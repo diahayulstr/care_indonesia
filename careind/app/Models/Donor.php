@@ -39,4 +39,9 @@ class Donor extends Model
     {
         return $this->belongsTo(TabelKomitmenSdg::class, 'komitmen_sdgs_id');
     }
+
+    public function donorID()
+    {
+        return $this->hasMany(Donor::class, 'donor_id');
+    }
 }

@@ -10,16 +10,16 @@ class HomeController extends Controller
     //     return view('pages.donor');
     // }
 
-    public function narahubung() {
-        return view('pages.narahubung');
-    }
+    // public function narahubung() {
+    //     return view('pages.narahubung');
+    // }
 
-    public function komunikasi() {
-        return view('pages.komunikasi');
-    }
+    // public function komunikasi() {
+    //     return view('pages.komunikasi');
+    // }
 
-    public function proposal() {
-        return view('pages.proposal');
-    }
+    // public function proposal() {
+    //     return view('pages.proposal');
+    // }
 
 }

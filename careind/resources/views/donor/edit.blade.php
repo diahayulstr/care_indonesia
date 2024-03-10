@@ -3,33 +3,16 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Care Indonesia</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="{{ asset('style/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    @include('layouts.template')
 
     {{-- Bootstrap CDN --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
-    {{-- Custom Js --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -150,17 +133,21 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            {{-- Form Add --}}
+                            {{-- Form Edit --}}
                             <div class="row">
                                 <div class="col-8">
-                                    <form action="{{ route('donor.update', ['donor' => $donor->id]) }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('donor.update', ['donor' => $donor->id]) }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @method('PATCH')
                                         @csrf
 
                                         <!-- Nama Organisasi -->
                                         <div class="form-group">
                                             <label for="nama_organisasi">Nama Organisasi</label>
-                                            <input type="text" placeholder="Nama Organisasi" class="form-control @error('nama_organisasi') is-invalid @enderror" id="nama_organisasi" name="nama_organisasi" value="{{ old('nama_organisasi') ?? $donor->nama_organisasi }}">
+                                            <input type="text" placeholder="Nama Organisasi"
+                                                class="form-control @error('nama_organisasi') is-invalid @enderror"
+                                                id="nama_organisasi" name="nama_organisasi"
+                                                value="{{ old('nama_organisasi') ?? $donor->nama_organisasi }}">
                                             @error('nama_organisasi')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -169,7 +156,10 @@
                                         <!-- Alamat -->
                                         <div class="form-group">
                                             <label for="alamat">Alamat</label>
-                                            <input type="text" placeholder="Alamat" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat') ?? $donor->alamat }}">
+                                            <input type="text" placeholder="Alamat"
+                                                class="form-control @error('alamat') is-invalid @enderror"
+                                                id="alamat" name="alamat"
+                                                value="{{ old('alamat') ?? $donor->alamat }}">
                                             @error('alamat')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -178,7 +168,10 @@
                                         <!-- Negara -->
                                         <div class="form-group">
                                             <label for="negara">Negara</label>
-                                            <input type="text" placeholder="Negara" class="form-control @error('negara') is-invalid @enderror" id="negara" name="negara" value="{{ old('negara') ?? $donor->negara }}">
+                                            <input type="text" placeholder="Negara"
+                                                class="form-control @error('negara') is-invalid @enderror"
+                                                id="negara" name="negara"
+                                                value="{{ old('negara') ?? $donor->negara }}">
                                             @error('negara')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -190,7 +183,9 @@
                                             <select class="form-select" name="provinsi_id" id="provinsi_id">
                                                 <option value="">Pilih Provinsi</option>
                                                 @foreach ($provinces as $provinsi)
-                                                    <option value="{{ $provinsi->id }}" {{ $provinsi->id == old('provinsi_id', $donor->provinsi_id) ? 'selected' : '' }}>{{ $provinsi->name }}</option>
+                                                    <option value="{{ $provinsi->id }}"
+                                                        {{ $provinsi->id == old('provinsi_id', $donor->provinsi_id) ? 'selected' : '' }}>
+                                                        {{ $provinsi->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('provinsi_id')
@@ -202,7 +197,9 @@
                                         <div class="form-group">
                                             <label for="kabupaten_id">Kabupaten</label>
                                             <select class="form-select" name="kabupaten_id" id="kabupaten_id">
-                                                <option value="{{ $donor->kabupaten->id }}" {{ $donor->kabupaten->id == old('kabupaten_id', $donor->kabupaten_id) ? 'selected' : '' }}>{{ $donor->kabupaten->name }}</option>
+                                                <option value="{{ $donor->kabupaten->id }}"
+                                                    {{ $donor->kabupaten->id == old('kabupaten_id', $donor->kabupaten_id) ? 'selected' : '' }}>
+                                                    {{ $donor->kabupaten->name }}</option>
                                             </select>
                                             @error('kabupaten_id')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -213,7 +210,9 @@
                                         <div class="form-group">
                                             <label for="kecamatan_id">Kecamatan</label>
                                             <select class="form-select" name="kecamatan_id" id="kecamatan_id">
-                                                <option value="{{ $donor->kecamatan->id }}" {{ $donor->kecamatan->id == old('kecamatan_id', $donor->kecamatan_id) ? 'selected' : '' }}>{{ $donor->kecamatan->name }}</option>                                             }
+                                                <option value="{{ $donor->kecamatan->id }}"
+                                                    {{ $donor->kecamatan->id == old('kecamatan_id', $donor->kecamatan_id) ? 'selected' : '' }}>
+                                                    {{ $donor->kecamatan->name }}</option> }
                                             </select>
                                             @error('kecamatan_id')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -224,7 +223,9 @@
                                         <div class="form-group">
                                             <label for="desa_id">Desa</label>
                                             <select class="form-select" name="desa_id" id="desa_id">
-                                                <option value="{{ $donor->desa->id }}" {{ $donor->desa->id == old('desa_id', $donor->desa_id) ? 'selected' : '' }}>{{ $donor->desa->name }}</option>
+                                                <option value="{{ $donor->desa->id }}"
+                                                    {{ $donor->desa->id == old('desa_id', $donor->desa_id) ? 'selected' : '' }}>
+                                                    {{ $donor->desa->name }}</option>
                                             </select>
                                             @error('desa_id')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -234,7 +235,10 @@
                                         <!-- Website -->
                                         <div class="form-group">
                                             <label for="website">Website</label>
-                                            <input type="text" placeholder="Website" class="form-control @error('website') is-invalid @enderror" id="website" name="website" value="{{ old('website') ?? $donor->website }}">
+                                            <input type="text" placeholder="Website"
+                                                class="form-control @error('website') is-invalid @enderror"
+                                                id="website" name="website"
+                                                value="{{ old('website') ?? $donor->website }}">
                                             @error('website')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -243,7 +247,8 @@
                                         <!-- Informasi Singkat -->
                                         <div class="form-group">
                                             <label for="informasi_singkat">Informasi Singkat</label>
-                                            <textarea placeholder="Informasi Singkat" class="form-control @error('informasi_singkat') is-invalid @enderror" id="informasi_singkat" name="informasi_singkat">{{ old('informasi_singkat') ?? $donor->informasi_singkat }}</textarea>
+                                            <textarea placeholder="Informasi Singkat" class="form-control @error('informasi_singkat') is-invalid @enderror"
+                                                id="informasi_singkat" name="informasi_singkat">{{ old('informasi_singkat') ?? $donor->informasi_singkat }}</textarea>
                                             @error('informasi_singkat')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -252,10 +257,13 @@
                                         <!-- Jenis Organisasi -->
                                         <div class="form-group">
                                             <label for="jenis_organisasi_id">Jenis Organisasi</label>
-                                            <select class="form-select" name="jenis_organisasi_id" id="jenis_organisasi_id">
+                                            <select class="form-select" name="jenis_organisasi_id"
+                                                id="jenis_organisasi_id">
                                                 <option value="">Pilih Jenis Organisasi</option>
-                                                @foreach($jenisOrganisasis as $jenisOrganisasi)
-                                                    <option value="{{ $jenisOrganisasi->id }}" {{ $jenisOrganisasi->id == old('jenis_organisasi_id', $donor->jenis_organisasi_id) ? 'selected' : '' }}>{{ $jenisOrganisasi->name }}</option>
+                                                @foreach ($jenisOrganisasis as $jenisOrganisasi)
+                                                    <option value="{{ $jenisOrganisasi->id }}"
+                                                        {{ $jenisOrganisasi->id == old('jenis_organisasi_id', $donor->jenis_organisasi_id) ? 'selected' : '' }}>
+                                                        {{ $jenisOrganisasi->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('jenis_organisasi_id')
@@ -266,10 +274,13 @@
                                         <!-- Komitmen SDGs -->
                                         <div class="form-group">
                                             <label for="komitmen_sdgs_id">Komitmen SDGs</label>
-                                            <select class="form-select" name="komitmen_sdgs_id" id="komitmen_sdgs_id">
+                                            <select class="form-select" name="komitmen_sdgs_id"
+                                                id="komitmen_sdgs_id">
                                                 <option value="">Pilih Komitmen SDGs</option>
-                                                @foreach($komitmenSdgs as $komitmenSdg)
-                                                    <option value="{{ $komitmenSdg->id }}" {{ $komitmenSdg->id == old('komitmen_sdgs_id', $donor->komitmen_sdgs_id) ? 'selected' : '' }}>{{ $komitmenSdg->name }}</option>
+                                                @foreach ($komitmenSdgs as $komitmenSdg)
+                                                    <option value="{{ $komitmenSdg->id }}"
+                                                        {{ $komitmenSdg->id == old('komitmen_sdgs_id', $donor->komitmen_sdgs_id) ? 'selected' : '' }}>
+                                                        {{ $komitmenSdg->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('komitmen_sdgs_id')
@@ -280,7 +291,10 @@
                                         <!-- Date -->
                                         <div class="form-group">
                                             <label for="date">Date</label>
-                                            <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date') ?? $donor->date }}">
+                                            <input type="date"
+                                                class="form-control @error('date') is-invalid @enderror"
+                                                id="date" name="date"
+                                                value="{{ old('date') ?? $donor->date }}">
                                             @error('date')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -289,18 +303,23 @@
                                         <!-- Dokumen -->
                                         <div class="form-group mb-4">
                                             <label for="dokumen" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen" name="dokumen">
+                                            <input type="file" class="form-control" id="dokumen"
+                                                name="dokumen">
                                             <br>
                                             @if ($donor->dokumen)
-                                                <input type="text" class="form-control" value="{{ basename($donor->dokumen) }}" readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ basename($donor->dokumen) }}" readonly>
                                                 <br>
                                                 @php
                                                     $extension = pathinfo($donor->dokumen, PATHINFO_EXTENSION);
                                                 @endphp
                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                    <img src="{{ url('') }}/{{ $donor->dokumen }}" alt="Pratinjau Gambar" style="max-width: 300px; max-height: 300px;">
+                                                    <img src="{{ url('') }}/{{ $donor->dokumen }}"
+                                                        alt="Pratinjau Gambar"
+                                                        style="max-width: 300px; max-height: 300px;">
                                                 @elseif ($extension === 'pdf')
-                                                    <embed src="{{ url('') }}/{{ $donor->dokumen }}" type="application/pdf" width="500" height="500">
+                                                    <embed src="{{ url('') }}/{{ $donor->dokumen }}"
+                                                        type="application/pdf" width="500" height="500">
                                                 @else
                                                     Tidak ada pratinjau
                                                 @endif
@@ -364,114 +383,97 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('style/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('style/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('style/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('style/js/sb-admin-2.min.js') }}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{ asset('style/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('style/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('style/js/demo/datatables-demo.js') }}"></script>
-
     {{-- Custom Javascript --}}
     <script>
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
+            $(function() {
+                $('#provinsi_id').on('change', function() {
+                    let id_provinsi = $('#provinsi_id').val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkabupaten') }}",
+                        data: {
+                            id_provinsi: id_provinsi
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kabupaten_id').html(msg);
+                            $('#kecamatan_id').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
+            $(function() {
+                $('#kabupaten_id').on('change', function() {
+                    let id_kabupaten = $('#kabupaten_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkecamatan') }}",
+                        data: {
+                            id_kabupaten: id_kabupaten
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kecamatan_id').html(msg);
+                            // $('#kecamatan').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
+            $(function() {
+                $('#kecamatan_id').on('change', function() {
+                    let id_kecamatan = $('#kecamatan_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getdesa') }}",
+                        data: {
+                            id_kecamatan: id_kecamatan
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#desa_id').html(msg);
+                            // $('#kecamatan').html('');
+                            // $('#desa').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
         });
-
-        // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
-        $(function() {
-            $('#provinsi_id').on('change', function() {
-                let id_provinsi = $('#provinsi_id').val();
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('getkabupaten') }}",
-                    data: {
-                        id_provinsi: id_provinsi
-                    },
-                    cache: false,
-
-                    success: function(msg) {
-                        $('#kabupaten_id').html(msg);
-                        $('#kecamatan_id').html('');
-                        $('#desa_id').html('');
-                    },
-                    error: function(data) {
-                        console.log('error:', data)
-                    },
-                })
-            })
-        })
-
-
-        // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
-        $(function() {
-            $('#kabupaten_id').on('change', function() {
-                let id_kabupaten = $('#kabupaten_id').val();
-
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('getkecamatan') }}",
-                    data: {
-                        id_kabupaten: id_kabupaten
-                    },
-                    cache: false,
-
-                    success: function(msg) {
-                        $('#kecamatan_id').html(msg);
-                        // $('#kecamatan').html('');
-                        $('#desa_id').html('');
-                    },
-                    error: function(data) {
-                        console.log('error:', data)
-                    },
-                })
-            })
-        })
-
-
-        // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
-        $(function() {
-            $('#kecamatan_id').on('change', function() {
-                let id_kecamatan = $('#kecamatan_id').val();
-
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('getdesa') }}",
-                    data: {
-                        id_kecamatan: id_kecamatan
-                    },
-                    cache: false,
-
-                    success: function(msg) {
-                        $('#desa_id').html(msg);
-                        // $('#kecamatan').html('');
-                        // $('#desa').html('');
-                    },
-                    error: function(data) {
-                        console.log('error:', data)
-                    },
-                })
-            })
-        })
-
-    });
     </script>
-
+    @include('layouts.template')
 </body>
 
 </html>

@@ -1,8 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
     @include('layouts.template')
 
@@ -118,88 +124,93 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    {{-- <h1 class="h3 mb-2 text-gray-800">Donor</h1> --}}
-
-                    <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <div class="card-header py-3">
                             <div>
-                                <h6 class="m-0 font-weight-bold text-danger">Narahubung</h6>
+                                <h6 class="m-0 font-weight-bold text-danger">Narahubung Edit</h6>
                             </div>
-                            <div>
-                                <a href="{{url('narahubung/add')}}" class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
-                                {{-- <a href="" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Master/Detail Add"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
-                                  </svg>
-                                </a> --}}
-                              </div>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-bordered">
-                                    <thead>
-                                        <tr class="text-center fw-bold">
-                                            <th>Narahubung ID</th>
-                                            <th>Donor ID</th>
-                                            <th>Nama Kontak</th>
-                                            <th>Jabatan</th>
-                                            <th>Email</th>
-                                            <th>No Telepon</th>
-                                            <th>Status</th>
-                                            <th colspan="4">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse($narahubung as $item)
-                                        <tr>
-                                            <td>{{ $item->id }}</td>
-                                            <td>{{ $item->donorID->nama_organisasi }}</td>
-                                            <td>{{ $item->nama_kontak }}</td>
-                                            <td>{{ $item->jabatan }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $item->no_telp }}</td>
-                                            <td id="statusact">
-                                                @if($item->status->name == 'Aktif')
-                                                    <button class="status-button bg-success active">{{ $item->status->name }}</button>
-                                                @else
-                                                    <button class="status-button bg-danger inactive">{{ $item->status->name }}</button>
-                                                @endif
-                                            </td>
+                            {{-- Form Edit --}}
+                            <div class="row">
+                                <div class="col-8">
+                                    <form action="{{ route('narahubung.update', ['narahubung' => $narahubung->id]) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="donor_id">Donor ID</label>
+                                            <select class="form-select" name="donor_id" id="donor_id">
+                                                <option value="">--Pilih Donor ID--</option>
+                                                @foreach ($donorID as $item)
+                                                    <option value="{{ $item->id }}" {{ $item->id == old('donor_id', $narahubung->donor_id) ? 'selected' : '' }}>{{ $item->nama_organisasi }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('donor_id')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama_kontak">Nama Kontak</label>
+                                            <input type="text" placeholder="Nama Kontak"
+                                                class="form-control @error('nama_kontak') is-invalid @enderror"
+                                                id="nama_kontak" name="nama_kontak"
+                                                value="{{ old('nama_kontak') ?? $narahubung->nama_kontak }}">
+                                            @error('nama_kontak')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jabatan">Jabatan</label>
+                                            <input type="text" placeholder=""
+                                                class="form-control @error('jabatan') is-invalid @enderror"
+                                                id="jabatan" name="jabatan"
+                                                value="{{ old('jabatan') ?? $narahubung->jabatan }}">
+                                            @error('jabatan')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" placeholder="Email"
+                                                class="form-control @error('email') is-invalid @enderror"
+                                                id="email" name="email"
+                                                value="{{ old('email') ?? $narahubung->email }}">
+                                            @error('email')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="no_telp">Nomor Telepon</label>
+                                            <input type="tel" placeholder="Nomor Telepon"
+                                                class="form-control @error('no_telp') is-invalid @enderror"
+                                                id="no_telp" name="no_telp"
+                                                value="{{ old('no_telp') ?? $narahubung->no_telp }}">
+                                            @error('')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="status_id">Status</label>
+                                            <select class="form-select" name="status_id" id="status_id">
+                                                <option value="">--Pilih Status--</option>
+                                                @foreach ($status as $item)
+                                                    <option value="{{ $item->id }}" {{ $item->id == old('status_id', $narahubung->status_id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('status_id')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
 
-                                            <td class="text-center">
-                                                <div class="action-buttons d-flex justify-content-center">
-                                                    <a href="{{ url('narahubung/'.$item->id) }}" class="btn btn-info btn-circle" data-bs-toggle="tooltip" title="View">
-                                                        <i class="fas fa-search"></i>
-                                                    </a>
-                                                    <a href="{{ url('narahubung/'.$item->id.'/edit')}}" class="btn btn-warning btn-circle" data-bs-toggle="tooltip" title="Edit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
-                                                        </svg>
-                                                    </a>
-                                                    <form action="{{ url('narahubung/'.$item->id) }}" method="POST">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button class="btn btn-danger btn-circle delete-btn" data-confirm-delete="true" data-bs-toggle="tooltip" title="Delete">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </td>
-                                            @empty
-                                            <td colspan="10" class="text-center">Tidak ada data...</td>
-                                        </tr>
-                                    @endforelse
-                                    </tbody>
-                                </table>
+                                        <!-- Tombol Submit -->
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="{{ url('narahubung') }}" class="btn btn-outline-primary">Cancel</a>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        {{-- <div class="card-footer">
-                            {{ $donor->links}}
-                        </div> --}}
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

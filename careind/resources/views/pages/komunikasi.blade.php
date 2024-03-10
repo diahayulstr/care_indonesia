@@ -4,24 +4,7 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Care Indonesia</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
-    
+    @include('layouts.template')
 
 </head>
 
@@ -137,7 +120,96 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    {{-- <h1 class="h3 mb-2 text-gray-800">Donor</h1> --}}
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="m-0 font-weight-bold text-danger">Komunikasi</h6>
+                            </div>
+                            <div>
+                                <a href="{{ url('komunikasi/add') }}" class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
+                                {{-- <a href="" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Master/Detail Add"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+                                  </svg>
+                                </a> --}}
+                              </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr class="text-center fw-bold">
+                                            <th>Komunikasi ID</th>
+                                            <th>Donor ID</th>
+                                            <th>Tanggal</th>
+                                            <th>Saluran</th>
+                                            <th>Jenjang Komunikasi</th>
+                                            <th>Tindak Lanjut</th>
+                                            <th>Catatan</th>
+                                            <th>Tanggal Selanjutnya</th>
+                                            <th>Dokumen</th>
+                                            <th colspan="4">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($komunikasi as $item)
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->donorID->nama_organisasi }}</td>
+                                            <td>{{ $item->tanggal}}</td>
+                                            <td>{{ $item->saluran->name }}</td>
+                                            <td>{{ $item->jenjangKomunikasi->name }}</td>
+                                            <td>{{ $item->tindakLanjut->name }}</td>
+                                            <td>{{ $item->catatan }}</td>
+                                            <td>{{ $item->tgl_selanjutnya }}</td>
+                                            <td>@if ($item->dokumen)
+                                                @php
+                                                    $extension = pathinfo($item->dokumen, PATHINFO_EXTENSION);
+                                                @endphp
+                                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                                    <img src="{{url('')}}/{{$item->dokumen}}" alt="Pratinjau Gambar" style="max-width: 100px; max-height: 100px;">
+                                                @elseif ($extension === 'pdf')
+                                                    <embed src="{{url('')}}/{{$item->dokumen}}" type="application/pdf" width="200" height="200">
+                                                @else
+                                                    Tidak ada pratinjau
+                                                @endif
+                                            @else
+                                                Tidak ada dokumen
+                                            @endif</td>
+
+                                            <td class="text-center">
+                                                <div class="action-buttons d-flex justify-content-center">
+                                                    <a href="{{ url('komunikasi/'.$item->id)}}" class="btn btn-info btn-circle" data-bs-toggle="tooltip" title="View">
+                                                        <i class="fas fa-search"></i>
+                                                    </a>
+                                                    <a href="{{ url('komunikasi/'.$item->id.'/edit') }}" class="btn btn-warning btn-circle" data-bs-toggle="tooltip" title="Edit">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                                        </svg>
+                                                    </a>
+                                                    <form action="{{ url('komunikasi/'.$item->id) }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button class="btn btn-danger btn-circle delete-btn" data-confirm-delete="true" data-bs-toggle="tooltip" title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                            @empty
+                                            <td colspan="10" class="text-center">Tidak ada data...</td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {{-- <div class="card-footer">
+                            {{ $donor->links}}
+                        </div> --}}
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -185,17 +257,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('style/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('style/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('style/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('style/js/sb-admin-2.min.js')}}"></script>
-
+    @include('layouts.template')
 </body>
 
 </html>

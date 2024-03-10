@@ -3,29 +3,7 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Care Indonesia</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
-     <!-- Custom styles for this page -->
-     <link href="{{ asset('style/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
-
-    <link rel="stylesheet" href="{{ asset('css_2/style.css')}}">
-
+    @include('layouts.template')
 
 </head>
 
@@ -162,7 +140,7 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr class="text-center fw-bold">
-                                            <th>Donor_id</th>
+                                            <th>Donor ID</th>
                                             <th>Nama Organisasi</th>
                                             <th>Alamat</th>
                                             <th>Negara</th>
@@ -199,7 +177,7 @@
                                         </tr>
                                     </tfoot> --}}
                                     <tbody>
-                                        @foreach($donor as $item)
+                                        @forelse($donor as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->nama_organisasi }}</td>
@@ -239,17 +217,19 @@
                                                             <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
                                                         </svg>
                                                     </a>
-                                                    <form action="{{ url('donor/'.$item->id) }}" method="POST" id="delete-form-{{ $item->id }}">
+                                                    <form action="{{ url('donor/'.$item->id) }}" method="POST">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <button class="btn btn-danger btn-circle delete-btn" data-confirm-delete="true" data-bs-toggle="tooltip" title="Delete" data-donor-id="{{ $item->id }}">
+                                                        <button class="btn btn-danger btn-circle delete-btn" data-confirm-delete="true" data-bs-toggle="tooltip" title="Delete">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
                                                 </div>
                                             </td>
+                                            @empty
+                                            <td colspan="15" class="text-center">Tidak ada data...</td>
                                         </tr>
-                                        @endforeach
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
@@ -305,29 +285,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('style/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('style/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('style/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('style/js/sb-admin-2.min.js') }}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{ asset('style/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{ asset('style/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('style/js/demo/datatables-demo.js')}}"></script>
-
-    {{-- Custom Script Dialog --}}
-    <script src="{{ asset('js_2/script.js')}}"></script>
-
-    @include('sweetalert::alert')
-
+    @include('layouts.template')
 </body>
 
 </html>

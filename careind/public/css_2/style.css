@@ -6,3 +6,16 @@
 .action-buttons a {
     margin-right: 8px;
 }
+
+.status-button {
+    border: none;
+    padding: 0 5px;
+    border-radius: 20px;
+    color: white;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+

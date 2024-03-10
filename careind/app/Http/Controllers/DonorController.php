@@ -73,8 +73,6 @@ class DonorController extends Controller
             'date'                  => 'required',
             'dokumen'               => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
         ]);
-
-        // Proses penyimpanan data
         $donor = new Donor();
         $donor->nama_organisasi     = $request->nama_organisasi;
         $donor->alamat              = $request->alamat;
@@ -85,8 +83,8 @@ class DonorController extends Controller
         $donor->desa_id             = $request->desa_id;
         $donor->website             = $request->website;
         $donor->informasi_singkat   = $request->informasi_singkat;
-        $donor->jenis_organisasi_id    = $request->jenis_organisasi_id;
-        $donor->komitmen_sdgs_id       = $request->komitmen_sdgs_id;
+        $donor->jenis_organisasi_id = $request->jenis_organisasi_id;
+        $donor->komitmen_sdgs_id    = $request->komitmen_sdgs_id;
         $donor->date                = $request->date;
 
         // Proses penyimpanan file dokumen
@@ -97,7 +95,7 @@ class DonorController extends Controller
             $donor->dokumen = $path;
         }
         $donor->save();
-        return redirect()->route('pages.donor')->with('toast_success', 'Data donor berhasil ditambahkan.');
+        return redirect()->route('pages.donor')->with('toast_success', 'Data donor berhasil ditambahkan');
     }
 
     public function show($id) {
@@ -116,7 +114,7 @@ class DonorController extends Controller
     }
 
     public function update(Request $request, Donor $donor) {
-        $request->validate([
+        $request -> validate([
             'nama_organisasi'       => 'required',
             'alamat'                => 'required',
             'negara'                => 'required',
@@ -150,11 +148,13 @@ class DonorController extends Controller
         if ($request->hasFile('dokumen')) {
             $extFile = $request->dokumen->getClientOriginalExtension();
             $namaFile = 'user-' . time() . "." . $extFile;
+            File::delete($donor->dokumen);
             $path = $request->dokumen->move('assets/donor/dokumen', $namaFile);
-            $donor->update(['dokumen' => 'assets/donor/dokumen/' . $namaFile]);
+            $donor->dokumen = $path;
         }
-
-        return redirect()->route('pages.donor', ['donor' => $donor->id])->with('success', 'Data berhasil diupdate');
+        $donor->save();
+        return redirect()->route('pages.donor', ['donor' => $donor->id])
+        ->with('toast_success', 'Data berhasil diupdate');
     }
 
     public function destroy($id) {

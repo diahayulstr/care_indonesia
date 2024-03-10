@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
 
@@ -18,7 +16,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('home')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('home') }}">
                 <div class="sidebar-brand-text mx-3">Care Indonesia</div>
             </a>
 
@@ -26,8 +24,8 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="{{url('home')}}">
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ url('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -38,25 +36,25 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('donor')}}">
+                <a class="nav-link" href="{{ url('donor') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Donor</span>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="{{url('narahubung')}}">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url('narahubung') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Narahubung</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('komunikasi')}}">
+                <a class="nav-link" href="{{ url('komunikasi') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Komunikasi</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('proposal')}}">
+                <a class="nav-link" href="{{ url('proposal') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Proposal</span>
                 </a>
@@ -99,7 +97,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/undraw_profile.svg')}}">
+                                    src="{{ asset('style/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -119,10 +117,75 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="m-0 font-weight-bold text-danger">Donor View</h6>
+                            </div>
+                            <div class="action-buttons d-flex justify-content-center">
+                                <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle me-2"
+                                    data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
+                                <a href="{{ url('narahubung/'.$narahubung->id.'/edit')}}" class="btn btn-warning btn-circle"
+                                    data-bs-toggle="tooltip" title="Edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                    </svg>
+                                </a>
+                                <form action="{{ url('narahubung/'.$narahubung->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button class="btn btn-danger btn-circle delete-btn" data-confirm-delete="true" data-bs-toggle="tooltip"
+                                        title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Narahubung ID</th>
+                                            <th>{{ $narahubung->id }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Donor ID</th>
+                                            <th>{{ $narahubung->donorID->nama_organisasi }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Nama Kontak</th>
+                                            <th>{{ $narahubung->nama_kontak }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Jabatan</th>
+                                            <th>{{ $narahubung->jabatan }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <th>{{ $narahubung->email }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Nomor Telepon</th>
+                                            <th>{{ $narahubung->no_telp }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Status</th>
+                                            <th id="statusact">
+                                                @if($narahubung->status->name == 'Aktif')
+                                                    <button class="status-button bg-success active">{{ $narahubung->status->name }}</button>
+                                                @else
+                                                    <button class="status-button bg-danger inactive">{{ $narahubung->status->name }}</button>
+                                                @endif
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -169,7 +232,6 @@
             </div>
         </div>
     </div>
-
     @include('layouts.template')
 </body>
 
