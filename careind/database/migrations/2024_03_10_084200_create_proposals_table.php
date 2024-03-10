@@ -39,7 +39,7 @@ return new class extends Migration
             $table->foreign('saluran_pendanaan_id')
                     ->references('id')->on('tabel_Saluran_pendanaans')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('jenis_intermediary_id')
-                    ->references('id')->on('tabel_jenis_intermediary')->onDelete('cascade')->onUpdate('cascade');
+                    ->references('id')->on('tabel_jenis_intermediaries')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('klasifikasi_portofolio_id')
                     ->references('id')->on('tabel_klasifikasi_portofolios')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('impact_goals_id')

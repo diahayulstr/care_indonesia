@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tabel_jenis_intermediary', function (Blueprint $table) {
+        Schema::create('tabel_jenis_intermediaries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tabel_jenis_intermediary');
+        Schema::dropIfExists('tabel_jenis_intermediaries');
     }
 };
