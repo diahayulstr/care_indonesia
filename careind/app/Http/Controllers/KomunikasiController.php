@@ -15,7 +15,7 @@ class KomunikasiController extends Controller
     public function komunikasi() {
         $komunikasi = Komunikasi::all();
         return view('pages.komunikasi', compact('komunikasi'));
-    }
+    } 
 
     public function addKomunikasi() {
         $donorID = Donor::all();

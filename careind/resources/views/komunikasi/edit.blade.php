@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +6,11 @@
     @include('layouts.template')
 
     {{-- Bootstrap CDN --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
 
 </head>
@@ -22,7 +24,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('home')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('home') }}">
                 <div class="sidebar-brand-text mx-3">Care Indonesia</div>
             </a>
 
@@ -31,7 +33,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('home')}}">
+                <a class="nav-link" href="{{ url('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -42,25 +44,25 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('donor')}}">
+                <a class="nav-link" href="{{ url('donor') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Donor</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('narahubung')}}">
+                <a class="nav-link" href="{{ url('narahubung') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Narahubung</span>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{url('komunikasi')}}">
+                <a class="nav-link" href="{{ url('komunikasi') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Komunikasi</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('proposal')}}">
+                <a class="nav-link" href="{{ url('proposal') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Proposal</span>
                 </a>
@@ -103,7 +105,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/undraw_profile.svg')}}">
+                                    src="{{ asset('style/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -135,108 +137,117 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('komunikasi.update', ['komunikasi' => $komunikasi->id]) }}" method="POST" enctype="multipart/form-data">
-                                @method('PATCH')
-                                @csrf
-                                <div class="form-group">
-                                    <label for="donor_id">Donor ID</label>
-                                    <select class="form-select form-control" name="donor_id" id="donor_id">
-                                        <option value="">--Pilih Donor ID--</option>
-                                        @foreach($donorID as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == old('donor_id',
-                                            $komunikasi->donor_id) ? 'selected' : '' }}>{{ $item->nama_organisasi }}</option>
-                                        @endforeach
-                                    </select>
+                            <div class="row">
+                                <div class="col-8">
+                                    <form action="{{ route('komunikasi.update', ['komunikasi' => $komunikasi->id]) }}"
+                                        method="POST" enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="donor_id">Donor ID</label>
+                                            <select class="form-select form-control" name="donor_id" id="donor_id">
+                                                <option value="">--Pilih Donor ID--</option>
+                                                @foreach ($donorID as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('donor_id', $komunikasi->donor_id) ? 'selected' : '' }}>
+                                                        {{ $item->nama_organisasi }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tanggal">Tanggal</label>
+                                            <input type="date" placeholder="Tanggal"
+                                                class="form-control @error('tanggal') is-invalid @enderror"
+                                                id="tanggal" name="tanggal"
+                                                value="{{ old('tanggal') ?? $komunikasi->tanggal }}">
+                                            @error('tanggal')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="saluran_id">Saluran</label>
+                                            <select class="form-select form-control" name="saluran_id" id="saluran_id">
+                                                <option value="">--Pilih Saluran--</option>
+                                                @foreach ($saluran as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('saluran_id', $komunikasi->saluran_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
+                                            <select class="form-select form-control" name="jenjang_komunikasi_id"
+                                                id="jenjang_komunikasi_id">
+                                                <option value="">--Pilih Jenjang Komunikasi--</option>
+                                                @foreach ($jenjangKomunikasi as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('jenjang_komunikasi_id', $komunikasi->jenjang_komunikasi_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tindak_lanjut_id">Tindak Lanjut</label>
+                                            <select class="form-select form-control" name="tindak_lanjut_id"
+                                                id="tindak_lanjut_id">
+                                                <option value="">--Pilih Tindak Lanjut--</option>
+                                                @foreach ($tindakLanjut as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('tindak_lanjut_id', $komunikasi->tindak_lanjut_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="catatan">Catatan</label>
+                                            <textarea type="text" placeholder="Catatan" class="form-control @error('catatan') is-invalid @enderror"
+                                                id="catatan" name="catatan">{{ old('catatan') ?? $komunikasi->catatan }}</textarea>
+                                            @error('catatan')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tgl_selanjutnya">Tanggal Selanjutnya</label>
+                                            <input type="date" placeholder="Tanggal Selanjutnya"
+                                                class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
+                                                id="tgl_selanjutnya" name="tgl_selanjutnya"
+                                                value="{{ old('tgl_selanjutnya') ?? $komunikasi->tgl_selanjutnya }}">
+                                            @error('tgl_selanjutnya')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="dokumen" class="form-label">Dokumen</label>
+                                            <input type="file" class="form-control" id="dokumen"
+                                                name="dokumen">
+                                            <br>
+                                            @if ($komunikasi->dokumen)
+                                                <input type="text" class="form-control"
+                                                    value="{{ basename($komunikasi->dokumen) }}" readonly>
+                                                <br>
+                                                @php
+                                                    $extension = pathinfo($komunikasi->dokumen, PATHINFO_EXTENSION);
+                                                @endphp
+                                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                                    <img src="{{ url('') }}/{{ $komunikasi->dokumen }}"
+                                                        alt="Pratinjau Gambar"
+                                                        style="max-width: 300px; max-height: 300px;">
+                                                @elseif ($extension === 'pdf')
+                                                    <embed src="{{ url('') }}/{{ $komunikasi->dokumen }}"
+                                                        type="application/pdf" width="500" height="500">
+                                                @else
+                                                    Tidak ada pratinjau
+                                                @endif
+                                            @else
+                                                <p>Tidak ada dokumen</p>
+                                            @endif
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="{{ url('komunikasi') }}" class="btn btn-outline-primary">Cancel</a>
+                                    </form>
                                 </div>
-                                <div class="form-group">
-                                    <label for="tanggal">Tanggal</label>
-                                    <input type="date" placeholder="Tanggal"
-                                        class="form-control @error('tanggal') is-invalid @enderror"
-                                        id="tanggal" name="tanggal"
-                                        value="{{ old('tanggal') ?? $komunikasi->tanggal }}">
-                                    @error('tanggal')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="saluran_id">Saluran</label>
-                                    <select class="form-select form-control" name="saluran_id" id="saluran_id">
-                                        <option value="">--Pilih Saluran--</option>
-                                        @foreach($saluran as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == old('saluran_id',
-                                            $komunikasi->saluran_id) ? 'selected' : '' }}>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
-                                    <select class="form-select form-control" name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
-                                        <option value="">--Pilih Jenjang Komunikasi--</option>
-                                        @foreach($jenjangKomunikasi as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == old('jenjang_komunikasi_id',
-                                            $komunikasi->jenjang_komunikasi_id) ? 'selected' : '' }}>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tindak_lanjut_id">Tindak Lanjut</label>
-                                    <select class="form-select form-control" name="tindak_lanjut_id" id="tindak_lanjut_id">
-                                        <option value="">--Pilih Tindak Lanjut--</option>
-                                        @foreach($tindakLanjut as $item)
-                                        <option value="{{ $item->id }}" {{ $item->id == old('tindak_lanjut_id',
-                                            $komunikasi->tindak_lanjut_id) ? 'selected' : '' }}>{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="catatan">Catatan</label>
-                                    <textarea type="text" placeholder="Catatan"
-                                        class="form-control @error('catatan') is-invalid @enderror"
-                                        id="catatan" name="catatan"
-                                        >{{ old('catatan') ?? $komunikasi->catatan }}</textarea>
-                                    @error('catatan')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="tgl_selanjutnya">Tanggal Selanjutnya</label>
-                                    <input type="date" placeholder="Tanggal Selanjutnya"
-                                        class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
-                                        id="tgl_selanjutnya" name="tgl_selanjutnya"
-                                        value="{{ old('tgl_selanjutnya') ?? $komunikasi->tgl_selanjutnya }}">
-                                    @error('tgl_selanjutnya')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group mb-4">
-                                    <label for="dokumen" class="form-label">Dokumen</label>
-                                    <input type="file" class="form-control" id="dokumen"
-                                        name="dokumen">
-                                    <br>
-                                    @if ($komunikasi->dokumen)
-                                        <input type="text" class="form-control"
-                                            value="{{ basename($komunikasi->dokumen) }}" readonly>
-                                        <br>
-                                        @php
-                                            $extension = pathinfo($komunikasi->dokumen, PATHINFO_EXTENSION);
-                                        @endphp
-                                        @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                            <img src="{{ url('') }}/{{ $komunikasi->dokumen }}"
-                                                alt="Pratinjau Gambar"
-                                                style="max-width: 300px; max-height: 300px;">
-                                        @elseif ($extension === 'pdf')
-                                            <embed src="{{ url('') }}/{{ $komunikasi->dokumen }}"
-                                                type="application/pdf" width="500" height="500">
-                                        @else
-                                            Tidak ada pratinjau
-                                        @endif
-                                    @else
-                                        <p>Tidak ada dokumen</p>
-                                    @endif
-                                </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ url('komunikasi') }}" class="btn btn-outline-primary">Cancel</a>
-                            </form>
+                            </div>
                         </div>
                         {{-- <div class="card-footer">
                             {{ $donor->links}}

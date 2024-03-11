@@ -1,10 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     @include('layouts.template')
+
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
+
 
 </head>
 
@@ -17,7 +25,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('home')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('home') }}">
                 <div class="sidebar-brand-text mx-3">Care Indonesia</div>
             </a>
 
@@ -26,7 +34,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('home')}}">
+                <a class="nav-link" href="{{ url('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -37,25 +45,25 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('donor')}}">
+                <a class="nav-link" href="{{ url('donor') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Donor</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('narahubung')}}">
+                <a class="nav-link" href="{{ url('narahubung') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Narahubung</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('komunikasi')}}">
+                <a class="nav-link" href="{{ url('komunikasi') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Komunikasi</span>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{url('proposal')}}">
+                <a class="nav-link" href="{{ url('proposal') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Proposal</span>
                 </a>
@@ -98,7 +106,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/undraw_profile.svg')}}">
+                                    src="{{ asset('style/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -128,15 +136,192 @@
                             <div>
                                 <h6 class="m-0 font-weight-bold text-danger">Proposal Edit</h6>
                             </div>
-                            <div>
-                                <a href="" class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
-                                {{-- <a href="" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Master/Detail Add"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
-                                  </svg>
-                                </a> --}}
-                              </div>
                         </div>
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <form action="{{ route('proposal.update', ['proposal' => $proposal->id]) }}" method="POST" enctype="multipart/form-data">
+                                        @method('PATCH')
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="donor_id">Donor ID</label>
+                                            <select class="form-select form-control" name="donor_id" id="donor_id">
+                                                <option value="">--Pilih Donor ID--</option>
+                                                @foreach ($donorID as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('donor_id', $proposal->donor_id) ? 'selected' : '' }}>
+                                                        {{ $item->nama_organisasi }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tujuan_pendanaan_id">Tujuan Pendanaan</label>
+                                            <select class="form-select form-control" name="tujuan_pendanaan_id"
+                                                id="tujuan_pendanaan_id">
+                                                <option value="">--Pilih Tujuan Pendanaan--</option>
+                                                @foreach ($tujuanPendanaan as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('tujuan_pendanaan_id', $proposal->tujuan_pendanaan_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jenis_penerimaan_id">Jenis Penerimaan</label>
+                                            <select class="form-select form-control" name="jenis_penerimaan_id"
+                                                id="jenis_penerimaan_id">
+                                                <option value="">--Pilih Jenis Penerimaan--</option>
+                                                @foreach ($jenisPenerimaan as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('jenis_penerimaan_id', $proposal->jenis_penerimaan_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="saluran_pendanaan_id">Saluran Pendanaan</label>
+                                            <select class="form-select form-control" name="saluran_pendanaan_id"
+                                                id="saluran_pendanaan_id">
+                                                <option value="">--Pilih Saluran Pendanaan--</option>
+                                                @foreach ($saluranPendanaan as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('saluran_pendanaan_id', $proposal->saluran_pendanaan_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jenis_intermediaries_id">Jenis Intermediary</label>
+                                            <select class="form-select form-control" name="jenis_intermediaries_id"
+                                                id="jenis_intermediaries_id">
+                                                <option value="">--Pilih Jenis Intermediary--</option>
+                                                @foreach ($jenisIntermediaries as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('jenis_intermediaries_id', $proposal->jenis_intermediaries_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jenis_intermediaries_id">Jenis Intermediary</label>
+                                            <select class="form-select form-control" name="jenis_intermediaries_id"
+                                                id="jenis_intermediaries_id">
+                                                <option value="">--Pilih Jenis Intermediary--</option>
+                                                @foreach ($jenisIntermediaries as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('jenis_intermediaries_id', $proposal->jenis_intermediaries_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama_proyek">Nama Proyek</label>
+                                            <input type="text" placeholder="Nama Proyek"
+                                                class="form-control @error('nama_proyek') is-invalid @enderror"
+                                                id="nama_proyek" name="nama_proyek"
+                                                value="{{ old('nama_proyek') ?? $proposal->nama_proyek }}">
+                                            @error('nama_proyek')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="klasifikasi_portfolio_id">Klasifikasi Portfolio</label>
+                                            <select class="form-select form-control" name="klasifikasi_portfolio_id"
+                                                id="klasifikasi_portfolio_id">
+                                                <option value="">--Pilih Klasifikasi Portfolio--</option>
+                                                @foreach ($klasifikasiPortfolios as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('klasifikasi_portfolio_id', $proposal->klasifikasi_portfolio_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="impact_goals_id">Impact Goals</label>
+                                            <select class="form-select form-control" name="impact_goals_id[]" id="impact_goals_id" multiple>
+                                                <option value="">--Pilih Impact Goals--</option>
+                                                @php $impactGoalsIds = json_decode($proposal->impact_goals_id); @endphp
+                                                @foreach ($impactGoals as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ in_array($item->id, $impactGoalsIds) ? 'selected' : '' }}>
+                                                        {{ $item->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="estimasi_nilai_usd">Estimasi Nilai USD</label>
+                                            <input type="text" placeholder="Estimasi Nilai USD"
+                                                class="form-control @error('estimasi_nilai_usd') is-invalid @enderror"
+                                                id="estimasi_nilai_usd" name="estimasi_nilai_usd"
+                                                value="{{ old('estimasi_nilai_usd') ?? $proposal->estimasi_nilai_usd }}">
+                                            @error('estimasi_nilai_usd')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="estimasi_nilai_idr">Estimasi Nilai IDR</label>
+                                            <input type="text" placeholder="Estimasi Nilai IDR"
+                                                class="form-control @error('estimasi_nilai_idr') is-invalid @enderror"
+                                                id="estimasi_nilai_idr" name="estimasi_nilai_idr"
+                                                value="{{ old('estimasi_nilai_idr') ?? $proposal->estimasi_nilai_usd }}">
+                                            @error('estimasi_nilai_idr')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="usulan_durasi">Usulan Durasi</label>
+                                            <input type="text" placeholder="Usulan Durasi"
+                                                class="form-control @error('usulan_durasi') is-invalid @enderror"
+                                                id="usulan_durasi" name="usulan_durasi"
+                                                value="{{ old('usulan_durasi') ?? $proposal->usulan_durasi }}">
+                                            @error('usulan_durasi')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="status_kemajuan_id">Status Kemajuan</label>
+                                            <select class="form-select form-control" name="status_kemajuan_id"
+                                                id="status_kemajuan_id">
+                                                <option value="">--Pilih Status Kemajuan--</option>
+                                                @foreach ($statusKemajuan as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ $item->id == old('status_kemajuan_id', $proposal->status_kemajuan_id) ? 'selected' : '' }}>
+                                                        {{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="dokumen" class="form-label">Dokumen</label>
+                                            <input type="file" class="form-control" id="dokumen"
+                                                name="dokumen">
+                                            <br>
+                                            @if ($proposal->dokumen)
+                                                <input type="text" class="form-control"
+                                                    value="{{ basename($proposal->dokumen) }}" readonly>
+                                                <br>
+                                                @php
+                                                    $extension = pathinfo($proposal->dokumen, PATHINFO_EXTENSION);
+                                                @endphp
+                                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                                    <img src="{{ url('') }}/{{ $proposal->dokumen }}"
+                                                        alt="Pratinjau Gambar"
+                                                        style="max-width: 300px; max-height: 300px;">
+                                                @elseif ($extension === 'pdf')
+                                                    <embed src="{{ url('') }}/{{ $proposal->dokumen }}"
+                                                        type="application/pdf" width="500" height="500">
+                                                @else
+                                                    Tidak ada pratinjau
+                                                @endif
+                                            @else
+                                                <p>Tidak ada dokumen</p>
+                                            @endif
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="{{ url('proposal') }}" class="btn btn-outline-primary">Cancel</a>
+                                    </form>
+                                </div>
+                            </div>
 
                         </div>
 
