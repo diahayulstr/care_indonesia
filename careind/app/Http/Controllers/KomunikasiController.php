@@ -34,7 +34,7 @@ class KomunikasiController extends Controller
             'tindak_lanjut_id'      =>  'required|exists:tabel_tindak_lanjuts,id',
             'catatan'               =>  'required',
             'tgl_selanjutnya'       =>  'required',
-            'dokumen'               =>  'required',
+            'dokumen'               =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
         ]);
         $komunikasi = new Komunikasi();
         $komunikasi->donor_id               =   $request->donor_id;

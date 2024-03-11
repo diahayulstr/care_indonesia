@@ -14,4 +14,12 @@ class TabelImpactGoals extends Model
     {
         return $this->hasMany(Proposal::class, 'impact_goals_id');
     }
+
+    // public function proposals()
+    // {
+    //     return $this->belongsToMany(Proposal::class, 'impact_goal_proposal', 'impact_goal_id', 'proposal_id');
+    // }
+
+
+
 }

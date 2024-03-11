@@ -141,14 +141,19 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr class="text-center fw-bold">
-                                            <th>Komunikasi ID</th>
+                                            <th>Proposal ID</th>
                                             <th>Donor ID</th>
-                                            <th>Tanggal</th>
-                                            <th>Saluran</th>
-                                            <th>Jenjang Komunikasi</th>
-                                            <th>Tindak Lanjut</th>
-                                            <th>Catatan</th>
-                                            <th>Tanggal Selanjutnya</th>
+                                            <th>Tujuan Pendanaan</th>
+                                            <th>Jenis Penerimaan</th>
+                                            <th>Saluran Pendanaan</th>
+                                            <th>Jenis Intermediary</th>
+                                            <th>Nama Proyek</th>
+                                            <th>Klasifikasi Portfolio</th>
+                                            <th>Impact Goals</th>
+                                            <th>Estimasi Nilai USD</th>
+                                            <th>Estimasi Nilai IDR</th>
+                                            <th>Usulan Durasi</th>
+                                            <th>Status Kemajuan</th>
                                             <th>Dokumen</th>
                                             <th colspan="4">Aksi</th>
                                         </tr>
@@ -156,16 +161,47 @@
                                     <tbody>
                                         @forelse($proposal as $item)
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->donorID->nama_organisasi }}</td>
+                                            <td>{{ $item->tujuanPendanaan->name }}</td>
+                                            <td>{{ $item->jenisPenerimaan->name }}</td>
+                                            <td>{{ $item->saluranPendanaan->name }}</td>
+                                            <td>{{ $item->jenisIntermediaries->name }}</td>
+                                            <td>{{ $item->nama_proyek }}</td>
+                                            <td>{{ $item->klasifikasiPortfolios->name }}</td>
+                                            <td>
+                                                @if(isset($item->impactGoals))
+                                                    @php
+                                                        $impactGoals = json_decode($item->impactGoals, true);
+                                                    @endphp
 
+                                                    @foreach($impactGoals as $goal)
+                                                        <span>{{ $goal['name'] }}</span>
+                                                        @if(!$loop->last)
+                                                            <span>, </span> <!-- Tambahkan koma jika bukan elemen terakhir -->
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                            {{-- <td>{{ $item->impactGoals->name }}</td> --}}
+                                            <td>{{ $item->estimasi_nilai_usd }}</td>
+                                            <td>{{ $item->estimasi_nilai_idr }}</td>
+                                            <td>{{ $item->usulan_durasi }}</td>
+                                            <td>{{ $item->statusKemajuan->name }}</td>
+                                            <td>@if ($item->dokumen)
+                                                @php
+                                                    $extension = pathinfo($item->dokumen, PATHINFO_EXTENSION);
+                                                @endphp
+                                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
+                                                    <img src="{{url('')}}/{{$item->dokumen}}" alt="Pratinjau Gambar" style="max-width: 100px; max-height: 100px;">
+                                                @elseif ($extension === 'pdf')
+                                                    <embed src="{{url('')}}/{{$item->dokumen}}" type="application/pdf" width="200" height="200">
+                                                @else
+                                                    Tidak ada pratinjau
+                                                @endif
+                                            @else
+                                                Tidak ada dokumen
+                                            @endif</td>
                                             <td class="text-center">
                                                 <div class="action-buttons d-flex justify-content-center">
                                                     <a href="" class="btn btn-info btn-circle" data-bs-toggle="tooltip" title="View">
@@ -186,7 +222,7 @@
                                                 </div>
                                             </td>
                                             @empty
-                                            <td colspan="10" class="text-center">Tidak ada data...</td>
+                                            <td colspan="15" class="text-center">Tidak ada data...</td>
                                         </tr>
                                         @endforelse
                                     </tbody>

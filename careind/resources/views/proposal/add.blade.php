@@ -8,9 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <!-- Contoh menggunakan CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
 
     @include('layouts.template')
 
@@ -148,7 +145,7 @@
                             {{-- Form Add --}}
                             <div class="row">
                                 <div class="col-8">
-                                    <form action="{{ url('komunikasi') }}" method="POST" enctype="multipart/form-data">
+                                    <form  action="{{ url('proposal') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
@@ -187,10 +184,10 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="jenis_intermediary_id">Jenis Intermediary</label>
-                                            <select class="form-select form-control" name="jenis_intermediary_id" id="jenis_intermediary_id">
+                                            <label for="jenis_intermediaries_id">Jenis Intermediary</label>
+                                            <select class="form-select form-control" name="jenis_intermediaries_id" id="jenis_intermediaries_id">
                                                 <option value="">--Pilih Jenis Intermediary--</option>
-                                                @foreach($jenisIntermediary as $item)
+                                                @foreach($jenisIntermediaries as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
@@ -206,17 +203,18 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="klasifikasi_portofolio_id">Klasifikasi Portfolio</label>
-                                            <select class="form-select form-control" name="klasifikasi_portofolio_id" id="klasifikasi_portofolio_id">
+                                            <label for="klasifikasi_portfolio_id">Klasifikasi Portfolio</label>
+                                            <select class="form-select form-control" name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
                                                 <option value="">--Pilih Klasifikasi Portfolio--</option>
-                                                @foreach($klasifikasiPortofolio as $item)
+                                                @foreach($klasifikasiPortfolios as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="impact_goals_id">Impact Goals</label>
-                                            <select class="form-select form-control" name="impact_goals_id" id="impact_goals_id">
+                                            <select class="form-select form-control" name="impact_goals_id[]
+                                            " id="impact_goals_id" multiple>
                                                 <option value="">--Pilih Impact Goals--</option>
                                                 @foreach($impactGoals as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -252,6 +250,15 @@
                                             @error('usulan_durasi')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="status_kemajuan_id">Status Kemajuan</label>
+                                            <select class="form-select form-control" name="status_kemajuan_id" id="status_kemajuan_id">
+                                                <option value="">--Pilih Status Kemajuan--</option>
+                                                @foreach($statusKemajuan as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group mb-4">
                                             <label for="dokumen" class="form-label">Dokumen</label>
@@ -316,6 +323,9 @@
     </div>
 
     @include('layouts.template')
+
+
+
 </body>
 
 </html>

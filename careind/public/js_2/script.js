@@ -17,6 +17,14 @@ function validateFile() {
 }
 
 
+$(document).ready(function() {
+    // Inisialisasi Select2 untuk elemen select impact_goals
+    $('#impact_goals_id').select2();
+});
+
+
+
+
 // document.addEventListener('DOMContentLoaded', function () {
 //     var deleteButtons = document.querySelectorAll('.delete-btn');
 //     deleteButtons.forEach(function (button) {

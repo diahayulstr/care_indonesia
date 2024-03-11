@@ -17,10 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('tujuan_pendanaan_id');
             $table->unsignedBigInteger('jenis_penerimaan_id');
             $table->unsignedBigInteger('saluran_pendanaan_id');
-            $table->unsignedBigInteger('jenis_intermediary_id');
+            $table->unsignedBigInteger('jenis_intermediaries_id');
             $table->string('nama_proyek');
-            $table->unsignedBigInteger('klasifikasi_portofolio_id');
-            $table->unsignedBigInteger('impact_goals_id');
+            $table->unsignedBigInteger('klasifikasi_portfolio_id');
+            $table->json('impact_goals_id');
             $table->string('estimasi_nilai_usd');
             $table->string('estimasi_nilai_idr');
             $table->string('usulan_durasi');
@@ -38,12 +38,10 @@ return new class extends Migration
                     ->references('id')->on('tabel_jenis_penerimaans')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('saluran_pendanaan_id')
                     ->references('id')->on('tabel_Saluran_pendanaans')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('jenis_intermediary_id')
+            $table->foreign('jenis_intermediaries_id')
                     ->references('id')->on('tabel_jenis_intermediaries')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('klasifikasi_portofolio_id')
-                    ->references('id')->on('tabel_klasifikasi_portofolios')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('impact_goals_id')
-                    ->references('id')->on('tabel_impact_goals')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('klasifikasi_portfolio_id')
+                    ->references('id')->on('tabel_klasifikasi_portfolios')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('status_kemajuan_id')
                     ->references('id')->on('tabel_status_kemajuans')->onDelete('cascade')->onUpdate('cascade');
 

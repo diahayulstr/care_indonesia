@@ -55,3 +55,4 @@ Route::delete('komunikasi/{komunikasi}', [App\Http\Controllers\KomunikasiControl
 // PROPOSAL
 Route::get('proposal', [App\Http\Controllers\ProposalController::class, 'proposal'])->name('pages.proposal');
 Route::get('proposal/add', [App\Http\Controllers\ProposalController::class, 'addProposal'])->name('proposal.add');
+Route::post('proposal', [App\Http\Controllers\ProposalController::class, 'store']);
