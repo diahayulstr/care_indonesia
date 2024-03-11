@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tabel_impact_goals', function (Blueprint $table) {
-            $table->char('id')->index();
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });
