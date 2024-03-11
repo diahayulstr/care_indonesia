@@ -169,19 +169,17 @@
                                             <td>{{ $item->jenisIntermediaries->name }}</td>
                                             <td>{{ $item->nama_proyek }}</td>
                                             <td>{{ $item->klasifikasiPortfolios->name }}</td>
+                                            <!-- Mengubah JSON impact_goals_id menjadi array -->
+                                            @php $impactGoalsIds = json_decode($item->impact_goals_id); @endphp
+                                            <!-- Mendapatkan nama impact goals berdasarkan id -->
                                             <td>
-                                                @if(isset($item->impactGoals))
-                                                    @php
-                                                        $impactGoals = json_decode($item->impactGoals, true);
-                                                    @endphp
-
-                                                    @foreach($impactGoals as $goal)
-                                                        <span>{{ $goal['name'] }}</span>
-                                                        @if(!$loop->last)
-                                                            <span>, </span> <!-- Tambahkan koma jika bukan elemen terakhir -->
-                                                        @endif
-                                                    @endforeach
-                                                @endif
+                                                @foreach ($impactGoalsIds as $impactGoalId)
+                                                    {{ \App\Models\TabelImpactGoals::find($impactGoalId)->name }}
+                                                    <!-- Tambahkan pemisah antara nama impact goals jika diperlukan -->
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
                                             </td>
                                             {{-- <td>{{ $item->impactGoals->name }}</td> --}}
                                             <td>{{ $item->estimasi_nilai_usd }}</td>
