@@ -27,7 +27,17 @@ $(document).ready(function() {
     $('#impact_goals_id').select2();
 });
 
+$(document).ready(function(){
+    $(document).on('click', '#btn-update', function(){
+        let data_id = $(this).attr("data-id");
+        let data_name = $(this).attr("data-name");
 
+        $('#name-edit').val(data_name);
+        $('#id-edit').val(data_id);
+
+        $('#form-update').modal('show');
+    });
+});
 
 
 // document.addEventListener('DOMContentLoaded', function () {
