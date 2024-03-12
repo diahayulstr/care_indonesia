@@ -157,7 +157,7 @@
                                             <th>Dokumen</th>
                                             <th colspan="4">Aksi</th>
                                         </tr>
-                                    </thead>
+                                    </thead> 
                                     <tbody>
                                         @forelse($proposal as $item)
                                         <tr>

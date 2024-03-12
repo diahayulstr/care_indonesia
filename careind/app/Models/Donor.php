@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Donor extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_organisasi', 'alamat', 'negara', 'provinsi_id', 'kabupaten_id', 'kecamatan_id', 'desa_id', 'website', 'informasi_singkat', 'jenis_organisasi_id', 'komitmen_sdgs_id', 'date', 'dokumen'];
+    protected $fillable = ['nama_organisasi', 'alamat', 'negara', 'provinsi_id', 'kabupaten_id', 'kecamatan_id', 'desa_id', 'website', 'informasi_singkat', 'jenis_organisasi_id', 'komitmen_sdgs', 'date', 'dokumen'];
 
     public function provinsi()
     {
@@ -37,7 +37,7 @@ class Donor extends Model
 
     public function komitmenSdgs()
     {
-        return $this->belongsTo(TabelKomitmenSdg::class, 'komitmen_sdgs_id');
+        return $this->belongsTo(TabelKomitmenSdg::class, 'komitmen_sdgs');
     }
 
     public function donorID()

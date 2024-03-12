@@ -18,6 +18,22 @@ Route::get('home', function () {
     return view('home');
 });
 
+Route::get('impact_goals', [App\Http\Controllers\HomeController::class, 'impact_goals'])->name('admin.impactGoals');
+Route::get('impact_goals/{impact_goals}/edit', [App\Http\Controllers\AdminController::class, 'edit_impact_goals'])->name('admin.impactGoals');
+
+Route::get('jenis_intermediary', [App\Http\Controllers\HomeController::class, 'jenis_intermediaries'])->name('admin.jenisIntermediary');
+Route::get('jenis_organisasi', [App\Http\Controllers\HomeController::class, 'jenis_organisasi'])->name('admin.jenisOrganisasi');
+Route::get('jenis_penerimaan', [App\Http\Controllers\HomeController::class, 'jenis_penerimaan'])->name('admin.jenisPenerimaan');
+Route::get('jenjang_komunikasi', [App\Http\Controllers\HomeController::class, 'jenjang_komunikasi'])->name('admin.jenjangKomunikasi');
+Route::get('klasifikasi_portfolio', [App\Http\Controllers\HomeController::class, 'klasifikasi_portfolio'])->name('admin.klasifikasiPortfolio');
+Route::get('komitmen_sdgs', [App\Http\Controllers\HomeController::class, 'komitmen_sdgs'])->name('admin.komitmenSdgs');
+Route::get('saluran', [App\Http\Controllers\HomeController::class, 'saluran'])->name('admin.saluran');
+Route::get('saluran_pendanaan', [App\Http\Controllers\HomeController::class, 'saluran_pendanaan'])->name('admin.saluranPendanaan');
+Route::get('status', [App\Http\Controllers\HomeController::class, 'status'])->name('admin.status');
+Route::get('status_kemajuan', [App\Http\Controllers\HomeController::class, 'status_kemajuan'])->name('admin.statusKemajuan');
+Route::get('tindak_lanjut', [App\Http\Controllers\HomeController::class, 'tindak_lanjut'])->name('admin.tindakLanjut');
+Route::get('tujuan_pendanaan', [App\Http\Controllers\HomeController::class, 'tujuan_pendanaan'])->name('admin.tujuanPendanaan');
+
 
 Route::post('getkabupaten', [App\Http\Controllers\DonorController::class, 'getkabupaten'])->name('getkabupaten');
 Route::post('getkecamatan', [App\Http\Controllers\DonorController::class, 'getkecamatan'])->name('getkecamatan');

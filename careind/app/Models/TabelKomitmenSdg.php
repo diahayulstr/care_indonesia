@@ -13,6 +13,6 @@ class TabelKomitmenSdg extends Model
 
     public function donors()
     {
-        return $this->hasMany(Donor::class, 'komitmen_sdgs_id');
+        return $this->hasMany(Donor::class, 'komitmen_sdgs');
     }
 }

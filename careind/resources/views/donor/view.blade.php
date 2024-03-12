@@ -194,7 +194,15 @@
                                         </tr>
                                         <tr>
                                             <th scope="row">Komitmen SDGs</th>
-                                            <th>{{ $donor->komitmenSdgs->name }}</th>
+                                            @php $komitSdgs = json_decode($donor->komitmen_sdgs); @endphp
+                                            <th>
+                                                @foreach ($komitSdgs as $komit_sdgs)
+                                                    {{ \App\Models\TabelKomitmenSdg::find($komit_sdgs)->name }}
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </th>
                                         </tr>
                                         <tr>
                                             <th scope="row">Tanggal</th>

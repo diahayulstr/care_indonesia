@@ -19,6 +19,11 @@ function validateFile() {
 
 $(document).ready(function() {
     // Inisialisasi Select2 untuk elemen select impact_goals
+    $('#komitmen_sdgs').select2();
+});
+
+$(document).ready(function() {
+    // Inisialisasi Select2 untuk elemen select impact_goals
     $('#impact_goals_id').select2();
 });
 

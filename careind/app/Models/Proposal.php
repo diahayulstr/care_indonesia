@@ -33,7 +33,7 @@ class Proposal extends Model
     {
         return $this->belongsTo(TabelImpactGoals::class, 'impact_goals_id');
     }
-
+ 
     // public function impactGoals()
     // {
     //     return $this->belongsToMany(TabelImpactGoals::class, 'impact_goal_proposal', 'proposal_id', 'impact_goal_id');

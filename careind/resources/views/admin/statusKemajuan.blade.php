@@ -16,6 +16,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+
+
 </head>
 
 <body id="page-top">
@@ -35,7 +37,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{url('home')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -74,26 +76,26 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            <li class="nav-item active">
+                <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Admin Only</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
+                        <a class="collapse-item "  href="{{ url('impact_goals') }}">Impact Goals</a>
                         <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                        <a class="collapse-item " href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
                         <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
                         <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                        <a class="collapse-item " href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
+                        <a class="collapse-item " href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
                         <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
                         <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
                         <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                        <a class="collapse-item active" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
                         <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
                         <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
                         <a class="collapse-item" href="#">User</a>

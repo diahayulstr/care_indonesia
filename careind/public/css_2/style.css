@@ -18,5 +18,7 @@
     margin: 10px 0;
 }
 
-
+#collapseTwo .collapse-item.active {
+    color: #e74a3b;
+}
 

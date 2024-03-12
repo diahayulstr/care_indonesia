@@ -190,9 +190,20 @@
                                             <td>{{ $item->website }}</td>
                                             <td>{{ $item->informasi_singkat }}</td>
                                             <td>{{ $item->jenisOrganisasi->name }}</td>
-                                            <td>{{ $item->komitmenSdgs->name }}</td>
+
+                                            <!-- Mengubah JSON impact_goals_id menjadi array -->
+                                            @php $komitSdgs = json_decode($item->komitmen_sdgs); @endphp
+                                            <!-- Mendapatkan nama impact goals berdasarkan id -->
+                                            <td>
+                                                @foreach ($komitSdgs as $komit_sdgs)
+                                                    {{ \App\Models\TabelKomitmenSdg::find($komit_sdgs)->name }}
+                                                    <!-- Tambahkan pemisah antara nama impact goals jika diperlukan -->
+                                                    @if (!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>{{ $item->date }}</td>
-                                            {{-- <td><img height="50px" src="{{url('')}}/{{$item->dokumen}}" class="rounded" alt=""></td> --}}
                                             <td>@if ($item->dokumen)
                                                 @php
                                                     $extension = pathinfo($item->dokumen, PATHINFO_EXTENSION);

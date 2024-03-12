@@ -69,7 +69,7 @@ class DonorController extends Controller
             'website'               => 'required',
             'informasi_singkat'     => 'required',
             'jenis_organisasi_id'   => 'required|exists:tabel_jenis_organisasis,id',
-            'komitmen_sdgs_id'      => 'required|exists:tabel_komitmen_sdgs,id',
+            'komitmen_sdgs'         => 'required|exists:tabel_komitmen_sdgs,id',
             'date'                  => 'required',
             'dokumen'               => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
         ]);
@@ -84,7 +84,7 @@ class DonorController extends Controller
         $donor->website             = $request->website;
         $donor->informasi_singkat   = $request->informasi_singkat;
         $donor->jenis_organisasi_id = $request->jenis_organisasi_id;
-        $donor->komitmen_sdgs_id    = $request->komitmen_sdgs_id;
+        $donor->komitmen_sdgs       = json_encode($request->komitmen_sdgs);
         $donor->date                = $request->date;
 
         // Proses penyimpanan file dokumen
@@ -125,7 +125,7 @@ class DonorController extends Controller
             'website'               => 'required',
             'informasi_singkat'     => 'required',
             'jenis_organisasi_id'   => 'required|exists:tabel_jenis_organisasis,id',
-            'komitmen_sdgs_id'      => 'required|exists:tabel_komitmen_sdgs,id',
+            'komitmen_sdgs'         => 'required|exists:tabel_komitmen_sdgs,id',
             'date'                  => 'required',
             'dokumen'               => 'file',
         ]);
@@ -141,7 +141,7 @@ class DonorController extends Controller
             'website',
             'informasi_singkat',
             'jenis_organisasi_id',
-            'komitmen_sdgs_id',
+            'komitmen_sdgs',
             'date',
         ]));
 

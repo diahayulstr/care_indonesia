@@ -55,6 +55,13 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('style/js/demo/datatables-demo.js') }}"></script>
 
+    <!-- Page level plugins -->
+    {{-- <script src="{{ asset('style/vendor/chart.js/Chart.min.js') }}"></script> --}}
+
+    <!-- Page level custom scripts -->
+    {{-- <script src="{{ asset('style/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('style/js/demo/chart-pie-demo.js') }}"></script> --}}
+
     {{-- Custom Script Dialog --}}
     <script src="{{ asset('js_2/script.js')}}"></script>
 

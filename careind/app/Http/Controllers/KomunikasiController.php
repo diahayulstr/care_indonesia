@@ -15,7 +15,7 @@ class KomunikasiController extends Controller
     public function komunikasi() {
         $komunikasi = Komunikasi::all();
         return view('pages.komunikasi', compact('komunikasi'));
-    } 
+    }
 
     public function addKomunikasi() {
         $donorID = Donor::all();
@@ -79,7 +79,7 @@ class KomunikasiController extends Controller
             'tgl_selanjutnya'       =>  'required',
             'dokumen'               =>  'file',
         ]);
-
+ 
         $komunikasi -> update($request->only([
             'donor_id',
             'tanggal',

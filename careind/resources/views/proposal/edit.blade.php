@@ -234,7 +234,7 @@
                                                         {{ $item->id == old('klasifikasi_portfolio_id', $proposal->klasifikasi_portfolio_id) ? 'selected' : '' }}>
                                                         {{ $item->name }}</option>
                                                 @endforeach
-                                            </select>
+                                            </select> 
                                         </div>
                                         <div class="form-group">
                                             <label for="impact_goals_id">Impact Goals</label>

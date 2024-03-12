@@ -273,17 +273,19 @@
 
                                         <!-- Komitmen SDGs -->
                                         <div class="form-group">
-                                            <label for="komitmen_sdgs_id">Komitmen SDGs</label>
-                                            <select class="form-select" name="komitmen_sdgs_id"
-                                                id="komitmen_sdgs_id">
+                                            <label for="komitmen_sdgs">Komitmen SDGs</label>
+                                            <select class="form-select form-control" name="komitmen_sdgs[]"
+                                                id="komitmen_sdgs" multiple>
                                                 <option value="">Pilih Komitmen SDGs</option>
-                                                @foreach ($komitmenSdgs as $komitmenSdg)
-                                                    <option value="{{ $komitmenSdg->id }}"
-                                                        {{ $komitmenSdg->id == old('komitmen_sdgs_id', $donor->komitmen_sdgs_id) ? 'selected' : '' }}>
-                                                        {{ $komitmenSdg->name }}</option>
+                                                @php $komitSdgs = json_decode($donor->komitmen_sdgs); @endphp
+                                                @foreach ($komitmenSdgs as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        {{ in_array($item->id, $komitSdgs) ? 'selected' : '' }}>
+                                                        {{ $item->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
-                                            @error('komitmen_sdgs_id')
+                                            @error('komitmen_sdgs')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

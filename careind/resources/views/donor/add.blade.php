@@ -229,8 +229,8 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="komitmen_sdgs_id">Komitmen SDGs</label>
-                                            <select class="form-select" name="komitmen_sdgs_id" id="komitmen_sdgs_id">
+                                            <label for="komitmen_sdgs">Komitmen SDGs</label>
+                                            <select class="form-select" name="komitmen_sdgs[]" id="komitmen_sdgs" multiple>
                                                 <option value="">--Pilih--</option>
                                                 @foreach($komitmenSdgs as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
