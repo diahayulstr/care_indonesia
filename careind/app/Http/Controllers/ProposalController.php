@@ -14,10 +14,10 @@ use App\Models\TabelStatusKemajuan;
 use App\Models\TabelTujuanPendanaan;
 use File;
 
-class ProposalController extends Controller 
+class ProposalController extends Controller
 {
     public function proposal() {
-        $proposal = Proposal::all();
+        $proposal = Proposal::paginate(2);
         return view('pages.proposal', compact('proposal'));
     }
 

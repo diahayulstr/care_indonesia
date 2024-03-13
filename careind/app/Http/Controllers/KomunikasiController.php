@@ -13,7 +13,7 @@ use File;
 class KomunikasiController extends Controller
 {
     public function komunikasi() {
-        $komunikasi = Komunikasi::all();
+        $komunikasi = Komunikasi::paginate(2);
         return view('pages.komunikasi', compact('komunikasi'));
     }
 
@@ -79,7 +79,7 @@ class KomunikasiController extends Controller
             'tgl_selanjutnya'       =>  'required',
             'dokumen'               =>  'file',
         ]);
- 
+
         $komunikasi -> update($request->only([
             'donor_id',
             'tanggal',
@@ -106,6 +106,6 @@ class KomunikasiController extends Controller
         $komunikasi = Komunikasi::findOrFail($id);
         File::delete($komunikasi->dokumen);
         $komunikasi->delete();
-        return redirect()->route('pages.komunikasi')->with('success', 'Data berhasil dihappus');
+        return redirect()->route('pages.komunikasi')->with('success', 'Data berhasil dihapus');
     }
 }

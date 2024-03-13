@@ -1,4 +1,4 @@
- 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -206,9 +206,9 @@
                                 </table>
                             </div>
                         </div>
-                        {{-- <div class="card-footer">
-                            {{ $donor->links}}
-                        </div> --}}
+                        <div class="card-footer">
+                            {{ $komunikasi->links('vendor.pagination.bootstrap-5') }}
+                        </div>
                     </div>
 
                 </div>

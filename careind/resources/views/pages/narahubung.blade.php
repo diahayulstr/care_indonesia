@@ -195,9 +195,9 @@
                                 </table>
                             </div>
                         </div>
-                        {{-- <div class="card-footer">
-                            {{ $donor->links}}
-                        </div> --}}
+                        <div class="card-footer">
+                            {{ $narahubung->links('vendor.pagination.bootstrap-5') }}
+                        </div>
                     </div>
 
                 </div>

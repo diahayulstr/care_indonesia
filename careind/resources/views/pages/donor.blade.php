@@ -5,6 +5,7 @@
 
     @include('layouts.template')
 
+
 </head>
 
 <body id="page-top">
@@ -137,7 +138,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-bordered">
+                                <table class="table table-hover table-bordered" id=>
                                     <thead>
                                         <tr class="text-center fw-bold">
                                             <th>Donor ID</th>
@@ -245,9 +246,9 @@
                                 </table>
                             </div>
                         </div>
-                        {{-- <div class="card-footer">
-                            {{ $donor->links}}
-                        </div> --}}
+                        <div class="card-footer">
+                            {{ $donor->links('vendor.pagination.bootstrap-5') }}
+                        </div>
                     </div>
 
                 </div>

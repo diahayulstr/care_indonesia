@@ -157,7 +157,7 @@
                                             <th>Dokumen</th>
                                             <th colspan="4">Aksi</th>
                                         </tr>
-                                    </thead> 
+                                    </thead>
                                     <tbody>
                                         @forelse($proposal as $item)
                                         <tr>
@@ -227,9 +227,9 @@
                                 </table>
                             </div>
                         </div>
-                        {{-- <div class="card-footer">
-                            {{ $donor->links}}
-                        </div> --}}
+                        <div class="card-footer">
+                            {{ $proposal->links('vendor.pagination.bootstrap-5') }}
+                        </div>
                     </div>
 
                 </div>

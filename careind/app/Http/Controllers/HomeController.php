@@ -20,67 +20,67 @@ use App\Models\TabelTujuanPendanaan;
 class HomeController extends Controller
 {
     public function impact_goals() {
-        $impactGoals = TabelImpactGoals::all();
+        $impactGoals = TabelImpactGoals::paginate(4);
         return view('admin.impactGoals', compact('impactGoals'));
     }
 
     public function jenis_intermediaries() {
-        $jenisIntermediary = TabelJenisIntermediaries::all();
+        $jenisIntermediary = TabelJenisIntermediaries::paginate(4);
         return view('admin.jenisIntermediary', compact('jenisIntermediary'));
     }
 
     public function jenis_organisasi() {
-        $jenisOrganisasi = TabelJenisOrganisasi::all();
+        $jenisOrganisasi = TabelJenisOrganisasi::paginate(4);
         return view('admin.jenisOrganisasi', compact('jenisOrganisasi'));
     }
 
     public function jenis_penerimaan() {
-        $jenisPenerimaan = TabelJenisPenerimaan::all();
+        $jenisPenerimaan = TabelJenisPenerimaan::paginate(4);
         return view('admin.jenisPenerimaan', compact('jenisPenerimaan'));
     }
 
     public function jenjang_komunikasi() {
-        $jenjangKomunikasi = TabelJenjangKomunikasi::all();
+        $jenjangKomunikasi = TabelJenjangKomunikasi::paginate(4);
         return view('admin.jenjangKomunikasi', compact('jenjangKomunikasi'));
     }
 
     public function klasifikasi_portfolio() {
-        $klasifikasiPortfolio = TabelKlasifikasiPortfolios::all();
+        $klasifikasiPortfolio = TabelKlasifikasiPortfolios::paginate(4);
         return view('admin.klasifikasiPortfolio', compact('klasifikasiPortfolio'));
     }
 
     public function komitmen_sdgs() {
-        $komitmenSdgs = TabelKomitmenSdg::all();
+        $komitmenSdgs = TabelKomitmenSdg::paginate(4);
         return view('admin.komitmenSdgs', compact('komitmenSdgs'));
     }
 
     public function saluran() {
-        $saluran = TabelSaluran::all();
+        $saluran = TabelSaluran::paginate(4);
         return view('admin.saluran', compact('saluran'));
     }
 
     public function saluran_pendanaan() {
-        $saluranPendanaan = TabelSaluranPendanaan::all();
+        $saluranPendanaan = TabelSaluranPendanaan::paginate(4);
         return view('admin.saluranPendanaan', compact('saluranPendanaan'));
     }
 
     public function status() {
-        $status = TabelStatus::all();
+        $status = TabelStatus::paginate(4);
         return view('admin.status', compact('status'));
     }
 
     public function status_kemajuan() {
-        $statusKemajuan = TabelStatusKemajuan::all();
+        $statusKemajuan = TabelStatusKemajuan::paginate(4);
         return view('admin.statusKemajuan', compact('statusKemajuan'));
     }
 
     public function tindak_lanjut() {
-        $tindakLanjut = TabelTindakLanjut::all();
+        $tindakLanjut = TabelTindakLanjut::paginate(4);
         return view('admin.tindakLanjut', compact('tindakLanjut'));
     }
 
     public function tujuan_pendanaan() {
-        $tujuanPendanaan = TabelTujuanPendanaan::all();
+        $tujuanPendanaan = TabelTujuanPendanaan::paginate(4);
         return view('admin.tujuanPendanaan', compact('tujuanPendanaan'));
     }
 

@@ -15,7 +15,7 @@ use File;
 class DonorController extends Controller
 {
     public function donor() {
-        $donor = Donor::all();
+        $donor = Donor::paginate(2);
         return view('pages.donor', compact('donor'));
     }
 

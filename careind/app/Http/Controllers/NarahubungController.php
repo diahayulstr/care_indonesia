@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -10,7 +10,7 @@ use App\Models\Donor;
 class NarahubungController extends Controller
 {
     public function narahubung() {
-        $narahubung = Narahubung::all();
+        $narahubung = Narahubung::paginate(4);
         return view('pages.narahubung', compact('narahubung'));
     }
 

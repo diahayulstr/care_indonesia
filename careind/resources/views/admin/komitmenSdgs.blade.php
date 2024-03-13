@@ -231,6 +231,9 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="card-footer">
+                                    {{ $komitmenSdgs->links('vendor.pagination.bootstrap-5') }}
+                                </div>
                             </div>
                         </div>
 

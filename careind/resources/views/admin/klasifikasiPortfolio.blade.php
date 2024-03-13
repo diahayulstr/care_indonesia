@@ -265,6 +265,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer">
+                                        {{ $klasifikasiPortfolio->links('vendor.pagination.bootstrap-5') }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
