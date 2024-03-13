@@ -34,7 +34,7 @@ class Donor extends Model
     {
         return $this->belongsTo(TabelJenisOrganisasi::class, 'jenis_organisasi_id');
     }
-
+ 
     public function komitmenSdgs()
     {
         return $this->belongsTo(TabelKomitmenSdg::class, 'komitmen_sdgs');

@@ -129,7 +129,6 @@ Route::get('komunikasi/{komunikasi}/edit', [App\Http\Controllers\KomunikasiContr
 Route::patch('komunikasi/{komunikasi}', [App\Http\Controllers\KomunikasiController::class, 'update'])->name('komunikasi.update');
 Route::delete('komunikasi/{komunikasi}', [App\Http\Controllers\KomunikasiController::class, 'destroy']);
 
-
 // PROPOSAL
 Route::get('proposal', [App\Http\Controllers\ProposalController::class, 'proposal'])->name('pages.proposal');
 Route::get('proposal/add', [App\Http\Controllers\ProposalController::class, 'addProposal'])->name('proposal.add');
@@ -138,4 +137,7 @@ Route::get('proposal/{proposal}', [App\Http\Controllers\ProposalController::clas
 Route::get('proposal/{proposal}/edit', [App\Http\Controllers\ProposalController::class, 'edit'])->name('proposal.edit');
 Route::patch('proposal/{proposal}', [App\Http\Controllers\ProposalController::class, 'update'])->name('proposal.update');
 Route::delete('proposal/{proposal}', [App\Http\Controllers\ProposalController::class, 'destroy']);
+
+// MASTER ADD
+Route::get('master_donor/add', [App\Http\Controllers\MasterController::class, 'master_addDonor'])->name('donor.master.add_master');
 

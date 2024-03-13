@@ -24,7 +24,6 @@ class DonorController extends Controller
         $jenisOrganisasis = TabelJenisOrganisasi::all();
         $komitmenSdgs = TabelKomitmenSdg::all();
         return view('donor.add', compact('jenisOrganisasis', 'komitmenSdgs', 'provinces'));
-
     }
 
     public function getkabupaten (request $request) {

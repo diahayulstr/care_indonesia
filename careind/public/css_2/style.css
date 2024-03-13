@@ -1,11 +1,6 @@
-.action-buttons {
-    display: flex;
-    align-items: center; /* Menyelaraskan tombol secara vertikal di tengah */
-}
 
-.action-buttons a {
-    margin-right: 8px;
-}
+
+
 
 .status-button {
     border: none;
@@ -22,3 +17,14 @@
     color: #e74a3b;
 }
 
+#myTabjustified .nav-link {
+    color: black;
+}
+
+#myTabjustified .nav-link.active {
+    color: #e74a3b;
+}
+
+#myTabjustified.flex-fill {
+    color: #e74a3b;
+}
