@@ -5,6 +5,13 @@
 
     @include('layouts.template')
 
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -129,7 +136,7 @@
                             </div>
                             <div class="action-buttons d-flex justify-content-center">
                                 <div class="d-inline-block">
-                                    <a href="{{ url('donor/add') }}" class="btn btn-primary btn-circle me-2"
+                                    <a href="{{ url('donor/add') }}" class="btn btn-primary btn-circle"
                                         data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
                                 </div>
                                 <div class="d-inline-block mx-1">
@@ -160,63 +167,63 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Donor ID</th>
-                                            <th>{{ $donor->id }}</th>
+                                            <td>{{ $donor->id }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Nama Organisasi</th>
-                                            <th>{{ $donor->nama_organisasi }}</th>
+                                            <td>{{ $donor->nama_organisasi }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Alamat</th>
-                                            <th>{{ $donor->alamat }}</th>
+                                            <td>{{ $donor->alamat }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Provinsi</th>
-                                            <th>{{ $donor->provinsi->name }}</th>
+                                            <td>{{ $donor->provinsi->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Kabupaten</th>
-                                            <th>{{ $donor->kabupaten->name }}</th>
+                                            <td>{{ $donor->kabupaten->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Kecamatan</th>
-                                            <th>{{ $donor->kecamatan->name }}</th>
+                                            <td>{{ $donor->kecamatan->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Desa</th>
-                                            <th>{{ $donor->desa->name }}</th>
+                                            <td>{{ $donor->desa->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Website</th>
-                                            <th>{{ $donor->website }}</th>
+                                            <td>{{ $donor->website }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Informasi Singkat</th>
-                                            <th>{{ $donor->informasi_singkat }}</th>
+                                            <td>{{ $donor->informasi_singkat }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Jenis Organisasi</th>
-                                            <th>{{ $donor->jenisOrganisasi->name }}</th>
+                                            <td>{{ $donor->jenisOrganisasi->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Komitmen SDGs</th>
                                             @php $komitSdgs = json_decode($donor->komitmen_sdgs); @endphp
-                                            <th>
+                                            <td>
                                                 @foreach ($komitSdgs as $komit_sdgs)
                                                     {{ \App\Models\TabelKomitmenSdg::find($komit_sdgs)->name }}
                                                     @if (!$loop->last)
                                                         ,
                                                     @endif
                                                 @endforeach
-                                            </th>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Tanggal</th>
-                                            <th>{{ $donor->date }}</th>
+                                            <td>{{ $donor->date }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Dokumen</th>
-                                            <th>
+                                            <td>
                                                 @if ($donor->dokumen)
                                                     @php
                                                         $extension = pathinfo($donor->dokumen, PATHINFO_EXTENSION);
@@ -234,7 +241,7 @@
                                                 @else
                                                     Tidak ada dokumen
                                                 @endif
-                                            </th>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

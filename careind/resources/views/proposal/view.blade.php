@@ -5,6 +5,13 @@
 
     @include('layouts.template')
 
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -129,7 +136,7 @@
                             </div>
                             <div class="action-buttons d-flex justify-content-center">
                                 <div class="d-inline-block">
-                                    <a href="{{ url('proposal/add') }}" class="btn btn-primary btn-circle me-2"
+                                    <a href="{{ url('proposal/add') }}" class="btn btn-primary btn-circle"
                                         data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
                                 </div>
                                 <div class="d-inline-block mx-1">
@@ -161,41 +168,41 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Proposal ID</th>
-                                            <th>{{ $proposal->id }}</th>
+                                            <td>{{ $proposal->id }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Donor ID</th>
-                                            <th>{{ $proposal->donorID->nama_organisasi }}</th>
+                                            <td>{{ $proposal->donorID->nama_organisasi }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Tujuan Pendanaan</th>
-                                            <th>{{ $proposal->tujuanPendanaan->name }}</th>
+                                            <td>{{ $proposal->tujuanPendanaan->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Jenis Penerimaan</th>
-                                            <th>{{ $proposal->jenisPenerimaan->name }}</th>
+                                            <td>{{ $proposal->jenisPenerimaan->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Saluran Pendanaan</th>
-                                            <th>{{ $proposal->saluranPendanaan->name }}</th>
+                                            <td>{{ $proposal->saluranPendanaan->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Jenis Intermediary</th>
-                                            <th>{{ $proposal->jenisIntermediaries->name }}</th>
+                                            <td>{{ $proposal->jenisIntermediaries->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Nama Proyek</th>
-                                            <th>{{ $proposal->nama_proyek }}</th>
+                                            <td>{{ $proposal->nama_proyek }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Klasifikasi Portfolio</th>
-                                            <th>{{ $proposal->klasifikasiPortfolios->name }}</th>
+                                            <td>{{ $proposal->klasifikasiPortfolios->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Impact Goals</th>
                                             @php $impactGoalsIds = json_decode($proposal->impact_goals_id); @endphp
                                             <!-- Mendapatkan nama impact goals berdasarkan id -->
-                                            <th>
+                                            <td>
                                                 @foreach ($impactGoalsIds as $impactGoalId)
                                                     {{ \App\Models\TabelImpactGoals::find($impactGoalId)->name }}
                                                     <!-- Tambahkan pemisah antara nama impact goals jika diperlukan -->
@@ -203,27 +210,27 @@
                                                         ,
                                                     @endif
                                                 @endforeach
-                                            </th>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Estimasi Nilai USD</th>
-                                            <th>{{ $proposal->estimasi_nilai_usd }}</th>
+                                            <td>{{ $proposal->estimasi_nilai_usd }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Estimasi Nilai IDR</th>
-                                            <th>{{ $proposal->estimasi_nilai_idr }}</th>
+                                            <td>{{ $proposal->estimasi_nilai_idr }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Usulan Durasi</th>
-                                            <th>{{ $proposal->usulan_durasi }}</th>
+                                            <td>{{ $proposal->usulan_durasi }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Status Kemajuan</th>
-                                            <th>{{ $proposal->statusKemajuan->name }}</th>
+                                            <td>{{ $proposal->statusKemajuan->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Dokumen</th>
-                                            <th>
+                                            <td>
                                                 @if ($proposal->dokumen)
                                                     @php
                                                         $extension = pathinfo($proposal->dokumen, PATHINFO_EXTENSION);
@@ -241,7 +248,7 @@
                                                 @else
                                                     Tidak ada dokumen
                                                 @endif
-                                            </th>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

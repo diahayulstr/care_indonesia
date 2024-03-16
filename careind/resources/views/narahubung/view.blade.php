@@ -5,6 +5,13 @@
 
     @include('layouts.template')
 
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -120,11 +127,11 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="m-0 font-weight-bold text-danger">Donor View</h6>
+                                <h6 class="m-0 font-weight-bold text-danger">Narahubung View</h6>
                             </div>
                             <div class="action-buttons d-flex justify-content-center">
                                 <div class="d-inline-block">
-                                    <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle me-2"
+                                    <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle"
                                         data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
                                 </div>
                                 <div class="d-inline-block mx-1">
@@ -155,31 +162,31 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Narahubung ID</th>
-                                            <th>{{ $narahubung->id }}</th>
+                                            <td>{{ $narahubung->id }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Donor ID</th>
-                                            <th>{{ $narahubung->donorID->nama_organisasi }}</th>
+                                            <td>{{ $narahubung->donorID->nama_organisasi }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Nama Kontak</th>
-                                            <th>{{ $narahubung->nama_kontak }}</th>
+                                            <td>{{ $narahubung->nama_kontak }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Jabatan</th>
-                                            <th>{{ $narahubung->jabatan }}</th>
+                                            <td>{{ $narahubung->jabatan }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Email</th>
-                                            <th>{{ $narahubung->email }}</th>
+                                            <td>{{ $narahubung->email }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Nomor Telepon</th>
-                                            <th>{{ $narahubung->no_telp }}</th>
+                                            <td>{{ $narahubung->no_telp }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Status</th>
-                                            <th id="statusact">
+                                            <td id="statusact">
                                                 @if ($narahubung->status->name == 'Aktif')
                                                     <button
                                                         class="status-button bg-success active">{{ $narahubung->status->name }}</button>
@@ -187,7 +194,7 @@
                                                     <button
                                                         class="status-button bg-danger inactive">{{ $narahubung->status->name }}</button>
                                                 @endif
-                                            </th>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

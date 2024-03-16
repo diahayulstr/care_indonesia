@@ -5,6 +5,13 @@
 
     @include('layouts.template')
 
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -130,7 +137,7 @@
 
                             <div class="action-buttons d-flex justify-content-center">
                                 <div class="d-inline-block">
-                                    <a href="{{ url('komunikasi/add') }}" class="btn btn-primary btn-circle me-2"
+                                    <a href="{{ url('komunikasi/add') }}" class="btn btn-primary btn-circle"
                                         data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
                                 </div>
                                 <div class="d-inline-block mx-1">
@@ -162,39 +169,39 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Komunikasi ID</th>
-                                            <th>{{ $komunikasi->id }}</th>
+                                            <td>{{ $komunikasi->id }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Donor ID</th>
-                                            <th>{{ $komunikasi->donorID->nama_organisasi }}</th>
+                                            <td>{{ $komunikasi->donorID->nama_organisasi }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Tanggal</th>
-                                            <th>{{ $komunikasi->tanggal }}</th>
+                                            <td>{{ $komunikasi->tanggal }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Saluran</th>
-                                            <th>{{ $komunikasi->saluran->name }}</th>
+                                            <td>{{ $komunikasi->saluran->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Jenjang Komunikasi</th>
-                                            <th>{{ $komunikasi->jenjangKomunikasi->name }}</th>
+                                            <td>{{ $komunikasi->jenjangKomunikasi->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Tindak Lanjut</th>
-                                            <th>{{ $komunikasi->tindakLanjut->name }}</th>
+                                            <td>{{ $komunikasi->tindakLanjut->name }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Catatan</th>
-                                            <th>{{ $komunikasi->catatan }}</th>
+                                            <td>{{ $komunikasi->catatan }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Tanggal Selanjutnya</th>
-                                            <th>{{ $komunikasi->tgl_selanjutnya }}</th>
+                                            <td>{{ $komunikasi->tgl_selanjutnya }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Dokumen</th>
-                                            <th>
+                                            <td>
                                                 @if ($komunikasi->dokumen)
                                                     @php
                                                         $extension = pathinfo($komunikasi->dokumen, PATHINFO_EXTENSION);
@@ -212,7 +219,7 @@
                                                 @else
                                                     Tidak ada dokumen
                                                 @endif
-                                            </th>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

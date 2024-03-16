@@ -1,13 +1,20 @@
-
-
-
-
-.status-button {
+#statusact .status-button {
     border: none;
     padding: 0 5px;
     border-radius: 20px;
     color: white;
     width: 120px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#statuskemajuanact .status-button {
+    border: none;
+    padding: 0 5px;
+    border-radius: 20px;
+    color: white;
+    width: 150px;
     height: 30px;
     text-align: center;
     margin: 10px 0;
@@ -27,4 +34,16 @@
 
 #myTabjustified.flex-fill {
     color: #e74a3b;
+}
+
+.table th, .table td input {
+    width: auto;
+}
+
+.table th, .table td select {
+    width: auto;
+}
+
+.table th, .table td textarea {
+    width: auto;
 }

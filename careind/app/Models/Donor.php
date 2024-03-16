@@ -34,7 +34,7 @@ class Donor extends Model
     {
         return $this->belongsTo(TabelJenisOrganisasi::class, 'jenis_organisasi_id');
     }
- 
+
     public function komitmenSdgs()
     {
         return $this->belongsTo(TabelKomitmenSdg::class, 'komitmen_sdgs');
@@ -43,5 +43,25 @@ class Donor extends Model
     public function donorID()
     {
         return $this->hasMany(Donor::class, 'donor_id');
+    }
+
+    public function narahubungs()
+    {
+        return $this->hasMany(Narahubung::class);
+    }
+
+    public function komunikasis()
+    {
+        return $this->hasMany(Komunikasi::class);
+    }
+
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
+    }
+
+    public function masters()
+    {
+        return $this->hasMany(Master::class);
     }
 }

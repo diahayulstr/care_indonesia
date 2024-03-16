@@ -334,7 +334,7 @@
                                         <a href="{{ url('donor') }}" class="btn btn-outline-primary">Cancel</a>
                                     </form>
 
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>

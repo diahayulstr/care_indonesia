@@ -139,5 +139,16 @@ Route::patch('proposal/{proposal}', [App\Http\Controllers\ProposalController::cl
 Route::delete('proposal/{proposal}', [App\Http\Controllers\ProposalController::class, 'destroy']);
 
 // MASTER ADD
-Route::get('master_donor/add', [App\Http\Controllers\MasterController::class, 'master_addDonor'])->name('donor.master.add_master');
+Route::get('master/add', [App\Http\Controllers\MasterController::class, 'master_add'])->name('donor.master.add_master');
+Route::get('master/{master}', [App\Http\Controllers\MasterController::class, 'master_show'])->name('donor.master.view_master');
+Route::get('master/{master}/edit', [App\Http\Controllers\MasterController::class, 'master_edit'])->name('donor.master.edit_master');
+
+Route::post('master/master_narahubung', [App\Http\Controllers\MasterController::class, 'store_narahubung']);
+Route::patch('master/master_narahubung/{master_narahubung}', [App\Http\Controllers\MasterController::class, 'update_narahubung'])->name('master.update_narahubung');
+Route::delete('master_narahubung/{master_narahubung}', [App\Http\Controllers\MasterController::class, 'destroy_narahubung']);
+
+Route::patch('master_komunikasi/{master_komunikasi}', [App\Http\Controllers\MasterController::class, 'store_komunikasi']);
+Route::delete('master_komunikasi/{master_komunikasi}', [App\Http\Controllers\MasterController::class, 'destroy_komunikasi']);
+
+Route::patch('master_proposal/{master_proposal}', [App\Http\Controllers\MasterController::class, 'store_proposal']);
 

@@ -88,10 +88,9 @@ class DonorController extends Controller
 
         // Proses penyimpanan file dokumen
         if ($request->hasFile('dokumen')) {
-            $extFile = $request->dokumen->getClientOriginalExtension();
-            $namaFile = 'user-'.time().".".$extFile;
-            $path = $request->dokumen->move('assets/donor/dokumen',$namaFile);
-            $donor->dokumen = $path;
+            $namaFile = $request->dokumen->getClientOriginalName();
+            $path = $request->dokumen->move('assets/donor/dokumen', $namaFile);
+            $donor->dokumen = 'assets/donor/dokumen/' . $namaFile;
         }
         $donor->save();
         return redirect()->route('pages.donor')->with('toast_success', 'Data donor berhasil ditambahkan');
@@ -145,11 +144,10 @@ class DonorController extends Controller
         ]));
 
         if ($request->hasFile('dokumen')) {
-            $extFile = $request->dokumen->getClientOriginalExtension();
-            $namaFile = 'user-' . time() . "." . $extFile;
-            File::delete($donor->dokumen);
+            $namaFile = $request->dokumen->getClientOriginalName();
             $path = $request->dokumen->move('assets/donor/dokumen', $namaFile);
-            $donor->dokumen = $path;
+            File::delete($donor->dokumen);
+            $donor->dokumen = 'assets/donor/dokumen/' . $namaFile;
         }
         $donor->save();
         return redirect()->route('pages.donor', ['donor' => $donor->id])

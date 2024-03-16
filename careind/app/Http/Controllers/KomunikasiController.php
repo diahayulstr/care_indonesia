@@ -44,11 +44,11 @@ class KomunikasiController extends Controller
         $komunikasi->tindak_lanjut_id       =   $request->tindak_lanjut_id;
         $komunikasi->catatan                =   $request->catatan;
         $komunikasi->tgl_selanjutnya        =   $request->tgl_selanjutnya;
+
         if ($request->hasFile('dokumen')) {
-            $extFile = $request->dokumen->getClientOriginalExtension();
-            $namaFile = 'user-'.time().".".$extFile;
-            $path = $request->dokumen->move('assets/komunikasi/dokumen',$namaFile);
-            $komunikasi->dokumen = $path;
+            $namaFile = $request->dokumen->getClientOriginalName();
+            $path = $request->dokumen->move('assets/komunikasi/dokumen', $namaFile);
+            $komunikasi->dokumen = 'assets/komunikasi/dokumen/' . $namaFile;
         }
         $komunikasi->save();
         return redirect()->route('pages.komunikasi')->with('toast_success', 'Data komunikasi berhasil ditambahkan');
@@ -91,11 +91,10 @@ class KomunikasiController extends Controller
         ]));
 
         if ($request->hasFile('dokumen')) {
-            $extFile = $request->dokumen->getClientOriginalExtension();
-            $namaFile = 'user-' . time() . "." . $extFile;
-            File::delete($komunikasi->dokumen);
+            $namaFile = $request->dokumen->getClientOriginalName();
             $path = $request->dokumen->move('assets/komunikasi/dokumen', $namaFile);
-            $komunikasi->dokumen = $path;
+            File::delete($komunikasi->dokumen);
+            $komunikasi->dokumen = 'assets/komunikasi/dokumen/' . $namaFile;
         }
         $komunikasi->save();
         return redirect()->route('pages.komunikasi', ['komunikasi' => $komunikasi->id])

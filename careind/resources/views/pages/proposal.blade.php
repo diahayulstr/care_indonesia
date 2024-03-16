@@ -5,6 +5,13 @@
 
     @include('layouts.template')
 
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -185,7 +192,15 @@
                                                 <td>{{ $item->estimasi_nilai_usd }}</td>
                                                 <td>{{ $item->estimasi_nilai_idr }}</td>
                                                 <td>{{ $item->usulan_durasi }}</td>
-                                                <td>{{ $item->statusKemajuan->name }}</td>
+                                                <td id="statuskemajuanact">
+                                                    @if ($item->statusKemajuan->name == 'Disetujui')
+                                                        <button class="status-button bg-success active">{{ $item->statusKemajuan->name }}</button>
+                                                    @elseif ($item->statusKemajuan->name == 'Tidak dilanjutkan')
+                                                        <button class="status-button bg-danger pending">{{ $item->statusKemajuan->name }}</button>
+                                                    @else
+                                                        <button class="status-button bg-warning inactive">{{ $item->statusKemajuan->name }}</button>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($item->dokumen)
                                                         @php

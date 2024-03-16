@@ -4,8 +4,12 @@
 <head>
 
     @include('layouts.template')
+
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
 </head>
@@ -139,7 +143,7 @@
                                     <span class="divider"></span>
 
                                 </a> --}}
-                                <a href="{{ url('master_donor/add') }}" class="btn btn-outline-primary btn-circle me-2" data-bs-toggle="tooltip" title="Master/Detail Add"><i class="fas fa-plus"></i></a>
+                                <a href="{{ url('master/add') }}" class="btn btn-outline-primary btn-circle me-2" data-bs-toggle="tooltip" title="Master/Detail Add"><i class="fas fa-plus"></i></a>
                                 <a href="{{url('donor/add')}}" class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
@@ -255,8 +259,8 @@
                                                                 <i class="fas fa-project-diagram"></i>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Master/Detail View</a></li>
-                                                                <li><a class="dropdown-item" href="#">Master/Detail Edit</a></li>
+                                                                <li><a class="dropdown-item" href="{{ url('master/'.$item->id) }}">Master/Detail View</a></li>
+                                                                <li><a class="dropdown-item" href="{{ url('master/'.$item->id.'/edit') }}">Master/Detail Edit</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

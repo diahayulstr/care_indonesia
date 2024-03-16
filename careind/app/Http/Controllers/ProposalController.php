@@ -70,10 +70,9 @@ class ProposalController extends Controller
         ]);
 
         if ($request->hasFile('dokumen')) {
-            $extFile = $request->dokumen->getClientOriginalExtension();
-            $namaFile = 'user-' . time() . "." . $extFile;
+            $namaFile = $request->dokumen->getClientOriginalName();
             $path = $request->dokumen->move('assets/proposal/dokumen', $namaFile);
-            $proposal->dokumen = $path;
+            $proposal->dokumen = 'assets/proposal/dokumen/' . $namaFile;
         }
         $proposal->save();
         return redirect()->route('pages.proposal')->with('success', 'Proposal berhasil disimpan.');
@@ -132,11 +131,10 @@ class ProposalController extends Controller
         ]));
 
         if ($request->hasFile('dokumen')) {
-            $extFile = $request->dokumen->getClientOriginalExtension();
-            $namaFile = 'user-' . time() . "." . $extFile;
-            File::delete($proposal->dokumen);
+            $namaFile = $request->dokumen->getClientOriginalName();
             $path = $request->dokumen->move('assets/proposal/dokumen', $namaFile);
-            $proposal->dokumen = $path;
+            File::delete($proposal->dokumen);
+            $proposal->dokumen = 'assets/proposal/dokumen/' . $namaFile;
         }
         $proposal->save();
         return redirect()->route('pages.proposal', ['proposal' => $proposal->id])

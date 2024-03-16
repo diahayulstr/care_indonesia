@@ -3,7 +3,7 @@
 
 <head>
 
-    @include('layouts.template')
+
 
     {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -11,6 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+
+    <!-- Link CSS Select2 dari CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+
+     @include('layouts.template')
 
 </head>
 
@@ -132,10 +138,10 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between align-items-center">
                             <div>
-                                <h6 class="m-0 font-weight-bold text-danger">Donor</h6>
+                                <h6 class="m-0 font-weight-bold text-danger">Master/Detail Add</h6>
                             </div>
                         </div>
-                        <form action="{{ url('donor') }}" method="POST" enctype="multipart/form-data">
+                        <form action="" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <!-- Default Tabs -->
@@ -163,8 +169,9 @@
                                     </li>
                                 </ul>
 
-                                {{-- DONOR --}}
-                                <div class="tab-content pt-2" id="myTabjustifiedContent">
+
+                                <div class="tab-content pt-4" id="myTabjustifiedContent">
+                                    {{-- DONOR --}}
                                     <div class="tab-pane fade show active" id="donor-justified" role="tabpanel"
                                         aria-labelledby="donor-tab">
                                         <div class="row">
@@ -297,234 +304,258 @@
                                     {{-- NARAHUBUNG --}}
                                     <div class="tab-pane fade" id="narahubung-justified" role="tabpanel"
                                         aria-labelledby="narahubung-tab">
-                                        <div class="form-group">
-                                            <label for="nama_kontak">Nama Kontak</label>
-                                            <input type="text" placeholder="Nama Kontak"
-                                                class="form-control @error('nama_kontak') is-invalid @enderror"
-                                                id="nama_kontak" name="nama_kontak"
-                                                value="{{ old('nama_kontak') }}">
-                                            @error('nama_kontak')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="jabatan">Jabatan</label>
-                                            <input type="text" placeholder="Jabatan"
-                                                class="form-control @error('jabatan') is-invalid @enderror"
-                                                id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
-                                            @error('jabatan')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="jabatan">Email</label>
-                                            <input type="email" placeholder="Email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                id="email" name="email" value="{{ old('email') }}">
-                                            @error('email')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="no_telp">No Telepon</label>
-                                            <input type="tel" placeholder="No Telepon"
-                                                class="form-control @error('no_telp') is-invalid @enderror"
-                                                id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
-                                            @error('no_telp')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status_id">Status</label>
-                                            <select class="form-select" name="status_id" id="status_id">
-                                                <option value="">--Pilih Status--</option>
-                                                {{-- @foreach ($status as $item)
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label for="nama_kontak">Nama Kontak</label>
+                                                    <input type="text" placeholder="Nama Kontak"
+                                                        class="form-control @error('nama_kontak') is-invalid @enderror"
+                                                        id="nama_kontak" name="nama_kontak"
+                                                        value="{{ old('nama_kontak') }}">
+                                                    @error('nama_kontak')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jabatan">Jabatan</label>
+                                                    <input type="text" placeholder="Jabatan"
+                                                        class="form-control @error('jabatan') is-invalid @enderror"
+                                                        id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
+                                                    @error('jabatan')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jabatan">Email</label>
+                                                    <input type="email" placeholder="Email"
+                                                        class="form-control @error('email') is-invalid @enderror"
+                                                        id="email" name="email" value="{{ old('email') }}">
+                                                    @error('email')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="no_telp">No Telepon</label>
+                                                    <input type="tel" placeholder="No Telepon"
+                                                        class="form-control @error('no_telp') is-invalid @enderror"
+                                                        id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
+                                                    @error('no_telp')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="status_id">Status</label>
+                                                    <select class="form-select" name="status_id" id="status_id">
+                                                        <option value="">--Pilih Status--</option>
+                                                        {{-- @foreach ($status as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     {{-- KOMUNIKASI --}}
                                     <div class="tab-pane fade" id="komunikasi-justified" role="tabpanel"
                                         aria-labelledby="komunikasi-tab">
-                                        <div class="form-group">
-                                            <label for="tanggal">Tanggal</label>
-                                            <input type="date" placeholder="Tanggal"
-                                                class="form-control @error('tanggal') is-invalid @enderror"
-                                                id="tanggal" name="tanggal"
-                                                value="{{ old('tanggal') }}">
-                                            @error('tanggal')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="saluran_id">Saluran</label>
-                                            <select class="form-select form-control" name="saluran_id" id="saluran_id">
-                                                <option value="">--Pilih Saluran--</option>
-                                                {{-- @foreach($saluran as $item)
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label for="tanggal">Tanggal</label>
+                                                    <input type="date" placeholder="Tanggal"
+                                                        class="form-control @error('tanggal') is-invalid @enderror"
+                                                        id="tanggal" name="tanggal" value="{{ old('tanggal') }}">
+                                                    @error('tanggal')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="saluran_id">Saluran</label>
+                                                    <select class="form-select form-control" name="saluran_id"
+                                                        id="saluran_id">
+                                                        <option value="">--Pilih Saluran--</option>
+                                                        {{-- @foreach ($saluran as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
-                                            <select class="form-select form-control" name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
-                                                <option value="">--Pilih Jenjang Komunikasi--</option>
-                                                {{-- @foreach($jenjangKomunikasi as $item)
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
+                                                    <select class="form-select form-control"
+                                                        name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
+                                                        <option value="">--Pilih Jenjang Komunikasi--</option>
+                                                        {{-- @foreach ($jenjangKomunikasi as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tindak_lanjut_id">Tindak Lanjut</label>
-                                            <select class="form-select form-control" name="tindak_lanjut_id" id="tindak_lanjut_id">
-                                                <option value="">--Pilih Tindak Lanjut--</option>
-                                                {{-- @foreach($tindakLanjut as $item)
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tindak_lanjut_id">Tindak Lanjut</label>
+                                                    <select class="form-select form-control" name="tindak_lanjut_id"
+                                                        id="tindak_lanjut_id">
+                                                        <option value="">--Pilih Tindak Lanjut--</option>
+                                                        {{-- @foreach ($tindakLanjut as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="catatan">Catatan</label>
-                                            <textarea type="text" placeholder="Catatan"
-                                                class="form-control @error('catatan') is-invalid @enderror"
-                                                id="catatan" name="catatan"
-                                                value="{{ old('catatan') }}"></textarea>
-                                            @error('catatan')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tgl_selanjutnya">Tanggal Selanjutnya</label>
-                                            <input type="date" placeholder="Tanggal Selanjutnya"
-                                                class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
-                                                id="tgl_selanjutnya" name="tgl_selanjutnya"
-                                                value="{{ old('tgl_selanjutnya') }}">
-                                            @error('tgl_selanjutnya')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-4">
-                                            <label for="dokumen" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen" name="dokumen" onchange="validateFile()">
-                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
-                                            <span id="file-error" class="text-danger"></span>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="catatan">Catatan</label>
+                                                    <textarea type="text" placeholder="Catatan" class="form-control @error('catatan') is-invalid @enderror"
+                                                        id="catatan" name="catatan" value="{{ old('catatan') }}"></textarea>
+                                                    @error('catatan')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tgl_selanjutnya">Tanggal Selanjutnya</label>
+                                                    <input type="date" placeholder="Tanggal Selanjutnya"
+                                                        class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
+                                                        id="tgl_selanjutnya" name="tgl_selanjutnya"
+                                                        value="{{ old('tgl_selanjutnya') }}">
+                                                    @error('tgl_selanjutnya')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-4">
+                                                    <label for="dokumen" class="form-label">Dokumen</label>
+                                                    <input type="file" class="form-control" id="dokumen"
+                                                        name="dokumen" onchange="validateFile()">
+                                                    <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
+                                                        gif)
+                                                        atau PDF.</small>
+                                                    <span id="file-error" class="text-danger"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     {{-- PROPOSAL --}}
                                     <div class="tab-pane fade" id="proposal-justified" role="tabpanel"
                                         aria-labelledby="proposal-tab">
-                                        <div class="form-group">
-                                            <label for="tujuan_pendanaan_id">Tujuan Pendanaan</label>
-                                            <select class="form-select form-control" name="tujuan_pendanaan_id" id="tujuan_pendanaan_id">
-                                                <option value="">--Pilih Tujuan Pendanaan--</option>
-                                                {{-- @foreach($tujuanPendanaan as $item)
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label for="tujuan_pendanaan_id">Tujuan Pendanaan</label>
+                                                    <select class="form-select form-control"
+                                                        name="tujuan_pendanaan_id" id="tujuan_pendanaan_id">
+                                                        <option value="">--Pilih Tujuan Pendanaan--</option>
+                                                        {{-- @foreach ($tujuanPendanaan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="jenis_penerimaan_id">Jenis Penerimaan</label>
-                                            <select class="form-select form-control" name="jenis_penerimaan_id" id="jenis_penerimaan_id">
-                                                <option value="">--Pilih Jenis Penerimaan--</option>
-                                                {{-- @foreach($jenisPenerimaan as $item)
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jenis_penerimaan_id">Jenis Penerimaan</label>
+                                                    <select class="form-select form-control"
+                                                        name="jenis_penerimaan_id" id="jenis_penerimaan_id">
+                                                        <option value="">--Pilih Jenis Penerimaan--</option>
+                                                        {{-- @foreach ($jenisPenerimaan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="saluran_pendanaan_id">Saluran Pendanaan</label>
-                                            <select class="form-select form-control" name="saluran_pendanaan_id" id="saluran_pendanaan_id">
-                                                <option value="">--Pilih Saluran Pendanaan--</option>
-                                                {{-- @foreach($saluranPendanaan as $item)
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="saluran_pendanaan_id">Saluran Pendanaan</label>
+                                                    <select class="form-select form-control"
+                                                        name="saluran_pendanaan_id" id="saluran_pendanaan_id">
+                                                        <option value="">--Pilih Saluran Pendanaan--</option>
+                                                        {{-- @foreach ($saluranPendanaan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="jenis_intermediaries_id">Jenis Intermediary</label>
-                                            <select class="form-select form-control" name="jenis_intermediaries_id" id="jenis_intermediaries_id">
-                                                <option value="">--Pilih Jenis Intermediary--</option>
-                                                {{-- @foreach($jenisIntermediaries as $item)
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jenis_intermediaries_id">Jenis Intermediary</label>
+                                                    <select class="form-select form-control"
+                                                        name="jenis_intermediaries_id" id="jenis_intermediaries_id">
+                                                        <option value="">--Pilih Jenis Intermediary--</option>
+                                                        {{-- @foreach ($jenisIntermediaries as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nama_proyek">Nama Proyek</label>
-                                            <input type="text" placeholder="Nama Proyek"
-                                                class="form-control @error('nama_proyek') is-invalid @enderror"
-                                                id="nama_proyek" name="nama_proyek"
-                                                value="{{ old('nama_proyek') }}">
-                                            @error('nama_proyek')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="klasifikasi_portfolio_id">Klasifikasi Portfolio</label>
-                                            <select class="form-select form-control" name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
-                                                <option value="">--Pilih Klasifikasi Portfolio--</option>
-                                                {{-- @foreach($klasifikasiPortfolios as $item)
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nama_proyek">Nama Proyek</label>
+                                                    <input type="text" placeholder="Nama Proyek"
+                                                        class="form-control @error('nama_proyek') is-invalid @enderror"
+                                                        id="nama_proyek" name="nama_proyek"
+                                                        value="{{ old('nama_proyek') }}">
+                                                    @error('nama_proyek')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="klasifikasi_portfolio_id">Klasifikasi Portfolio</label>
+                                                    <select class="form-select form-control"
+                                                        name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
+                                                        <option value="">--Pilih Klasifikasi Portfolio--</option>
+                                                        {{-- @foreach ($klasifikasiPortfolios as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="impact_goals_id">Impact Goals</label>
-                                            <select class="form-select form-control" name="impact_goals_id[]
-                                            " id="impact_goals_id" multiple>
-                                                <option value="">--Pilih Impact Goals--</option>
-                                                {{-- @foreach($impactGoals as $item)
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="impact_goals_id">Impact Goals</label>
+                                                    <select class="form-select form-control"
+                                                        name="impact_goals_id[]" id="impact_goals_id" multiple>
+                                                        <option value="">--Pilih Impact Goals--</option>
+                                                        {{-- @foreach($impactGoals as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @endforeach --}}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="estimasi_nilai_usd">Estimasi Nilai USD</label>
+                                                    <input type="text" placeholder="Estimasi Nilai USD"
+                                                        class="form-control @error('estimasi_nilai_usd') is-invalid @enderror"
+                                                        id="estimasi_nilai_usd" name="estimasi_nilai_usd"
+                                                        value="{{ old('estimasi_nilai_usd') }}">
+                                                    @error('estimasi_nilai_usd')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="estimasi_nilai_idr">Estimasi Nilai IDR</label>
+                                                    <input type="text" placeholder="Estimasi Nilai IDR"
+                                                        class="form-control @error('estimasi_nilai_idr') is-invalid @enderror"
+                                                        id="estimasi_nilai_idr" name="estimasi_nilai_idr"
+                                                        value="{{ old('estimasi_nilai_idr') }}">
+                                                    @error('estimasi_nilai_idr')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="usulan_durasi">Usulan Durasi</label>
+                                                    <input type="text" placeholder="Usulan Durasi"
+                                                        class="form-control @error('usulan_durasi') is-invalid @enderror"
+                                                        id="usulan_durasi" name="usulan_durasi"
+                                                        value="{{ old('usulan_durasi') }}">
+                                                    @error('usulan_durasi')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="status_kemajuan_id">Status Kemajuan</label>
+                                                    <select class="form-select form-control" name="status_kemajuan_id"
+                                                        id="status_kemajuan_id">
+                                                        <option value="">--Pilih Status Kemajuan--</option>
+                                                        {{-- @foreach ($statusKemajuan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="estimasi_nilai_usd">Estimasi Nilai USD</label>
-                                            <input type="text" placeholder="Estimasi Nilai USD"
-                                                class="form-control @error('estimasi_nilai_usd') is-invalid @enderror"
-                                                id="estimasi_nilai_usd" name="estimasi_nilai_usd"
-                                                value="{{ old('estimasi_nilai_usd') }}">
-                                            @error('estimasi_nilai_usd')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="estimasi_nilai_idr">Estimasi Nilai IDR</label>
-                                            <input type="text" placeholder="Estimasi Nilai IDR"
-                                                class="form-control @error('estimasi_nilai_idr') is-invalid @enderror"
-                                                id="estimasi_nilai_idr" name="estimasi_nilai_idr"
-                                                value="{{ old('estimasi_nilai_idr') }}">
-                                            @error('estimasi_nilai_idr')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="usulan_durasi">Usulan Durasi</label>
-                                            <input type="text" placeholder="Usulan Durasi"
-                                                class="form-control @error('usulan_durasi') is-invalid @enderror"
-                                                id="usulan_durasi" name="usulan_durasi"
-                                                value="{{ old('usulan_durasi') }}">
-                                            @error('usulan_durasi')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status_kemajuan_id">Status Kemajuan</label>
-                                            <select class="form-select form-control" name="status_kemajuan_id" id="status_kemajuan_id">
-                                                <option value="">--Pilih Status Kemajuan--</option>
-                                                {{-- @foreach($statusKemajuan as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-4">
-                                            <label for="dokumen" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen" name="dokumen" onchange="validateFile()">
-                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
-                                            <span id="file-error" class="text-danger"></span>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-4">
+                                                    <label for="dokumen" class="form-label">Dokumen</label>
+                                                    <input type="file" class="form-control" id="dokumen"
+                                                        name="dokumen" onchange="validateFile()">
+                                                    <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
+                                                        gif)
+                                                        atau PDF.</small>
+                                                    <span id="file-error" class="text-danger"></span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -582,7 +613,14 @@
                 </div>
             </div>
         </div>
-        @include('layouts.template')
+
+
+    @include('layouts.template')
+
+    <!-- Link JavaScript Select2 dari CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
 </body>
 
 </html>

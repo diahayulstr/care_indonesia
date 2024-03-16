@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Narahubung;
 use App\Models\TabelStatus;
-use App\Models\Donor;
+use App\Models\Donor; 
 
 class NarahubungController extends Controller
 {
