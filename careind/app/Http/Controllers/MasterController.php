@@ -81,30 +81,34 @@ class MasterController extends Controller
         ));
     }
 
-    public function store_narahubung(Request $request) {
+    public function storeOrUpdate_narahubung(Request $request, $donor_id)
+    {
         $request->validate([
-            'donor_id'       => 'required|exists:donors,id',
-            'nama_kontak'    => 'required',
-            'jabatan'        => 'required',
-            'email'          => 'required|max:15',
-            'no_telp'        => 'required',
-            'status_id'      => 'required|exists:tabel_statuses,id',
+            'nama_kontak' => 'required',
+            'jabatan' => 'required',
+            'email' => 'required|email',
+            'no_telp' => 'required',
+            'status_id' => 'required|exists:tabel_statuses,id',
         ]);
-        $narahubung = new Narahubung();
-        $narahubung->donor_id       = $request->donor_id;
-        $narahubung->nama_kontak    = $request->nama_kontak;
-        $narahubung->jabatan        = $request->jabatan;
-        $narahubung->email          = $request->email;
-        $narahubung->no_telp        = $request->no_telp;
-        $narahubung->status_id      = $request->status_id;
+        if ($request->filled('narahubung_id')) {
+            $narahubung = Narahubung::findOrFail($request->narahubung_id);
+        } else {
+            $narahubung = new Narahubung;
+        }
+        $narahubung->donor_id = $donor_id;
+        $narahubung->nama_kontak = $request->nama_kontak;
+        $narahubung->jabatan = $request->jabatan;
+        $narahubung->email = $request->email;
+        $narahubung->no_telp = $request->no_telp;
+        $narahubung->status_id = $request->status_id;
         $narahubung->save();
-        $donorId = $request->donor_id;
-        return redirect()->route('donor.master.view_master', ['master' => $donorId])
-        ->with('toast_success', 'Data narahubung berhasil ditambahkan.');
+        return redirect()->route('donor.master.view_master', $donor_id)->with('success', 'Data narahubung berhasil disimpan atau diperbarui.');
     }
 
+
+
     public function update_narahubung(Request $request, $master_narahubung)
-{
+    {
     // Validasi input
     $request->validate([
         'donor_id'      =>  'required|exists:donors,id',

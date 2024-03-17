@@ -23,6 +23,6 @@ class Master extends Model
 
     public function donorID()
     {
-        return $this->belongsTo(Donor::class, 'donor_id');
+        return $this->belongsTo(Donor::class);
     }
 }

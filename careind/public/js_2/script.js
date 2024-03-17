@@ -63,65 +63,25 @@ $(document).ready(function(){
 
 
 $(document).ready(function(){
-    // Tangani klik tombol #btn-addmaster-narahubung
-    $(document).on('click', '#btn-addmaster-narahubung', function(){
-        let data_id = $(this).attr("data-id");
-        $('#donor_id-master-narahubung').val(data_id);
-        $('#form-add-master-narahubung').modal('show');
-    });
-
-    // Tangani klik tombol #btn-addmaster-komunikasi
-    $(document).on('click', '#btn-addmaster-komunikasi', function(){
-        let data_id = $(this).attr("data-id");
-        $('#donor_id-master-komunikasi').val(data_id);
-        $('#form-add-master-komunikasi').modal('show');
-    });
-
-    // Tangani klik tombol #btn-addmaster-proposal
-    $(document).on('click', '#btn-addmaster-proposal', function(){
-        let data_id = $(this).attr("data-id");
-        $('#donor_id-master-proposal').val(data_id);
-        $('#form-add-master-proposal').modal('show');
-    });
-
     // Tangani klik tombol #btn-editmaster-narahubung
     $(document).on('click', '#btn-editmaster-narahubung', function() {
-        var narahubungId = $(this).data("narahubung-id");
-        var donorId = $(this).data("donor-id");
-        var namaKontak = $(this).data("nama-kontak");
-        var jabatan = $(this).data("jabatan");
-        var email = $(this).data("email");
-        var noTelp = $(this).data("no-telp");
-        // var statusId = $(this).data("status-id");
-        var statusId = this.getAttribute('data-status-id');
-        console.log(statusId);
+            var id = $(this).data('id');
+            var donor_id = $(this).data('donor-id');
+            var nama_kontak = $(this).data('nama-kontak');
+            var jabatan = $(this).data('jabatan');
+            var email = $(this).data('email');
+            var no_telp = $(this).data('no-telp');
+            var status_id = $(this).data('status-id');
 
-        $('#narahubung_id-master-narahubung').val(narahubungId);
-        $('#donor_id-masteredit-narahubung').val(donorId);
-        $('#nama_kontak_edit').val(namaKontak);
-        $('#jabatan_edit').val(jabatan);
-        $('#email_edit').val(email);
-        $('#no_telp_edit').val(noTelp);
-        $('#status_id_edit').val(statusId).change();
+            $('#narahubung_id').val(id);
+            $('#donor_id-master-narahubung').val(donor_id);
+            $('#nama_kontak').val(nama_kontak);
+            $('#jabatan').val(jabatan);
+            $('#email').val(email);
+            $('#no_telp').val(no_telp);
+            $('#status_id').val(status_id);
 
-    });
-
-    // Tangani klik tombol #btn-editmaster-komunikasi
-    $(document).on('click', '#btn-editmaster-komunikasi', function() {
-        var komunikasiId = $(this).data("komunikasi-id");
-        var donorId = $(this).data("donor-id");
-
-        $('#komunikasi_id-master-komunikasi').val(komunikasiId);
-        $('#donor_id-masteredit-komunikasi').val(donorId);
-    });
-
-    // Tangani klik tombol #btn-editmaster-proposal
-    $(document).on('click', '#btn-editmaster-proposal', function() {
-        var proposalId = $(this).data("proposal-id");
-        var donorId = $(this).data("donor-id");
-
-        $('#proposal_id-master-proposal').val(proposalId);
-        $('#donor_id-masteredit-proposal').val(donorId);
+            $('#form-master-narahubung').modal('show');
     });
 });
 
