@@ -216,14 +216,14 @@
                                                 @endforeach
                                             </td>
                                             <td>{{ $item->date }}</td>
-                                            <td>@if ($item->dokumen)
+                                            <td>@if ($item->dokumen_donor)
                                                 @php
-                                                    $extension = pathinfo($item->dokumen, PATHINFO_EXTENSION);
+                                                    $extension = pathinfo($item->dokumen_donor, PATHINFO_EXTENSION);
                                                 @endphp
                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                    <img src="{{url('')}}/{{$item->dokumen}}" alt="Pratinjau Gambar" style="max-width: 100px; max-height: 100px;">
+                                                    <img src="{{url('')}}/{{$item->dokumen_donor}}" alt="Pratinjau Gambar" style="max-width: 100px; max-height: 100px;">
                                                 @elseif ($extension === 'pdf')
-                                                    <embed src="{{url('')}}/{{$item->dokumen}}" type="application/pdf" width="200" height="200">
+                                                    <embed src="{{url('')}}/{{$item->dokumen_donor}}" type="application/pdf" width="200" height="200">
                                                 @else
                                                     Tidak ada pratinjau
                                                 @endif

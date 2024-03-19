@@ -34,7 +34,7 @@ class KomunikasiController extends Controller
             'tindak_lanjut_id'      =>  'required|exists:tabel_tindak_lanjuts,id',
             'catatan'               =>  'required',
             'tgl_selanjutnya'       =>  'required',
-            'dokumen'               =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
+            'dokumen_komunikasi'    =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
         ]);
         $komunikasi = new Komunikasi();
         $komunikasi->donor_id               =   $request->donor_id;
@@ -45,10 +45,10 @@ class KomunikasiController extends Controller
         $komunikasi->catatan                =   $request->catatan;
         $komunikasi->tgl_selanjutnya        =   $request->tgl_selanjutnya;
 
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/komunikasi/dokumen', $namaFile);
-            $komunikasi->dokumen = 'assets/komunikasi/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_komunikasi')) {
+            $namaFile = $request->dokumen_komunikasi->getClientOriginalName();
+            $path = $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
+            $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
         }
         $komunikasi->save();
         return redirect()->route('pages.komunikasi')->with('toast_success', 'Data komunikasi berhasil ditambahkan');
@@ -77,7 +77,7 @@ class KomunikasiController extends Controller
             'tindak_lanjut_id'      =>  'required|exists:tabel_tindak_lanjuts,id',
             'catatan'               =>  'required',
             'tgl_selanjutnya'       =>  'required',
-            'dokumen'               =>  'file',
+            'dokumen_komunikasi'    =>  'file',
         ]);
 
         $komunikasi -> update($request->only([
@@ -90,21 +90,21 @@ class KomunikasiController extends Controller
             'tgl_selanjutnya',
         ]));
 
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/komunikasi/dokumen', $namaFile);
-            File::delete($komunikasi->dokumen);
-            $komunikasi->dokumen = 'assets/komunikasi/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_komunikasi')) {
+            $namaFile = $request->dokumen_komunikasi->getClientOriginalName();
+            $path = $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
+            File::delete($komunikasi->dokumen_komunikasi);
+            $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
         }
         $komunikasi->save();
         return redirect()->route('pages.komunikasi', ['komunikasi' => $komunikasi->id])
-        ->with('toast_success', 'Data berhasil diupdate');
+        ->with('toast_success', 'Data komunikasi berhasil diupdate');
     }
 
     public function destroy($id) {
         $komunikasi = Komunikasi::findOrFail($id);
-        File::delete($komunikasi->dokumen);
+        File::delete($komunikasi->dokumen_komunikasi);
         $komunikasi->delete();
-        return redirect()->route('pages.komunikasi')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('pages.komunikasi')->with('success', 'Data komunikasi berhasil dihapus');
     }
 }

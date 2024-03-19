@@ -70,7 +70,7 @@ class DonorController extends Controller
             'jenis_organisasi_id'   => 'required|exists:tabel_jenis_organisasis,id',
             'komitmen_sdgs'         => 'required|exists:tabel_komitmen_sdgs,id',
             'date'                  => 'required',
-            'dokumen'               => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
+            'dokumen_donor'         => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
         ]);
         $donor = new Donor();
         $donor->nama_organisasi     = $request->nama_organisasi;
@@ -87,10 +87,10 @@ class DonorController extends Controller
         $donor->date                = $request->date;
 
         // Proses penyimpanan file dokumen
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/donor/dokumen', $namaFile);
-            $donor->dokumen = 'assets/donor/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_donor')) {
+            $namaFile = $request->dokumen_donor->getClientOriginalName();
+            $path = $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
+            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFile;
         }
         $donor->save();
         return redirect()->route('pages.donor')->with('toast_success', 'Data donor berhasil ditambahkan');
@@ -125,7 +125,7 @@ class DonorController extends Controller
             'jenis_organisasi_id'   => 'required|exists:tabel_jenis_organisasis,id',
             'komitmen_sdgs'         => 'required|exists:tabel_komitmen_sdgs,id',
             'date'                  => 'required',
-            'dokumen'               => 'file',
+            'dokumen_donor'         => 'file',
         ]);
 
         $donor->update($request->only([
@@ -143,26 +143,26 @@ class DonorController extends Controller
             'date',
         ]));
 
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/donor/dokumen', $namaFile);
-            File::delete($donor->dokumen);
-            $donor->dokumen = 'assets/donor/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_donor')) {
+            $namaFile = $request->dokumen_donor->getClientOriginalName();
+            $path = $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
+            File::delete($donor->dokumen_donor);
+            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFile;
         }
         $donor->save();
         return redirect()->route('pages.donor', ['donor' => $donor->id])
-        ->with('toast_success', 'Data berhasil diupdate');
+        ->with('toast_success', 'Data donor berhasil diupdate');
     }
 
     public function destroy($id) {
         $donor = Donor::findOrFail($id);
-        File::delete($donor->dokumen);
+        File::delete($donor->dokumen_donor);
         $donor->delete();
         // $title = 'Delete!';
         // $text = "Are you sure you want to delete?";
         // confirmDelete($title, $text);
         // return redirect()->route('pages.donor');
-        return redirect()->route('pages.donor')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('pages.donor')->with('success', 'Data donor berhasil dihapus');
     }
 
 

@@ -290,7 +290,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-4">
-                                                    <label for="dokumen" class="form-label">Dokumen</label>
+                                                    <label for="dokumen_donor" class="form-label">Dokumen</label>
                                                     <input type="file" class="form-control" id="dokumen_donor"
                                                         name="dokumen_donor" onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
@@ -306,8 +306,7 @@
                                         aria-labelledby="narahubung-tab">
                                         <div class="row">
                                             <div class="col-8">
-                                                {{-- <input type="hidden" id="donor_id_narahubung" name="donor_id"> --}}
-                                                {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
+                                                {{-- <input type="hidden" id="donor_id" name="donor_id"> --}}
 
                                                 <div class="form-group">
                                                     <label for="nama_kontak">Nama Kontak</label>
@@ -323,7 +322,8 @@
                                                     <label for="jabatan">Jabatan</label>
                                                     <input type="text" placeholder="Jabatan"
                                                         class="form-control @error('jabatan') is-invalid @enderror"
-                                                        id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
+                                                        id="jabatan" name="jabatan"
+                                                        value="{{ old('jabatan') }}">
                                                     @error('jabatan')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
@@ -425,7 +425,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-4">
-                                                    <label for="dokumen" class="form-label">Dokumen</label>
+                                                    <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
                                                     <input type="file" class="form-control" id="dokumen_komunikasi"
                                                         name="dokumen_komunikasi" onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
@@ -556,7 +556,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group mb-4">
-                                                    <label for="dokumen" class="form-label">Dokumen</label>
+                                                    <label for="dokumen_proposal" class="form-label">Dokumen</label>
                                                     <input type="file" class="form-control" id="dokumen_proposal"
                                                         name="dokumen_proposal" onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,

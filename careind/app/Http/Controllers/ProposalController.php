@@ -50,7 +50,7 @@ class ProposalController extends Controller
             'estimasi_nilai_idr'        =>  'required',
             'usulan_durasi'             =>  'required',
             'status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
-            'dokumen'                   =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
+            'dokumen_proposal'          =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
         ]);
 
         $proposal = new Proposal([
@@ -69,13 +69,13 @@ class ProposalController extends Controller
             // 'dokumen'                    =>   $request->dokumen,
         ]);
 
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/proposal/dokumen', $namaFile);
-            $proposal->dokumen = 'assets/proposal/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_proposal')) {
+            $namaFile = $request->dokumen_proposal->getClientOriginalName();
+            $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
         }
         $proposal->save();
-        return redirect()->route('pages.proposal')->with('success', 'Proposal berhasil disimpan.');
+        return redirect()->route('pages.proposal')->with('success', 'Data proposal berhasil ditambahkan');
     }
 
     public function show($id) {
@@ -112,7 +112,7 @@ class ProposalController extends Controller
             'estimasi_nilai_idr'        =>  'required',
             'usulan_durasi'             =>  'required',
             'status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
-            'dokumen'                   =>  'file',
+            'dokumen_proposal'          =>  'file',
         ]);
 
         $proposal -> update($request->only([
@@ -130,22 +130,22 @@ class ProposalController extends Controller
             'status_kemajuan_id',
         ]));
 
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/proposal/dokumen', $namaFile);
-            File::delete($proposal->dokumen);
-            $proposal->dokumen = 'assets/proposal/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_proposal')) {
+            $namaFile = $request->dokumen_proposal->getClientOriginalName();
+            $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+            File::delete($proposal->dokumen_proposal);
+            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
         }
         $proposal->save();
         return redirect()->route('pages.proposal', ['proposal' => $proposal->id])
-        ->with('toast_success', 'Data berhasil diupdate');
+        ->with('toast_success', 'Data proposal berhasil diupdate');
     }
 
     public function destroy($id) {
         $proposal = Proposal::findOrFail($id);
-        File::delete($proposal->dokumen);
+        File::delete($proposal->dokumen_proposal);
         $proposal->delete();
-        return redirect()->route('pages.proposal')->with('success', 'Date berhasil dihapus');
+        return redirect()->route('pages.proposal')->with('success', 'Data proposal berhasil dihapus');
     }
 
 }

@@ -218,23 +218,23 @@
                                             @enderror
                                         </div>
                                         <div class="form-group mb-4">
-                                            <label for="dokumen" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen"
-                                                name="dokumen">
+                                            <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
+                                            <input type="file" class="form-control" id="dokumen_komunikasi"
+                                                name="dokumen_komunikasi">
                                             <br>
-                                            @if ($komunikasi->dokumen)
+                                            @if ($komunikasi->dokumen_komunikasi)
                                                 <input type="text" class="form-control"
-                                                    value="{{ basename($komunikasi->dokumen) }}" readonly>
+                                                    value="{{ basename($komunikasi->dokumen_komunikasi) }}" readonly>
                                                 <br>
                                                 @php
-                                                    $extension = pathinfo($komunikasi->dokumen, PATHINFO_EXTENSION);
+                                                    $extension = pathinfo($komunikasi->dokumen_komunikasi, PATHINFO_EXTENSION);
                                                 @endphp
                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                    <img src="{{ url('') }}/{{ $komunikasi->dokumen }}"
+                                                    <img src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
                                                         alt="Pratinjau Gambar"
                                                         style="max-width: 300px; max-height: 300px;">
                                                 @elseif ($extension === 'pdf')
-                                                    <embed src="{{ url('') }}/{{ $komunikasi->dokumen }}"
+                                                    <embed src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
                                                         type="application/pdf" width="500" height="500">
                                                 @else
                                                     Tidak ada pratinjau

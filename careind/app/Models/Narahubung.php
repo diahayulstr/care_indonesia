@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Narahubung extends Model
 {
     use HasFactory;
-    protected $fillable = ['donor_id', 'nama_kontak', 'jabatab', 'email', 'no_telp', 'status_id'];
+    protected $fillable = ['donor_id', 'nama_kontak', 'jabatan', 'email', 'no_telp', 'status_id'];
 
     public function status()
     {

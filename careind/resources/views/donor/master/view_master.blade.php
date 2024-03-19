@@ -227,20 +227,20 @@
                                                 <tr>
                                                     <th scope="row">Dokumen</th>
                                                     <td>
-                                                        @if ($donor->dokumen)
+                                                        @if ($donor->dokumen_donor)
                                                             @php
                                                                 $extension = pathinfo(
-                                                                    $donor->dokumen,
+                                                                    $donor->dokumen_donor,
                                                                     PATHINFO_EXTENSION,
                                                                 );
                                                             @endphp
                                                             @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                <img src="{{ url('') }}/{{ $donor->dokumen }}"
+                                                                <img src="{{ url('') }}/{{ $donor->dokumen_donor }}"
                                                                     alt="Pratinjau Gambar"
                                                                     style="max-width: 300px; max-height: 300px;">
                                                             @elseif ($extension === 'pdf')
                                                                 <embed
-                                                                    src="{{ url('') }}/{{ $donor->dokumen }}"
+                                                                    src="{{ url('') }}/{{ $donor->dokumen_donor }}"
                                                                     type="application/pdf" width="500"
                                                                     height="500">
                                                             @else
@@ -392,20 +392,20 @@
                                                         <td>{{ $item->catatan }}</td>
                                                         <td>{{ $item->tgl_selanjutnya }}</td>
                                                         <td>
-                                                            @if ($item->dokumen)
+                                                            @if ($item->dokumen_komunikasi)
                                                                 @php
                                                                     $extension = pathinfo(
-                                                                        $item->dokumen,
+                                                                        $item->dokumen_komunikasi,
                                                                         PATHINFO_EXTENSION,
                                                                     );
                                                                 @endphp
                                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                    <img src="{{ url('') }}/{{ $item->dokumen }}"
+                                                                    <img src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
                                                                         alt="Pratinjau Gambar"
                                                                         style="max-width: 100px; max-height: 100px;">
                                                                 @elseif ($extension === 'pdf')
                                                                     <embed
-                                                                        src="{{ url('') }}/{{ $item->dokumen }}"
+                                                                        src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
                                                                         type="application/pdf" width="200"
                                                                         height="200">
                                                                 @else
@@ -438,7 +438,7 @@
                                                                         data-tindak-lanjut-id = "{{ $item->tindak_lanjut_id }}"
                                                                         data-catatan = "{{ $item->catatan }}"
                                                                         data-tgl-selanjutnya = "{{ $item->tgl_selanjutnya }}"
-                                                                        data-dokumen-komunikasi = "{{ $item->dokumen }}"
+                                                                        data-dokumen-komunikasi = "{{ $item->dokumen_komunikasi }}"
                                                                         >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="16" height="16"
@@ -546,20 +546,20 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            @if ($item->dokumen)
+                                                            @if ($item->dokumen_proposal)
                                                                 @php
                                                                     $extension = pathinfo(
-                                                                        $item->dokumen,
+                                                                        $item->dokumen_proposal,
                                                                         PATHINFO_EXTENSION,
                                                                     );
                                                                 @endphp
                                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                    <img src="{{ url('') }}/{{ $item->dokumen }}"
+                                                                    <img src="{{ url('') }}/{{ $item->dokumen_proposal }}"
                                                                         alt="Pratinjau Gambar"
                                                                         style="max-width: 100px; max-height: 100px;">
                                                                 @elseif ($extension === 'pdf')
                                                                     <embed
-                                                                        src="{{ url('') }}/{{ $item->dokumen }}"
+                                                                        src="{{ url('') }}/{{ $item->dokumen_proposal }}"
                                                                         type="application/pdf" width="200"
                                                                         height="200">
                                                                 @else
@@ -595,7 +595,7 @@
                                                                         data-estimasi-nilai-idr = "{{ $item->estimasi_nilai_idr }}"
                                                                         data-usulan-durasi = "{{ $item->usulan_durasi }}"
                                                                         data-status-kemajuan-id = "{{ $item->status_kemajuan_id }}"
-                                                                        data-dokumen-proposal = "{{ $item->dokumen }}"
+                                                                        data-dokumen-proposal = "{{ $item->dokumen_proposal }}"
                                                                         >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="16" height="16"
@@ -850,8 +850,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="dokumen" class="form-label">Dokumen</label>
-                                        <input type="file" class="form-control" id="dokumen-komunikasi" name="dokumen" onchange="validateFile()">
+                                        <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
+                                        <input type="file" class="form-control" id="dokumen_komunikasi" name="dokumen_komunikasi" onchange="validateFile()">
                                         <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
                                         <span id="file-error-komunikasi" class="text-danger"></span>
                                     </div>
@@ -1005,8 +1005,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="dokumen" class="form-label">Dokumen</label>
-                                        <input type="file" class="form-control" id="dokumen-proposal" name="dokumen" onchange="validateFile()">
+                                        <label for="dokumen_proposal" class="form-label">Dokumen</label>
+                                        <input type="file" class="form-control" id="dokumen_proposal" name="dokumen_proposal" onchange="validateFile()">
                                         <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
                                         <span id="file-error-proposal" class="text-danger"></span>
                                     </div>

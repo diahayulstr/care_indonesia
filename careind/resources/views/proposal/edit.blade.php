@@ -234,7 +234,7 @@
                                                         {{ $item->id == old('klasifikasi_portfolio_id', $proposal->klasifikasi_portfolio_id) ? 'selected' : '' }}>
                                                         {{ $item->name }}</option>
                                                 @endforeach
-                                            </select> 
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="impact_goals_id">Impact Goals</label>
@@ -292,23 +292,23 @@
                                             </select>
                                         </div>
                                         <div class="form-group mb-4">
-                                            <label for="dokumen" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen"
-                                                name="dokumen">
+                                            <label for="dokumen_proposal" class="form-label">Dokumen</label>
+                                            <input type="file" class="form-control" id="dokumen_proposal"
+                                                name="dokumen_proposal">
                                             <br>
-                                            @if ($proposal->dokumen)
+                                            @if ($proposal->dokumen_proposal)
                                                 <input type="text" class="form-control"
-                                                    value="{{ basename($proposal->dokumen) }}" readonly>
+                                                    value="{{ basename($proposal->dokumen_proposal) }}" readonly>
                                                 <br>
                                                 @php
-                                                    $extension = pathinfo($proposal->dokumen, PATHINFO_EXTENSION);
+                                                    $extension = pathinfo($proposal->dokumen_proposal, PATHINFO_EXTENSION);
                                                 @endphp
                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                    <img src="{{ url('') }}/{{ $proposal->dokumen }}"
+                                                    <img src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
                                                         alt="Pratinjau Gambar"
                                                         style="max-width: 300px; max-height: 300px;">
                                                 @elseif ($extension === 'pdf')
-                                                    <embed src="{{ url('') }}/{{ $proposal->dokumen }}"
+                                                    <embed src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
                                                         type="application/pdf" width="500" height="500">
                                                 @else
                                                     Tidak ada pratinjau

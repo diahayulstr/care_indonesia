@@ -339,23 +339,23 @@
 
                                                 <!-- Dokumen -->
                                                 <div class="form-group mb-4">
-                                                    <label for="dokumen" class="form-label">Dokumen</label>
-                                                    <input type="file" class="form-control" id="dokumen"
-                                                        name="dokumen">
+                                                    <label for="dokumen_donor" class="form-label">Dokumen</label>
+                                                    <input type="file" class="form-control" id="dokumen_donor"
+                                                        name="dokumen_donor">
                                                     <br>
-                                                    @if ($donor->dokumen)
+                                                    @if ($donor->dokumen_donor)
                                                         <input type="text" class="form-control"
-                                                            value="{{ basename($donor->dokumen) }}" readonly>
+                                                            value="{{ basename($donor->dokumen_donor) }}" readonly>
                                                         <br>
                                                         @php
-                                                            $extension = pathinfo($donor->dokumen, PATHINFO_EXTENSION);
+                                                            $extension = pathinfo($donor->dokumen_donor, PATHINFO_EXTENSION);
                                                         @endphp
                                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                            <img src="{{ url('') }}/{{ $donor->dokumen }}"
+                                                            <img src="{{ url('') }}/{{ $donor->dokumen_donor }}"
                                                                 alt="Pratinjau Gambar"
                                                                 style="max-width: 300px; max-height: 300px;">
                                                         @elseif ($extension === 'pdf')
-                                                            <embed src="{{ url('') }}/{{ $donor->dokumen }}"
+                                                            <embed src="{{ url('') }}/{{ $donor->dokumen_donor }}"
                                                                 type="application/pdf" width="500" height="500">
                                                         @else
                                                             Tidak ada pratinjau
@@ -556,26 +556,26 @@
                                                             </td>
                                                             <td>
                                                                 <input type="file" class="form-control"
-                                                                    id="dokumen" name="dokumen">
+                                                                    id="dokumen_komunikasi" name="dokumen_komunikasi">
                                                                 <br>
-                                                                @if ($komunikasis->dokumen)
+                                                                @if ($komunikasis->dokumen_komunikasi)
                                                                     <input type="text" class="form-control"
-                                                                        value="{{ basename($komunikasis->dokumen) }}"
+                                                                        value="{{ basename($komunikasis->dokumen_komunikasi) }}"
                                                                         readonly>
                                                                     <br>
                                                                     @php
                                                                         $extension = pathinfo(
-                                                                            $komunikasis->dokumen,
+                                                                            $komunikasis->dokumen_komunikasi,
                                                                             PATHINFO_EXTENSION,
                                                                         );
                                                                     @endphp
                                                                     @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                        <img src="{{ url('') }}/{{ $komunikasis->dokumen }}"
+                                                                        <img src="{{ url('') }}/{{ $komunikasis->dokumen_komunikasi }}"
                                                                             alt="Pratinjau Gambar"
                                                                             style="max-width: 100px; max-height: 100px;">
                                                                     @elseif ($extension === 'pdf')
                                                                         <embed
-                                                                            src="{{ url('') }}/{{ $komunikasis->dokumen }}"
+                                                                            src="{{ url('') }}/{{ $komunikasis->dokumen_komunikasi }}"
                                                                             type="application/pdf" width="200"
                                                                             height="200">
                                                                     @else
@@ -773,26 +773,26 @@
                                                                     @endforeach
                                                                 </select></td>
                                                             <td><input type="file" class="form-control"
-                                                                    id="dokumen" name="dokumen">
+                                                                    id="dokumen_proposal" name="dokumen_proposal">
                                                                 <br>
-                                                                @if ($proposals->dokumen)
+                                                                @if ($proposals->dokumen_proposal)
                                                                     <input type="text" class="form-control"
-                                                                        value="{{ basename($proposals->dokumen) }}"
+                                                                        value="{{ basename($proposals->dokumen_proposal) }}"
                                                                         readonly>
                                                                     <br>
                                                                     @php
                                                                         $extension = pathinfo(
-                                                                            $proposals->dokumen,
+                                                                            $proposals->dokumen_proposal,
                                                                             PATHINFO_EXTENSION,
                                                                         );
                                                                     @endphp
                                                                     @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                        <img src="{{ url('') }}/{{ $proposals->dokumen }}"
+                                                                        <img src="{{ url('') }}/{{ $proposals->dokumen_proposal }}"
                                                                             alt="Pratinjau Gambar"
                                                                             style="max-width: 100px; max-height: 100px;">
                                                                     @elseif ($extension === 'pdf')
                                                                         <embed
-                                                                            src="{{ url('') }}/{{ $proposals->dokumen }}"
+                                                                            src="{{ url('') }}/{{ $proposals->dokumen_proposal }}"
                                                                             type="application/pdf" width="200"
                                                                             height="200">
                                                                     @else

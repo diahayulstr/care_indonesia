@@ -231,16 +231,16 @@
                                         <tr>
                                             <th scope="row">Dokumen</th>
                                             <td>
-                                                @if ($proposal->dokumen)
+                                                @if ($proposal->dokumen_proposal)
                                                     @php
-                                                        $extension = pathinfo($proposal->dokumen, PATHINFO_EXTENSION);
+                                                        $extension = pathinfo($proposal->dokumen_proposal, PATHINFO_EXTENSION);
                                                     @endphp
                                                     @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                        <img src="{{ url('') }}/{{ $proposal->dokumen }}"
+                                                        <img src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
                                                             alt="Pratinjau Gambar"
                                                             style="max-width: 300px; max-height: 300px;">
                                                     @elseif ($extension === 'pdf')
-                                                        <embed src="{{ url('') }}/{{ $proposal->dokumen }}"
+                                                        <embed src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
                                                             type="application/pdf" width="500" height="500">
                                                     @else
                                                         Tidak ada pratinjau

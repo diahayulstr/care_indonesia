@@ -248,8 +248,8 @@
                                             @enderror
                                         </div>
                                         <div class="form-group mb-4">
-                                            <label for="dokumen" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen" name="dokumen" onchange="validateFile()">
+                                            <label for="dokumen_donor" class="form-label">Dokumen</label>
+                                            <input type="file" class="form-control" id="dokumen_donor" name="dokumen_donor" onchange="validateFile()">
                                             <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
                                             <span id="file-error" class="text-danger"></span>
                                         </div>

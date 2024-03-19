@@ -1,42 +1,42 @@
-function validateFile() {
-    // Mendapatkan elemen-elemen input file dan pesan error
-    var dokumenInput = document.getElementById('dokumen');
-    var dokumenDonorInput = document.getElementById('dokumen_donor');
-    var dokumenKomunikasiInput = document.getElementById('dokumen_komunikasi');
-    var dokumenProposalInput = document.getElementById('dokumen_proposal');
+// function validateFile() {
+//     // Mendapatkan elemen-elemen input file dan pesan error
+//     var dokumenInput = document.getElementById('dokumen');
+//     var dokumenDonorInput = document.getElementById('dokumen_donor');
+//     var dokumenKomunikasiInput = document.getElementById('dokumen_komunikasi');
+//     var dokumenProposalInput = document.getElementById('dokumen_proposal');
 
-    var fileErrorDonor = document.getElementById('file-error-donor');
-    var fileErrorKomunikasi = document.getElementById('file-error-komunikasi');
-    var fileErrorProposal = document.getElementById('file-error-proposal');
-
-
-    // Memvalidasi setiap input file
-    validateSingleFile(dokumenInput, fileErrorInput);
-    validateSingleFile(dokumenDonorInput, fileErrorDonor);
-    validateSingleFile(dokumenKomunikasiInput, fileErrorKomunikasi);
-    validateSingleFile(dokumenProposalInput, fileErrorProposal);
-}
-
-function validateSingleFile(fileInput, fileError) {
-    // Memeriksa apakah ada file yang dipilih
-    if (fileInput.files.length > 0) {
-        var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
-        var filePath = fileInput.value;
-        var fileExtension = filePath.split('.').pop().toLowerCase();
-
-        // Memeriksa ekstensi file
-        if (allowedExtensions.indexOf(fileExtension) === -1) {
-            fileError.textContent = 'File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.';
-            fileInput.value = ''; // Mengosongkan input file
-        } else {
-            fileError.textContent = ''; // Membersihkan pesan error jika valid
-        }
-    } else {
-        fileError.textContent = ''; // Membersihkan pesan error jika tidak ada file yang dipilih
-    }
-}
+//     var fileErrorDonor = document.getElementById('file-error-donor');
+//     var fileErrorKomunikasi = document.getElementById('file-error-komunikasi');
+//     var fileErrorProposal = document.getElementById('file-error-proposal');
 
 
+//     // Memvalidasi setiap input file
+//     validateSingleFile(dokumenInput, fileErrorInput);
+//     validateSingleFile(dokumenDonorInput, fileErrorDonor);
+//     validateSingleFile(dokumenKomunikasiInput, fileErrorKomunikasi);
+//     validateSingleFile(dokumenProposalInput, fileErrorProposal);
+// }
+
+// function validateSingleFile(fileInput, fileError) {
+//     // Memeriksa apakah ada file yang dipilih
+//     if (fileInput.files.length > 0) {
+//         var allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
+//         var filePath = fileInput.value;
+//         var fileExtension = filePath.split('.').pop().toLowerCase();
+
+//         // Memeriksa ekstensi file
+//         if (allowedExtensions.indexOf(fileExtension) === -1) {
+//             fileError.textContent = 'File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.';
+//             fileInput.value = ''; // Mengosongkan input file
+//         } else {
+//             fileError.textContent = ''; // Membersihkan pesan error jika valid
+//         }
+//     } else {
+//         fileError.textContent = ''; // Membersihkan pesan error jika tidak ada file yang dipilih
+//     }
+// }
+
+function validateFile() {}
 
 $(document).ready(function() {
     $('#impact_goals_id').select2();
@@ -122,7 +122,7 @@ $(document).ready(function(){
     $(document).on('click', '#btn-addmaster-komunikasi', function() {
         var donor_id = $(this).data('id');
         $('#donor_id-master-komunikasi').val(donor_id);
-        $('#dokumen-komunikasi').change(function() {
+        $('#dokumen_komunikasi').change(function() {
             var file = this.files[0];
             var fileType = file.type;
             var reader = new FileReader();
@@ -164,7 +164,7 @@ $(document).ready(function(){
         $('#nama-dokumen-komunikasi').text(dokumen);
 
 
-        $('#dokumen-komunikasi').change(function() {
+        $('#dokumen_komunikasi').change(function() {
             var file = this.files[0];
             var fileType = file.type;
             var reader = new FileReader();
@@ -204,7 +204,7 @@ $(document).ready(function(){
     $(document).on('click', '#btn-addmaster-proposal', function() {
         var donor_id = $(this).data('id');
         $('#donor_id-master-proposal').val(donor_id);
-        $('#dokumen-proposal').change(function() {
+        $('#dokumen_proposal').change(function() {
             var file = this.files[0];
             var fileType = file.type;
             var reader = new FileReader();
@@ -256,7 +256,7 @@ $(document).ready(function(){
         $('#nama-dokumen-proposal').text(dokumen);
 
 
-        $('#dokumen-proposal').change(function() {
+        $('#dokumen_proposal').change(function() {
             var file = this.files[0];
             var fileType = file.type;
             var reader = new FileReader();

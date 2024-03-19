@@ -51,7 +51,7 @@ class MasterController extends Controller
     }
 
     public function store_master_add (Request $request) {
-        $validateData = $request->validate([
+        $validatedData = $request->validate([
             // Donor
             'nama_organisasi'           => 'required',
             'alamat'                    => 'required',
@@ -65,15 +65,10 @@ class MasterController extends Controller
             'jenis_organisasi_id'       => 'required|exists:tabel_jenis_organisasis,id',
             'komitmen_sdgs'             => 'required|exists:tabel_komitmen_sdgs,id',
             'date'                      => 'required',
-
-            // Narahubung, Komunikasi, Proposal
-            // 'donor_id'                  => 'required|exists:donors,id',
-            // 'dokumen'             => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
             'dokumen_donor'             => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
-            'dokumen_komunikasi'        => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
-            'dokumen_proposal'          => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
 
             // Narahubung
+            // 'donor_id'                  => 'required|exists:donors,id',
             'nama_kontak'               => 'required',
             'jabatan'                   => 'required',
             'email'                     => 'required|max:15',
@@ -87,6 +82,7 @@ class MasterController extends Controller
             'tindak_lanjut_id'          =>  'required|exists:tabel_tindak_lanjuts,id',
             'catatan'                   =>  'required',
             'tgl_selanjutnya'           =>  'required',
+            'dokumen_komunikasi'        => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
 
             // Proposal
             'tujuan_pendanaan_id'       =>  'required|exists:tabel_tujuan_pendanaans,id',
@@ -100,61 +96,58 @@ class MasterController extends Controller
             'estimasi_nilai_idr'        =>  'required',
             'usulan_durasi'             =>  'required',
             'status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
+            'dokumen_proposal'          => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
         ]);
 
         // Donor
         $donor = Donor::create([
-            'nama_organisasi'     => $request->nama_organisasi,
-            'alamat'              => $request->alamat,
-            'negara'              => $request->negara,
-            'provinsi_id'         => $request->provinsi_id,
-            'kabupaten_id'        => $request->kabupaten_id,
-            'kecamatan_id'        => $request->kecamatan_id,
-            'desa_id'             => $request->desa_id,
-            'website'             => $request->website,
-            'informasi_singkat'   => $request->informasi_singkat,
-            'jenis_organisasi_id' => $request->jenis_organisasi_id,
-            'komitmen_sdgs'       => json_encode($request->komitmen_sdgs),
-            'date'                => $request->date,
+            'nama_organisasi'   => $validatedData['nama_organisasi'],
+            'alamat'            => $validatedData['alamat'],
+            'negara'            => $validatedData['negara'],
+            'provinsi_id'       => $validatedData['provinsi_id'],
+            'kabupaten_id'      => $validatedData['kabupaten_id'],
+            'kecamatan_id'      => $validatedData['kecamatan_id'],
+            'desa_id'           => $validatedData['desa_id'],
+            'website'           => $validatedData['website'],
+            'informasi_singkat' => $validatedData['informasi_singkat'],
+            'jenis_organisasi_id' => $validatedData['jenis_organisasi_id'],
+            'komitmen_sdgs'     => json_encode($validatedData['komitmen_sdgs']),
+            'date'              => $validatedData['date'],
         ]);
         if ($request->hasFile('dokumen_donor')) {
             $namaFile = $request->dokumen_donor->getClientOriginalName();
             $path = $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
-            $donor->dokumen = 'assets/donor/dokumen/' . $namaFile;
+            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFile;
             $donor->save();
         }
         // $donor->save();
 
-        if (!$donor->id) {
-            return redirect()->back()->with('error', 'Gagal menyimpan data donor.');
-        }
-
         // Narahubung
         $narahubung = Narahubung::create([
             'donor_id'       => $donor->id,
-            'nama_kontak'    => $request->nama_kontak,
-            'jabatan'        => $request->jabatan,
-            'email'          => $request->email,
-            'no_telp'        => $request->no_telp,
-            'status_id'      => $request->status_id,
+            'nama_kontak'    => $request->input('nama_kontak'),
+            'jabatan'        => $request->input('jabatan'),
+            'email'          => $request->input('email'),
+            'no_telp'        => $request->input('no_telp'),
+            'status_id'      => $request->input('status_id'),
         ]);
         // $narahubung->save();
 
         // Komunikasi
         $komunikasi = Komunikasi::create([
             'donor_id'               =>   $donor->id,
-            'tanggal'                =>   $request->tanggal,
-            'saluran_id'             =>   $request->saluran_id,
-            'jenjang_komunikasi_id'  =>   $request->jenjang_komunikasi_id,
-            'tindak_lanjut_id'       =>   $request->tindak_lanjut_id,
-            'catatan'                =>   $request->catatan,
-            'tgl_selanjutnya'        =>   $request->tgl_selanjutnya,
+            'tanggal'                =>   $request->input('tanggal'),
+            'saluran_id'             =>   $request->input('saluran_id'),
+            'jenjang_komunikasi_id'  =>   $request->input('jenjang_komunikasi_id'),
+            'tindak_lanjut_id'       =>   $request->input('tindak_lanjut_id'),
+            'catatan'                =>   $request->input('catatan'),
+            'tgl_selanjutnya'        =>   $request->input('tgl_selanjutnya'),
 
         ]);
         if ($request->hasFile('dokumen_komunikasi')) {
             $namaFile = $request->dokumen_komunikasi->getClientOriginalName();
             $path = $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
-            $komunikasi->dokumen = 'assets/komunikasi/dokumen/' . $namaFile;
+            $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
             $komunikasi->save();
         }
         // $komunikasi->save();
@@ -162,30 +155,30 @@ class MasterController extends Controller
         // Proposal
         $proposal = Proposal::create([
             'donor_id'                   =>   $donor->id,
-            'tujuan_pendanaan_id'        =>   $request->tujuan_pendanaan_id,
-            'jenis_penerimaan_id'        =>   $request->jenis_penerimaan_id,
-            'saluran_pendanaan_id'       =>   $request->saluran_pendanaan_id,
-            'jenis_intermediaries_id'    =>   $request->jenis_intermediaries_id,
-            'nama_proyek'                =>   $request->nama_proyek,
-            'klasifikasi_portfolio_id'   =>   $request->klasifikasi_portfolio_id,
-            'impact_goals_id'            =>   json_encode($request->impact_goals_id),
-            'estimasi_nilai_usd'         =>   $request->estimasi_nilai_usd,
-            'estimasi_nilai_idr'         =>   $request->estimasi_nilai_idr,
-            'usulan_durasi'              =>   $request->usulan_durasi,
-            'status_kemajuan_id'         =>   $request->status_kemajuan_id,
+            'tujuan_pendanaan_id'        =>   $request->input('tujuan_pendanaan_id'),
+            'jenis_penerimaan_id'        =>   $request->input('jenis_penerimaan_id'),
+            'saluran_pendanaan_id'       =>   $request->input('saluran_pendanaan_id'),
+            'jenis_intermediaries_id'    =>   $request->input('jenis_intermediaries_id'),
+            'nama_proyek'                =>   $request->input('nama_proyek'),
+            'klasifikasi_portfolio_id'   =>   $request->input('klasifikasi_portfolio_id'),
+            'impact_goals_id'            =>   json_encode($request->input('impact_goals_id')),
+            'estimasi_nilai_usd'         =>   $request->input('estimasi_nilai_usd'),
+            'estimasi_nilai_idr'         =>   $request->input('estimasi_nilai_idr'),
+            'usulan_durasi'              =>   $request->input('usulan_durasi'),
+            'status_kemajuan_id'         =>   $request->input('status_kemajuan_id'),
         ]);
         if ($request->hasFile('dokumen_proposal')) {
             $namaFile = $request->dokumen_proposal->getClientOriginalName();
             $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
-            $proposal->dokumen = 'assets/proposal/dokumen/' . $namaFile;
+            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
             $proposal->save();
         }
         // $proposal->save();
 
         if ($donor && $narahubung && $komunikasi && $proposal) {
-            return redirect()->route('pages.donor')->with('success', 'Data berhasil disimpan.');
+            return redirect()->route('donor.master.view_master', ['master' => $donor->id])->with('success', 'Data berhasil disimpan.');
         } else {
-            return redirect()->route('donor.master.view_master')->with('error', 'Gagal menyimpan data.');
+            return redirect()->route('donor.master.add_master')->with('error', 'Gagal menyimpan data.');
         }
     }
 
@@ -313,7 +306,7 @@ class MasterController extends Controller
             'tindak_lanjut_id'      => 'required|exists:tabel_tindak_lanjuts,id',
             'catatan'               => 'required',
             'tgl_selanjutnya'       => 'required',
-            'dokumen'               => 'file',
+            'dokumen_komunikasi'    => 'file',
         ]);
         if ($request->filled('komunikasi_id')) {
             $komunikasi = Komunikasi::findOrFail($request->komunikasi_id);
@@ -327,11 +320,11 @@ class MasterController extends Controller
         $komunikasi->tindak_lanjut_id        = $request->tindak_lanjut_id;
         $komunikasi->catatan                 = $request->catatan;
         $komunikasi->tgl_selanjutnya         = $request->tgl_selanjutnya;
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/komunikasi/dokumen', $namaFile);
-            File::delete($komunikasi->dokumen);
-            $komunikasi->dokumen = 'assets/komunikasi/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_komunikasi')) {
+            $namaFile = $request->dokumen_komunikasi->getClientOriginalName();
+            $path = $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
+            File::delete($komunikasi->dokumen_komunikasi);
+            $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
         }
         $komunikasi->save();
         return redirect()->route('donor.master.view_master', $donor_id)
@@ -359,7 +352,7 @@ class MasterController extends Controller
             'estimasi_nilai_idr'        =>  'required',
             'usulan_durasi'             =>  'required',
             'status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
-            'dokumen'                   =>  'file',
+            'dokumen_proposal'          =>  'file',
         ]);
         if ($request->filled('proposal_id')) {
             $proposal = Proposal::findOrFail($request->proposal_id);
@@ -379,11 +372,11 @@ class MasterController extends Controller
         $proposal->usulan_durasi            = $request->usulan_durasi;
         $proposal->status_kemajuan_id       = $request->status_kemajuan_id;
 
-        if ($request->hasFile('dokumen')) {
-            $namaFile = $request->dokumen->getClientOriginalName();
-            $path = $request->dokumen->move('assets/proposal/dokumen', $namaFile);
-            File::delete($proposal->dokumen);
-            $proposal->dokumen = 'assets/proposal/dokumen/' . $namaFile;
+        if ($request->hasFile('dokumen_proposal')) {
+            $namaFile = $request->dokumen_proposal->getClientOriginalName();
+            $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+            File::delete($proposal->dokumen_proposal);
+            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
         }
         $proposal->save();
         return redirect()->route('donor.master.view_master', $donor_id)

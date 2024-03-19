@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    
+
 </head>
 
 <body id="page-top">
@@ -172,16 +172,16 @@
                                                 <td>{{ $item->catatan }}</td>
                                                 <td>{{ $item->tgl_selanjutnya }}</td>
                                                 <td>
-                                                    @if ($item->dokumen)
+                                                    @if ($item->dokumen_komunikasi)
                                                         @php
-                                                            $extension = pathinfo($item->dokumen, PATHINFO_EXTENSION);
+                                                            $extension = pathinfo($item->dokumen_komunikasi, PATHINFO_EXTENSION);
                                                         @endphp
                                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                            <img src="{{ url('') }}/{{ $item->dokumen }}"
+                                                            <img src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
                                                                 alt="Pratinjau Gambar"
                                                                 style="max-width: 100px; max-height: 100px;">
                                                         @elseif ($extension === 'pdf')
-                                                            <embed src="{{ url('') }}/{{ $item->dokumen }}"
+                                                            <embed src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
                                                                 type="application/pdf" width="200" height="200">
                                                         @else
                                                             Tidak ada pratinjau
