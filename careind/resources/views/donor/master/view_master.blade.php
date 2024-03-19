@@ -360,11 +360,10 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h2></h2>
                                         <div class="action-buttons">
-                                            <a href="#" class="btn btn-primary btn-circle me-2" title="Add"
-                                                data-bs-toggle="modal" data-bs-target="#form-add-master-komunikasi"
-                                                id="btn-addmaster-komunikasi"
-                                                data-id="{{ $donor->nama_organisasi }}"><i
-                                                    class="fas fa-plus"></i></a>
+                                            <a href="#" class="btn btn-primary btn-circle me-2" title="Add" data-action="add"
+                                                data-bs-toggle="modal" data-bs-target="#form-master-komunikasi"
+                                                id="btn-addmaster-komunikasi" data-id="{{ $donor->id }}">
+                                                <i class="fas fa-plus"></i></a>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -429,12 +428,18 @@
                                                                 <div class="d-inline-block mx-1">
                                                                     <a href="#"
                                                                         class="btn btn-warning btn-circle"
-                                                                        id="btn-editmaster-komunikasi"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#form-edit-master-komunikasi"
-                                                                        title="Edit"
-                                                                        data-komunikasi-id="{{ $item->id }}"
-                                                                        data-donor-id="{{ $item->donorID->nama_organisasi }}">
+                                                                        id="btn-editmaster-komunikasi" title="Edit"
+                                                                        data-action="edit"
+                                                                        data-id = "{{ $item->id }}"
+                                                                        data-donor-id = "{{ $item->donor_id }}"
+                                                                        data-tanggal = "{{ $item->tanggal }}"
+                                                                        data-saluran-id = "{{ $item->saluran_id }}"
+                                                                        data-jenjang-komunikasi-id = "{{ $item->jenjang_komunikasi_id }}"
+                                                                        data-tindak-lanjut-id = "{{ $item->tindak_lanjut_id }}"
+                                                                        data-catatan = "{{ $item->catatan }}"
+                                                                        data-tgl-selanjutnya = "{{ $item->tgl_selanjutnya }}"
+                                                                        data-dokumen-komunikasi = "{{ $item->dokumen }}"
+                                                                        >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="16" height="16"
                                                                             fill="currentColor"
@@ -477,10 +482,9 @@
                                         <h2></h2>
                                         <div class="action-buttons">
                                             <a href="#" class="btn btn-primary btn-circle me-2" title="Add"
-                                                data-bs-toggle="modal" data-bs-target="#form-add-master-proposal"
-                                                id="btn-addmaster-proposal"
-                                                data-id="{{ $donor->nama_organisasi }}"><i
-                                                    class="fas fa-plus"></i></a>
+                                                data-bs-toggle="modal" data-bs-target="#form-master-proposal"
+                                                id="btn-addmaster-proposal" data-id="{{ $donor->id }}">
+                                                <i class="fas fa-plus"></i></a>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
@@ -577,12 +581,22 @@
                                                                 <div class="d-inline-block mx-1">
                                                                     <a href="#"
                                                                         class="btn btn-warning btn-circle"
-                                                                        id="btn-editmaster-proposal"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#form-edit-master-proposal"
-                                                                        title="Edit"
-                                                                        data-proposal-id="{{ $item->id }}"
-                                                                        data-donor-id="{{ $item->donorID->nama_organisasi }}">
+                                                                        id="btn-editmaster-proposal" title="Edit"
+                                                                        data-id = "{{ $item->id }}"
+                                                                        data-donor-id = "{{ $item->donor_id }}"
+                                                                        data-tujuan-pendanaan-id = "{{ $item->tujuan_pendanaan_id }}"
+                                                                        data-jenis-penerimaan-id = "{{ $item->jenis_penerimaan_id }}"
+                                                                        data-saluran-pendanaan-id = "{{ $item->saluran_pendanaan_id }}"
+                                                                        data-jenis-intermediaries-id = "{{ $item->jenis_intermediaries_id }}"
+                                                                        data-nama-proyek = "{{ $item->nama_proyek }}"
+                                                                        data-klasifikasi-portfolio-id = "{{ $item->klasifikasi_portfolio_id }}"
+                                                                        data-impact-goals-id = "{{ $item->impact_goals_id }}"
+                                                                        data-estimasi-nilai-usd = "{{ $item->estimasi_nilai_usd }}"
+                                                                        data-estimasi-nilai-idr = "{{ $item->estimasi_nilai_idr }}"
+                                                                        data-usulan-durasi = "{{ $item->usulan_durasi }}"
+                                                                        data-status-kemajuan-id = "{{ $item->status_kemajuan_id }}"
+                                                                        data-dokumen-proposal = "{{ $item->dokumen }}"
+                                                                        >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="16" height="16"
                                                                             fill="currentColor"
@@ -667,7 +681,7 @@
         </div>
 
 
-        <!-- Modal Add Master/Detail Narahubung -->
+        <!-- Modal Add/Edit Master/Detail Narahubung -->
         <div class="modal fade" id="form-master-narahubung" role="dialog" data-bs-backdrop="static"
             tabindex="-1" aria-labelledby="formAddLabelNarahubung" aria-hidden="true">
             <form id="addmasterFormNarahubung" method="POST" action="{{ route('master.storeOrUpdate_narahubung', $donor->id) }}" enctype="multipart/form-data">
@@ -752,7 +766,266 @@
         </div>
 
 
+        <!-- Modal Add/Edit Master/Detail Komunikasi -->
+        <div class="modal fade" id="form-master-komunikasi" role="dialog" data-bs-backdrop="static"
+            tabindex="-1" aria-labelledby="formAddLabelKomunikasi" aria-hidden="true">
+            <form id="addmasterFormKomunikasi" method="POST" action="{{ route('master.storeOrUpdate_komunikasi', $donor->id) }}" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="formAddLabelKomunikasi">Form Komunikasi</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-16">
+                                    <input type="hidden" id="komunikasi_id" name="komunikasi_id">
 
+                                    <div class="form-group">
+                                        <label for="donor_id">Donor ID</label>
+                                        <input type="text" class="form-control" name="donor_id"
+                                            id="donor_id-master-komunikasi" readonly
+                                            value="{{ $item->donor_id ?? '' }}">
+                                        @error('donor_id')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanggal">Tanggal</label>
+                                        <input type="date" placeholder="Tanggal"
+                                            class="form-control @error('tanggal') is-invalid @enderror"
+                                            id="tanggal" name="tanggal"
+                                            value="{{ old('tanggal') }}">
+                                        @error('tanggal')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="saluran_id">Saluran</label>
+                                        <select class="form-select form-control" name="saluran_id" id="saluran_id">
+                                            <option value="">--Pilih Saluran--</option>
+                                            @foreach($saluran as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
+                                        <select class="form-select form-control" name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
+                                            <option value="">--Pilih Jenjang Komunikasi--</option>
+                                            @foreach($jenjangKomunikasi as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tindak_lanjut_id">Tindak Lanjut</label>
+                                        <select class="form-select form-control" name="tindak_lanjut_id" id="tindak_lanjut_id">
+                                            <option value="">--Pilih Tindak Lanjut--</option>
+                                            @foreach($tindakLanjut as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="catatan">Catatan</label>
+                                        <textarea type="text" placeholder="Catatan"
+                                            class="form-control @error('catatan') is-invalid @enderror"
+                                            id="catatan" name="catatan"
+                                            value="{{ old('catatan') }}"></textarea>
+                                        @error('catatan')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tgl_selanjutnya">Tanggal Selanjutnya</label>
+                                        <input type="date" placeholder="Tanggal Selanjutnya"
+                                            class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
+                                            id="tgl_selanjutnya" name="tgl_selanjutnya"
+                                            value="{{ old('tgl_selanjutnya') }}">
+                                        @error('tgl_selanjutnya')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="dokumen" class="form-label">Dokumen</label>
+                                        <input type="file" class="form-control" id="dokumen-komunikasi" name="dokumen" onchange="validateFile()">
+                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                        <span id="file-error-komunikasi" class="text-danger"></span>
+                                    </div>
+                                    <div id="nama-dokumen-komunikasi"></div>
+                                    <br>
+                                    <!-- Tambahkan elemen pratinjau file -->
+                                    <div id="filePreview-komunikasi"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- Modal Add/Edit Master/Detail Proposal -->
+        <div class="modal fade" id="form-master-proposal" role="dialog" data-bs-backdrop="static"
+            tabindex="-1" aria-labelledby="formAddLabelProposal" aria-hidden="true">
+            <form id="addmasterFormProposal" method="POST" action="{{ route('master.storeOrUpdate_proposal', $donor->id) }}" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="formAddLabelProposal">Form Proposal</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-16">
+                                    <input type="hidden" id="proposal_id" name="proposal_id">
+
+                                    <div class="form-group">
+                                        <label for="donor_id">Donor ID</label>
+                                        <input type="text" class="form-control" name="donor_id"
+                                            id="donor_id-master-proposal" readonly
+                                            value="{{ $item->donor_id ?? '' }}">
+                                        @error('donor_id')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="tujuan_pendanaan_id">Tujuan Pendanaan</label>
+                                        <select class="form-select form-control" name="tujuan_pendanaan_id" id="tujuan_pendanaan_id">
+                                            <option value="">--Pilih Tujuan Pendanaan--</option>
+                                            @foreach($tujuanPendanaan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jenis_penerimaan_id">Jenis Penerimaan</label>
+                                        <select class="form-select form-control" name="jenis_penerimaan_id" id="jenis_penerimaan_id">
+                                            <option value="">--Pilih Jenis Penerimaan--</option>
+                                            @foreach($jenisPenerimaan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="saluran_pendanaan_id">Saluran Pendanaan</label>
+                                        <select class="form-select form-control" name="saluran_pendanaan_id" id="saluran_pendanaan_id">
+                                            <option value="">--Pilih Saluran Pendanaan--</option>
+                                            @foreach($saluranPendanaan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jenis_intermediaries_id">Jenis Intermediary</label>
+                                        <select class="form-select form-control" name="jenis_intermediaries_id" id="jenis_intermediaries_id">
+                                            <option value="">--Pilih Jenis Intermediary--</option>
+                                            @foreach($jenisIntermediaries as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nama_proyek">Nama Proyek</label>
+                                        <input type="text" placeholder="Nama Proyek"
+                                            class="form-control @error('nama_proyek') is-invalid @enderror"
+                                            id="nama_proyek" name="nama_proyek"
+                                            value="{{ old('nama_proyek') }}">
+                                        @error('nama_proyek')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="klasifikasi_portfolio_id">Klasifikasi Portfolio</label>
+                                        <select class="form-select form-control" name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
+                                            <option value="">--Pilih Klasifikasi Portfolio--</option>
+                                            @foreach($klasifikasiPortfolios as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="impact_goals_id">Impact Goals</label>
+                                        <select class="form-select form-control" name="impact_goals_id[]
+                                        " id="impact_goals_id" multiple>
+                                            <option value="">--Pilih Impact Goals--</option>
+                                            @foreach($impactGoals as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estimasi_nilai_usd">Estimasi Nilai USD</label>
+                                        <input type="text" placeholder="Estimasi Nilai USD"
+                                            class="form-control @error('estimasi_nilai_usd') is-invalid @enderror"
+                                            id="estimasi_nilai_usd" name="estimasi_nilai_usd"
+                                            value="{{ old('estimasi_nilai_usd') }}">
+                                        @error('estimasi_nilai_usd')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estimasi_nilai_idr">Estimasi Nilai IDR</label>
+                                        <input type="text" placeholder="Estimasi Nilai IDR"
+                                            class="form-control @error('estimasi_nilai_idr') is-invalid @enderror"
+                                            id="estimasi_nilai_idr" name="estimasi_nilai_idr"
+                                            value="{{ old('estimasi_nilai_idr') }}">
+                                        @error('estimasi_nilai_idr')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="usulan_durasi">Usulan Durasi</label>
+                                        <input type="text" placeholder="Usulan Durasi"
+                                            class="form-control @error('usulan_durasi') is-invalid @enderror"
+                                            id="usulan_durasi" name="usulan_durasi"
+                                            value="{{ old('usulan_durasi') }}">
+                                        @error('usulan_durasi')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status_kemajuan_id">Status Kemajuan</label>
+                                        <select class="form-select form-control" name="status_kemajuan_id" id="status_kemajuan_id">
+                                            <option value="">--Pilih Status Kemajuan--</option>
+                                            @foreach($statusKemajuan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="dokumen" class="form-label">Dokumen</label>
+                                        <input type="file" class="form-control" id="dokumen-proposal" name="dokumen" onchange="validateFile()">
+                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                        <span id="file-error-proposal" class="text-danger"></span>
+                                    </div>
+                                    <div id="nama-dokumen-proposal"></div>
+                                    <br>
+                                    <!-- Tambahkan elemen pratinjau file -->
+                                    <div id="filePreview-proposal"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary"
+                                data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
         @include('layouts.template')
 

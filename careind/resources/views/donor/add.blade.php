@@ -238,7 +238,7 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="date">Date</label>
+                                            <label for="date">Tanggal</label>
                                             <input type="date"
                                                 class="form-control @error('date') is-invalid @enderror"
                                                 id="date" name="date"

@@ -66,7 +66,7 @@ class ProposalController extends Controller
             'estimasi_nilai_idr'         =>   $request->estimasi_nilai_idr,
             'usulan_durasi'              =>   $request->usulan_durasi,
             'status_kemajuan_id'         =>   $request->status_kemajuan_id,
-            'dokumen'                    =>   $request->dokumen,
+            // 'dokumen'                    =>   $request->dokumen,
         ]);
 
         if ($request->hasFile('dokumen')) {

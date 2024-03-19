@@ -12,8 +12,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
-    <!-- Link CSS Select2 dari CDN -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
 
 
      @include('layouts.template')
@@ -141,7 +140,7 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Master/Detail Add</h6>
                             </div>
                         </div>
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('master/add') }}" id="form-add-master" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <!-- Default Tabs -->
@@ -176,6 +175,7 @@
                                         aria-labelledby="donor-tab">
                                         <div class="row">
                                             <div class="col-8">
+
                                                 <div class="form-group">
                                                     <label for="nama_organisasi">Nama Organisasi</label>
                                                     <input type="text" placeholder="Nama Organisasi"
@@ -208,9 +208,9 @@
                                                     <label for="provinsi_id">Provinsi</label>
                                                     <select class="form-select" name="provinsi_id" id="provinsi_id">
                                                         <option value="">Pilih Provinsi</option>
-                                                        {{-- @foreach ($provinces as $provinsi)
+                                                        @foreach ($provinces as $provinsi)
                                                             <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
                                                     @error('provinsi')
                                                         <div class="text-danger">{{ $message }}</div>
@@ -265,9 +265,9 @@
                                                     <select class="form-select" name="jenis_organisasi_id"
                                                         id="jenis_organisasi_id">
                                                         <option value="">--Pilih--</option>
-                                                        {{-- @foreach ($jenisOrganisasis as $item)
+                                                        @foreach ($jenisOrganisasis as $item)
                                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -275,13 +275,13 @@
                                                     <select class="form-select" name="komitmen_sdgs[]"
                                                         id="komitmen_sdgs" multiple>
                                                         <option value="">--Pilih--</option>
-                                                        {{-- @foreach ($komitmenSdgs as $item)
+                                                        @foreach ($komitmenSdgs as $item)
                                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="date">Date</label>
+                                                    <label for="date">Tanggal</label>
                                                     <input type="date"
                                                         class="form-control @error('date') is-invalid @enderror"
                                                         id="date" name="date" value="{{ old('date') }}">
@@ -291,11 +291,11 @@
                                                 </div>
                                                 <div class="form-group mb-4">
                                                     <label for="dokumen" class="form-label">Dokumen</label>
-                                                    <input type="file" class="form-control" id="dokumen"
-                                                        name="dokumen" onchange="validateFile()">
+                                                    <input type="file" class="form-control" id="dokumen_donor"
+                                                        name="dokumen_donor" onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
                                                         gif) atau PDF.</small>
-                                                    <span id="file-error" class="text-danger"></span>
+                                                    <span id="file-error-donor" class="text-danger"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -306,6 +306,9 @@
                                         aria-labelledby="narahubung-tab">
                                         <div class="row">
                                             <div class="col-8">
+                                                {{-- <input type="hidden" id="donor_id_narahubung" name="donor_id"> --}}
+                                                {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
+
                                                 <div class="form-group">
                                                     <label for="nama_kontak">Nama Kontak</label>
                                                     <input type="text" placeholder="Nama Kontak"
@@ -347,9 +350,9 @@
                                                     <label for="status_id">Status</label>
                                                     <select class="form-select" name="status_id" id="status_id">
                                                         <option value="">--Pilih Status--</option>
-                                                        {{-- @foreach ($status as $item)
+                                                        @foreach ($status as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -361,6 +364,9 @@
                                         aria-labelledby="komunikasi-tab">
                                         <div class="row">
                                             <div class="col-8">
+                                                {{-- <input type="hidden" id="donor_id_komunikasi" name="donor_id"> --}}
+                                                {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
+
                                                 <div class="form-group">
                                                     <label for="tanggal">Tanggal</label>
                                                     <input type="date" placeholder="Tanggal"
@@ -375,9 +381,9 @@
                                                     <select class="form-select form-control" name="saluran_id"
                                                         id="saluran_id">
                                                         <option value="">--Pilih Saluran--</option>
-                                                        {{-- @foreach ($saluran as $item)
+                                                        @foreach ($saluran as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -385,9 +391,9 @@
                                                     <select class="form-select form-control"
                                                         name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
                                                         <option value="">--Pilih Jenjang Komunikasi--</option>
-                                                        {{-- @foreach ($jenjangKomunikasi as $item)
+                                                        @foreach ($jenjangKomunikasi as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -395,9 +401,9 @@
                                                     <select class="form-select form-control" name="tindak_lanjut_id"
                                                         id="tindak_lanjut_id">
                                                         <option value="">--Pilih Tindak Lanjut--</option>
-                                                        {{-- @foreach ($tindakLanjut as $item)
+                                                        @foreach ($tindakLanjut as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -420,12 +426,12 @@
                                                 </div>
                                                 <div class="form-group mb-4">
                                                     <label for="dokumen" class="form-label">Dokumen</label>
-                                                    <input type="file" class="form-control" id="dokumen"
-                                                        name="dokumen" onchange="validateFile()">
+                                                    <input type="file" class="form-control" id="dokumen_komunikasi"
+                                                        name="dokumen_komunikasi" onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
                                                         gif)
                                                         atau PDF.</small>
-                                                    <span id="file-error" class="text-danger"></span>
+                                                    <span id="file-error-komunikasi" class="text-danger"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -436,14 +442,17 @@
                                         aria-labelledby="proposal-tab">
                                         <div class="row">
                                             <div class="col-8">
+                                                {{-- <input type="hidden" id="donor_id_proposal" name="donor_id"> --}}
+                                                {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
+
                                                 <div class="form-group">
                                                     <label for="tujuan_pendanaan_id">Tujuan Pendanaan</label>
                                                     <select class="form-select form-control"
                                                         name="tujuan_pendanaan_id" id="tujuan_pendanaan_id">
                                                         <option value="">--Pilih Tujuan Pendanaan--</option>
-                                                        {{-- @foreach ($tujuanPendanaan as $item)
+                                                        @foreach ($tujuanPendanaan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -451,9 +460,9 @@
                                                     <select class="form-select form-control"
                                                         name="jenis_penerimaan_id" id="jenis_penerimaan_id">
                                                         <option value="">--Pilih Jenis Penerimaan--</option>
-                                                        {{-- @foreach ($jenisPenerimaan as $item)
+                                                        @foreach ($jenisPenerimaan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -461,9 +470,9 @@
                                                     <select class="form-select form-control"
                                                         name="saluran_pendanaan_id" id="saluran_pendanaan_id">
                                                         <option value="">--Pilih Saluran Pendanaan--</option>
-                                                        {{-- @foreach ($saluranPendanaan as $item)
+                                                        @foreach ($saluranPendanaan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -471,9 +480,9 @@
                                                     <select class="form-select form-control"
                                                         name="jenis_intermediaries_id" id="jenis_intermediaries_id">
                                                         <option value="">--Pilih Jenis Intermediary--</option>
-                                                        {{-- @foreach ($jenisIntermediaries as $item)
+                                                        @foreach ($jenisIntermediaries as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -491,9 +500,9 @@
                                                     <select class="form-select form-control"
                                                         name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
                                                         <option value="">--Pilih Klasifikasi Portfolio--</option>
-                                                        {{-- @foreach ($klasifikasiPortfolios as $item)
+                                                        @foreach ($klasifikasiPortfolios as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -501,9 +510,9 @@
                                                     <select class="form-select form-control"
                                                         name="impact_goals_id[]" id="impact_goals_id" multiple>
                                                         <option value="">--Pilih Impact Goals--</option>
-                                                        {{-- @foreach($impactGoals as $item)
+                                                        @foreach($impactGoals as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                        @endforeach --}}
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -541,19 +550,19 @@
                                                     <select class="form-select form-control" name="status_kemajuan_id"
                                                         id="status_kemajuan_id">
                                                         <option value="">--Pilih Status Kemajuan--</option>
-                                                        {{-- @foreach ($statusKemajuan as $item)
+                                                        @foreach ($statusKemajuan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach --}}
+                                                @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group mb-4">
                                                     <label for="dokumen" class="form-label">Dokumen</label>
-                                                    <input type="file" class="form-control" id="dokumen"
-                                                        name="dokumen" onchange="validateFile()">
+                                                    <input type="file" class="form-control" id="dokumen_proposal"
+                                                        name="dokumen_proposal" onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
                                                         gif)
                                                         atau PDF.</small>
-                                                    <span id="file-error" class="text-danger"></span>
+                                                    <span id="file_error_proposal" class="text-danger"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -615,12 +624,100 @@
         </div>
 
 
-    @include('layouts.template')
-
-    <!-- Link JavaScript Select2 dari CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 
+    {{-- Custom Javascript --}}
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
+            $(function() {
+                $('#provinsi_id').on('change', function() {
+                    let id_provinsi = $('#provinsi_id').val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkabupaten') }}",
+                        data: {
+                            id_provinsi: id_provinsi
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kabupaten_id').html(msg);
+                            $('#kecamatan_id').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
+            $(function() {
+                $('#kabupaten_id').on('change', function() {
+                    let id_kabupaten = $('#kabupaten_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkecamatan') }}",
+                        data: {
+                            id_kabupaten: id_kabupaten
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kecamatan_id').html(msg);
+                            // $('#kecamatan').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
+            $(function() {
+                $('#kecamatan_id').on('change', function() {
+                    let id_kecamatan = $('#kecamatan_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getdesa') }}",
+                        data: {
+                            id_kecamatan: id_kecamatan
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#desa_id').html(msg);
+                            // $('#kecamatan').html('');
+                            // $('#desa').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+        });
+        </script>
+
+        @include('layouts.template')
 </body>
 
 </html>
