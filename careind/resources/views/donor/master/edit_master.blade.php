@@ -3,8 +3,6 @@
 
 <head>
 
-    @include('layouts.template')
-
     {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,10 +10,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
-    {{-- CDN Select2 --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-
+    @include('layouts.template')
 
 </head>
 
@@ -139,8 +134,15 @@
                             <div>
                                 <h6 class="m-0 font-weight-bold text-danger">Master/Detail Edit</h6>
                             </div>
+                            <div>
+                                <a href="{{ url('master/'.$donor->id) }}" class="btn btn-outline-info btn-circle me-2" data-bs-toggle="tooltip" title="Master/Detail View">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
                         </div>
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('master.update_master_add', ['master' => $donor->id]) }}" method="POST" id="form-edit-master"
+                            enctype="multipart/form-data">
+                            @method('PATCH')
                             @csrf
                             <div class="card-body">
                                 <!-- Default Tabs -->
@@ -348,14 +350,18 @@
                                                             value="{{ basename($donor->dokumen_donor) }}" readonly>
                                                         <br>
                                                         @php
-                                                            $extension = pathinfo($donor->dokumen_donor, PATHINFO_EXTENSION);
+                                                            $extension = pathinfo(
+                                                                $donor->dokumen_donor,
+                                                                PATHINFO_EXTENSION,
+                                                            );
                                                         @endphp
                                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
                                                             <img src="{{ url('') }}/{{ $donor->dokumen_donor }}"
                                                                 alt="Pratinjau Gambar"
                                                                 style="max-width: 300px; max-height: 300px;">
                                                         @elseif ($extension === 'pdf')
-                                                            <embed src="{{ url('') }}/{{ $donor->dokumen_donor }}"
+                                                            <embed
+                                                                src="{{ url('') }}/{{ $donor->dokumen_donor }}"
                                                                 type="application/pdf" width="500" height="500">
                                                         @else
                                                             Tidak ada pratinjau
@@ -388,60 +394,66 @@
                                                     @forelse ($narahubung as $narahubungs)
                                                         <tr>
                                                             <td><input type="text" placeholder="Narahubung ID"
-                                                                    class="form-control  @error('id') is-invalid @enderror"
-                                                                    id="id" name="id"
-                                                                    value="{{ old('id') ?? $narahubungs->id }}"
+                                                                    class="form-control @error('items_narahubung.' . $narahubungs->id . '.id') is-invalid @enderror"
+                                                                    id="id"
+                                                                    name="items_narahubung[{{ $narahubungs->id }}][id]"
+                                                                    value="{{ old('items_narahubung.' . $narahubungs->id . '.id') ?? $narahubungs->id }}"
                                                                     readonly></td>
                                                             <td>
                                                                 <input type="text" placeholder="Nama Kontak"
-                                                                    class="form-control @error('nama_kontak') is-invalid @enderror"
-                                                                    id="nama_kontak" name="nama_kontak"
-                                                                    value="{{ old('nama_kontak') ?? $narahubungs->nama_kontak }}">
-                                                                @error('nama_kontak')
+                                                                    class="form-control @error('items_narahubung.' . $narahubungs->id . '.nama_kontak') is-invalid @enderror"
+                                                                    id="nama_kontak"
+                                                                    name="items_narahubung[{{ $narahubungs->id }}][nama_kontak]"
+                                                                    value="{{ old('items_narahubung.' . $narahubungs->id . '.nama_kontak') ?? $narahubungs->nama_kontak }}">
+                                                                @error('items_narahubung.' . $narahubungs->id . '.nama_kontak')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
                                                             <td><input type="text" placeholder=""
-                                                                    class="form-control @error('jabatan') is-invalid @enderror"
-                                                                    id="jabatan" name="jabatan"
-                                                                    value="{{ old('jabatan') ?? $narahubungs->jabatan }}">
-                                                                @error('jabatan')
+                                                                    class="form-control @error('items_narahubung.' . $narahubungs->id . '.jabatan') is-invalid @enderror"
+                                                                    id="jabatan"
+                                                                    name="items_narahubung[{{ $narahubungs->id }}][jabatan]"
+                                                                    value="{{ old('items_narahubung.' . $narahubungs->id . '.jabatan') ?? $narahubungs->jabatan }}">
+                                                                @error('items_narahubung.' . $narahubungs->id . '.jabatan')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
                                                             <td><input type="email" placeholder="Email"
-                                                                    class="form-control @error('email') is-invalid @enderror"
-                                                                    id="email" name="email"
-                                                                    value="{{ old('email') ?? $narahubungs->email }}">
-                                                                @error('email')
+                                                                    class="form-control @error('items_narahubung.' . $narahubungs->id . '.email') is-invalid @enderror"
+                                                                    id="email"
+                                                                    name="items_narahubung[{{ $narahubungs->id }}][email]"
+                                                                    value="{{ old('items_narahubung.' . $narahubungs->id . '.email') ?? $narahubungs->email }}">
+                                                                @error('items_narahubung.' . $narahubungs->id . '.email')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
                                                             <td><input type="tel" placeholder="Nomor Telepon"
-                                                                    class="form-control @error('no_telp') is-invalid @enderror"
-                                                                    id="no_telp" name="no_telp"
-                                                                    value="{{ old('no_telp') ?? $narahubungs->no_telp }}">
-                                                                @error('')
+                                                                    class="form-control @error('items_narahubung.' . $narahubungs->id . '.no_telp') is-invalid @enderror"
+                                                                    id="no_telp"
+                                                                    name="items_narahubung[{{ $narahubungs->id }}][no_telp]"
+                                                                    value="{{ old('items_narahubung.' . $narahubungs->id . '.no_telp') ?? $narahubungs->no_telp }}">
+                                                                @error('items_narahubung.' . $narahubungs->id . '.no_telp')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
-                                                            <td><select class="form-select" name="status_id"
-                                                                    id="status_id">
+                                                            <td><select class="form-select"
+                                                                    name="items_narahubung[{{ $narahubungs->id }}][status_id]"
+                                                                    id="status_id_{{ $narahubungs->id }}">
                                                                     <option value="">--Pilih Status--</option>
                                                                     @foreach ($status as $item)
                                                                         <option value="{{ $item->id }}"
-                                                                            {{ $item->id == old('status_id', $narahubungs->status_id) ? 'selected' : '' }}>
+                                                                            {{ $item->id == old('items_narahubung.' . $narahubungs->id . '.status_id', $narahubungs->status_id) ? 'selected' : '' }}>
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
-                                                                @error('status_id')
+                                                                @error('items_narahubung.' . $narahubungs->id . '.status_id')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
                                                             <td>
                                                                 <div class="d-inline-block">
-                                                                    <form
-                                                                        action="{{ url('master_narahubung/' . $narahubungs->id) }}"
+                                                                    {{-- <form
+                                                                        action="{{ route('master.destroy_master_narahubung', ['master' => $narahubungs->id]) }}"
                                                                         method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
@@ -451,7 +463,7 @@
                                                                             data-bs-toggle="tooltip" title="Delete">
                                                                             <i class="fas fa-trash"></i>
                                                                         </button>
-                                                                    </form>
+                                                                    </form> --}}
                                                                 </div>
                                                             </td>
                                                         @empty
@@ -487,59 +499,62 @@
                                                     @forelse ($komunikasi as $komunikasis)
                                                         <tr>
                                                             <td><input type="text" placeholder="Komunikasi ID"
-                                                                    class="form-control @error('id') is-invalid @enderror"
-                                                                    id="id" name="id"
-                                                                    value="{{ old('id') ?? $komunikasis->id }}"
+                                                                    class="form-control" id="id"
+                                                                    name="items_komunikasi[{{ $komunikasis->id }}][id]"
+                                                                    value="{{ old('items_komunikasi.' . $komunikasis->id . '.id') ?? $komunikasis->id }}"
                                                                     readonly>
                                                             </td>
                                                             <td>
                                                                 <input type="date" placeholder="Tanggal"
                                                                     class="form-control @error('tanggal') is-invalid @enderror"
-                                                                    id="tanggal" name="tanggal"
-                                                                    value="{{ old('tanggal') ?? $komunikasis->tanggal }}">
+                                                                    id="tanggal"
+                                                                    name="items_komunikasi[{{ $komunikasis->id }}][tanggal]"
+                                                                    value="{{ old('items_komunikasi.' . $komunikasis->id . '.tanggal') ?? $komunikasis->tanggal }}">
                                                                 @error('tanggal')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
                                                             <td>
                                                                 <select class="form-select form-control"
-                                                                    name="saluran_id" id="saluran_id">
+                                                                    name="items_komunikasi[{{ $komunikasis->id }}][saluran_id]"
+                                                                    id="saluran_id">
                                                                     <option value="">--Pilih Saluran--</option>
                                                                     @foreach ($saluran as $item)
                                                                         <option value="{{ $item->id }}"
-                                                                            {{ $item->id == old('saluran_id', $komunikasis->saluran_id) ? 'selected' : '' }}>
+                                                                            {{ $item->id == old('items_komunikasi.' . $komunikasis->id . '.saluran_id', $komunikasis->saluran_id) ? 'selected' : '' }}>
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </td>
                                                             <td>
                                                                 <select class="form-select form-control"
-                                                                    name="jenjang_komunikasi_id"
+                                                                    name="items_komunikasi[{{ $komunikasis->id }}][jenjang_komunikasi_id]"
                                                                     id="jenjang_komunikasi_id">
                                                                     <option value="">--Pilih Jenjang Komunikasi--
                                                                     </option>
                                                                     @foreach ($jenjangKomunikasi as $item)
                                                                         <option value="{{ $item->id }}"
-                                                                            {{ $item->id == old('jenjang_komunikasi_id', $komunikasis->jenjang_komunikasi_id) ? 'selected' : '' }}>
+                                                                            {{ $item->id == old('items_komunikasi.' . $komunikasis->id . '.jenjang_komunikasi_id', $komunikasis->jenjang_komunikasi_id) ? 'selected' : '' }}>
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </td>
                                                             <td>
                                                                 <select class="form-select form-control"
-                                                                    name="tindak_lanjut_id" id="tindak_lanjut_id">
+                                                                    name="items_komunikasi[{{ $komunikasis->id }}][tindak_lanjut_id]"
+                                                                    id="tindak_lanjut_id">
                                                                     <option value="">--Pilih Tindak Lanjut--
                                                                     </option>
                                                                     @foreach ($tindakLanjut as $item)
                                                                         <option value="{{ $item->id }}"
-                                                                            {{ $item->id == old('tindak_lanjut_id', $komunikasis->tindak_lanjut_id) ? 'selected' : '' }}>
+                                                                            {{ $item->id == old('items_komunikasi.' . $komunikasis->id . '.tindak_lanjut_id', $komunikasis->tindak_lanjut_id) ? 'selected' : '' }}>
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </td>
                                                             <td>
                                                                 <textarea type="text" placeholder="Catatan" class="form-control @error('catatan') is-invalid @enderror"
-                                                                    id="catatan" name="catatan">{{ old('catatan') ?? $komunikasis->catatan }}</textarea>
+                                                                    id="catatan" name="items_komunikasi[{{ $komunikasis->id }}][catatan]">{{ old('items_komunikasi.' . $komunikasis->id . '.catatan') ?? $komunikasis->catatan }}</textarea>
                                                                 @error('catatan')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
@@ -548,15 +563,17 @@
                                                                 <input type="date"
                                                                     placeholder="Tanggal Selanjutnya"
                                                                     class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
-                                                                    id="tgl_selanjutnya" name="tgl_selanjutnya"
-                                                                    value="{{ old('tgl_selanjutnya') ?? $komunikasis->tgl_selanjutnya }}">
+                                                                    id="tgl_selanjutnya"
+                                                                    name="items_komunikasi[{{ $komunikasis->id }}][tgl_selanjutnya]"
+                                                                    value="{{ old('items_komunikasi.' . $komunikasis->id . '.tgl_selanjutnya') ?? $komunikasis->tgl_selanjutnya }}">
                                                                 @error('tgl_selanjutnya')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
                                                             <td>
                                                                 <input type="file" class="form-control"
-                                                                    id="dokumen_komunikasi" name="dokumen_komunikasi">
+                                                                    id="dokumen_komunikasi"
+                                                                    name="items_komunikasi[{{ $komunikasis->id }}][dokumen_komunikasi]">
                                                                 <br>
                                                                 @if ($komunikasis->dokumen_komunikasi)
                                                                     <input type="text" class="form-control"
@@ -569,26 +586,15 @@
                                                                             PATHINFO_EXTENSION,
                                                                         );
                                                                     @endphp
-                                                                    @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                        <img src="{{ url('') }}/{{ $komunikasis->dokumen_komunikasi }}"
-                                                                            alt="Pratinjau Gambar"
-                                                                            style="max-width: 100px; max-height: 100px;">
-                                                                    @elseif ($extension === 'pdf')
-                                                                        <embed
-                                                                            src="{{ url('') }}/{{ $komunikasis->dokumen_komunikasi }}"
-                                                                            type="application/pdf" width="200"
-                                                                            height="200">
-                                                                    @else
-                                                                        Tidak ada pratinjau
-                                                                    @endif
                                                                 @else
                                                                     <p>Tidak ada dokumen</p>
                                                                 @endif
                                                             </td>
+
                                                             <td>
                                                                 <div class="d-inline-block">
-                                                                    <form
-                                                                        action="{{ url('master_komunikasi/' . $komunikasis->id) }}"
+                                                                    {{-- <form
+                                                                        action="{{ route('master.destroy_master_komunikasi', ['master' => $komunikasis->id]) }}"
                                                                         method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
@@ -598,7 +604,7 @@
                                                                             data-bs-toggle="tooltip" title="Delete">
                                                                             <i class="fas fa-trash"></i>
                                                                         </button>
-                                                                    </form>
+                                                                    </form> --}}
                                                                 </div>
                                                             </td>
                                                         @empty
@@ -614,8 +620,8 @@
                                     {{-- PROPOSAL --}}
                                     <div class="tab-pane fade" id="proposal-justified" role="tabpanel"
                                         aria-labelledby="proposal-tab">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover table-bordered">
+                                        <div class="table-responsive" id="table_select2">
+                                            <table class="table table-hover table-bordered" id="table_id">
                                                 <thead>
                                                     <tr class="text-center fw-bold">
                                                         <th>Proposal ID</th>
@@ -640,13 +646,17 @@
                                                             <td>
                                                                 <input type="text" placeholder="Proposal ID"
                                                                     class="form-control @error('id') is-invalid @enderror"
-                                                                    id="id" name="id"
+                                                                    id="id"
+                                                                    name="items_proposal[{{ $proposals->id }}][id]"
                                                                     value="{{ old('id') ?? $proposals->id }}"
                                                                     readonly>
+                                                                @error('id')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
                                                             </td>
                                                             <td>
                                                                 <select class="form-select form-control"
-                                                                    name="tujuan_pendanaan_id"
+                                                                    name="items_proposal[{{ $proposals->id }}][tujuan_pendanaan_id]"
                                                                     id="tujuan_pendanaan_id">
                                                                     <option value="">--Pilih Tujuan Pendanaan--
                                                                     </option>
@@ -656,10 +666,13 @@
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                @error('tujuan_pendanaan_id')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
                                                             </td>
                                                             <td>
                                                                 <select class="form-select form-control"
-                                                                    name="jenis_penerimaan_id"
+                                                                    name="items_proposal[{{ $proposals->id }}][jenis_penerimaan_id]"
                                                                     id="jenis_penerimaan_id">
                                                                     <option value="">--Pilih Jenis Penerimaan--
                                                                     </option>
@@ -669,10 +682,13 @@
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                @error('jenis_penerimaan_id')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
                                                             </td>
                                                             <td>
                                                                 <select class="form-select form-control"
-                                                                    name="saluran_pendanaan_id"
+                                                                    name="items_proposal[{{ $proposals->id }}][saluran_pendanaan_id]"
                                                                     id="saluran_pendanaan_id">
                                                                     <option value="">--Pilih Saluran Pendanaan--
                                                                     </option>
@@ -682,9 +698,13 @@
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                @error('saluran_pendanaan_id')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
                                                             </td>
-                                                            <td><select class="form-select form-control"
-                                                                    name="jenis_intermediaries_id"
+                                                            <td>
+                                                                <select class="form-select form-control"
+                                                                    name="items_proposal[{{ $proposals->id }}][jenis_intermediaries_id]"
                                                                     id="jenis_intermediaries_id">
                                                                     <option value="">--Pilih Jenis Intermediary--
                                                                     </option>
@@ -693,28 +713,24 @@
                                                                             {{ $item->id == old('jenis_intermediaries_id', $proposals->jenis_intermediaries_id) ? 'selected' : '' }}>
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
-                                                                </select></td>
-                                                            <td><select class="form-select form-control"
-                                                                    name="jenis_intermediaries_id"
-                                                                    id="jenis_intermediaries_id">
-                                                                    <option value="">--Pilih Jenis Intermediary--
-                                                                    </option>
-                                                                    @foreach ($jenisIntermediaries as $item)
-                                                                        <option value="{{ $item->id }}"
-                                                                            {{ $item->id == old('jenis_intermediaries_id', $proposals->jenis_intermediaries_id) ? 'selected' : '' }}>
-                                                                            {{ $item->name }}</option>
-                                                                    @endforeach
-                                                                </select></td>
-                                                            <td><input type="text" placeholder="Nama Proyek"
+                                                                </select>
+                                                                @error('jenis_intermediaries_id')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" placeholder="Nama Proyek"
                                                                     class="form-control @error('nama_proyek') is-invalid @enderror"
-                                                                    id="nama_proyek" name="nama_proyek"
+                                                                    id="nama_proyek"
+                                                                    name="items_proposal[{{ $proposals->id }}][nama_proyek]"
                                                                     value="{{ old('nama_proyek') ?? $proposals->nama_proyek }}">
                                                                 @error('nama_proyek')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
-                                                            <td><select class="form-select form-control"
-                                                                    name="klasifikasi_portfolio_id"
+                                                            <td>
+                                                                <select class="form-select form-control"
+                                                                    name="items_proposal[{{ $proposals->id }}][klasifikasi_portfolio_id]"
                                                                     id="klasifikasi_portfolio_id">
                                                                     <option value="">--Pilih Klasifikasi
                                                                         Portfolio--
@@ -724,10 +740,15 @@
                                                                             {{ $item->id == old('klasifikasi_portfolio_id', $proposals->klasifikasi_portfolio_id) ? 'selected' : '' }}>
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
-                                                                </select></td>
-                                                            <td><select class="form-select form-control"
-                                                                    name="impact_goals_id[]" id="impact_goals_id"
-                                                                    multiple>
+                                                                </select>
+                                                                @error('klasifikasi_portfolio_id')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-select form-control impact-goals-select"
+                                                                    name="items_proposal[{{ $proposals->id }}][impact_goals_id][]"
+                                                                    id="impact_goals_id" multiple>
                                                                     <option value="">--Pilih Impact Goals--
                                                                     </option>
                                                                     @php $impactGoalsIds = json_decode($proposals->impact_goals_id); @endphp
@@ -737,33 +758,41 @@
                                                                             {{ $item->name }}
                                                                         </option>
                                                                     @endforeach
-                                                                </select></td>
-                                                            <td><input type="text" placeholder="Estimasi Nilai USD"
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" placeholder="Estimasi Nilai USD"
                                                                     class="form-control @error('estimasi_nilai_usd') is-invalid @enderror"
-                                                                    id="estimasi_nilai_usd" name="estimasi_nilai_usd"
+                                                                    id="estimasi_nilai_usd"
+                                                                    name="items_proposal[{{ $proposals->id }}][estimasi_nilai_usd]"
                                                                     value="{{ old('estimasi_nilai_usd') ?? $proposals->estimasi_nilai_usd }}">
                                                                 @error('estimasi_nilai_usd')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
-                                                            <td><input type="text" placeholder="Estimasi Nilai IDR"
+                                                            <td>
+                                                                <input type="text" placeholder="Estimasi Nilai IDR"
                                                                     class="form-control @error('estimasi_nilai_idr') is-invalid @enderror"
-                                                                    id="estimasi_nilai_idr" name="estimasi_nilai_idr"
-                                                                    value="{{ old('estimasi_nilai_idr') ?? $proposals->estimasi_nilai_usd }}">
+                                                                    id="estimasi_nilai_idr"
+                                                                    name="items_proposal[{{ $proposals->id }}][estimasi_nilai_idr]"
+                                                                    value="{{ old('estimasi_nilai_idr') ?? $proposals->estimasi_nilai_idr }}">
                                                                 @error('estimasi_nilai_idr')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
-                                                            <td><input type="text" placeholder="Usulan Durasi"
+                                                            <td>
+                                                                <input type="number" placeholder="Usulan Durasi"
                                                                     class="form-control @error('usulan_durasi') is-invalid @enderror"
-                                                                    id="usulan_durasi" name="usulan_durasi"
+                                                                    id="usulan_durasi"
+                                                                    name="items_proposal[{{ $proposals->id }}][usulan_durasi]"
                                                                     value="{{ old('usulan_durasi') ?? $proposals->usulan_durasi }}">
                                                                 @error('usulan_durasi')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
-                                                            <td><select class="form-select form-control"
-                                                                    name="status_kemajuan_id" id="status_kemajuan_id">
+                                                            <td>
+                                                                <select class="form-select form-control"
+                                                                    name="items_proposal[{{ $proposals->id }}][status_kemajuan_id]" id="status_kemajuan_id">
                                                                     <option value="">--Pilih Status Kemajuan--
                                                                     </option>
                                                                     @foreach ($statusKemajuan as $item)
@@ -771,9 +800,12 @@
                                                                             {{ $item->id == old('status_kemajuan_id', $proposals->status_kemajuan_id) ? 'selected' : '' }}>
                                                                             {{ $item->name }}</option>
                                                                     @endforeach
-                                                                </select></td>
-                                                            <td><input type="file" class="form-control"
-                                                                    id="dokumen_proposal" name="dokumen_proposal">
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="file" class="form-control"
+                                                                    id="dokumen_proposal"
+                                                                    name="items_proposal[{{ $proposals->id }}][dokumen_proposal]">
                                                                 <br>
                                                                 @if ($proposals->dokumen_proposal)
                                                                     <input type="text" class="form-control"
@@ -786,21 +818,25 @@
                                                                             PATHINFO_EXTENSION,
                                                                         );
                                                                     @endphp
-                                                                    @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                        <img src="{{ url('') }}/{{ $proposals->dokumen_proposal }}"
-                                                                            alt="Pratinjau Gambar"
-                                                                            style="max-width: 100px; max-height: 100px;">
-                                                                    @elseif ($extension === 'pdf')
-                                                                        <embed
-                                                                            src="{{ url('') }}/{{ $proposals->dokumen_proposal }}"
-                                                                            type="application/pdf" width="200"
-                                                                            height="200">
-                                                                    @else
-                                                                        Tidak ada pratinjau
-                                                                    @endif
                                                                 @else
                                                                     <p>Tidak ada dokumen</p>
                                                                 @endif
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-inline-block">
+                                                                    {{-- <form
+                                                                        action="{{ route('master.destroy_master_proposal', ['master' => $proposals->id]) }}"
+                                                                        method="POST">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button
+                                                                            class="btn btn-danger btn-circle delete-btn"
+                                                                            data-confirm-delete="true"
+                                                                            data-bs-toggle="tooltip" title="Delete">
+                                                                            <i class="fas fa-trash"></i>
+                                                                        </button>
+                                                                    </form> --}}
+                                                                </div>
                                                             </td>
                                                         @empty
                                                             <td colspan="15" class="text-center">Tidak ada data...
@@ -814,64 +850,93 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Add</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                     <a href="{{ url('donor') }}" class="btn btn-outline-primary">Cancel</a>
                                 </div>
                         </form>
-
                     </div>
-                    <!-- /.container-fluid -->
-
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Care Indonesia 2024</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Care Indonesia 2024</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
+    {{-- <script>
+        function deleteNarahubung(button) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                var narahubungId = button.getAttribute('data-narahubung-id');
+                var deleteUrl = "{{ url('master/'.$narahubungs->id.'/narahubung') }}";
+                deleteUrl = deleteUrl.replace('narahubung_id', narahubungId);
+
+                fetch(deleteUrl, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Data berhasil dihapus');
+                        location.reload();
+                    } else {
+                        console.error('Gagal menghapus data');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+    </script> --}}
+
+    {{-- <form id="deleteFormNarahubung" method="POST" style="display: none;">
+        @method('DELETE')
+        @csrf
+    </form> --}}
 
     @include('layouts.template')
-
-    {{-- CDN Select2 --}}
-
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </body>
 

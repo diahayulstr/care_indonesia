@@ -143,6 +143,10 @@ Route::get('master/add', [App\Http\Controllers\MasterController::class, 'master_
 Route::post('master/add', [App\Http\Controllers\MasterController::class, 'store_master_add']);
 Route::get('master/{master}', [App\Http\Controllers\MasterController::class, 'master_show'])->name('donor.master.view_master');
 Route::get('master/{master}/edit', [App\Http\Controllers\MasterController::class, 'master_edit'])->name('donor.master.edit_master');
+Route::patch('master/{master}', [App\Http\Controllers\MasterController::class, 'update_master_add'])->name('master.update_master_add');
+Route::delete('master/{master}/narahubung', [App\Http\Controllers\MasterController::class, 'destroy_master_narahubung'])->name('master.destroy_master_narahubung');
+Route::delete('master/{master}/komunikasi', [App\Http\Controllers\MasterController::class, 'destroy_master_komunikasi'])->name('master.destroy_master_komunikasi');
+Route::delete('master/{master}/proposal', [App\Http\Controllers\MasterController::class, 'destroy_master_proposal'])->name('master.destroy_master_proposal');
 
 
 Route::post('/master/{donor_id}/narahubung', [App\Http\Controllers\MasterController::class,'storeOrUpdate_narahubung'])->name('master.storeOrUpdate_narahubung');

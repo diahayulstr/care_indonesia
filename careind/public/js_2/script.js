@@ -55,6 +55,31 @@ $(document).ready(function() {
     });
 });
 
+// $(document).ready(function() {
+//     $('#form-master-edit').on('click', function() {
+//         if ($('#proposal-tab-edit').hasClass('active')) {
+//             $('#table_id select.impact-goals-select').each(function() {
+//                 $(this).select2();
+//             });
+//         }
+//     });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ADMIN ONLY DROPDOWN SELECT
 $(document).ready(function(){
@@ -68,14 +93,6 @@ $(document).ready(function(){
         $('#form-update').modal('show');
     });
 });
-
-// MODAL
-// $(document).ready(function() {
-//     $('#form-edit-master-narahubung').on('hidden.bs.modal', function() {
-//         // Menutup modal pertama saat modal kedua ditutup
-//         $('#form-add-master-narahubung').modal('hide');
-//     });
-// });
 
 // NARAHUBUNG
 $(document).ready(function(){
@@ -293,15 +310,8 @@ $(document).ready(function(){
 
 
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     var deleteButtons = document.querySelectorAll('.delete-btn');
-//     deleteButtons.forEach(function (button) {
-//         button.addEventListener('click', function (event) {
-//             event.preventDefault();
-//             var donorId = button.getAttribute('data-donor-id');
-//             if (confirm('Are you sure you want to delete this donor?')) {
-//                 document.getElementById('delete-form-' + donorId).submit();
-//             }
-//         });
-//     });
-// });
+
+
+
+
+
