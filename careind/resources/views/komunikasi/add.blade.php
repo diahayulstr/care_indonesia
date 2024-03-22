@@ -1,12 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     {{-- Bootstrap CDN --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
     @include('layouts.template')
 
@@ -21,7 +23,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('home')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('home') }}">
                 <div class="sidebar-brand-text mx-3">Care Indonesia</div>
             </a>
 
@@ -30,7 +32,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('home')}}">
+                <a class="nav-link" href="{{ url('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -41,25 +43,25 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('donor')}}">
+                <a class="nav-link" href="{{ url('donor') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Donor</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('narahubung')}}">
+                <a class="nav-link" href="{{ url('narahubung') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Narahubung</span>
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="{{url('komunikasi')}}">
+                <a class="nav-link" href="{{ url('komunikasi') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Komunikasi</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('proposal')}}">
+                <a class="nav-link" href="{{ url('proposal') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Proposal</span>
                 </a>
@@ -102,7 +104,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/undraw_profile.svg')}}">
+                                    src="{{ asset('style/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -133,18 +135,19 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Komunikasi Add</h6>
                             </div>
                         </div>
-                        <div class="card-body">
-                            {{-- Form Add --}}
-                            <div class="row">
-                                <div class="col-8">
-                                    <form action="{{ url('komunikasi') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
+                        <form action="{{ url('komunikasi') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body">
+                                {{-- Form Add --}}
+                                <div class="row">
+                                    <div class="col-8">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select form-control" name="donor_id" id="donor_id">
                                                 <option value="">--Pilih Donor ID--</option>
-                                                @foreach($donorID as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->nama_organisasi }}</option>
+                                                @foreach ($donorID as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->nama_organisasi }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -152,8 +155,7 @@
                                             <label for="tanggal">Tanggal</label>
                                             <input type="date" placeholder="Tanggal"
                                                 class="form-control @error('tanggal') is-invalid @enderror"
-                                                id="tanggal" name="tanggal"
-                                                value="{{ old('tanggal') }}">
+                                                id="tanggal" name="tanggal" value="{{ old('tanggal') }}">
                                             @error('tanggal')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -162,35 +164,35 @@
                                             <label for="saluran_id">Saluran</label>
                                             <select class="form-select form-control" name="saluran_id" id="saluran_id">
                                                 <option value="">--Pilih Saluran--</option>
-                                                @foreach($saluran as $item)
+                                                @foreach ($saluran as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
-                                            <select class="form-select form-control" name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
+                                            <select class="form-select form-control" name="jenjang_komunikasi_id"
+                                                id="jenjang_komunikasi_id">
                                                 <option value="">--Pilih Jenjang Komunikasi--</option>
-                                                @foreach($jenjangKomunikasi as $item)
+                                                @foreach ($jenjangKomunikasi as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="tindak_lanjut_id">Tindak Lanjut</label>
-                                            <select class="form-select form-control" name="tindak_lanjut_id" id="tindak_lanjut_id">
+                                            <select class="form-select form-control" name="tindak_lanjut_id"
+                                                id="tindak_lanjut_id">
                                                 <option value="">--Pilih Tindak Lanjut--</option>
-                                                @foreach($tindakLanjut as $item)
+                                                @foreach ($tindakLanjut as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="catatan">Catatan</label>
-                                            <textarea type="text" placeholder="Catatan"
-                                                class="form-control @error('catatan') is-invalid @enderror"
-                                                id="catatan" name="catatan"
-                                                value="{{ old('catatan') }}"></textarea>
+                                            <textarea type="text" placeholder="Catatan" class="form-control @error('catatan') is-invalid @enderror"
+                                                id="catatan" name="catatan" value="{{ old('catatan') }}"></textarea>
                                             @error('catatan')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -207,19 +209,20 @@
                                         </div>
                                         <div class="form-group mb-4">
                                             <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen_komunikasi" name="dokumen_komunikasi" onchange="validateFile()">
-                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                            <input type="file" class="form-control" id="dokumen_komunikasi"
+                                                name="dokumen_komunikasi" onchange="validateFile()">
+                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                atau PDF.</small>
                                             <span id="file-error" class="text-danger"></span>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Add</button>
-                                        <a href="{{ url('komunikasi') }}" class="btn btn-outline-primary">Cancel</a>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {{-- <div class="card-footer">
-                            {{ $donor->links}}
-                        </div> --}}
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{{ url('komunikasi') }}" class="btn btn-outline-primary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>

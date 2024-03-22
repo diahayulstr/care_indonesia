@@ -130,14 +130,14 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Narahubung Edit</h6>
                             </div>
                         </div>
+                        <form action="{{ route('narahubung.update', ['narahubung' => $narahubung->id]) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @method('PATCH')
+                            @csrf
                         <div class="card-body">
                             {{-- Form Edit --}}
                             <div class="row">
                                 <div class="col-8">
-                                    <form action="{{ route('narahubung.update', ['narahubung' => $narahubung->id]) }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @method('PATCH')
-                                        @csrf
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select" name="donor_id" id="donor_id">
@@ -202,14 +202,14 @@
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-
-                                        <!-- Tombol Submit -->
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ url('narahubung') }}" class="btn btn-outline-primary">Cancel</a>
-                                    </form>
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url('narahubung') }}" class="btn btn-outline-primary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

@@ -136,13 +136,14 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Komunikasi Edit</h6>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-8">
-                                    <form action="{{ route('komunikasi.update', ['komunikasi' => $komunikasi->id]) }}"
-                                        method="POST" enctype="multipart/form-data">
-                                        @method('PATCH')
-                                        @csrf
+
+                        <form action="{{ route('komunikasi.update', ['komunikasi' => $komunikasi->id]) }}"
+                            method="POST" enctype="multipart/form-data">
+                            @method('PATCH')
+                            @csrf
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select form-control" name="donor_id" id="donor_id">
@@ -227,14 +228,18 @@
                                                     value="{{ basename($komunikasi->dokumen_komunikasi) }}" readonly>
                                                 <br>
                                                 @php
-                                                    $extension = pathinfo($komunikasi->dokumen_komunikasi, PATHINFO_EXTENSION);
+                                                    $extension = pathinfo(
+                                                        $komunikasi->dokumen_komunikasi,
+                                                        PATHINFO_EXTENSION,
+                                                    );
                                                 @endphp
                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
                                                     <img src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
                                                         alt="Pratinjau Gambar"
                                                         style="max-width: 300px; max-height: 300px;">
                                                 @elseif ($extension === 'pdf')
-                                                    <embed src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
+                                                    <embed
+                                                        src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
                                                         type="application/pdf" width="500" height="500">
                                                 @else
                                                     Tidak ada pratinjau
@@ -243,15 +248,14 @@
                                                 <p>Tidak ada dokumen</p>
                                             @endif
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ url('komunikasi') }}" class="btn btn-outline-primary">Cancel</a>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {{-- <div class="card-footer">
-                            {{ $donor->links}}
-                        </div> --}}
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{{ url('komunikasi') }}" class="btn btn-outline-primary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
                     </div>
 
                 </div>

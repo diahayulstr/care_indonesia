@@ -137,12 +137,13 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Proposal Edit</h6>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-8">
-                                    <form action="{{ route('proposal.update', ['proposal' => $proposal->id]) }}" method="POST" enctype="multipart/form-data">
-                                        @method('PATCH')
-                                        @csrf
+                        <form action="{{ route('proposal.update', ['proposal' => $proposal->id]) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @method('PATCH')
+                            @csrf
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select form-control" name="donor_id" id="donor_id">
@@ -238,7 +239,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="impact_goals_id">Impact Goals</label>
-                                            <select class="form-select form-control" name="impact_goals_id[]" id="impact_goals_id" multiple>
+                                            <select class="form-select form-control" name="impact_goals_id[]"
+                                                id="impact_goals_id" multiple>
                                                 <option value="">--Pilih Impact Goals--</option>
                                                 @php $impactGoalsIds = json_decode($proposal->impact_goals_id); @endphp
                                                 @foreach ($impactGoals as $item)
@@ -301,14 +303,18 @@
                                                     value="{{ basename($proposal->dokumen_proposal) }}" readonly>
                                                 <br>
                                                 @php
-                                                    $extension = pathinfo($proposal->dokumen_proposal, PATHINFO_EXTENSION);
+                                                    $extension = pathinfo(
+                                                        $proposal->dokumen_proposal,
+                                                        PATHINFO_EXTENSION,
+                                                    );
                                                 @endphp
                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
                                                     <img src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
                                                         alt="Pratinjau Gambar"
                                                         style="max-width: 300px; max-height: 300px;">
                                                 @elseif ($extension === 'pdf')
-                                                    <embed src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
+                                                    <embed
+                                                        src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
                                                         type="application/pdf" width="500" height="500">
                                                 @else
                                                     Tidak ada pratinjau
@@ -317,16 +323,15 @@
                                                 <p>Tidak ada dokumen</p>
                                             @endif
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ url('proposal') }}" class="btn btn-outline-primary">Cancel</a>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-
-                        </div>
-
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{{ url('proposal') }}" class="btn btn-outline-primary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

@@ -4,13 +4,16 @@
 <head>
 
     {{-- Bootstrap CDN --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
     @include('layouts.template')
 
 </head>
- 
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -127,18 +130,19 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Narahubung Add</h6>
                             </div>
                         </div>
-                        <div class="card-body">
-                            {{-- Form Add --}}
-                            <div class="row">
-                                <div class="col-8">
-                                    <form action="{{ url('narahubung') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
+                        <form action="{{ url('narahubung') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body">
+                                {{-- Form Add --}}
+                                <div class="row">
+                                    <div class="col-8">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select form-control" name="donor_id" id="donor_id">
                                                 <option value="">--Pilih Donor ID--</option>
-                                                @foreach($donorID as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->nama_organisasi }}</option>
+                                                @foreach ($donorID as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->nama_organisasi }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -146,8 +150,7 @@
                                             <label for="nama_kontak">Nama Kontak</label>
                                             <input type="text" placeholder="Nama Kontak"
                                                 class="form-control @error('nama_kontak') is-invalid @enderror"
-                                                id="nama_kontak" name="nama_kontak"
-                                                value="{{ old('nama_kontak') }}">
+                                                id="nama_kontak" name="nama_kontak" value="{{ old('nama_kontak') }}">
                                             @error('nama_kontak')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -156,8 +159,7 @@
                                             <label for="jabatan">Jabatan</label>
                                             <input type="text" placeholder="Jabatan"
                                                 class="form-control @error('jabatan') is-invalid @enderror"
-                                                id="jabatan" name="jabatan"
-                                                value="{{ old('jabatan') }}">
+                                                id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
                                             @error('jabatan')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -166,8 +168,7 @@
                                             <label for="jabatan">Email</label>
                                             <input type="email" placeholder="Email"
                                                 class="form-control @error('email') is-invalid @enderror"
-                                                id="email" name="email"
-                                                value="{{ old('email') }}">
+                                                id="email" name="email" value="{{ old('email') }}">
                                             @error('email')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -176,8 +177,7 @@
                                             <label for="no_telp">No Telepon</label>
                                             <input type="tel" placeholder="No Telepon"
                                                 class="form-control @error('no_telp') is-invalid @enderror"
-                                                id="no_telp" name="no_telp"
-                                                value="{{ old('no_telp') }}">
+                                                id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
                                             @error('no_telp')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -186,17 +186,19 @@
                                             <label for="status_id">Status</label>
                                             <select class="form-select" name="status_id" id="status_id">
                                                 <option value="">--Pilih Status--</option>
-                                                @foreach($status as $item)
+                                                @foreach ($status as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Add</button>
-                                        <a href="{{ url('narahubung') }}" class="btn btn-outline-primary">Cancel</a>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{{ url('narahubung') }}" class="btn btn-outline-primary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

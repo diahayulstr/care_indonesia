@@ -132,15 +132,14 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Donor Edit</h6>
                             </div>
                         </div>
-                        <div class="card-body">
-                            {{-- Form Edit --}}
-                            <div class="row">
-                                <div class="col-8">
-                                    <form action="{{ route('donor.update', ['donor' => $donor->id]) }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @method('PATCH')
-                                        @csrf
-
+                        <form action="{{ route('donor.update', ['donor' => $donor->id]) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @method('PATCH')
+                            @csrf
+                            <div class="card-body">
+                                {{-- Form Edit --}}
+                                <div class="row">
+                                    <div class="col-8">
                                         <!-- Nama Organisasi -->
                                         <div class="form-group">
                                             <label for="nama_organisasi">Nama Organisasi</label>
@@ -310,7 +309,7 @@
                                             <br>
                                             @if ($donor->dokumen_donor)
                                                 <input type="text" class="form-control"
-                                                value="{{ basename($donor->dokumen_donor) }}" readonly>
+                                                    value="{{ basename($donor->dokumen_donor) }}" readonly>
                                                 <br>
                                                 @php
                                                     $extension = pathinfo($donor->dokumen_donor, PATHINFO_EXTENSION);
@@ -329,14 +328,15 @@
                                                 <p>Tidak ada dokumen</p>
                                             @endif
                                         </div>
-                                        <!-- Tombol Submit -->
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                        <a href="{{ url('donor') }}" class="btn btn-outline-primary">Cancel</a>
-                                    </form>
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                                <!-- Tombol Submit -->
+                                <a href="{{ url('donor') }}" class="btn btn-outline-primary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

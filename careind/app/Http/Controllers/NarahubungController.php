@@ -25,7 +25,7 @@ class NarahubungController extends Controller
             'donor_id'       => 'required|exists:donors,id',
             'nama_kontak'    => 'required',
             'jabatan'        => 'required',
-            'email'          => 'required|max:15',
+            'email'          => 'required',
             'no_telp'        => 'required',
             'status_id'      => 'required|exists:tabel_statuses,id',
         ]);
@@ -62,7 +62,7 @@ class NarahubungController extends Controller
             'nama_kontak'   =>  'required',
             'jabatan'       =>  'required',
             'email'         =>  'required',
-            'no_telp'       =>  'required|max:15',
+            'no_telp'       =>  'required',
             'status_id'     =>  'required|exists:tabel_statuses,id',
         ]);
 

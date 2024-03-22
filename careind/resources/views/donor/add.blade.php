@@ -4,8 +4,11 @@
 <head>
 
     {{-- Bootstrap CDN --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
     @include('layouts.template')
 
@@ -127,12 +130,12 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Donor Add</h6>
                             </div>
                         </div>
-                        <div class="card-body">
-                            {{-- Form Add --}}
-                            <div class="row">
-                                <div class="col-8">
-                                    <form action="{{ url('donor') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
+                        <form action="{{ url('donor') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="card-body">
+                                {{-- Form Add --}}
+                                <div class="row">
+                                    <div class="col-8">
                                         <div class="form-group">
                                             <label for="nama_organisasi">Nama Organisasi</label>
                                             <input type="text" placeholder="Nama Organisasi"
@@ -147,8 +150,7 @@
                                             <label for="alamat">Alamat</label>
                                             <input type="text" placeholder="Alamat"
                                                 class="form-control @error('alamat') is-invalid @enderror"
-                                                id="alamat" name="alamat"
-                                                value="{{ old('alamat') }}">
+                                                id="alamat" name="alamat" value="{{ old('alamat') }}">
                                             @error('alamat')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -157,8 +159,7 @@
                                             <label for="negara">Negara</label>
                                             <input type="text" placeholder="Negara"
                                                 class="form-control @error('negara') is-invalid @enderror"
-                                                id="negara" name="negara"
-                                                value="{{ old('negara') }}">
+                                                id="negara" name="negara" value="{{ old('negara') }}">
                                             @error('negara')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -168,7 +169,8 @@
                                             <select class="form-select" name="provinsi_id" id="provinsi_id">
                                                 <option value="">Pilih Provinsi</option>
                                                 @foreach ($provinces as $provinsi)
-                                                <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
+                                                    <option value="{{ $provinsi->id }}">{{ $provinsi->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('provinsi')
@@ -203,8 +205,7 @@
                                             <label for="website">Website</label>
                                             <input type="text" placeholder="Website"
                                                 class="form-control @error('website') is-invalid @enderror"
-                                                id="website" name="website"
-                                                value="{{ old('website') }}">
+                                                id="website" name="website" value="{{ old('website') }}">
                                             @error('website')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -212,27 +213,28 @@
                                         <div class="form-group">
                                             <label for="informasi_singkat">Informasi Singkat</label>
                                             <textarea type="text" placeholder="Informasi Singkat"
-                                                class="form-control @error('informasi_singkat') is-invalid @enderror"
-                                                id="informasi_singkat" name="informasi_singkat"
-                                                value="{{ old('informasi_singkat') }}"></textarea>
+                                                class="form-control @error('informasi_singkat') is-invalid @enderror" id="informasi_singkat"
+                                                name="informasi_singkat" value="{{ old('informasi_singkat') }}"></textarea>
                                             @error('informasi_singkat')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="jenis_organisasi_id">Jenis Organisasi</label>
-                                            <select class="form-select" name="jenis_organisasi_id" id="jenis_organisasi_id">
+                                            <select class="form-select" name="jenis_organisasi_id"
+                                                id="jenis_organisasi_id">
                                                 <option value="">--Pilih--</option>
-                                                @foreach($jenisOrganisasis as $item)
+                                                @foreach ($jenisOrganisasis as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="komitmen_sdgs">Komitmen SDGs</label>
-                                            <select class="form-select" name="komitmen_sdgs[]" id="komitmen_sdgs" multiple>
+                                            <select class="form-select" name="komitmen_sdgs[]" id="komitmen_sdgs"
+                                                multiple>
                                                 <option value="">--Pilih--</option>
-                                                @foreach($komitmenSdgs as $item)
+                                                @foreach ($komitmenSdgs as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
@@ -241,24 +243,28 @@
                                             <label for="date">Tanggal</label>
                                             <input type="date"
                                                 class="form-control @error('date') is-invalid @enderror"
-                                                id="date" name="date"
-                                                value="{{ old('date') }}">
+                                                id="date" name="date" value="{{ old('date') }}">
                                             @error('date')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group mb-4">
                                             <label for="dokumen_donor" class="form-label">Dokumen</label>
-                                            <input type="file" class="form-control" id="dokumen_donor" name="dokumen_donor" onchange="validateFile()">
-                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                            <input type="file" class="form-control" id="dokumen_donor"
+                                                name="dokumen_donor" onchange="validateFile()">
+                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                atau PDF.</small>
                                             <span id="file-error" class="text-danger"></span>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Add</button>
-                                        <a href="{{ url('donor') }}" class="btn btn-outline-primary">Cancel</a>
-                                    </form>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="{{ url('donor') }}" class="btn btn-outline-primary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -309,93 +315,93 @@
 
     {{-- Custom Javascript --}}
     <script>
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
+            $(function() {
+                $('#provinsi_id').on('change', function() {
+                    let id_provinsi = $('#provinsi_id').val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkabupaten') }}",
+                        data: {
+                            id_provinsi: id_provinsi
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kabupaten_id').html(msg);
+                            $('#kecamatan_id').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
+            $(function() {
+                $('#kabupaten_id').on('change', function() {
+                    let id_kabupaten = $('#kabupaten_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkecamatan') }}",
+                        data: {
+                            id_kabupaten: id_kabupaten
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kecamatan_id').html(msg);
+                            // $('#kecamatan').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
+            $(function() {
+                $('#kecamatan_id').on('change', function() {
+                    let id_kecamatan = $('#kecamatan_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getdesa') }}",
+                        data: {
+                            id_kecamatan: id_kecamatan
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#desa_id').html(msg);
+                            // $('#kecamatan').html('');
+                            // $('#desa').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
         });
-
-        // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
-        $(function() {
-            $('#provinsi_id').on('change', function() {
-                let id_provinsi = $('#provinsi_id').val();
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('getkabupaten') }}",
-                    data: {
-                        id_provinsi: id_provinsi
-                    },
-                    cache: false,
-
-                    success: function(msg) {
-                        $('#kabupaten_id').html(msg);
-                        $('#kecamatan_id').html('');
-                        $('#desa_id').html('');
-                    },
-                    error: function(data) {
-                        console.log('error:', data)
-                    },
-                })
-            })
-        })
-
-
-        // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
-        $(function() {
-            $('#kabupaten_id').on('change', function() {
-                let id_kabupaten = $('#kabupaten_id').val();
-
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('getkecamatan') }}",
-                    data: {
-                        id_kabupaten: id_kabupaten
-                    },
-                    cache: false,
-
-                    success: function(msg) {
-                        $('#kecamatan_id').html(msg);
-                        // $('#kecamatan').html('');
-                        $('#desa_id').html('');
-                    },
-                    error: function(data) {
-                        console.log('error:', data)
-                    },
-                })
-            })
-        })
-
-
-        // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
-        $(function() {
-            $('#kecamatan_id').on('change', function() {
-                let id_kecamatan = $('#kecamatan_id').val();
-
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('getdesa') }}",
-                    data: {
-                        id_kecamatan: id_kecamatan
-                    },
-                    cache: false,
-
-                    success: function(msg) {
-                        $('#desa_id').html(msg);
-                        // $('#kecamatan').html('');
-                        // $('#desa').html('');
-                    },
-                    error: function(data) {
-                        console.log('error:', data)
-                    },
-                })
-            })
-        })
-
-    });
     </script>
     @include('layouts.template')
 </body>

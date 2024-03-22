@@ -569,9 +569,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Add</button>
+                            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
                                 <a href="{{ url('donor') }}" class="btn btn-outline-primary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">Add</button>
                             </div>
                         </form>
 

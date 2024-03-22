@@ -266,9 +266,11 @@
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Add</button>
-                                                    <a href="{{ url('jenjang_komunikasi') }}"
-                                                        class="btn btn-outline-primary">Cancel</a>
+                                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                        <a href="{{ url('jenjang_komunikasi') }}"
+                                                            class="btn btn-outline-primary">Cancel</a>
+                                                        <button type="submit" class="btn btn-primary">Add</button>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
