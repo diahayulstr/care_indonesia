@@ -38,6 +38,7 @@
 
 function validateFile() {}
 
+// Edit Modal
 $(document).ready(function() {
     $('#impact_goals_id').select2();
     $('#komitmen_sdgs').select2();
@@ -47,6 +48,7 @@ $(document).ready(function() {
     });
 });
 
+// Add
 $(document).ready(function() {
     $('#myTabjustified').on('click', function() {
         if ($('#proposal-tab').hasClass('active')) {
@@ -55,31 +57,10 @@ $(document).ready(function() {
     });
 });
 
-// $(document).ready(function() {
-//     $('#form-master-edit').on('click', function() {
-//         if ($('#proposal-tab-edit').hasClass('active')) {
-//             $('#table_id select.impact-goals-select').each(function() {
-//                 $(this).select2();
-//             });
-//         }
-//     });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Edit Master
+$(document).ready(function() {
+    $('.impact-goals-select').select2();
+});
 
 // ADMIN ONLY DROPDOWN SELECT
 $(document).ready(function(){
@@ -307,6 +288,27 @@ $(document).ready(function(){
         $('#filePreview-proposal').empty();
     });
 });
+
+// Delete Master Edit
+function deleteNarahubung() {
+    var form = document.getElementById('deleteFormNarahubung');
+    form.submit();
+}
+
+function deleteKomunikasi() {
+    var form = document.getElementById('deleteFormKomunikasi');
+    form.submit();
+}
+
+function deleteProposal() {
+    var form = document.getElementById('deleteFormProposal');
+    form.submit();
+}
+
+
+
+
+
 
 
 

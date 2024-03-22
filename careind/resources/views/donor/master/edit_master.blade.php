@@ -464,6 +464,10 @@
                                                                             <i class="fas fa-trash"></i>
                                                                         </button>
                                                                     </form> --}}
+                                                                    <a class="btn btn-danger btn-circle delete-btn-narahubung"
+                                                                        onclick="deleteNarahubung()"
+                                                                        data-narahubung-id="{{ $narahubungs->id }}" title="Delete"><i class="fas fa-trash"></i>
+                                                                    </a>
                                                                 </div>
                                                             </td>
                                                         @empty
@@ -605,6 +609,10 @@
                                                                             <i class="fas fa-trash"></i>
                                                                         </button>
                                                                     </form> --}}
+                                                                    <a class="btn btn-danger btn-circle delete-btn-komunikasi"
+                                                                        onclick="deleteKomunikasi()"
+                                                                        data-komunikasi-id="{{ $komunikasis->id }}" title="Delete"><i class="fas fa-trash"></i>
+                                                                    </a>
                                                                 </div>
                                                             </td>
                                                         @empty
@@ -745,10 +753,10 @@
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </td>
-                                                            <td>
-                                                                <select class="form-select form-control impact-goals-select"
+                                                            <td id="group-select2">
+                                                                <select class="impact-goals-select form-select form-control"
                                                                     name="items_proposal[{{ $proposals->id }}][impact_goals_id][]"
-                                                                    id="impact_goals_id" multiple>
+                                                                    id="impact_goals_id_{{ $proposals->id }}" multiple>
                                                                     <option value="">--Pilih Impact Goals--
                                                                     </option>
                                                                     @php $impactGoalsIds = json_decode($proposals->impact_goals_id); @endphp
@@ -836,6 +844,10 @@
                                                                             <i class="fas fa-trash"></i>
                                                                         </button>
                                                                     </form> --}}
+                                                                    <a class="btn btn-danger btn-circle delete-btn-proposal"
+                                                                        onclick="deleteProposal()"
+                                                                        data-proposal-id="{{ $proposals->id }}" title="Delete"><i class="fas fa-trash"></i>
+                                                                    </a>
                                                                 </div>
                                                             </td>
                                                         @empty
@@ -903,38 +915,21 @@
     </div>
     </div>
 
-    {{-- <script>
-        function deleteNarahubung(button) {
-            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                var narahubungId = button.getAttribute('data-narahubung-id');
-                var deleteUrl = "{{ url('master/'.$narahubungs->id.'/narahubung') }}";
-                deleteUrl = deleteUrl.replace('narahubung_id', narahubungId);
-
-                fetch(deleteUrl, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Data berhasil dihapus');
-                        location.reload();
-                    } else {
-                        console.error('Gagal menghapus data');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        }
-    </script> --}}
-
-    {{-- <form id="deleteFormNarahubung" method="POST" style="display: none;">
+    <form id="deleteFormNarahubung" action="{{ url('master/'.$narahubungs->id.'/narahubung') }}" method="POST" style="display: none;">
         @method('DELETE')
         @csrf
-    </form> --}}
+    </form>
+
+    <form id="deleteFormKomunikasi" action="{{ url('master/'.$komunikasis->id.'/komunikasi') }}" method="POST" style="display: none;">
+        @method('DELETE')
+        @csrf
+    </form>
+
+    <form id="deleteFormProposal" action="{{ url('master/'.$proposals->id.'/proposal') }}" method="POST" style="display: none;">
+        @method('DELETE')
+        @csrf
+    </form>
+
 
     @include('layouts.template')
 
