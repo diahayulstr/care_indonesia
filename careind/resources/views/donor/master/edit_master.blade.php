@@ -140,7 +140,7 @@
                                 </a>
                             </div>
                         </div>
-                        <form action="{{ route('master.update_master_add', ['master' => $donor->id]) }}" method="POST" id="form-edit-master"
+                        <form id="form-edit-master" action="{{ route('master.update_master_add', ['master' => $donor->id]) }}" method="POST" id="form-edit-master"
                             enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
@@ -175,7 +175,7 @@
                                     <div class="tab-pane fade show active" id="donor-justified" role="tabpanel"
                                         aria-labelledby="donor-tab">
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-16">
                                                 <!-- Nama Organisasi -->
                                                 <div class="form-group">
                                                     <label for="nama_organisasi">Nama Organisasi</label>
@@ -348,28 +348,11 @@
                                                     @if ($donor->dokumen_donor)
                                                         <input type="text" class="form-control"
                                                             value="{{ basename($donor->dokumen_donor) }}" readonly>
-                                                        <br>
-                                                        @php
-                                                            $extension = pathinfo(
-                                                                $donor->dokumen_donor,
-                                                                PATHINFO_EXTENSION,
-                                                            );
-                                                        @endphp
-                                                        @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                            <img src="{{ url('') }}/{{ $donor->dokumen_donor }}"
-                                                                alt="Pratinjau Gambar"
-                                                                style="max-width: 300px; max-height: 300px;">
-                                                        @elseif ($extension === 'pdf')
-                                                            <embed
-                                                                src="{{ url('') }}/{{ $donor->dokumen_donor }}"
-                                                                type="application/pdf" width="500" height="500">
-                                                        @else
-                                                            Tidak ada pratinjau
-                                                        @endif
                                                     @else
                                                         <p>Tidak ada dokumen</p>
                                                     @endif
                                                 </div>
+                                                <div id="filePreview-edit-master-donor"></div>
                                             </div>
                                         </div>
                                     </div>

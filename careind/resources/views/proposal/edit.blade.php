@@ -137,13 +137,13 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Proposal Edit</h6>
                             </div>
                         </div>
-                        <form action="{{ route('proposal.update', ['proposal' => $proposal->id]) }}" method="POST"
+                        <form id="form-edit-proposal" action="{{ route('proposal.update', ['proposal' => $proposal->id]) }}" method="POST"
                             enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-16">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select form-control" name="donor_id" id="donor_id">
@@ -301,28 +301,11 @@
                                             @if ($proposal->dokumen_proposal)
                                                 <input type="text" class="form-control"
                                                     value="{{ basename($proposal->dokumen_proposal) }}" readonly>
-                                                <br>
-                                                @php
-                                                    $extension = pathinfo(
-                                                        $proposal->dokumen_proposal,
-                                                        PATHINFO_EXTENSION,
-                                                    );
-                                                @endphp
-                                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                    <img src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
-                                                        alt="Pratinjau Gambar"
-                                                        style="max-width: 300px; max-height: 300px;">
-                                                @elseif ($extension === 'pdf')
-                                                    <embed
-                                                        src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
-                                                        type="application/pdf" width="500" height="500">
-                                                @else
-                                                    Tidak ada pratinjau
-                                                @endif
                                             @else
                                                 <p>Tidak ada dokumen</p>
                                             @endif
                                         </div>
+                                        <div id="filePreview-edit-proposal"></div>
                                     </div>
                                 </div>
                             </div>

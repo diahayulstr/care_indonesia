@@ -258,7 +258,7 @@
                                                     @csrf
                                                     <div class="form-group">
                                                         <label for="name">Nama Jenjang Komunikasi</label>
-                                                        <input type="text" placeholder="Nama Organisasi"
+                                                        <input type="text" placeholder="Nama Komunikasi"
                                                             class="form-control @error('name') is-invalid @enderror"
                                                             id="name" name="name"
                                                             value="{{ old('name') }}">

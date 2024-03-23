@@ -130,12 +130,12 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Donor Add</h6>
                             </div>
                         </div>
-                        <form action="{{ url('donor') }}" method="POST" enctype="multipart/form-data">
+                        <form id="form-add-donor" action="{{ url('donor') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 {{-- Form Add --}}
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-16">
                                         <div class="form-group">
                                             <label for="nama_organisasi">Nama Organisasi</label>
                                             <input type="text" placeholder="Nama Organisasi"
@@ -256,7 +256,7 @@
                                                 atau PDF.</small>
                                             <span id="file-error" class="text-danger"></span>
                                         </div>
-
+                                        <div id="filePreview-add-donor"></div>
                                     </div>
                                 </div>
                             </div>

@@ -174,7 +174,7 @@
                                     <div class="tab-pane fade show active" id="donor-justified" role="tabpanel"
                                         aria-labelledby="donor-tab">
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-16">
 
                                                 <div class="form-group">
                                                     <label for="nama_organisasi">Nama Organisasi</label>
@@ -272,7 +272,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="komitmen_sdgs">Komitmen SDGs</label>
-                                                    <select class="form-select" name="komitmen_sdgs[]"
+                                                    <select class="form-select form-control" name="komitmen_sdgs[]"
                                                         id="komitmen_sdgs" multiple>
                                                         <option value="">--Pilih--</option>
                                                         @foreach ($komitmenSdgs as $item)
@@ -297,6 +297,7 @@
                                                         gif) atau PDF.</small>
                                                     <span id="file-error-donor" class="text-danger"></span>
                                                 </div>
+                                                <div id="filePreview-addMaster-donor"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -305,7 +306,7 @@
                                     <div class="tab-pane fade" id="narahubung-justified" role="tabpanel"
                                         aria-labelledby="narahubung-tab">
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-16">
                                                 {{-- <input type="hidden" id="donor_id" name="donor_id"> --}}
 
                                                 <div class="form-group">
@@ -363,7 +364,7 @@
                                     <div class="tab-pane fade" id="komunikasi-justified" role="tabpanel"
                                         aria-labelledby="komunikasi-tab">
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-16">
                                                 {{-- <input type="hidden" id="donor_id_komunikasi" name="donor_id"> --}}
                                                 {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
 
@@ -433,6 +434,7 @@
                                                         atau PDF.</small>
                                                     <span id="file-error-komunikasi" class="text-danger"></span>
                                                 </div>
+                                                <div id="filePreview-addMaster-komunikasi"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -441,7 +443,7 @@
                                     <div class="tab-pane fade" id="proposal-justified" role="tabpanel"
                                         aria-labelledby="proposal-tab">
                                         <div class="row">
-                                            <div class="col-8">
+                                            <div class="col-16">
                                                 {{-- <input type="hidden" id="donor_id_proposal" name="donor_id"> --}}
                                                 {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
 
@@ -564,6 +566,7 @@
                                                         atau PDF.</small>
                                                     <span id="file_error_proposal" class="text-danger"></span>
                                                 </div>
+                                                <div id="filePreview-addMaster-proposal"></div>
                                             </div>
                                         </div>
                                     </div>

@@ -137,13 +137,13 @@
                             </div>
                         </div>
 
-                        <form action="{{ route('komunikasi.update', ['komunikasi' => $komunikasi->id]) }}"
+                        <form id="form-edit-komunikasi" action="{{ route('komunikasi.update', ['komunikasi' => $komunikasi->id]) }}"
                             method="POST" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-16">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select form-control" name="donor_id" id="donor_id">
@@ -226,28 +226,11 @@
                                             @if ($komunikasi->dokumen_komunikasi)
                                                 <input type="text" class="form-control"
                                                     value="{{ basename($komunikasi->dokumen_komunikasi) }}" readonly>
-                                                <br>
-                                                @php
-                                                    $extension = pathinfo(
-                                                        $komunikasi->dokumen_komunikasi,
-                                                        PATHINFO_EXTENSION,
-                                                    );
-                                                @endphp
-                                                @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                    <img src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
-                                                        alt="Pratinjau Gambar"
-                                                        style="max-width: 300px; max-height: 300px;">
-                                                @elseif ($extension === 'pdf')
-                                                    <embed
-                                                        src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
-                                                        type="application/pdf" width="500" height="500">
-                                                @else
-                                                    Tidak ada pratinjau
-                                                @endif
                                             @else
                                                 <p>Tidak ada dokumen</p>
                                             @endif
                                         </div>
+                                        <div id="filePreview-edit-komunikasi"></div>
                                     </div>
                                 </div>
                             </div>

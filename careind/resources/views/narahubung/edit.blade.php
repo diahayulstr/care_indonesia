@@ -137,7 +137,7 @@
                         <div class="card-body">
                             {{-- Form Edit --}}
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-16">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select" name="donor_id" id="donor_id">

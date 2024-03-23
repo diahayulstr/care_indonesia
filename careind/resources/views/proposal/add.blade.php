@@ -144,12 +144,12 @@
                                 </a> --}}
                             </div>
                         </div>
-                        <form action="{{ url('proposal') }}" method="POST" enctype="multipart/form-data">
+                        <form id="form-add-proposal" action="{{ url('proposal') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 {{-- Form Add --}}
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-16">
                                         <div class="form-group">
                                             <label for="donor_id">Donor ID</label>
                                             <select class="form-select form-control" name="donor_id" id="donor_id">
@@ -280,11 +280,12 @@
                                                 atau PDF.</small>
                                             <span id="file-error" class="text-danger"></span>
                                         </div>
+                                        <div id="filePreview-add-proposal"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="{{ url('komunikasi') }}" class="btn btn-outline-primary">Cancel</a>
+                                <a href="{{ url('proposal') }}" class="btn btn-outline-primary">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>
                         </form>

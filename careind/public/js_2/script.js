@@ -57,6 +57,8 @@ $(document).ready(function() {
     });
 });
 
+
+
 // Edit Master
 $(document).ready(function() {
     $('.impact-goals-select').select2();
@@ -304,6 +306,75 @@ function deleteProposal() {
     var form = document.getElementById('deleteFormProposal');
     form.submit();
 }
+
+// File Preview
+$(document).ready(function(){
+    function previewFile(inputElement, previewElement) {
+        inputElement.change(function() {
+            var file = this.files[0];
+            var fileType = file.type;
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                if (fileType.startsWith('image')) {
+                    previewElement.html('<img src="' + e.target.result + '" class="img-fluid" alt="Pratinjau Gambar">');
+                } else if (fileType === 'application/pdf') {
+                    previewElement.html('<embed src="' + e.target.result + '" type="application/pdf" width="100%" height="400px">');
+                }
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+    // add
+    previewFile($('#dokumen_donor'), $('#filePreview-addMaster-donor'));
+    previewFile($('#dokumen_komunikasi'), $('#filePreview-addMaster-komunikasi'));
+    previewFile($('#dokumen_proposal'), $('#filePreview-addMaster-proposal'));
+
+    previewFile($('#dokumen_donor'), $('#filePreview-add-donor'));
+    previewFile($('#dokumen_komunikasi'), $('#filePreview-add-komunikasi'));
+    previewFile($('#dokumen_proposal'), $('#filePreview-add-proposal'));
+
+    // edit
+    previewFile($('#dokumen_donor'), $('#filePreview-edit-donor'));
+    previewFile($('#dokumen_komunikasi'), $('#filePreview-edit-komunikasi'));
+    previewFile($('#dokumen_proposal'), $('#filePreview-edit-proposal'));
+    previewFile($('#dokumen_donor'), $('#filePreview-edit-master-donor'));
+
+    $(document).on('click', '#btn-addMaster', function() {
+        $('#form-add-master').show();
+    });
+
+    $(document).on('click', '#btn-add-donor', function() {
+        $('#form-add-donor').show();
+    });
+
+    $(document).on('click', '#btn-add-komunikasi', function() {
+        $('#form-add-komunikasi').show();
+    });
+
+    $(document).on('click', '#btn-add-proposal', function() {
+        $('#form-add-proposal').show();
+    });
+
+    $(document).on('click', '#btn-edit-donor', function() {
+        $('#form-edit-donor').show();
+    });
+
+    $(document).on('click', '#btn-edit-komunikasi', function() {
+        $('#form-edit-komunikasi').show();
+    });
+
+    $(document).on('click', '#btn-edit-proposal', function() {
+        $('#form-edit-proposal').show();
+    });
+
+    $(document).on('click', '#btn-edit-master', function() {
+        $('#form-edit-master').show();
+    });
+});
+
+
 
 
 

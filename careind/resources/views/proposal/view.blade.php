@@ -241,7 +241,7 @@
                                                             style="max-width: 300px; max-height: 300px;">
                                                     @elseif ($extension === 'pdf')
                                                         <embed src="{{ url('') }}/{{ $proposal->dokumen_proposal }}"
-                                                            type="application/pdf" width="500" height="500">
+                                                            type="application/pdf" width="100%" height="500">
                                                     @else
                                                         Tidak ada pratinjau
                                                     @endif
