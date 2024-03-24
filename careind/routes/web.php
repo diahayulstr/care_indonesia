@@ -18,6 +18,9 @@ Route::get('home', function () {
     return view('home');
 });
 
+// LOGIN
+Route::get('login', [App\Http\Controllers\AdminController::class, 'login'])->name('auth.login');
+
 // IMPACT GOALS
 Route::get('impact_goals', [App\Http\Controllers\HomeController::class, 'impact_goals'])->name('admin.impactGoals');
 Route::post('impact_goals', [App\Http\Controllers\AdminController::class, 'store_impact_goals']);

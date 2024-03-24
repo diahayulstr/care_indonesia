@@ -10,7 +10,12 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
-    @include('layouts.template')
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
 
 </head>
 
@@ -914,6 +919,100 @@
     </form>
 
 
+    {{-- Custom Js --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {{-- Custom Javascript --}}
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
+            $(function() {
+                $('#provinsi_id').on('change', function() {
+                    let id_provinsi = $('#provinsi_id').val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkabupaten') }}",
+                        data: {
+                            id_provinsi: id_provinsi
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kabupaten_id').html(msg);
+                            $('#kecamatan_id').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
+            $(function() {
+                $('#kabupaten_id').on('change', function() {
+                    let id_kabupaten = $('#kabupaten_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getkecamatan') }}",
+                        data: {
+                            id_kabupaten: id_kabupaten
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#kecamatan_id').html(msg);
+                            // $('#kecamatan').html('');
+                            $('#desa_id').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+
+            // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
+            $(function() {
+                $('#kecamatan_id').on('change', function() {
+                    let id_kecamatan = $('#kecamatan_id').val();
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('getdesa') }}",
+                        data: {
+                            id_kecamatan: id_kecamatan
+                        },
+                        cache: false,
+
+                        success: function(msg) {
+                            $('#desa_id').html(msg);
+                            // $('#kecamatan').html('');
+                            // $('#desa').html('');
+                        },
+                        error: function(data) {
+                            console.log('error:', data)
+                        },
+                    })
+                })
+            })
+
+        });
+    </script>
+    
     @include('layouts.template')
 
 </body>
