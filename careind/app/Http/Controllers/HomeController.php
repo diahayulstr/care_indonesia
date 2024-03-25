@@ -19,6 +19,10 @@ use App\Models\TabelTujuanPendanaan;
 
 class HomeController extends Controller
 {
+    public function home() {
+        return view('home');
+    }
+
     public function impact_goals() {
         $impactGoals = TabelImpactGoals::paginate(4);
         return view('admin.impactGoals', compact('impactGoals'));

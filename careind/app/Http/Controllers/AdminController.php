@@ -20,9 +20,9 @@ use App\Models\TabelTujuanPendanaan;
 class AdminController extends Controller
 {
     // LOGIN
-    public function login() {
-        return view('auth.login');
-    }
+    // public function login() {
+    //     return view('auth.login');
+    // }
 
     // IMPACT GOALS
     public function store_impact_goals(Request $request) {

@@ -48,6 +48,13 @@
     width: auto;
 }
 
+#container-login .card-body {
+    background-color: #EEEBDD;
+}
+
+#container-login .card {
+    border-radius: 32px;
+}
 /* #bgLogin {
     background-color: #f1faee;
 } */
