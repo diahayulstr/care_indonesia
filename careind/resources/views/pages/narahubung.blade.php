@@ -171,12 +171,12 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Narahubung</h6>
                             </div>
                             <div>
+                                @if(Auth::user()->role_id !=1)
+
+                                @else
                                 <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle me-2"
                                     data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
-                                {{-- <a href="" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Master/Detail Add"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
-                                  </svg>
-                                </a> --}}
+                                @endif
                             </div>
                         </div>
                         <div class="card-body">
@@ -215,6 +215,15 @@
 
                                                 <td class="text-center">
                                                     <div class="action-buttons d-flex justify-content-center">
+                                                        @if(Auth::user()->role_id !=1)
+                                                        <div class="d-inline-block">
+                                                            <a href="{{ url('narahubung/' . $item->id) }}"
+                                                                class="btn btn-info btn-circle" data-bs-toggle="tooltip"
+                                                                title="View">
+                                                                <i class="fas fa-search"></i>
+                                                            </a>
+                                                        </div>
+                                                        @else
                                                         <div class="d-inline-block">
                                                             <a href="{{ url('narahubung/' . $item->id) }}"
                                                                 class="btn btn-info btn-circle" data-bs-toggle="tooltip"
@@ -246,6 +255,7 @@
                                                                 </button>
                                                             </form>
                                                         </div>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             @empty

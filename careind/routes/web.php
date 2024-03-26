@@ -134,51 +134,51 @@ Route::delete('donor/{donor}',[DonorController::class, 'destroy'])->middleware([
 
 // NARAHUBUNG
 Route::get('narahubung', [NarahubungController::class, 'narahubung'])->name('pages.narahubung')->middleware('auth');
-Route::get('narahubung/add', [NarahubungController::class, 'addNarahubung'])->name('narahubung.add')->middleware('auth');
-Route::post('narahubung', [NarahubungController::class, 'store'])->middleware('auth');
+Route::get('narahubung/add', [NarahubungController::class, 'addNarahubung'])->name('narahubung.add')->middleware(['auth', 'must-admin']);
+Route::post('narahubung', [NarahubungController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('narahubung/{narahubung}', [NarahubungController::class, 'show'])->name('narahubung.view')->middleware('auth');
-Route::get('narahubung/{narahubung}/edit/', [NarahubungController::class, 'edit'])->name('narahubung.edit')->middleware('auth');
-Route::patch('narahubung/{narahubung}', [NarahubungController::class, 'update'])->name('narahubung.update')->middleware('auth');
-Route::delete('narahubung/{narahubung}',[NarahubungController::class, 'destroy'])->middleware('auth');
+Route::get('narahubung/{narahubung}/edit/', [NarahubungController::class, 'edit'])->name('narahubung.edit')->middleware(['auth', 'must-admin']);
+Route::patch('narahubung/{narahubung}', [NarahubungController::class, 'update'])->name('narahubung.update')->middleware(['auth', 'must-admin']);
+Route::delete('narahubung/{narahubung}',[NarahubungController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 
 
 // KOMUNIKASI
 Route::get('komunikasi', [KomunikasiController::class, 'komunikasi'])->name('pages.komunikasi')->middleware('auth');
-Route::get('komunikasi/add', [KomunikasiController::class, 'addKomunikasi'])->name('komunikasi.add')->middleware('auth');
-Route::post('komunikasi', [KomunikasiController::class, 'store'])->middleware('auth');
+Route::get('komunikasi/add', [KomunikasiController::class, 'addKomunikasi'])->name('komunikasi.add')->middleware(['auth', 'must-admin']);
+Route::post('komunikasi', [KomunikasiController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('komunikasi/{komunikasi}', [KomunikasiController::class, 'show'])->name('komunikasi.view')->middleware('auth');
-Route::get('komunikasi/{komunikasi}/edit', [KomunikasiController::class, 'edit'])->name('komunikasi.edit')->middleware('auth');
-Route::patch('komunikasi/{komunikasi}', [KomunikasiController::class, 'update'])->name('komunikasi.update')->middleware('auth');
-Route::delete('komunikasi/{komunikasi}', [KomunikasiController::class, 'destroy'])->middleware('auth');
+Route::get('komunikasi/{komunikasi}/edit', [KomunikasiController::class, 'edit'])->name('komunikasi.edit')->middleware(['auth', 'must-admin']);
+Route::patch('komunikasi/{komunikasi}', [KomunikasiController::class, 'update'])->name('komunikasi.update')->middleware(['auth', 'must-admin']);
+Route::delete('komunikasi/{komunikasi}', [KomunikasiController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 
 // PROPOSAL
 Route::get('proposal', [ProposalController::class, 'proposal'])->name('pages.proposal')->middleware('auth');
-Route::get('proposal/add', [ProposalController::class, 'addProposal'])->name('proposal.add')->middleware('auth');
-Route::post('proposal', [ProposalController::class, 'store'])->middleware('auth');
+Route::get('proposal/add', [ProposalController::class, 'addProposal'])->name('proposal.add')->middleware(['auth', 'must-admin']);
+Route::post('proposal', [ProposalController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('proposal/{proposal}', [ProposalController::class, 'show'])->name('proposal.view')->middleware('auth');
-Route::get('proposal/{proposal}/edit', [ProposalController::class, 'edit'])->name('proposal.edit')->middleware('auth');
-Route::patch('proposal/{proposal}', [ProposalController::class, 'update'])->name('proposal.update')->middleware('auth');
-Route::delete('proposal/{proposal}', [ProposalController::class, 'destroy'])->middleware('auth');
+Route::get('proposal/{proposal}/edit', [ProposalController::class, 'edit'])->name('proposal.edit')->middleware(['auth', 'must-admin']);
+Route::patch('proposal/{proposal}', [ProposalController::class, 'update'])->name('proposal.update')->middleware(['auth', 'must-admin']);
+Route::delete('proposal/{proposal}', [ProposalController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 
 // MASTER ADD
-Route::get('master/add', [MasterController::class, 'master_add'])->name('donor.master.add_master')->middleware('auth');
-Route::post('master/add', [MasterController::class, 'store_master_add'])->middleware('auth');
+Route::get('master/add', [MasterController::class, 'master_add'])->name('donor.master.add_master')->middleware(['auth', 'must-admin']);
+Route::post('master/add', [MasterController::class, 'store_master_add'])->middleware(['auth', 'must-admin']);
 Route::get('master/{master}', [MasterController::class, 'master_show'])->name('donor.master.view_master')->middleware('auth');
-Route::get('master/{master}/edit', [MasterController::class, 'master_edit'])->name('donor.master.edit_master')->middleware('auth');
-Route::patch('master/{master}', [MasterController::class, 'update_master_add'])->name('master.update_master_add')->middleware('auth');
-Route::delete('master/{master}/narahubung', [MasterController::class, 'destroy_master_narahubung'])->name('master.destroy_master_narahubung')->middleware('auth');
-Route::delete('master/{master}/komunikasi', [MasterController::class, 'destroy_master_komunikasi'])->name('master.destroy_master_komunikasi')->middleware('auth');
-Route::delete('master/{master}/proposal', [MasterController::class, 'destroy_master_proposal'])->name('master.destroy_master_proposal')->middleware('auth');
+Route::get('master/{master}/edit', [MasterController::class, 'master_edit'])->name('donor.master.edit_master')->middleware(['auth', 'must-admin']);
+Route::patch('master/{master}', [MasterController::class, 'update_master_add'])->name('master.update_master_add')->middleware(['auth', 'must-admin']);
+Route::delete('master/{master}/narahubung', [MasterController::class, 'destroy_master_narahubung'])->name('master.destroy_master_narahubung')->middleware(['auth', 'must-admin']);
+Route::delete('master/{master}/komunikasi', [MasterController::class, 'destroy_master_komunikasi'])->name('master.destroy_master_komunikasi')->middleware(['auth', 'must-admin']);
+Route::delete('master/{master}/proposal', [MasterController::class, 'destroy_master_proposal'])->name('master.destroy_master_proposal')->middleware(['auth', 'must-admin']);
 
 
-Route::post('/master/{donor_id}/narahubung', [MasterController::class,'storeOrUpdate_narahubung'])->name('master.storeOrUpdate_narahubung')->middleware('auth');
-Route::delete('master_narahubung/{master_narahubung}', [MasterController::class, 'destroy_narahubung'])->middleware('auth');
+Route::post('/master/{donor_id}/narahubung', [MasterController::class,'storeOrUpdate_narahubung'])->name('master.storeOrUpdate_narahubung')->middleware(['auth', 'must-admin']);
+Route::delete('master_narahubung/{master_narahubung}', [MasterController::class, 'destroy_narahubung'])->middleware(['auth', 'must-admin']);
 
 
-Route::post('/master/{donor_id}/komunikasi', [MasterController::class,'storeOrUpdate_komunikasi'])->name('master.storeOrUpdate_komunikasi')->middleware('auth');
-Route::delete('master_komunikasi/{master_komunikasi}', [MasterController::class, 'destroy_komunikasi'])->middleware('auth');
+Route::post('/master/{donor_id}/komunikasi', [MasterController::class,'storeOrUpdate_komunikasi'])->name('master.storeOrUpdate_komunikasi')->middleware(['auth', 'must-admin']);
+Route::delete('master_komunikasi/{master_komunikasi}', [MasterController::class, 'destroy_komunikasi'])->middleware(['auth', 'must-admin']);
 
 
-Route::post('/master/{donor_id}/proposal', [MasterController::class,'storeOrUpdate_proposal'])->name('master.storeOrUpdate_proposal')->middleware('auth');
-Route::delete('master_proposal/{master_proposal}', [MasterController::class, 'destroy_proposal'])->middleware('auth');
+Route::post('/master/{donor_id}/proposal', [MasterController::class,'storeOrUpdate_proposal'])->name('master.storeOrUpdate_proposal')->middleware(['auth', 'must-admin']);
+Route::delete('master_proposal/{master_proposal}', [MasterController::class, 'destroy_proposal'])->middleware(['auth', 'must-admin']);
 

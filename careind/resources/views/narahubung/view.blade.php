@@ -166,6 +166,9 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Narahubung View</h6>
                             </div>
                             <div class="action-buttons d-flex justify-content-center">
+                                @if(Auth::user()->role_id !=1)
+
+                                @else
                                 <div class="d-inline-block">
                                     <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle"
                                         data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
@@ -190,6 +193,7 @@
                                         </button>
                                     </form>
                                 </div>
+                                @endif
                             </div>
                         </div>
                         <div class="card-body">

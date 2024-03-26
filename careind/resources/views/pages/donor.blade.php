@@ -180,12 +180,17 @@
                                     <span class="divider"></span>
 
                                 </a> --}}
+                                @if(Auth::user()->role_id !=1)
+
+                                @else
                                 <a href="{{ url('master/add') }}" id="btn-addMaster"
                                     class="btn btn-outline-primary btn-circle me-2" data-bs-toggle="tooltip"
                                     title="Master/Detail Add"><i class="fas fa-plus"></i></a>
                                 <a href="{{ url('donor/add') }}" id="btn-add-donor"
                                     class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" title="Add"><i
                                         class="fas fa-plus"></i></a>
+                                @endif
+
                             </div>
                         </div>
                         <div class="card-body">
@@ -282,6 +287,29 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="action-buttons d-flex justify-content-center">
+                                                        @if(Auth::user()->role_id !=1)
+                                                        <div class="d-inline-block">
+                                                            <a href="{{ url('donor/' . $item->id) }}"
+                                                                class="btn btn-info btn-circle"
+                                                                data-bs-toggle="tooltip" title="View">
+                                                                <i class="fas fa-search"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="d-inline-block mx-1">
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-success btn-circle"
+                                                                    type="button" data-bs-toggle="dropdown"
+                                                                    aria-expanded="false">
+                                                                    <i class="fas fa-project-diagram"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item"
+                                                                            href="{{ url('master/' . $item->id) }}">Master/Detail
+                                                                            View</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="d-inline-block">
                                                             <a href="{{ url('donor/' . $item->id) }}"
                                                                 class="btn btn-info btn-circle"
@@ -330,6 +358,7 @@
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        @endif
                                                     </div>
 
                                                 </td>
