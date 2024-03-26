@@ -78,39 +78,40 @@
                 </a>
             </li>
 
-            @if(Auth::user()->role_id != 1)
+            @if (Auth::user()->role_id != 1)
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
             @else
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item active">
-                <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Admin Only</span>
-                </a>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item " href="{{ url('impact_goals') }}">Impact Goals</a>
-                        <a class="collapse-item " href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
-                        <a class="collapse-item " href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
-                        <a class="collapse-item " href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item " href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item " href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
-                        <a class="collapse-item active" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
-                        <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item active">
+                    <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Admin Only</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Pages</h6>
+                            <a class="collapse-item " href="{{ url('impact_goals') }}">Impact Goals</a>
+                            <a class="collapse-item " href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
+                            <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                            <a class="collapse-item " href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
+                            <a class="collapse-item " href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
+                            <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
+                                Portfolio</a>
+                            <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                            <a class="collapse-item " href="{{ url('saluran') }}">Saluran</a>
+                            <a class="collapse-item " href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('status') }}">Status</a>
+                            <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                            <a class="collapse-item active" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
+                            <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
             @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -145,9 +146,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/user.png')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('style/img/user.png') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -315,20 +316,21 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title fw-semibold" id="exampleModalLabel">Logout Account</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login
+                    again.</div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ url('logout') }}">Logout</a>
+                    <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>
                 </div>
             </div>
         </div>

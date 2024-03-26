@@ -13,10 +13,10 @@
     </script>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 
 </head>
@@ -74,38 +74,39 @@
                 </a>
             </li>
 
-            @if(Auth::user()->role_id != 1)
+            @if (Auth::user()->role_id != 1)
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
             @else
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Admin Only</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
-                        <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
-                        <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
-                        <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
-                        <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
-                        <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Admin Only</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Pages</h6>
+                            <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
+                            <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
+                            <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                            <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
+                            <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
+                            <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
+                                Portfolio</a>
+                            <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                            <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
+                            <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('status') }}">Status</a>
+                            <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                            <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
+                            <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
             @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -140,15 +141,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/user.png')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('style/img/user.png') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -173,7 +175,8 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Master/Detail Add</h6>
                             </div>
                         </div>
-                        <form action="{{ url('master/add') }}" id="form-add-master" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('master/add') }}" id="form-add-master" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <!-- Default Tabs -->
@@ -242,8 +245,9 @@
                                                     <select class="form-select" name="provinsi_id" id="provinsi_id">
                                                         <option value="">Pilih Provinsi</option>
                                                         @foreach ($provinces as $provinsi)
-                                                            <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
-                                                            @endforeach
+                                                            <option value="{{ $provinsi->id }}">{{ $provinsi->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                     @error('provinsi')
                                                         <div class="text-danger">{{ $message }}</div>
@@ -299,8 +303,9 @@
                                                         id="jenis_organisasi_id">
                                                         <option value="">--Pilih--</option>
                                                         @foreach ($jenisOrganisasis as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                            @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -309,8 +314,9 @@
                                                         id="komitmen_sdgs" multiple>
                                                         <option value="">--Pilih--</option>
                                                         @foreach ($komitmenSdgs as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                            @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -356,8 +362,7 @@
                                                     <label for="jabatan">Jabatan</label>
                                                     <input type="text" placeholder="Jabatan"
                                                         class="form-control @error('jabatan') is-invalid @enderror"
-                                                        id="jabatan" name="jabatan"
-                                                        value="{{ old('jabatan') }}">
+                                                        id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
                                                     @error('jabatan')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
@@ -385,8 +390,9 @@
                                                     <select class="form-select" name="status_id" id="status_id">
                                                         <option value="">--Pilih Status--</option>
                                                         @foreach ($status as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -416,8 +422,9 @@
                                                         id="saluran_id">
                                                         <option value="">--Pilih Saluran--</option>
                                                         @foreach ($saluran as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -426,8 +433,9 @@
                                                         name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
                                                         <option value="">--Pilih Jenjang Komunikasi--</option>
                                                         @foreach ($jenjangKomunikasi as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -436,8 +444,9 @@
                                                         id="tindak_lanjut_id">
                                                         <option value="">--Pilih Tindak Lanjut--</option>
                                                         @foreach ($tindakLanjut as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -460,8 +469,9 @@
                                                 </div>
                                                 <div class="form-group mb-4">
                                                     <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
-                                                    <input type="file" class="form-control" id="dokumen_komunikasi"
-                                                        name="dokumen_komunikasi" onchange="validateFile()">
+                                                    <input type="file" class="form-control"
+                                                        id="dokumen_komunikasi" name="dokumen_komunikasi"
+                                                        onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
                                                         gif)
                                                         atau PDF.</small>
@@ -486,8 +496,9 @@
                                                         name="tujuan_pendanaan_id" id="tujuan_pendanaan_id">
                                                         <option value="">--Pilih Tujuan Pendanaan--</option>
                                                         @foreach ($tujuanPendanaan as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -496,8 +507,9 @@
                                                         name="jenis_penerimaan_id" id="jenis_penerimaan_id">
                                                         <option value="">--Pilih Jenis Penerimaan--</option>
                                                         @foreach ($jenisPenerimaan as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -506,8 +518,9 @@
                                                         name="saluran_pendanaan_id" id="saluran_pendanaan_id">
                                                         <option value="">--Pilih Saluran Pendanaan--</option>
                                                         @foreach ($saluranPendanaan as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -516,8 +529,9 @@
                                                         name="jenis_intermediaries_id" id="jenis_intermediaries_id">
                                                         <option value="">--Pilih Jenis Intermediary--</option>
                                                         @foreach ($jenisIntermediaries as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -536,17 +550,19 @@
                                                         name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
                                                         <option value="">--Pilih Klasifikasi Portfolio--</option>
                                                         @foreach ($klasifikasiPortfolios as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="impact_goals_id">Impact Goals</label>
-                                                    <select class="form-select form-control"
-                                                        name="impact_goals_id[]" id="impact_goals_id" multiple>
+                                                    <select class="form-select form-control" name="impact_goals_id[]"
+                                                        id="impact_goals_id" multiple>
                                                         <option value="">--Pilih Impact Goals--</option>
-                                                        @foreach($impactGoals as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @foreach ($impactGoals as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -586,8 +602,9 @@
                                                         id="status_kemajuan_id">
                                                         <option value="">--Pilih Status Kemajuan--</option>
                                                         @foreach ($statusKemajuan as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group mb-4">
@@ -640,119 +657,120 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <h5 class="modal-title fw-semibold" id="exampleModalLabel">Logout Account</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login
+                        again.</div>
                     <div class="modal-footer">
                         <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="{{ url('logout') }}">Logout</a>
+                        <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>
                     </div>
                 </div>
             </div>
         </div>
 
 
-    {{-- Custom Js --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        {{-- Custom Js --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-    {{-- Custom Javascript --}}
-    <script>
-        $(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+        {{-- Custom Javascript --}}
+        <script>
+            $(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
+                $(function() {
+                    $('#provinsi_id').on('change', function() {
+                        let id_provinsi = $('#provinsi_id').val();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('getkabupaten') }}",
+                            data: {
+                                id_provinsi: id_provinsi
+                            },
+                            cache: false,
+
+                            success: function(msg) {
+                                $('#kabupaten_id').html(msg);
+                                $('#kecamatan_id').html('');
+                                $('#desa_id').html('');
+                            },
+                            error: function(data) {
+                                console.log('error:', data)
+                            },
+                        })
+                    })
+                })
+
+
+                // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
+                $(function() {
+                    $('#kabupaten_id').on('change', function() {
+                        let id_kabupaten = $('#kabupaten_id').val();
+
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('getkecamatan') }}",
+                            data: {
+                                id_kabupaten: id_kabupaten
+                            },
+                            cache: false,
+
+                            success: function(msg) {
+                                $('#kecamatan_id').html(msg);
+                                // $('#kecamatan').html('');
+                                $('#desa_id').html('');
+                            },
+                            error: function(data) {
+                                console.log('error:', data)
+                            },
+                        })
+                    })
+                })
+
+
+                // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
+                $(function() {
+                    $('#kecamatan_id').on('change', function() {
+                        let id_kecamatan = $('#kecamatan_id').val();
+
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{{ route('getdesa') }}",
+                            data: {
+                                id_kecamatan: id_kecamatan
+                            },
+                            cache: false,
+
+                            success: function(msg) {
+                                $('#desa_id').html(msg);
+                                // $('#kecamatan').html('');
+                                // $('#desa').html('');
+                            },
+                            error: function(data) {
+                                console.log('error:', data)
+                            },
+                        })
+                    })
+                })
+
             });
-
-            // MENAMPILKAN KABUPATEN DARI PROVINSI YG DIPILIH
-            $(function() {
-                $('#provinsi_id').on('change', function() {
-                    let id_provinsi = $('#provinsi_id').val();
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('getkabupaten') }}",
-                        data: {
-                            id_provinsi: id_provinsi
-                        },
-                        cache: false,
-
-                        success: function(msg) {
-                            $('#kabupaten_id').html(msg);
-                            $('#kecamatan_id').html('');
-                            $('#desa_id').html('');
-                        },
-                        error: function(data) {
-                            console.log('error:', data)
-                        },
-                    })
-                })
-            })
-
-
-            // MENAMPILKAN KECAMATAN DARI KABUPATEN YG DIPILIH
-            $(function() {
-                $('#kabupaten_id').on('change', function() {
-                    let id_kabupaten = $('#kabupaten_id').val();
-
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('getkecamatan') }}",
-                        data: {
-                            id_kabupaten: id_kabupaten
-                        },
-                        cache: false,
-
-                        success: function(msg) {
-                            $('#kecamatan_id').html(msg);
-                            // $('#kecamatan').html('');
-                            $('#desa_id').html('');
-                        },
-                        error: function(data) {
-                            console.log('error:', data)
-                        },
-                    })
-                })
-            })
-
-
-            // MENAMPILKAN KECAMATAN DARI KECAMATAN YG DIPILIH
-            $(function() {
-                $('#kecamatan_id').on('change', function() {
-                    let id_kecamatan = $('#kecamatan_id').val();
-
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('getdesa') }}",
-                        data: {
-                            id_kecamatan: id_kecamatan
-                        },
-                        cache: false,
-
-                        success: function(msg) {
-                            $('#desa_id').html(msg);
-                            // $('#kecamatan').html('');
-                            // $('#desa').html('');
-                        },
-                        error: function(data) {
-                            console.log('error:', data)
-                        },
-                    })
-                })
-            })
-
-        });
         </script>
 
         @include('layouts.template')
