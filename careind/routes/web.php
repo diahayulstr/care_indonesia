@@ -41,96 +41,96 @@ Route::patch('user/{user}', [AdminController::class, 'update_user'])->name('admi
 Route::delete('user/{user}',[AdminController::class, 'destroy_user'])->middleware('auth');
 
 // IMPACT GOALS
-Route::get('impact_goals', [HomeController::class, 'impact_goals'])->name('admin.impactGoals')->middleware('auth');
-Route::post('impact_goals', [AdminController::class, 'store_impact_goals'])->middleware('auth');
-Route::patch('impact_goals/{impact_goals}', [AdminController::class, 'update_impact_goals'])->name('admin.update_impact_goals')->middleware('auth');
-Route::delete('impact_goals/{impact_goals}',[AdminController::class, 'destroy_impact_goals'])->middleware('auth');
+Route::get('impact_goals', [HomeController::class, 'impact_goals'])->name('admin.impactGoals')->middleware(['auth', 'must-admin']);
+Route::post('impact_goals', [AdminController::class, 'store_impact_goals'])->middleware(['auth', 'must-admin']);
+Route::patch('impact_goals/{impact_goals}', [AdminController::class, 'update_impact_goals'])->name('admin.update_impact_goals')->middleware(['auth', 'must-admin']);
+Route::delete('impact_goals/{impact_goals}',[AdminController::class, 'destroy_impact_goals'])->middleware(['auth', 'must-admin']);
 
 // INTERMEDIARY
-Route::get('jenis_intermediary', [HomeController::class, 'jenis_intermediaries'])->name('admin.jenisIntermediary')->middleware('auth');
-Route::post('jenis_intermediary', [AdminController::class, 'store_jenis_intermediary'])->middleware('auth');
-Route::patch('jenis_intermediary/{jenis_intermediary}', [AdminController::class, 'update_jenis_intermediary'])->name('admin.update_jenis_intermediary')->middleware('auth');
-Route::delete('jenis_intermediary/{jenis_intermediary}',[AdminController::class, 'destroy_jenis_intermediary'])->middleware('auth');
+Route::get('jenis_intermediary', [HomeController::class, 'jenis_intermediaries'])->name('admin.jenisIntermediary')->middleware(['auth', 'must-admin']);
+Route::post('jenis_intermediary', [AdminController::class, 'store_jenis_intermediary'])->middleware(['auth', 'must-admin']);
+Route::patch('jenis_intermediary/{jenis_intermediary}', [AdminController::class, 'update_jenis_intermediary'])->name('admin.update_jenis_intermediary')->middleware(['auth', 'must-admin']);
+Route::delete('jenis_intermediary/{jenis_intermediary}',[AdminController::class, 'destroy_jenis_intermediary'])->middleware(['auth', 'must-admin']);
 
 // JENIS ORGANISASI
-Route::get('jenis_organisasi', [HomeController::class, 'jenis_organisasi'])->name('admin.jenisOrganisasi')->middleware('auth');
-Route::post('jenis_organisasi', [AdminController::class, 'store_jenis_organisasi'])->middleware('auth');
-Route::patch('jenis_organisasi/{jenis_organisasi}', [AdminController::class, 'update_jenis_organisasi'])->name('admin.update_jenis_organisasi')->middleware('auth');
-Route::delete('jenis_organisasi/{jenis_organisasi}',[AdminController::class, 'destroy_jenis_organisasi'])->middleware('auth');
+Route::get('jenis_organisasi', [HomeController::class, 'jenis_organisasi'])->name('admin.jenisOrganisasi')->middleware(['auth', 'must-admin']);
+Route::post('jenis_organisasi', [AdminController::class, 'store_jenis_organisasi'])->middleware(['auth', 'must-admin']);
+Route::patch('jenis_organisasi/{jenis_organisasi}', [AdminController::class, 'update_jenis_organisasi'])->name('admin.update_jenis_organisasi')->middleware(['auth', 'must-admin']);
+Route::delete('jenis_organisasi/{jenis_organisasi}',[AdminController::class, 'destroy_jenis_organisasi'])->middleware(['auth', 'must-admin']);
 
 // JENIS PENERIMAAN
-Route::get('jenis_penerimaan', [HomeController::class, 'jenis_penerimaan'])->name('admin.jenisPenerimaan')->middleware('auth');
-Route::post('jenis_penerimaan', [AdminController::class, 'store_jenis_penerimaan'])->middleware('auth');
-Route::patch('jenis_penerimaan/{jenis_penerimaan}', [AdminController::class, 'update_jenis_penerimaan'])->name('admin.update_jenis_penerimaan')->middleware('auth');
-Route::delete('jenis_penerimaan/{jenis_penerimaan}',[AdminController::class, 'destroy_jenis_penerimaan'])->middleware('auth');
+Route::get('jenis_penerimaan', [HomeController::class, 'jenis_penerimaan'])->name('admin.jenisPenerimaan')->middleware(['auth', 'must-admin']);
+Route::post('jenis_penerimaan', [AdminController::class, 'store_jenis_penerimaan'])->middleware(['auth', 'must-admin']);
+Route::patch('jenis_penerimaan/{jenis_penerimaan}', [AdminController::class, 'update_jenis_penerimaan'])->name('admin.update_jenis_penerimaan')->middleware(['auth', 'must-admin']);
+Route::delete('jenis_penerimaan/{jenis_penerimaan}',[AdminController::class, 'destroy_jenis_penerimaan'])->middleware(['auth', 'must-admin']);
 
 // JENJANG KOMUNIKASI
-Route::get('jenjang_komunikasi', [HomeController::class, 'jenjang_komunikasi'])->name('admin.jenjangKomunikasi')->middleware('auth');
-Route::post('jenjang_komunikasi', [AdminController::class, 'store_jenjang_komunikasi'])->middleware('auth');
-Route::patch('jenjang_komunikasi/{jenjang_komunikasi}', [AdminController::class, 'update_jenjang_komunikasi'])->name('admin.update_jenjang_komunikasi')->middleware('auth');
-Route::delete('jenjang_komunikasi/{jenjang_komunikasi}',[AdminController::class, 'destroy_jenjang_komunikasi'])->middleware('auth');
+Route::get('jenjang_komunikasi', [HomeController::class, 'jenjang_komunikasi'])->name('admin.jenjangKomunikasi')->middleware(['auth', 'must-admin']);
+Route::post('jenjang_komunikasi', [AdminController::class, 'store_jenjang_komunikasi'])->middleware(['auth', 'must-admin']);
+Route::patch('jenjang_komunikasi/{jenjang_komunikasi}', [AdminController::class, 'update_jenjang_komunikasi'])->name('admin.update_jenjang_komunikasi')->middleware(['auth', 'must-admin']);
+Route::delete('jenjang_komunikasi/{jenjang_komunikasi}',[AdminController::class, 'destroy_jenjang_komunikasi'])->middleware(['auth', 'must-admin']);
 
 // KLASIFIKASI PORTFOLIO
-Route::get('klasifikasi_portfolio', [HomeController::class, 'klasifikasi_portfolio'])->name('admin.klasifikasiPortfolio')->middleware('auth');
-Route::post('klasifikasi_portfolio', [AdminController::class, 'store_klasifikasi_portfolio'])->middleware('auth');
-Route::patch('klasifikasi_portfolio/{klasifikasi_portfolio}', [AdminController::class, 'update_klasifikasi_portfolio'])->name('admin.update_klasifikasi_portfolio')->middleware('auth');
-Route::delete('klasifikasi_portfolio/{klasifikasi_portfolio}',[AdminController::class, 'destroy_klasifikasi_portfolio'])->middleware('auth');
+Route::get('klasifikasi_portfolio', [HomeController::class, 'klasifikasi_portfolio'])->name('admin.klasifikasiPortfolio')->middleware(['auth', 'must-admin']);
+Route::post('klasifikasi_portfolio', [AdminController::class, 'store_klasifikasi_portfolio'])->middleware(['auth', 'must-admin']);
+Route::patch('klasifikasi_portfolio/{klasifikasi_portfolio}', [AdminController::class, 'update_klasifikasi_portfolio'])->name('admin.update_klasifikasi_portfolio')->middleware(['auth', 'must-admin']);
+Route::delete('klasifikasi_portfolio/{klasifikasi_portfolio}',[AdminController::class, 'destroy_klasifikasi_portfolio'])->middleware(['auth', 'must-admin']);
 
 // KOMITMEN SDGS
-Route::get('komitmen_sdgs', [HomeController::class, 'komitmen_sdgs'])->name('admin.komitmenSdgs')->middleware('auth');
-Route::post('komitmen_sdgs', [AdminController::class, 'store_komitmen_sdgs'])->middleware('auth');
-Route::patch('komitmen_sdgs/{komitmen_sdgs}', [AdminController::class, 'update_komitmen_sdgs'])->name('admin.update_komitmen_sdgs')->middleware('auth');
-Route::delete('komitmen_sdgs/{komitmen_sdgs}',[AdminController::class, 'destroy_komitmen_sdgs'])->middleware('auth');
+Route::get('komitmen_sdgs', [HomeController::class, 'komitmen_sdgs'])->name('admin.komitmenSdgs')->middleware(['auth', 'must-admin']);
+Route::post('komitmen_sdgs', [AdminController::class, 'store_komitmen_sdgs'])->middleware(['auth', 'must-admin']);
+Route::patch('komitmen_sdgs/{komitmen_sdgs}', [AdminController::class, 'update_komitmen_sdgs'])->name('admin.update_komitmen_sdgs')->middleware(['auth', 'must-admin']);
+Route::delete('komitmen_sdgs/{komitmen_sdgs}',[AdminController::class, 'destroy_komitmen_sdgs'])->middleware(['auth', 'must-admin']);
 
 // SALURAN
-Route::get('saluran', [HomeController::class, 'saluran'])->name('admin.saluran')->middleware('auth');
-Route::post('saluran', [AdminController::class, 'store_saluran'])->middleware('auth');
-Route::patch('saluran/{saluran}', [AdminController::class, 'update_saluran'])->name('admin.update_saluran')->middleware('auth');
-Route::delete('saluran/{saluran}',[AdminController::class, 'destroy_saluran'])->middleware('auth');
+Route::get('saluran', [HomeController::class, 'saluran'])->name('admin.saluran')->middleware(['auth', 'must-admin']);
+Route::post('saluran', [AdminController::class, 'store_saluran'])->middleware(['auth', 'must-admin']);
+Route::patch('saluran/{saluran}', [AdminController::class, 'update_saluran'])->name('admin.update_saluran')->middleware(['auth', 'must-admin']);
+Route::delete('saluran/{saluran}',[AdminController::class, 'destroy_saluran'])->middleware(['auth', 'must-admin']);
 
 // SALURAN PENDANAAN
-Route::get('saluran_pendanaan', [HomeController::class, 'saluran_pendanaan'])->name('admin.saluranPendanaan')->middleware('auth');
-Route::post('saluran_pendanaan', [AdminController::class, 'store_saluran_pendanaan'])->middleware('auth');
-Route::patch('saluran_pendanaan/{saluran_pendanaan}', [AdminController::class, 'update_saluran_pendanaan'])->name('admin.update_saluran_pendanaan')->middleware('auth');
-Route::delete('saluran_pendanaan/{saluran_pendanaan}',[AdminController::class, 'destroy_saluran_pendanaan'])->middleware('auth');
+Route::get('saluran_pendanaan', [HomeController::class, 'saluran_pendanaan'])->name('admin.saluranPendanaan')->middleware(['auth', 'must-admin']);
+Route::post('saluran_pendanaan', [AdminController::class, 'store_saluran_pendanaan'])->middleware(['auth', 'must-admin']);
+Route::patch('saluran_pendanaan/{saluran_pendanaan}', [AdminController::class, 'update_saluran_pendanaan'])->name('admin.update_saluran_pendanaan')->middleware(['auth', 'must-admin']);
+Route::delete('saluran_pendanaan/{saluran_pendanaan}',[AdminController::class, 'destroy_saluran_pendanaan'])->middleware(['auth', 'must-admin']);
 
 // STATUS
-Route::get('status', [HomeController::class, 'status'])->name('admin.status')->middleware('auth');
-Route::post('status', [AdminController::class, 'store_status'])->middleware('auth');
-Route::patch('status/{status}', [AdminController::class, 'update_status'])->name('admin.update_status')->middleware('auth');
-Route::delete('status/{status}',[AdminController::class, 'destroy_status'])->middleware('auth');
+Route::get('status', [HomeController::class, 'status'])->name('admin.status')->middleware(['auth', 'must-admin']);
+Route::post('status', [AdminController::class, 'store_status'])->middleware(['auth', 'must-admin']);
+Route::patch('status/{status}', [AdminController::class, 'update_status'])->name('admin.update_status')->middleware(['auth', 'must-admin']);
+Route::delete('status/{status}',[AdminController::class, 'destroy_status'])->middleware(['auth', 'must-admin']);
 
 // STATUS KEMAJUAN
-Route::get('status_kemajuan', [HomeController::class, 'status_kemajuan'])->name('admin.statusKemajuan')->middleware('auth');
-Route::post('status_kemajuan', [AdminController::class, 'store_status_kemajuan'])->middleware('auth');
-Route::patch('status_kemajuan/{status_kemajuan}', [AdminController::class, 'update_status_kemajuan'])->name('admin.update_status_kemajuan')->middleware('auth');
-Route::delete('status_kemajuan/{status_kemajuan}',[AdminController::class, 'destroy_status_kemajuan'])->middleware('auth');
+Route::get('status_kemajuan', [HomeController::class, 'status_kemajuan'])->name('admin.statusKemajuan')->middleware(['auth', 'must-admin']);
+Route::post('status_kemajuan', [AdminController::class, 'store_status_kemajuan'])->middleware(['auth', 'must-admin']);
+Route::patch('status_kemajuan/{status_kemajuan}', [AdminController::class, 'update_status_kemajuan'])->name('admin.update_status_kemajuan')->middleware(['auth', 'must-admin']);
+Route::delete('status_kemajuan/{status_kemajuan}',[AdminController::class, 'destroy_status_kemajuan'])->middleware(['auth', 'must-admin']);
 
 // TINDAK LANJUT
-Route::get('tindak_lanjut', [HomeController::class, 'tindak_lanjut'])->name('admin.tindakLanjut')->middleware('auth');
-Route::post('tindak_lanjut', [AdminController::class, 'store_tindak_lanjut'])->middleware('auth');
-Route::patch('tindak_lanjut/{tindak_lanjut}', [AdminController::class, 'update_tindak_lanjut'])->name('admin.update_tindak_lanjut')->middleware('auth');
-Route::delete('tindak_lanjut/{tindak_lanjut}',[AdminController::class, 'destroy_tindak_lanjut'])->middleware('auth');
+Route::get('tindak_lanjut', [HomeController::class, 'tindak_lanjut'])->name('admin.tindakLanjut')->middleware(['auth', 'must-admin']);
+Route::post('tindak_lanjut', [AdminController::class, 'store_tindak_lanjut'])->middleware(['auth', 'must-admin']);
+Route::patch('tindak_lanjut/{tindak_lanjut}', [AdminController::class, 'update_tindak_lanjut'])->name('admin.update_tindak_lanjut')->middleware(['auth', 'must-admin']);
+Route::delete('tindak_lanjut/{tindak_lanjut}',[AdminController::class, 'destroy_tindak_lanjut'])->middleware(['auth', 'must-admin']);
 
 // TUJUAN PENDANAAN
-Route::get('tujuan_pendanaan', [HomeController::class, 'tujuan_pendanaan'])->name('admin.tujuanPendanaan')->middleware('auth');
-Route::post('tujuan_pendanaan', [AdminController::class, 'store_tujuan_pendanaan'])->middleware('auth');
-Route::patch('tujuan_pendanaan/{tujuan_pendanaan}', [AdminController::class, 'update_tujuan_pendanaan'])->name('admin.update_tujuan_pendanaan')->middleware('auth');
-Route::delete('tujuan_pendanaan/{tujuan_pendanaan}',[AdminController::class, 'destroy_tujuan_pendanaan'])->middleware('auth');
+Route::get('tujuan_pendanaan', [HomeController::class, 'tujuan_pendanaan'])->name('admin.tujuanPendanaan')->middleware(['auth', 'must-admin']);
+Route::post('tujuan_pendanaan', [AdminController::class, 'store_tujuan_pendanaan'])->middleware(['auth', 'must-admin']);
+Route::patch('tujuan_pendanaan/{tujuan_pendanaan}', [AdminController::class, 'update_tujuan_pendanaan'])->name('admin.update_tujuan_pendanaan')->middleware(['auth', 'must-admin']);
+Route::delete('tujuan_pendanaan/{tujuan_pendanaan}',[AdminController::class, 'destroy_tujuan_pendanaan'])->middleware(['auth', 'must-admin']);
 
 
-Route::post('getkabupaten', [DonorController::class, 'getkabupaten'])->name('getkabupaten')->middleware('auth');
-Route::post('getkecamatan', [DonorController::class, 'getkecamatan'])->name('getkecamatan')->middleware('auth');
-Route::post('getdesa', [DonorController::class, 'getdesa'])->name('getdesa')->middleware('auth');
+Route::post('getkabupaten', [DonorController::class, 'getkabupaten'])->name('getkabupaten')->middleware(['auth', 'must-admin']);
+Route::post('getkecamatan', [DonorController::class, 'getkecamatan'])->name('getkecamatan')->middleware(['auth', 'must-admin']);
+Route::post('getdesa', [DonorController::class, 'getdesa'])->name('getdesa')->middleware(['auth', 'must-admin']);
 
 // DONOR
 Route::get('donor', [DonorController::class, 'donor'])->name('pages.donor')->middleware('auth');
-Route::get('donor/add', [DonorController::class, 'addDonor'])->name('donor.add')->middleware('auth');
-Route::post('donor', [DonorController::class, 'store'])->middleware('auth');
+Route::get('donor/add', [DonorController::class, 'addDonor'])->name('donor.add')->middleware(['auth', 'must-admin']);
+Route::post('donor', [DonorController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('donor/{donor}', [DonorController::class, 'show'])->name('donor.view')->middleware('auth');
-Route::get('donor/{donor}/edit/', [DonorController::class, 'edit'])->name('donor.edit')->middleware('auth');
-Route::patch('donor/{donor}', [DonorController::class, 'update'])->name('donor.update')->middleware('auth');
-Route::delete('donor/{donor}',[DonorController::class, 'destroy'])->middleware('auth');
+Route::get('donor/{donor}/edit/', [DonorController::class, 'edit'])->name('donor.edit')->middleware(['auth', 'must-admin']);
+Route::patch('donor/{donor}', [DonorController::class, 'update'])->name('donor.update')->middleware(['auth', 'must-admin']);
+Route::delete('donor/{donor}',[DonorController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 
 // NARAHUBUNG
 Route::get('narahubung', [NarahubungController::class, 'narahubung'])->name('pages.narahubung')->middleware('auth');

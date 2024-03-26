@@ -73,9 +73,12 @@
                 </a>
             </li>
 
+            @if(Auth::user()->role_id != 1)
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+            @else
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -102,6 +105,7 @@
                     </div>
                 </div>
             </li>
+            @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -313,7 +317,7 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{ url('logout') }}">Logout</a>
                 </div>
             </div>

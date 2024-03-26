@@ -10,6 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    {{-- Bootstrap CDN --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
@@ -30,6 +37,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('home')}}">
                 <div class="sidebar-brand-text mx-3">Care Indonesia</div>
             </a>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -71,9 +79,14 @@
                 </a>
             </li>
 
+
+
+            @if(Auth::user()->role_id != 1)
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+            @else
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -100,6 +113,7 @@
                     </div>
                 </div>
             </li>
+            @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

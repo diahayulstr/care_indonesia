@@ -58,3 +58,10 @@
 /* #bgLogin {
     background-color: #f1faee;
 } */
+
+#page-top .sidebar-divider {
+    border: none;
+    border-top: 1px solid white;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
