@@ -96,16 +96,15 @@
                         <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
                         <a class="collapse-item " href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
                         <a class="collapse-item " href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item active" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
-                            Portfolio</a>
+                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
                         <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                        <a class="collapse-item " href="{{ url('saluran') }}">Saluran</a>
+                        <a class="collapse-item " href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
                         <a class="collapse-item" href="{{ url('status') }}">Status</a>
                         <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
                         <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
                         <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        <a class="collapse-item active" href="{{ url('user') }}">User</a>
                     </div>
                 </div>
             </li>
@@ -142,9 +141,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/user.png')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('style/img/user.png') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -168,7 +167,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Klaifikasi Portfolio</h1>
+                        <h1 class="h3 mb-0 text-gray-800">User</h1>
                     </div>
 
                     <div class="row">
@@ -177,7 +176,7 @@
                             <div class="card mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header">
-                                    <h6 class="m-0 font-weight-bold text-danger">View Klasifikasi Portfolio</h6>
+                                    <h6 class="m-0 font-weight-bold text-danger">View User</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -185,15 +184,21 @@
                                             <thead>
                                                 <tr class="text-center fw-bold">
                                                     <th>ID</th>
-                                                    <th>Nama Klasifikasi Portfolio </th>
+                                                    <th>Nama</th>
+                                                    <th>Email</th>
+                                                    <th>Password</th>
+                                                    <th>Role</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @forelse($klasifikasiPortfolio as $item)
+                                                @forelse($user as $item)
                                                     <tr>
                                                         <td>{{ $item->id }}</td>
                                                         <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->email }}</td>
+                                                        <td>{{ $item->password }}</td>
+                                                        <td>{{ $item->roleID->name }}</td>
                                                         <td class="text-center">
                                                             <div class="action-buttons d-flex justify-content-center">
                                                                 <div class="d-inline-block">
@@ -202,7 +207,10 @@
                                                                         title="Edit" data-bs-toggle="modal"
                                                                         data-bs-target="#form-update"
                                                                         data-id="{{ $item->id }}"
-                                                                        data-name="{{ $item->name }}">
+                                                                        data-name="{{ $item->name }}"
+                                                                        data-email="{{ $item->email }}"
+                                                                        data-password="{{ $item->password }}"
+                                                                        data-role-id="{{ $item->role_id }}">
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                             width="16" height="16"
                                                                             fill="currentColor"
@@ -215,7 +223,7 @@
                                                                 </div>
                                                                 <div class="d-inline-block mx-1">
                                                                     <form
-                                                                        action="{{ url('klasifikasi_portfolio/' . $item->id) }}"
+                                                                        action="{{ url('user/' . $item->id) }}"
                                                                         method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
@@ -237,6 +245,9 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="card-footer">
+                                    {{ $user->links('vendor.pagination.bootstrap-5') }}
+                                </div>
                             </div>
                         </div>
 
@@ -245,18 +256,18 @@
                                 <a href="#collapseCardExample" class="d-block card-header py-3"
                                     data-toggle="collapse" role="button" aria-expanded="true"
                                     aria-controls="collapseCardExample">
-                                    <h6 class="m-0 font-weight-bold text-danger">Add Klasifikasi Portfolio</h6>
+                                    <h6 class="m-0 font-weight-bold text-danger">Add User</h6>
                                 </a>
                                 <div class="collapse show" id="collapseCardExample">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
-                                                <form action="{{ url('klasifikasi_portfolio') }}" method="POST"
+                                                <form action="{{ url('user') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="form-group">
-                                                        <label for="name">Nama Klasifikasi Portfolio</label>
-                                                        <input type="text" placeholder="Nama Klaifikasi Portfolio"
+                                                        <label for="name">Nama</label>
+                                                        <input type="text" placeholder="Nama"
                                                             class="form-control @error('name') is-invalid @enderror"
                                                             id="name" name="name"
                                                             value="{{ old('name') }}">
@@ -264,17 +275,46 @@
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input type="email" placeholder="Email"
+                                                            class="form-control @error('email') is-invalid @enderror"
+                                                            id="email" name="email"
+                                                            value="{{ old('email') }}">
+                                                        @error('email')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="password">Password</label>
+                                                        <input type="password" placeholder="Password"
+                                                            class="form-control @error('password') is-invalid @enderror"
+                                                            id="password" name="password"
+                                                            value="{{ old('password') }}">
+                                                        @error('password')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="role_id">Roles</label>
+                                                        <select class="form-select form-control" name="role_id"
+                                                            id="role_id">
+                                                            <option value="">--Pilih Roles--</option>
+                                                            @foreach ($roleID as $role)
+                                                                <option value="{{ $role->id }}">
+                                                                    {{ $role->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                        <a href="{{ url('klasifikasi_portfolio') }}"
+                                                        <a href="{{ url('user') }}"
                                                             class="btn btn-outline-primary">Cancel</a>
                                                         <button type="submit" class="btn btn-primary">Add</button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        {{ $klasifikasiPortfolio->links('vendor.pagination.bootstrap-5') }}
                                     </div>
                                 </div>
                             </div>
@@ -336,13 +376,13 @@
     <div class="modal fade" id="form-update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="formUpdateLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="updateForm" action="{{ url('klasifikasi_portfolio/' . $item->id) }}" method="POST"
+            <form id="updateForm" action="{{ url('user/' . $item->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="formUpdateLabel">Update Jenis Penerimaan</h1>
+                        <h1 class="modal-title fs-5" id="formUpdateLabel">Update User</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -350,12 +390,38 @@
                         <input type="hidden" id="id-edit" name="id">
 
                         <div class="form-group">
-                            <label for="name">Nama Klasifikasi Portfolio</label>
+                            <label for="name">Nama</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror"
                                 id="name-edit" name="name" value="{{ old('name') }}">
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                id="email-edit" name="email"value="{{ old('email') }}" @readonly(true)>
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="password-edit" name="password" value="{{ old('password') }}">
+                            @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="role_id">Roles</label>
+                            <select class="form-select form-control" name="role_id" id="role_id-edit">
+                                <option value="">--Pilih Roles--</option>
+                                @foreach ($roleID as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -104,7 +104,7 @@
                         <a class="collapse-item active" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
                         <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
                         <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="#">User</a>
+                        <a class="collapse-item" href="{{ url('user') }}">User</a>
                     </div>
                 </div>
             </li>

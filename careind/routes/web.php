@@ -26,15 +26,19 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// LOGIN
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'authentication'])->name('login.authentication');
-
-// LOGOUT
-Route::get('logout', [AuthController::class, 'logout'])->name('login.logout');
+// LOGIN LOGOUT
+Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('login', [AuthController::class, 'authentication'])->name('login.authentication')->middleware('guest');
+Route::get('logout', [AuthController::class, 'logout'])->name('login.logout')->middleware('auth');
 
 // HOME
 Route::get('home', [HomeController::class, 'home'])->name('home')->middleware('auth');
+
+// USER
+Route::get('user', [HomeController::class, 'user'])->name('admin.user')->middleware('auth');
+Route::post('user', [AdminController::class, 'store_user'])->middleware('auth');
+Route::patch('user/{user}', [AdminController::class, 'update_user'])->name('admin.update_user')->middleware('auth');
+Route::delete('user/{user}',[AdminController::class, 'destroy_user'])->middleware('auth');
 
 // IMPACT GOALS
 Route::get('impact_goals', [HomeController::class, 'impact_goals'])->name('admin.impactGoals')->middleware('auth');

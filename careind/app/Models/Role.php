@@ -12,4 +12,9 @@ class Role extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function roleID()
+    {
+        return $this->hasMany(Role::class, 'role_id');
+    }
 }

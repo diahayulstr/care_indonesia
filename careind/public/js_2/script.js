@@ -64,14 +64,20 @@ $(document).ready(function() {
     $('.impact-goals-select').select2();
 });
 
-// ADMIN ONLY DROPDOWN SELECT
+// ADMIN ONLY MODAL EDIT
 $(document).ready(function(){
     $(document).on('click', '#btn-update', function(){
         let data_id = $(this).attr("data-id");
         let data_name = $(this).attr("data-name");
+        let data_email = $(this).attr("data-email");
+        let data_password = $(this).attr("data-password");
+        let data_role_id = $(this).attr("data-role-id");
 
         $('#name-edit').val(data_name);
         $('#id-edit').val(data_id);
+        $('#email-edit').val(data_email);
+        $('#password-edit').val(data_password);
+        $('#role_id-edit').val(data_role_id);
 
         $('#form-update').modal('show');
     });

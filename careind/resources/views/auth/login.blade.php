@@ -44,11 +44,11 @@
             <div class="col-xl-6 col-lg-8 col-md-9">
                 <div class="card o-hidden shadow-lg my-5">
                     <div class="card-body p-0">
-                        @if(Session::has('status'))
+                        {{-- @if(Session::has('status'))
                             <div class="alert alert-danger" role="alert">
                                 {{Session::get('message')}}
                             </div>
-                        @endif
+                        @endif --}}
                         <!-- Nested Row within Card Body -->
                         <div class="row justify-content-center">
                             <div class="col-lg-12">

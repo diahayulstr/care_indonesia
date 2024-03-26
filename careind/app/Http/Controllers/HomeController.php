@@ -2,25 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\User;
+use App\Models\TabelStatus;
+use App\Models\TabelSaluran;
 use Illuminate\Http\Request;
 use App\Models\TabelImpactGoals;
-use App\Models\TabelJenisIntermediaries;
+use App\Models\TabelKomitmenSdg;
+use App\Models\TabelTindakLanjut;
+use App\Models\TabelStatusKemajuan;
 use App\Models\TabelJenisOrganisasi;
 use App\Models\TabelJenisPenerimaan;
-use App\Models\TabelJenjangKomunikasi;
-use App\Models\TabelKlasifikasiPortfolios;
-use App\Models\TabelKomitmenSdg;
-use App\Models\TabelSaluran;
-use App\Models\TabelSaluranPendanaan;
-use App\Models\TabelStatus;
-use App\Models\TabelStatusKemajuan;
-use App\Models\TabelTindakLanjut;
 use App\Models\TabelTujuanPendanaan;
+use App\Models\TabelSaluranPendanaan;
+use App\Models\TabelJenjangKomunikasi;
+use App\Models\TabelJenisIntermediaries;
+use App\Models\TabelKlasifikasiPortfolios;
 
 class HomeController extends Controller
 {
     public function home() {
         return view('home');
+    }
+
+    public function user() {
+        $user = User::paginate(4);
+        $roleID = Role::all();
+        return view('admin.user', compact('user', 'roleID'));
     }
 
     public function impact_goals() {

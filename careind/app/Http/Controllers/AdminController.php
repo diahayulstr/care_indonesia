@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\User;
+use App\Models\TabelStatus;
+use App\Models\TabelSaluran;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\TabelImpactGoals;
-use App\Models\TabelJenisIntermediaries;
+use App\Models\TabelKomitmenSdg;
+use App\Models\TabelTindakLanjut;
+use App\Models\TabelStatusKemajuan;
 use App\Models\TabelJenisOrganisasi;
 use App\Models\TabelJenisPenerimaan;
-use App\Models\TabelJenjangKomunikasi;
-use App\Models\TabelKlasifikasiPortfolios;
-use App\Models\TabelKomitmenSdg;
-use App\Models\TabelSaluran;
-use App\Models\TabelSaluranPendanaan;
-use App\Models\TabelStatus;
-use App\Models\TabelStatusKemajuan;
-use App\Models\TabelTindakLanjut;
 use App\Models\TabelTujuanPendanaan;
+use App\Models\TabelSaluranPendanaan;
+use App\Models\TabelJenjangKomunikasi;
+use App\Models\TabelJenisIntermediaries;
+use App\Models\TabelKlasifikasiPortfolios;
 
 class AdminController extends Controller
 {
@@ -23,6 +26,52 @@ class AdminController extends Controller
     // public function login() {
     //     return view('auth.login');
     // }
+
+    // USER
+    public function store_user(Request $request)
+    {
+        $request -> validate ([
+            'name'      =>  'required',
+            'email'     =>  'required|email',
+            'password'  =>  'required',
+            'role_id'   =>  'required|exists:roles,id',
+        ]);
+        $user = new User();
+        $user -> name       = $request->name;
+        $user -> email      = $request->email;
+        $user -> password   = $request->password;
+        $user -> role_id    = $request->role_id;
+        $user -> save();
+        return redirect()->route('admin.user')->
+        with('toast_success', 'User berhasil ditambahkan');
+    }
+
+    public function update_user(Request $request, User $user)
+    {
+        $request->validate([
+            'name'      =>  'required',
+            'email'     =>  'required|email|unique:users,email,'.$user->id,
+            'password'  =>  'required',
+            'role_id'   =>  'required|exists:roles,id',
+        ]);
+
+        $user->update($request->only([
+            'name',
+            'email',
+            'password',
+            'role_id',
+        ]));
+        
+        return redirect()->route('admin.user', ['user' => $user->id])
+            ->with('toast_success', 'User berhasil diupdate');
+    }
+
+    public function destroy_user($id) {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.user')
+        ->with('success', 'User berhasil dihapus');
+    }
 
     // IMPACT GOALS
     public function store_impact_goals(Request $request) {
