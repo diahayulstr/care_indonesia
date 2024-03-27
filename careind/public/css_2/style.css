@@ -78,3 +78,28 @@
     margin-bottom: 100px;
 }
 
+.dotted-button {
+    border-style: dashed;
+    border-width: 2px;
+}
+
+.dotted-button:hover {
+    background-color: transparent;
+    border-style: solid;
+}
+
+.dotted-button .icon {
+    color: #4e73df;
+}
+
+.dotted-button:hover .icon {
+    color: #4e73df;
+}
+
+#btn-blank-row-narahubung .icon {
+    color: #e74a3b;
+}
+
+#btn-blank-row-narahubung:hover .icon {
+    color: #e74a3b;
+}

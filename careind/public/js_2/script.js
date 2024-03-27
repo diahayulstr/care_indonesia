@@ -380,6 +380,42 @@ $(document).ready(function(){
     });
 });
 
+// ADD BLANK ROW NARAHUBUNG
+function addBlankRow() {
+    var tableBody = document.querySelector("table tbody");
+    var newRow = document.createElement("tr");
+
+    newRow.innerHTML = `
+        <td><select class="form-select form-control" name="donor_id"><option value="">--Pilih Donor ID--</option></select></td>
+        <td><input type="text" placeholder="Nama Kontak" class="form-control" name="nama_kontak"></td>
+        <td><input type="text" placeholder="Jabatan" class="form-control" name="jabatan"></td>
+        <td><input type="email" placeholder="Email" class="form-control" name="email"></td>
+        <td><input type="tel" placeholder="No Telepon" class="form-control" name="no_telp"></td>
+        <td><select class="form-select" name="status_id"><option value="">--Pilih Status--</option></select></td>
+        <td><div class="d-inline-block"><a class="btn btn-danger btn-circle" id="delete-btn-row-narahubung" title="Delete"><i class="fas fa-trash"></i></a></div></td>
+    `;
+    tableBody.appendChild(newRow);
+    newRow.querySelector("#delete-btn-row-narahubung").addEventListener("click", deleteRow);
+}
+
+document.getElementById("btn-blank-row-narahubung").addEventListener("click", function(event) {
+    event.preventDefault();
+    addBlankRow();
+});
+
+function deleteRow(event) {
+    var deleteButton = event.target;
+    var rowToDelete = deleteButton.closest("tr");
+    if (rowToDelete) {
+        rowToDelete.remove();
+    }
+}
+
+document.querySelectorAll("#delete-btn-row-narahubung").forEach(function(button) {
+    button.addEventListener("click", function(event) {
+        deleteRow(event);
+    });
+});
 
 
 

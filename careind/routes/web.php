@@ -140,6 +140,7 @@ Route::get('narahubung/{narahubung}', [NarahubungController::class, 'show'])->na
 Route::get('narahubung/{narahubung}/edit/', [NarahubungController::class, 'edit'])->name('narahubung.edit')->middleware(['auth', 'must-admin']);
 Route::patch('narahubung/{narahubung}', [NarahubungController::class, 'update'])->name('narahubung.update')->middleware(['auth', 'must-admin']);
 Route::delete('narahubung/{narahubung}',[NarahubungController::class, 'destroy'])->middleware(['auth', 'must-admin']);
+Route::get('grid_add/narahubung', [NarahubungController::class, 'grid_add_narahubung'])->name('narahubung.gridAdd')->middleware(['auth', 'must-admin']);
 
 
 // KOMUNIKASI

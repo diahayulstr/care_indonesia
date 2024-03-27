@@ -10,6 +10,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
@@ -174,6 +175,10 @@
                                 @if(Auth::user()->role_id !=1)
 
                                 @else
+                                <a href="{{ url('grid_add/narahubung') }}" class="btn btn-outline-primary btn-circle me-2 dotted-button"
+                                    data-bs-toggle="tooltip" title="Grid Add">
+                                    <i class="fas fa-plus icon"></i>
+                                </a>
                                 <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle me-2"
                                     data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
                                 @endif

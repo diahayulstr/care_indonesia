@@ -83,4 +83,10 @@ class NarahubungController extends Controller
         $narahubung->delete();
         return redirect()->route('pages.narahubung')->with('success', 'Data narahubung berhasil dihapus');
     }
+
+    public function grid_add_narahubung() {
+        $donorID = Donor::all();
+        $status = TabelStatus::all();
+        return view('narahubung.gridAdd', compact('donorID', 'status'));
+    }
 }
