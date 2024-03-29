@@ -107,4 +107,37 @@ class KomunikasiController extends Controller
         $komunikasi->delete();
         return redirect()->route('pages.komunikasi')->with('success', 'Data komunikasi berhasil dihapus');
     }
+
+    public function grid_add_komunikasi() {
+        $donorID = Donor::all();
+        $saluran = TabelSaluran::all();
+        $jenjangKomunikasi = TabelJenjangKomunikasi::all();
+        $tindakLanjut = TabelTindakLanjut::all();
+        return view('komunikasi.gridAdd', compact('donorID', 'saluran', 'jenjangKomunikasi', 'tindakLanjut'));
+    }
+
+    public function store_grid_add_komunikasi(Request $request) {
+        $request->validate([
+            'inputs_komunikasi.*.donor_id'              =>  'required|exists:donors,id',
+            'inputs_komunikasi.*.tanggal'               =>  'required',
+            'inputs_komunikasi.*.saluran_id'            =>  'required|exists:tabel_salurans,id',
+            'inputs_komunikasi.*.jenjang_komunikasi_id' =>  'required|exists:tabel_jenjang_komunikasis,id',
+            'inputs_komunikasi.*.tindak_lanjut_id'      =>  'required|exists:tabel_tindak_lanjuts,id',
+            'inputs_komunikasi.*.catatan'               =>  'required',
+            'inputs_komunikasi.*.tgl_selanjutnya'       =>  'required',
+            'inputs_komunikasi.*.dokumen_komunikasi'    =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
+        ]);
+
+        foreach($request->inputs_komunikasi as $key => $value) {
+            $komunikasi = Komunikasi::create($value);
+            if ($request->file('inputs_komunikasi.'.$key.'.dokumen_komunikasi')) {
+                $namaFile = $request->file('inputs_komunikasi.'.$key.'.dokumen_komunikasi')->getClientOriginalName();
+                $path = $request->file('inputs_komunikasi.'.$key.'.dokumen_komunikasi')->move('assets/komunikasi/dokumen', $namaFile);
+                $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
+                $komunikasi->save();
+            }
+        }
+        return redirect()->route('pages.komunikasi')
+            ->with('toast_success', 'Data komunikasi berhasil ditambahkan.');
+    }
 }

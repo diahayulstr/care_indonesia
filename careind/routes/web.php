@@ -141,6 +141,7 @@ Route::get('narahubung/{narahubung}/edit/', [NarahubungController::class, 'edit'
 Route::patch('narahubung/{narahubung}', [NarahubungController::class, 'update'])->name('narahubung.update')->middleware(['auth', 'must-admin']);
 Route::delete('narahubung/{narahubung}',[NarahubungController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 Route::get('grid_add/narahubung', [NarahubungController::class, 'grid_add_narahubung'])->name('narahubung.gridAdd')->middleware(['auth', 'must-admin']);
+Route::post('grid_add/narahubung', [NarahubungController::class, 'store_grid_add_narahubung'])->name('narahubung.store_grid_add_narahubung')->middleware(['auth', 'must-admin']);
 
 
 // KOMUNIKASI
@@ -151,6 +152,9 @@ Route::get('komunikasi/{komunikasi}', [KomunikasiController::class, 'show'])->na
 Route::get('komunikasi/{komunikasi}/edit', [KomunikasiController::class, 'edit'])->name('komunikasi.edit')->middleware(['auth', 'must-admin']);
 Route::patch('komunikasi/{komunikasi}', [KomunikasiController::class, 'update'])->name('komunikasi.update')->middleware(['auth', 'must-admin']);
 Route::delete('komunikasi/{komunikasi}', [KomunikasiController::class, 'destroy'])->middleware(['auth', 'must-admin']);
+Route::get('grid_add/komunikasi', [KomunikasiController::class, 'grid_add_komunikasi'])->name('komunikasi.gridAdd')->middleware(['auth', 'must-admin']);
+Route::post('grid_add/komunikasi', [KomunikasiController::class, 'store_grid_add_komunikasi'])->name('komunikasi.store_grid_add_komunikasi')->middleware(['auth', 'must-admin']);
+
 
 // PROPOSAL
 Route::get('proposal', [ProposalController::class, 'proposal'])->name('pages.proposal')->middleware('auth');
@@ -160,6 +164,8 @@ Route::get('proposal/{proposal}', [ProposalController::class, 'show'])->name('pr
 Route::get('proposal/{proposal}/edit', [ProposalController::class, 'edit'])->name('proposal.edit')->middleware(['auth', 'must-admin']);
 Route::patch('proposal/{proposal}', [ProposalController::class, 'update'])->name('proposal.update')->middleware(['auth', 'must-admin']);
 Route::delete('proposal/{proposal}', [ProposalController::class, 'destroy'])->middleware(['auth', 'must-admin']);
+Route::get('grid_add/proposal', [ProposalController::class, 'grid_add_proposal'])->name('proposal.gridAdd')->middleware(['auth', 'must-admin']);
+Route::post('grid_add/proposal', [ProposalController::class, 'store_grid_add_proposal'])->name('proposal.store_grid_add_proposal')->middleware(['auth', 'must-admin']);
 
 // MASTER ADD
 Route::get('master/add', [MasterController::class, 'master_add'])->name('donor.master.add_master')->middleware(['auth', 'must-admin']);

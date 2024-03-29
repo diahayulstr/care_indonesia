@@ -174,6 +174,10 @@
                                 @if(Auth::user()->role_id !=1)
 
                                 @else
+                                <a href="{{ url('grid_add/proposal') }}" class="btn btn-outline-primary btn-circle me-2 dotted-button"
+                                    data-bs-toggle="tooltip" title="Grid Add">
+                                    <i class="fas fa-plus icon"></i>
+                                </a>
                                 <a href="{{ url('proposal/add') }}" class="btn btn-primary btn-circle me-2" id="btn-add-proposal"
                                     data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
                                 @endif

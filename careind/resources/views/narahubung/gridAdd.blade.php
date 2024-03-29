@@ -17,6 +17,10 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{ asset('css_2/style.css')}}">
+
+
 
 </head>
 
@@ -175,6 +179,7 @@
                             </div>
                             <div>
                                 @if (Auth::user()->role_id != 1)
+
                                 @else
                                     <a href="#" class="btn btn-outline-danger btn-circle me-2 dotted-button"
                                         id="btn-blank-row-narahubung" data-bs-toggle="tooltip" title="Add Blank Row">
@@ -183,10 +188,10 @@
                                 @endif
                             </div>
                         </div>
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('narahubung.store_grid_add_narahubung') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" id="tabel-grid">
                                     <table class="table table-hover table-bordered">
                                         <thead>
                                             <tr class="text-center fw-bold" style="width: 250px;">
@@ -200,10 +205,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @for ($i = 1; $i <= 3; $i++)
+                                            {{-- @for ($i = 1; $i <= 3; $i++) --}}
                                             <tr>
-                                                <td><select class="form-select form-control" name="donor_id{{ $i }}"
-                                                        id="donor_id{{ $i }}">
+                                                <td><select class="form-select form-control" name="inputs_narahubung[0][donor_id]"
+                                                        id="donor_id">
                                                         <option value="">--Pilih Donor ID--</option>
                                                         @foreach ($donorID as $item)
                                                             <option value="{{ $item->id }}">
@@ -215,7 +220,7 @@
                                                 <td>
                                                     <input type="text" placeholder="Nama Kontak"
                                                         class="form-control @error('nama_kontak') is-invalid @enderror"
-                                                        id="nama_kontak{{ $i }}" name="nama_kontak{{ $i }}"
+                                                        id="nama_kontak" name="inputs_narahubung[0][nama_kontak]"
                                                         value="{{ old('nama_kontak') }}">
                                                     @error('nama_kontak')
                                                         <div class="text-danger">{{ $message }}</div>
@@ -223,26 +228,26 @@
                                                 </td>
                                                 <td><input type="text" placeholder="Jabatan"
                                                         class="form-control @error('jabatan') is-invalid @enderror"
-                                                        id="jabatan{{ $i }}" name="jabatan{{ $i }}" value="{{ old('jabatan') }}">
+                                                        id="jabatan" name="inputs_narahubung[0][jabatan]" value="{{ old('jabatan') }}">
                                                     @error('jabatan')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
                                                 </td>
                                                 <td><input type="email" placeholder="Email"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        id="email{{ $i }}" name="email{{ $i }}" value="{{ old('email') }}">
+                                                        id="email" name="inputs_narahubung[0][email]" value="{{ old('email') }}">
                                                     @error('email')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
                                                 </td>
                                                 <td><input type="tel" placeholder="No Telepon"
                                                         class="form-control @error('no_telp') is-invalid @enderror"
-                                                        id="no_telp{{ $i }}" name="no_telp{{ $i }}" value="{{ old('no_telp') }}">
+                                                        id="no_telp" name="inputs_narahubung[0][no_telp]" value="{{ old('no_telp') }}">
                                                     @error('no_telp')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
                                                 </td>
-                                                <td><select class="form-select" name="status_id{{ $i }}" id="status_id{{ $i }}">
+                                                <td><select class="form-select" name="inputs_narahubung[0][status_id]" id="status_id">
                                                         <option value="">--Pilih Status--</option>
                                                         @foreach ($status as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}
@@ -258,7 +263,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @endfor
+                                            {{-- @endfor --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -317,6 +322,96 @@
             </div>
         </div>
     </div>
+
+
+    <script id="donorIDs" type="application/json">
+        {!! json_encode($donorID) !!}
+    </script>
+
+    <script id="statusIDs" type="application/json">
+        {!! json_encode($status) !!}
+    </script>
+
+    <script>
+
+    var donorIDs = JSON.parse(document.getElementById("donorIDs").textContent);
+    var statusIDs = JSON.parse(document.getElementById("statusIDs").textContent);
+    function addBlankRow() {
+        var tableBody = document.querySelector("table tbody");
+        var newRow = document.createElement("tr");
+        var i = tableBody.children.length;
+        newRow.innerHTML = `
+                            <td><select class="form-select form-control" name="inputs_narahubung[${i}][donor_id]">
+                            <option value="">--Pilih Donor ID--</option>
+                            </select>
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Nama Kontak" class="form-control" name="inputs_narahubung[${i}][nama_kontak]">
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Jabatan" class="form-control" name="inputs_narahubung[${i}][jabatan]">
+                            </td>
+                            <td>
+                                <input type="email" placeholder="Email" class="form-control" name="inputs_narahubung[${i}][email]">
+                            </td>
+                            <td>
+                                <input type="tel" placeholder="No Telepon" class="form-control" name="inputs_narahubung[${i}][no_telp]">
+                            </td>
+                            <td>
+                                <select class="form-select" name="inputs_narahubung[${i}][status_id]">
+                                <option value="">--Pilih Status--</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="d-inline-block">
+                                    <a class="btn btn-danger btn-circle" id="delete-btn-row-narahubung" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+        `;
+
+        var donorSelect = newRow.querySelector(`select[name='inputs_narahubung[${i}][donor_id]']`);
+        donorIDs.forEach(function(donor) {
+            var option = document.createElement('option');
+            option.value = donor.id;
+            option.text = donor.nama_organisasi;
+            donorSelect.appendChild(option);
+        });
+
+        var statusSelect = newRow.querySelector(`select[name='inputs_narahubung[${i}][status_id]']`);
+        statusIDs.forEach(function(status) {
+            var option = document.createElement('option');
+            option.value = status.id;
+            option.text = status.name;
+            statusSelect.appendChild(option);
+        });
+
+        tableBody.appendChild(newRow);
+        newRow.querySelector("#delete-btn-row-narahubung").addEventListener("click", deleteRow);
+    }
+
+    document.getElementById("btn-blank-row-narahubung").addEventListener("click", function (event) {
+        event.preventDefault();
+        addBlankRow();
+    });
+
+    function deleteRow(event) {
+        var deleteButton = event.target;
+        var rowToDelete = deleteButton.closest("tr");
+        if (rowToDelete) {
+            rowToDelete.remove();
+        }
+    }
+
+    document.querySelectorAll("#delete-btn-row-narahubung").forEach(function (button) {
+        button.addEventListener("click", function (event) {
+            deleteRow(event);
+        });
+    });
+    </script>
+
+
     @include('layouts.template')
 </body>
 

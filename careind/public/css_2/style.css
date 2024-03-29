@@ -36,20 +36,23 @@
     color: #e74a3b;
 }
 
-.table th, .table td input {
+.table th,
+.table td input {
     width: auto;
 }
 
-.table th, .table td select {
+.table th,
+.table td select {
     width: auto;
 }
 
-.table th, .table td textarea {
+.table th,
+.table td textarea {
     width: auto;
 }
 
 #container-login .card-body {
-    background-color: #EEEBDD;
+    background-color: #eeebdd;
 }
 
 #container-login .card {
@@ -101,5 +104,21 @@
 }
 
 #btn-blank-row-narahubung:hover .icon {
+    color: #e74a3b;
+}
+
+#btn-blank-row-komunikasi .icon {
+    color: #e74a3b;
+}
+
+#btn-blank-row-komunikasi:hover .icon {
+    color: #e74a3b;
+
+}
+#btn-blank-row-proposal .icon {
+    color: #e74a3b;
+}
+
+#btn-blank-row-proposal:hover .icon {
     color: #e74a3b;
 }

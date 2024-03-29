@@ -148,4 +148,60 @@ class ProposalController extends Controller
         return redirect()->route('pages.proposal')->with('success', 'Data proposal berhasil dihapus');
     }
 
+    public function grid_add_proposal() {
+        $donorID = Donor::all();
+        $impactGoals = TabelImpactGoals::all();
+        $jenisIntermediaries = TabelJenisIntermediaries::all();
+        $jenisPenerimaan = TabelJenisPenerimaan::all();
+        $klasifikasiPortfolios = TabelKlasifikasiPortfolios::all();
+        $saluranPendanaan = TabelSaluranPendanaan::all();
+        $statusKemajuan = TabelStatusKemajuan::all();
+        $tujuanPendanaan = TabelTujuanPendanaan::all();
+        return view('proposal.gridAdd', compact('donorID', 'impactGoals', 'jenisIntermediaries',
+        'jenisPenerimaan', 'klasifikasiPortfolios', 'saluranPendanaan', 'statusKemajuan',
+        'tujuanPendanaan'));
+    }
+
+    public function store_grid_add_proposal(Request $request) {
+        $request->validate([
+            'inputs_proposal.*.donor_id'                  =>  'required|exists:donors,id',
+            'inputs_proposal.*.tujuan_pendanaan_id'       =>  'required|exists:tabel_tujuan_pendanaans,id',
+            'inputs_proposal.*.jenis_penerimaan_id'       =>  'required|exists:tabel_jenis_penerimaans,id',
+            'inputs_proposal.*.saluran_pendanaan_id'      =>  'required|exists:tabel_saluran_pendanaans,id',
+            'inputs_proposal.*.jenis_intermediaries_id'   =>  'required|exists:tabel_jenis_intermediaries,id',
+            'inputs_proposal.*.nama_proyek'               =>  'required',
+            'inputs_proposal.*.klasifikasi_portfolio_id'  =>  'required|exists:tabel_klasifikasi_portfolios,id',
+            'inputs_proposal.*.impact_goals_id'           =>  'required|exists:tabel_impact_goals,id',
+            'inputs_proposal.*.estimasi_nilai_usd'        =>  'required',
+            'inputs_proposal.*.estimasi_nilai_idr'        =>  'required',
+            'inputs_proposal.*.usulan_durasi'             =>  'required',
+            'inputs_proposal.*.status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
+            'inputs_proposal.*.dokumen_proposal'          =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
+        ]);
+        foreach($request->inputs_proposal as $key => $value) {
+            $proposal = new Proposal([
+                'donor_id'                  => $value['donor_id'],
+                'tujuan_pendanaan_id'       => $value['tujuan_pendanaan_id'],
+                'jenis_penerimaan_id'       => $value['jenis_penerimaan_id'],
+                'saluran_pendanaan_id'      => $value['saluran_pendanaan_id'],
+                'jenis_intermediaries_id'   => $value['jenis_intermediaries_id'],
+                'nama_proyek'               => $value['nama_proyek'],
+                'klasifikasi_portfolio_id'  => $value['klasifikasi_portfolio_id'],
+                'impact_goals_id'           => json_encode($value['impact_goals_id']),
+                'estimasi_nilai_usd'        => $value['estimasi_nilai_usd'],
+                'estimasi_nilai_idr'        => $value['estimasi_nilai_idr'],
+                'usulan_durasi'             => $value['usulan_durasi'],
+                'status_kemajuan_id'        => $value['status_kemajuan_id'],
+            ]);
+            
+            if ($request->file('inputs_proposal.'.$key.'.dokumen_proposal')) {
+                $namaFile = $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->getClientOriginalName();
+                $path = $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->move('assets/proposal/dokumen', $namaFile);
+                $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
+                $proposal->save();
+            }
+        }
+        return redirect()->route('pages.proposal')
+            ->with('toast_success', 'Data proposal berhasil ditambahkan.');
+    }
 }

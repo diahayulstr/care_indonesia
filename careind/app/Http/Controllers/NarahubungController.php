@@ -25,7 +25,7 @@ class NarahubungController extends Controller
             'donor_id'       => 'required|exists:donors,id',
             'nama_kontak'    => 'required',
             'jabatan'        => 'required',
-            'email'          => 'required',
+            'email'          => 'required|email',
             'no_telp'        => 'required',
             'status_id'      => 'required|exists:tabel_statuses,id',
         ]);
@@ -61,7 +61,7 @@ class NarahubungController extends Controller
             'donor_id'      =>  'required|exists:donors,id',
             'nama_kontak'   =>  'required',
             'jabatan'       =>  'required',
-            'email'         =>  'required',
+            'email'         =>  'required|email',
             'no_telp'       =>  'required',
             'status_id'     =>  'required|exists:tabel_statuses,id',
         ]);
@@ -89,4 +89,21 @@ class NarahubungController extends Controller
         $status = TabelStatus::all();
         return view('narahubung.gridAdd', compact('donorID', 'status'));
     }
+
+    public function store_grid_add_narahubung(Request $request) {
+        $request->validate([
+            'inputs_narahubung.*.donor_id'      => 'required|exists:donors,id',
+            'inputs_narahubung.*.nama_kontak'   => 'required',
+            'inputs_narahubung.*.jabatan'       => 'required',
+            'inputs_narahubung.*.email'         => 'required|email',
+            'inputs_narahubung.*.status_id'     => 'required|exists:tabel_statuses,id',
+        ]);
+
+        foreach($request->inputs_narahubung as $key => $value) {
+            Narahubung::create($value);
+        }
+        return redirect()->route('pages.narahubung')
+            ->with('toast_success', 'Data narahubung berhasil ditambahkan.');
+    }
+
 }
