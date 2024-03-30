@@ -117,11 +117,17 @@ class MasterController extends Controller
         ]);
         if ($request->hasFile('dokumen_donor')) {
             $namaFile = $request->dokumen_donor->getClientOriginalName();
-            $path = $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
-            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFile;
-            $donor->save();
+            $path = 'assets/donor/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/donor/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
+            $donor->dokumen_donor = $path;
         }
-        // $donor->save();
+        $donor->save();
 
         // Narahubung
         $narahubung = Narahubung::create([
@@ -132,7 +138,7 @@ class MasterController extends Controller
             'no_telp'        => $request->input('no_telp'),
             'status_id'      => $request->input('status_id'),
         ]);
-        // $narahubung->save();
+        $narahubung->save();
 
         // Komunikasi
         $komunikasi = Komunikasi::create([
@@ -147,11 +153,17 @@ class MasterController extends Controller
         ]);
         if ($request->hasFile('dokumen_komunikasi')) {
             $namaFile = $request->dokumen_komunikasi->getClientOriginalName();
-            $path = $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
-            $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
-            $komunikasi->save();
+            $path = 'assets/komunikasi/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/komunikasi/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
+            $komunikasi->dokumen_komunikasi = $path;
         }
-        // $komunikasi->save();
+        $komunikasi->save();
 
         // Proposal
         $proposal = Proposal::create([
@@ -170,11 +182,17 @@ class MasterController extends Controller
         ]);
         if ($request->hasFile('dokumen_proposal')) {
             $namaFile = $request->dokumen_proposal->getClientOriginalName();
-            $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
-            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
-            $proposal->save();
+            $path = 'assets/proposal/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/proposal/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+            $proposal->dokumen_proposal = $path;
         }
-        // $proposal->save();
+        $proposal->save();
 
         if ($donor && $narahubung && $komunikasi && $proposal) {
             return redirect()->route('donor.master.view_master', ['master' => $donor->id])->with('toast_success', 'Data berhasil disimpan.');
@@ -250,15 +268,19 @@ class MasterController extends Controller
         $donor = Donor::findOrFail($id);
         $donor->update($donorData);
         if ($request->hasFile('dokumen_donor')) {
-            $file = $request->file('dokumen_donor');
-            $namaFile = $file->getClientOriginalName();
-            $path = $file->move('assets/donor/dokumen', $namaFile);
-            if ($donor->dokumen_donor) {
-                File::delete(public_path($donor->dokumen_donor));
+            $namaFile = $request->dokumen_donor->getClientOriginalName();
+            $path = 'assets/donor/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/donor/dokumen/' . $namaFile;
+                $counter++;
             }
-            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFile;
-            $donor->save();
+            $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
+	        File::delete($donor->dokumen_donor);
+            $donor->dokumen_donor = $path;
         }
+        $donor->save();
 
         foreach ($request->input('items_narahubung') as $key => $item) {
             // Narahubung
@@ -272,6 +294,7 @@ class MasterController extends Controller
             ]);
         }
 
+
         foreach ($request->input('items_komunikasi') as $key => $item) {
             // Komunikasi
             $komunikasi = Komunikasi::findOrFail($item['id']);
@@ -283,16 +306,21 @@ class MasterController extends Controller
                 'catatan'               => $item['catatan'],
                 'tgl_selanjutnya'       => $item['tgl_selanjutnya'],
             ]);
-            if ($request->hasFile('items_komunikasi.' . $key . '.dokumen_komunikasi')) {
-                $file = $request->file('items_komunikasi.' . $key . '.dokumen_komunikasi');
+            if ($request->file('items_komunikasi.'.$key.'.dokumen_komunikasi')) {
+                $file = $request->file('items_komunikasi.'.$key.'.dokumen_komunikasi');
                 $namaFile = $file->getClientOriginalName();
-                $path = $file->move('assets/komunikasi/dokumen', $namaFile);
-                if ($komunikasi->dokumen_komunikasi) {
-                    File::delete(public_path($komunikasi->dokumen_komunikasi));
+                $path = 'assets/komunikasi/dokumen/' . $namaFile;
+                $counter = 1;
+                while (file_exists($path)) {
+                    $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                    $path = 'assets/komunikasi/dokumen/' . $namaFile;
+                    $counter++;
                 }
-                $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
-                $komunikasi->save();
+                $file->move('assets/komunikasi/dokumen', $namaFile);
+                File::delete($komunikasi->dokumen_komunikasi);
+                $komunikasi->dokumen_komunikasi = $path;
             }
+            $komunikasi->save();
         }
 
         foreach ($request->input('items_proposal') as $key => $item) {
@@ -311,16 +339,21 @@ class MasterController extends Controller
                 'usulan_durasi'             => $item['usulan_durasi'],
                 'status_kemajuan_id'        => $item['status_kemajuan_id'],
             ]);
-            if ($request->hasFile('items_proposal.' . $key . '.dokumen_proposal')) {
-                $file = $request->file('items_proposal.' . $key . '.dokumen_proposal');
+            if ($request->file('items_proposal.'.$key.'.dokumen_proposal')) {
+                $file = $request->file('items_proposal.'.$key.'.dokumen_proposal');
                 $namaFile = $file->getClientOriginalName();
-                $path = $file->move('assets/proposal/dokumen', $namaFile);
-                if ($proposal->dokumen_proposal) {
-                    File::delete(public_path($proposal->dokumen_proposal));
+                $path = 'assets/proposal/dokumen/' . $namaFile;
+                $counter = 1;
+                while (file_exists($path)) {
+                    $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                    $path = 'assets/proposal/dokumen/' . $namaFile;
+                    $counter++;
                 }
-                $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
-                $proposal->save();
+                $file->move('assets/proposal/dokumen', $namaFile);
+                File::delete($proposal->dokumen_proposal);
+                $proposal->dokumen_proposal = $path;
             }
+            $proposal->save();
         }
 
         if ($donor && $narahubung && $komunikasi && $proposal) {
@@ -498,9 +531,16 @@ class MasterController extends Controller
         $komunikasi->tgl_selanjutnya         = $request->tgl_selanjutnya;
         if ($request->hasFile('dokumen_komunikasi')) {
             $namaFile = $request->dokumen_komunikasi->getClientOriginalName();
-            $path = $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
-            File::delete($komunikasi->dokumen_komunikasi);
-            $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
+            $path = 'assets/komunikasi/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/komunikasi/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFile);
+	        File::delete($komunikasi->dokumen_komunikasi);
+            $komunikasi->dokumen_komunikasi = $path;
         }
         $komunikasi->save();
         return redirect()->route('donor.master.view_master', $donor_id)
@@ -550,9 +590,16 @@ class MasterController extends Controller
 
         if ($request->hasFile('dokumen_proposal')) {
             $namaFile = $request->dokumen_proposal->getClientOriginalName();
-            $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
-            File::delete($proposal->dokumen_proposal);
-            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
+            $path = 'assets/proposal/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/proposal/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+	        File::delete($proposal->dokumen_proposal);
+            $proposal->dokumen_proposal = $path;
         }
         $proposal->save();
         return redirect()->route('donor.master.view_master', $donor_id)

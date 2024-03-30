@@ -71,8 +71,15 @@ class ProposalController extends Controller
 
         if ($request->hasFile('dokumen_proposal')) {
             $namaFile = $request->dokumen_proposal->getClientOriginalName();
-            $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
-            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
+            $path = 'assets/proposal/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/proposal/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+            $proposal->dokumen_proposal = $path;
         }
         $proposal->save();
         return redirect()->route('pages.proposal')->with('success', 'Data proposal berhasil ditambahkan');
@@ -132,9 +139,16 @@ class ProposalController extends Controller
 
         if ($request->hasFile('dokumen_proposal')) {
             $namaFile = $request->dokumen_proposal->getClientOriginalName();
-            $path = $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
-            File::delete($proposal->dokumen_proposal);
-            $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
+            $path = 'assets/proposal/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/proposal/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+	        File::delete($proposal->dokumen_proposal);
+            $proposal->dokumen_proposal = $path;
         }
         $proposal->save();
         return redirect()->route('pages.proposal', ['proposal' => $proposal->id])
