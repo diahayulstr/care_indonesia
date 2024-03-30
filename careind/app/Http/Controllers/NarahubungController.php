@@ -141,7 +141,7 @@ class NarahubungController extends Controller
         $narahubung = Narahubung::findOrFail($id);
         $donorId = $narahubung->donor_id;
         $narahubung->delete();
-        return redirect()->route('pages.narahubung')
+        return redirect()->route('narahubung.gridEdit')
                          ->with('success', 'Data narahubung berhasil dihapus.');
     }
 

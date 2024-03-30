@@ -86,11 +86,17 @@ class DonorController extends Controller
         $donor->komitmen_sdgs       = json_encode($request->komitmen_sdgs);
         $donor->date                = $request->date;
 
-        // Proses penyimpanan file dokumen
         if ($request->hasFile('dokumen_donor')) {
             $namaFile = $request->dokumen_donor->getClientOriginalName();
-            $path = $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
-            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFile;
+            $path = 'assets/donor/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/donor/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
+            $donor->dokumen_donor = $path;
         }
         $donor->save();
         return redirect()->route('pages.donor')->with('toast_success', 'Data donor berhasil ditambahkan');
@@ -145,9 +151,16 @@ class DonorController extends Controller
 
         if ($request->hasFile('dokumen_donor')) {
             $namaFile = $request->dokumen_donor->getClientOriginalName();
-            $path = $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
-            File::delete($donor->dokumen_donor);
-            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFile;
+            $path = 'assets/donor/dokumen/' . $namaFile;
+            $counter = 1;
+            while (file_exists($path)) {
+                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+                $path = 'assets/donor/dokumen/' . $namaFile;
+                $counter++;
+            }
+            $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
+	        File::delete($donor->dokumen_donor);
+            $donor->dokumen_donor = $path;
         }
         $donor->save();
         return redirect()->route('pages.donor', ['donor' => $donor->id])
