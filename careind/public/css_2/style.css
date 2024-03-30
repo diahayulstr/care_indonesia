@@ -99,26 +99,44 @@
     color: #4e73df;
 }
 
-#btn-blank-row-narahubung .icon {
+.dotted-button .icon-edit {
+    color: #f6c23e;
+}
+
+.dotted-button:hover .icon-edit {
+    color: #f6c23e;
+}
+
+.dash-button-add {
+    border-style: dashed;
+    border-width: 2px;
+}
+
+.dash-button-add:hover {
+    background-color: transparent;
+    border-style: solid;
+}
+
+#btn-blank-row-narahubung .icon-narhub {
     color: #e74a3b;
 }
 
-#btn-blank-row-narahubung:hover .icon {
+#btn-blank-row-narahubung:hover .icon-narhub {
     color: #e74a3b;
 }
 
-#btn-blank-row-komunikasi .icon {
+#btn-blank-row-komunikasi .icon-kom {
     color: #e74a3b;
 }
 
-#btn-blank-row-komunikasi:hover .icon {
+#btn-blank-row-komunikasi:hover .icon-kom {
     color: #e74a3b;
 
 }
-#btn-blank-row-proposal .icon {
+#btn-blank-row-proposal .icon-prop {
     color: #e74a3b;
 }
 
-#btn-blank-row-proposal:hover .icon {
+#btn-blank-row-proposal:hover .icon-prop {
     color: #e74a3b;
 }

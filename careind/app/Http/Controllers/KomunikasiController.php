@@ -140,4 +140,60 @@ class KomunikasiController extends Controller
         return redirect()->route('pages.komunikasi')
             ->with('toast_success', 'Data komunikasi berhasil ditambahkan.');
     }
+
+    public function edit_grid_komunikasi() {
+        $donorID = Donor::all();
+        $saluran = TabelSaluran::all();
+        $jenjangKomunikasi = TabelJenjangKomunikasi::all();
+        $tindakLanjut = TabelTindakLanjut::all();
+        $komunikasi = Komunikasi::all();
+        return view('komunikasi.gridEdit', compact('donorID', 'saluran', 'jenjangKomunikasi', 'tindakLanjut', 'komunikasi'));
+    }
+
+    public function update_grid_komunikasi(Request $request) {
+        $request -> validate ([
+            'inputs_komunikasi.*.donor_id'              =>  'required|exists:donors,id',
+            'inputs_komunikasi.*.tanggal'               =>  'required',
+            'inputs_komunikasi.*.saluran_id'            =>  'required|exists:tabel_salurans,id',
+            'inputs_komunikasi.*.jenjang_komunikasi_id' =>  'required|exists:tabel_jenjang_komunikasis,id',
+            'inputs_komunikasi.*.tindak_lanjut_id'      =>  'required|exists:tabel_tindak_lanjuts,id',
+            'inputs_komunikasi.*.catatan'               =>  'required',
+            'inputs_komunikasi.*.tgl_selanjutnya'       =>  'required',
+            'inputs_komunikasi.*.dokumen_komunikasi'    =>  'file',
+        ]);
+
+        foreach ($request->input('inputs_komunikasi') as $key => $item) {
+            $komunikasi = Komunikasi::findOrFail($key);
+            $komunikasi->update([
+                'donor_id'      => $item['donor_id'],
+                'tanggal'               => $item['tanggal'],
+                'saluran_id'            => $item['saluran_id'],
+                'jenjang_komunikasi_id' => $item['jenjang_komunikasi_id'],
+                'tindak_lanjut_id'      => $item['tindak_lanjut_id'],
+                'catatan'               => $item['catatan'],
+                'tgl_selanjutnya'       => $item['tgl_selanjutnya'],
+            ]);
+            if ($request->hasFile('inputs_komunikasi.' . $key . '.dokumen_komunikasi')) {
+                $file = $request->file('inputs_komunikasi.' . $key . '.dokumen_komunikasi');
+                $namaFile = $file->getClientOriginalName();
+                $path = $file->move('assets/komunikasi/dokumen', $namaFile);
+                if ($komunikasi->dokumen_komunikasi) {
+                    File::delete(public_path($komunikasi->dokumen_komunikasi));
+                }
+                $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFile;
+                $komunikasi->save();
+            }
+        }
+        return redirect()->route('pages.komunikasi', ['komunikasi' => $komunikasi->id])
+        ->with('toast_success', 'Data komunikasi berhasil diupdate');
+    }
+
+    public function destroy_grid_edit_komunikasi($id) {
+        $komunikasi = Komunikasi::findOrFail($id);
+        $donorId = $komunikasi->donor_id;
+        File::delete($komunikasi->dokumen_komunikasi);
+        $komunikasi->delete();
+        return redirect()->route('pages.komunikasi')
+                         ->with('success', 'Data komunikasi berhasil dihapus.');
+    }
 }

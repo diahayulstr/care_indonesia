@@ -142,6 +142,9 @@ Route::patch('narahubung/{narahubung}', [NarahubungController::class, 'update'])
 Route::delete('narahubung/{narahubung}',[NarahubungController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 Route::get('grid_add/narahubung', [NarahubungController::class, 'grid_add_narahubung'])->name('narahubung.gridAdd')->middleware(['auth', 'must-admin']);
 Route::post('grid_add/narahubung', [NarahubungController::class, 'store_grid_add_narahubung'])->name('narahubung.store_grid_add_narahubung')->middleware(['auth', 'must-admin']);
+Route::get('grid_edit/narahubung/edit', [NarahubungController::class, 'edit_grid_narahubung'])->name('narahubung.gridEdit')->middleware(['auth', 'must-admin']);
+Route::patch('grid_edit/narahubung', [NarahubungController::class, 'update_grid_narahubung'])->name('narahubung.update_grid_narahubung')->middleware(['auth', 'must-admin']);
+Route::delete('grid_edit/{narahubung}/narahubung', [NarahubungController::class, 'destroy_grid_edit_narahubung'])->name('narahubung.destroy_grid_edit_narahubung')->middleware(['auth', 'must-admin']);
 
 
 // KOMUNIKASI
@@ -154,6 +157,9 @@ Route::patch('komunikasi/{komunikasi}', [KomunikasiController::class, 'update'])
 Route::delete('komunikasi/{komunikasi}', [KomunikasiController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 Route::get('grid_add/komunikasi', [KomunikasiController::class, 'grid_add_komunikasi'])->name('komunikasi.gridAdd')->middleware(['auth', 'must-admin']);
 Route::post('grid_add/komunikasi', [KomunikasiController::class, 'store_grid_add_komunikasi'])->name('komunikasi.store_grid_add_komunikasi')->middleware(['auth', 'must-admin']);
+Route::get('grid_edit/komunikasi/edit', [KomunikasiController::class, 'edit_grid_komunikasi'])->name('komunikasi.gridEdit')->middleware(['auth', 'must-admin']);
+Route::patch('grid_edit/komunikasi', [KomunikasiController::class, 'update_grid_komunikasi'])->name('komunikasi.update_grid_komunikasi')->middleware(['auth', 'must-admin']);
+Route::delete('grid_edit/{komunikasi}/komunikasi', [KomunikasiController::class, 'destroy_grid_edit_komunikasi'])->name('narahubung.destroy_grid_edit_komunikasi')->middleware(['auth', 'must-admin']);
 
 
 // PROPOSAL
@@ -166,6 +172,10 @@ Route::patch('proposal/{proposal}', [ProposalController::class, 'update'])->name
 Route::delete('proposal/{proposal}', [ProposalController::class, 'destroy'])->middleware(['auth', 'must-admin']);
 Route::get('grid_add/proposal', [ProposalController::class, 'grid_add_proposal'])->name('proposal.gridAdd')->middleware(['auth', 'must-admin']);
 Route::post('grid_add/proposal', [ProposalController::class, 'store_grid_add_proposal'])->name('proposal.store_grid_add_proposal')->middleware(['auth', 'must-admin']);
+Route::get('grid_edit/proposal/edit', [ProposalController::class, 'edit_grid_proposal'])->name('proposal.gridEdit')->middleware(['auth', 'must-admin']);
+Route::patch('grid_edit/proposal', [ProposalController::class, 'update_grid_proposal'])->name('proposal.update_grid_proposal')->middleware(['auth', 'must-admin']);
+Route::delete('grid_edit/{proposal}/proposal', [ProposalController::class, 'destroy_grid_edit_proposal'])->name('proposal.destroy_grid_edit_proposal')->middleware(['auth', 'must-admin']);
+
 
 // MASTER ADD
 Route::get('master/add', [MasterController::class, 'master_add'])->name('donor.master.add_master')->middleware(['auth', 'must-admin']);

@@ -342,6 +342,7 @@ class MasterController extends Controller
     public function destroy_master_komunikasi($id) {
         $komunikasi = Komunikasi::findOrFail($id);
         $donorId = $komunikasi->donor_id;
+        File::delete($komunikasi->dokumen_komunikasi);
         $komunikasi->delete();
 
         return redirect()->route('donor.master.edit_master', ['master' => $donorId])
@@ -351,6 +352,7 @@ class MasterController extends Controller
     public function destroy_master_proposal($id) {
         $proposal = Proposal::findOrFail($id);
         $donorId = $proposal->donor_id;
+        File::delete($proposal->dokumen_proposal);
         $proposal->delete();
 
         return redirect()->route('donor.master.edit_master', ['master' => $donorId])

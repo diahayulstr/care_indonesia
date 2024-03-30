@@ -357,6 +357,22 @@ function deleteProposal() {
     form.submit();
 }
 
+// Delete Grid Edit
+function deleteGridEditNarahubung() {
+    var form = document.getElementById("deleteFormGridEditNarahubung");
+    form.submit();
+}
+
+function deleteGridEditKomunikasi() {
+    var form = document.getElementById("deleteFormGridEditKomunikasi");
+    form.submit();
+}
+
+function deleteGridEditProposal() {
+    var form = document.getElementById("deleteFormGridEditProposal");
+    form.submit();
+}
+
 // File Preview
 $(document).ready(function () {
     function previewFile(inputElement, previewElement) {

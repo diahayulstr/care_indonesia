@@ -180,9 +180,9 @@
                                 @if (Auth::user()->role_id != 1)
 
                                 @else
-                                    <a href="#" class="btn btn-outline-danger btn-circle me-2 dotted-button"
+                                    <a href="#" class="btn btn-outline-danger btn-circle me-2 dash-button-add"
                                         id="btn-blank-row-komunikasi" data-bs-toggle="tooltip" title="Add Blank Row">
-                                        <i class="fas fa-plus icon"></i>
+                                        <i class="fas fa-plus icon-kom"></i>
                                     </a>
                                 @endif
                             </div>

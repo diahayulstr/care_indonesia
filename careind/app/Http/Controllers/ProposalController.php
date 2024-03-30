@@ -193,7 +193,7 @@ class ProposalController extends Controller
                 'usulan_durasi'             => $value['usulan_durasi'],
                 'status_kemajuan_id'        => $value['status_kemajuan_id'],
             ]);
-            
+
             if ($request->file('inputs_proposal.'.$key.'.dokumen_proposal')) {
                 $namaFile = $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->getClientOriginalName();
                 $path = $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->move('assets/proposal/dokumen', $namaFile);
@@ -203,5 +203,77 @@ class ProposalController extends Controller
         }
         return redirect()->route('pages.proposal')
             ->with('toast_success', 'Data proposal berhasil ditambahkan.');
+    }
+
+    public function edit_grid_proposal() {
+        $donorID = Donor::all();
+        $tujuanPendanaan = TabelTujuanPendanaan::all();
+        $jenisPenerimaan = TabelJenisPenerimaan::all();
+        $saluranPendanaan = TabelSaluranPendanaan::all();
+        $jenisIntermediaries = TabelJenisIntermediaries::all();
+        $proposal = Proposal::all();
+        $klasifikasiPortfolios = TabelKlasifikasiPortfolios::all();
+        $impactGoals = TabelImpactGoals::all();
+        $statusKemajuan = TabelStatusKemajuan::all();
+        return view('proposal.gridEdit', compact('donorID', 'tujuanPendanaan',
+        'jenisPenerimaan', 'saluranPendanaan', 'jenisIntermediaries','proposal',
+        'klasifikasiPortfolios', 'impactGoals', 'statusKemajuan'));
+    }
+
+    public function update_grid_proposal(Request $request) {
+        $request -> validate ([
+            'inputs_proposal.*.donor_id'                  =>  'required|exists:donors,id',
+            'inputs_proposal.*.tujuan_pendanaan_id'       =>  'required|exists:tabel_tujuan_pendanaans,id',
+            'inputs_proposal.*.jenis_penerimaan_id'       =>  'required|exists:tabel_jenis_penerimaans,id',
+            'inputs_proposal.*.saluran_pendanaan_id'      =>  'required|exists:tabel_saluran_pendanaans,id',
+            'inputs_proposal.*.jenis_intermediaries_id'   =>  'required|exists:tabel_jenis_intermediaries,id',
+            'inputs_proposal.*.nama_proyek'               =>  'required',
+            'inputs_proposal.*.klasifikasi_portfolio_id'  =>  'required|exists:tabel_klasifikasi_portfolios,id',
+            'inputs_proposal.*.impact_goals_id'           =>  'required|exists:tabel_impact_goals,id',
+            'inputs_proposal.*.estimasi_nilai_usd'        =>  'required',
+            'inputs_proposal.*.estimasi_nilai_idr'        =>  'required',
+            'inputs_proposal.*.usulan_durasi'             =>  'required',
+            'inputs_proposal.*.status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
+            'inputs_proposal.*.dokumen_proposal'          =>  'file',
+        ]);
+
+        foreach ($request->input('inputs_proposal') as $key => $item) {
+            $proposal = Proposal::findOrFail($key);
+            $proposal->update([
+                'donor_id'                  => $item['donor_id'],
+                'tujuan_pendanaan_id'       => $item['tujuan_pendanaan_id'],
+                'jenis_penerimaan_id'       => $item['jenis_penerimaan_id'],
+                'saluran_pendanaan_id'      => $item['saluran_pendanaan_id'],
+                'jenis_intermediaries_id'   => $item['jenis_intermediaries_id'],
+                'nama_proyek'               => $item['nama_proyek'],
+                'klasifikasi_portfolio_id'  => $item['klasifikasi_portfolio_id'],
+                'impact_goals_id'           => json_encode($item['impact_goals_id']),
+                'estimasi_nilai_usd'        => $item['estimasi_nilai_usd'],
+                'estimasi_nilai_idr'        => $item['estimasi_nilai_idr'],
+                'usulan_durasi'             => $item['usulan_durasi'],
+                'status_kemajuan_id'        => $item['status_kemajuan_id'],
+            ]);
+            if ($request->hasFile('inputs_proposal.' . $key . '.dokumen_proposal')) {
+                $file = $request->file('inputs_proposal.' . $key . '.dokumen_proposal');
+                $namaFile = $file->getClientOriginalName();
+                $path = $file->move('assets/proposal/dokumen', $namaFile);
+                if ($proposal->dokumen_proposal) {
+                    File::delete(public_path($proposal->dokumen_proposal));
+                }
+                $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFile;
+                $proposal->save();
+            }
+        }
+        return redirect()->route('pages.proposal', ['proposal' => $proposal->id])
+        ->with('toast_success', 'Dataproposal berhasil diupdate');
+    }
+
+    public function destroy_grid_edit_proposal($id) {
+        $proposal = Proposal::findOrFail($id);
+        $donorId = $proposal->donor_id;
+        File::delete($proposal->dokumen_proposal);
+        $proposal->delete();
+        return redirect()->route('pages.proposal')
+                         ->with('success', 'Data proposal berhasil dihapus.');
     }
 }
