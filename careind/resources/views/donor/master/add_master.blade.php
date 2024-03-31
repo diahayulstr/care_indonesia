@@ -18,6 +18,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{ asset('css_2/style.css')}}">
 
 </head>
 
@@ -344,280 +346,344 @@
                                     {{-- NARAHUBUNG --}}
                                     <div class="tab-pane fade" id="narahubung-justified" role="tabpanel"
                                         aria-labelledby="narahubung-tab">
-                                        <div class="row">
-                                            <div class="col-16">
-                                                {{-- <input type="hidden" id="donor_id" name="donor_id"> --}}
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h2></h2>
+                                            <div class="action-buttons">
+                                                @if (Auth::user()->role_id != 1)
 
-                                                <div class="form-group">
-                                                    <label for="nama_kontak">Nama Kontak</label>
-                                                    <input type="text" placeholder="Nama Kontak"
-                                                        class="form-control @error('nama_kontak') is-invalid @enderror"
-                                                        id="nama_kontak" name="nama_kontak"
-                                                        value="{{ old('nama_kontak') }}">
-                                                    @error('nama_kontak')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="jabatan">Jabatan</label>
-                                                    <input type="text" placeholder="Jabatan"
-                                                        class="form-control @error('jabatan') is-invalid @enderror"
-                                                        id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
-                                                    @error('jabatan')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="jabatan">Email</label>
-                                                    <input type="email" placeholder="Email"
-                                                        class="form-control @error('email') is-invalid @enderror"
-                                                        id="email" name="email" value="{{ old('email') }}">
-                                                    @error('email')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="no_telp">No Telepon</label>
-                                                    <input type="tel" placeholder="No Telepon"
-                                                        class="form-control @error('no_telp') is-invalid @enderror"
-                                                        id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
-                                                    @error('no_telp')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="status_id">Status</label>
-                                                    <select class="form-select" name="status_id" id="status_id">
-                                                        <option value="">--Pilih Status--</option>
-                                                        @foreach ($status as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                @else
+                                                    <a href="#" class="btn btn-outline-danger btn-circle me-2 dash-button-add"
+                                                        id="btn-blank-row-narahubung" data-bs-toggle="tooltip" title="Add Blank Row">
+                                                        <i class="fas fa-plus icon-narhub"></i>
+                                                    </a>
+                                                @endif
                                             </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                    <tr class="text-center fw-bold" style="width: 250px;">
+                                                        <th>Nama Kontak</th>
+                                                        <th>Jabatan</th>
+                                                        <th>Email</th>
+                                                        <th>No Telepon</th>
+                                                        <th>Status</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-narahubung">
+                                                    {{-- @for ($i = 1; $i <= 3; $i++) --}}
+                                                    <tr>
+                                                        <td>
+                                                            <input type="text" placeholder="Nama Kontak"
+                                                                class="form-control @error('nama_kontak') is-invalid @enderror"
+                                                                id="nama_kontak" name="inputs_narahubung[0][nama_kontak]"
+                                                                value="{{ old('nama_kontak') }}">
+                                                            @error('nama_kontak')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td><input type="text" placeholder="Jabatan"
+                                                                class="form-control @error('jabatan') is-invalid @enderror"
+                                                                id="jabatan" name="inputs_narahubung[0][jabatan]" value="{{ old('jabatan') }}">
+                                                            @error('jabatan')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td><input type="email" placeholder="Email"
+                                                                class="form-control @error('email') is-invalid @enderror"
+                                                                id="email" name="inputs_narahubung[0][email]" value="{{ old('email') }}">
+                                                            @error('email')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td><input type="tel" placeholder="No Telepon"
+                                                                class="form-control @error('no_telp') is-invalid @enderror"
+                                                                id="no_telp" name="inputs_narahubung[0][no_telp]" value="{{ old('no_telp') }}">
+                                                            @error('no_telp')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td><select class="form-select" name="inputs_narahubung[0][status_id]" id="status_id">
+                                                                <option value="">--Pilih Status--</option>
+                                                                @foreach ($status as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-inline-block">
+                                                                <a class="btn btn-danger btn-circle" id="delete-btn-row-narahubung" title="Delete">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    {{-- @endfor --}}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
 
                                     {{-- KOMUNIKASI --}}
                                     <div class="tab-pane fade" id="komunikasi-justified" role="tabpanel"
                                         aria-labelledby="komunikasi-tab">
-                                        <div class="row">
-                                            <div class="col-16">
-                                                {{-- <input type="hidden" id="donor_id_komunikasi" name="donor_id"> --}}
-                                                {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h2></h2>
+                                            <div class="action-buttons">
+                                                @if (Auth::user()->role_id != 1)
 
-                                                <div class="form-group">
-                                                    <label for="tanggal">Tanggal</label>
-                                                    <input type="date" placeholder="Tanggal"
-                                                        class="form-control @error('tanggal') is-invalid @enderror"
-                                                        id="tanggal" name="tanggal" value="{{ old('tanggal') }}">
-                                                    @error('tanggal')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="saluran_id">Saluran</label>
-                                                    <select class="form-select form-control" name="saluran_id"
-                                                        id="saluran_id">
-                                                        <option value="">--Pilih Saluran--</option>
-                                                        @foreach ($saluran as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
-                                                    <select class="form-select form-control"
-                                                        name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
-                                                        <option value="">--Pilih Jenjang Komunikasi--</option>
-                                                        @foreach ($jenjangKomunikasi as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="tindak_lanjut_id">Tindak Lanjut</label>
-                                                    <select class="form-select form-control" name="tindak_lanjut_id"
-                                                        id="tindak_lanjut_id">
-                                                        <option value="">--Pilih Tindak Lanjut--</option>
-                                                        @foreach ($tindakLanjut as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="catatan">Catatan</label>
-                                                    <textarea type="text" placeholder="Catatan" class="form-control @error('catatan') is-invalid @enderror"
-                                                        id="catatan" name="catatan" value="{{ old('catatan') }}"></textarea>
-                                                    @error('catatan')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="tgl_selanjutnya">Tanggal Selanjutnya</label>
-                                                    <input type="date" placeholder="Tanggal Selanjutnya"
-                                                        class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
-                                                        id="tgl_selanjutnya" name="tgl_selanjutnya"
-                                                        value="{{ old('tgl_selanjutnya') }}">
-                                                    @error('tgl_selanjutnya')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group mb-4">
-                                                    <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
-                                                    <input type="file" class="form-control"
-                                                        id="dokumen_komunikasi" name="dokumen_komunikasi"
-                                                        onchange="validateFile()">
-                                                    <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
-                                                        gif)
-                                                        atau PDF.</small>
-                                                    <span id="file-error-komunikasi" class="text-danger"></span>
-                                                </div>
-                                                <div id="filePreview-addMaster-komunikasi"></div>
+                                                @else
+                                                    <a href="#" class="btn btn-outline-danger btn-circle me-2 dash-button-add"
+                                                        id="btn-blank-row-komunikasi" data-bs-toggle="tooltip" title="Add Blank Row">
+                                                        <i class="fas fa-plus icon-kom"></i>
+                                                    </a>
+                                                @endif
                                             </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                    <tr class="text-center fw-bold" style="width: 250px;">
+                                                        <th>Tanggal</th>
+                                                        <th>Saluran</th>
+                                                        <th>Jenjang Komunikasi</th>
+                                                        <th>Tindak Lanjut</th>
+                                                        <th>Catatan</th>
+                                                        <th>Tanggal Selanjutnya</th>
+                                                        <th>Dokumen</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-komunikasi">
+                                                    <tr>
+                                                        <td>
+                                                            <input type="date" placeholder="Tanggal"
+                                                            class="form-control @error('tanggal') is-invalid @enderror"
+                                                            id="tanggal" name="inputs_komunikasi[0][tanggal]" value="{{ old('tanggal') }}">
+                                                            @error('tanggal')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_komunikasi[0][saluran_id]" id="saluran_id">
+                                                                <option value="">--Pilih Saluran--</option>
+                                                                @foreach ($saluran as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_komunikasi[0][jenjang_komunikasi_id]"
+                                                                id="jenjang_komunikasi_id">
+                                                                <option value="">--Pilih Jenjang Komunikasi--</option>
+                                                                @foreach ($jenjangKomunikasi as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_komunikasi[0][tindak_lanjut_id]"
+                                                                id="tindak_lanjut_id">
+                                                                <option value="">--Pilih Tindak Lanjut--</option>
+                                                                @foreach ($tindakLanjut as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <textarea type="text" placeholder="Catatan" class="form-control @error('catatan') is-invalid @enderror"
+                                                                id="catatan" name="inputs_komunikasi[0][catatan]" value="{{ old('catatan') }}"></textarea>
+                                                            @error('catatan')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <input type="date" placeholder="Tanggal Selanjutnya"
+                                                                class="form-control @error('tgl_selanjutnya') is-invalid @enderror"
+                                                                id="tgl_selanjutnya" name="inputs_komunikasi[0][tgl_selanjutnya]"
+                                                                value="{{ old('tgl_selanjutnya') }}">
+                                                            @error('tgl_selanjutnya')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <input type="file" class="form-control" id="dokumen_komunikasi"
+                                                                name="inputs_komunikasi[0][dokumen_komunikasi]" onchange="validateFile()">
+                                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                                atau PDF.</small>
+                                                            <span id="file-error" class="text-danger"></span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-inline-block">
+                                                                <a class="btn btn-danger btn-circle" id="delete-btn-row-komunikasi" title="Delete">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
 
                                     {{-- PROPOSAL --}}
                                     <div class="tab-pane fade" id="proposal-justified" role="tabpanel"
                                         aria-labelledby="proposal-tab">
-                                        <div class="row">
-                                            <div class="col-16">
-                                                {{-- <input type="hidden" id="donor_id_proposal" name="donor_id"> --}}
-                                                {{-- <input type="hidden" name="donor_id" value="{{ $donorId }}"> --}}
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h2></h2>
+                                            <div class="action-buttons">
+                                                @if (Auth::user()->role_id != 1)
 
-                                                <div class="form-group">
-                                                    <label for="tujuan_pendanaan_id">Tujuan Pendanaan</label>
-                                                    <select class="form-select form-control"
-                                                        name="tujuan_pendanaan_id" id="tujuan_pendanaan_id">
-                                                        <option value="">--Pilih Tujuan Pendanaan--</option>
-                                                        @foreach ($tujuanPendanaan as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="jenis_penerimaan_id">Jenis Penerimaan</label>
-                                                    <select class="form-select form-control"
-                                                        name="jenis_penerimaan_id" id="jenis_penerimaan_id">
-                                                        <option value="">--Pilih Jenis Penerimaan--</option>
-                                                        @foreach ($jenisPenerimaan as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="saluran_pendanaan_id">Saluran Pendanaan</label>
-                                                    <select class="form-select form-control"
-                                                        name="saluran_pendanaan_id" id="saluran_pendanaan_id">
-                                                        <option value="">--Pilih Saluran Pendanaan--</option>
-                                                        @foreach ($saluranPendanaan as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="jenis_intermediaries_id">Jenis Intermediary</label>
-                                                    <select class="form-select form-control"
-                                                        name="jenis_intermediaries_id" id="jenis_intermediaries_id">
-                                                        <option value="">--Pilih Jenis Intermediary--</option>
-                                                        @foreach ($jenisIntermediaries as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="nama_proyek">Nama Proyek</label>
-                                                    <input type="text" placeholder="Nama Proyek"
-                                                        class="form-control @error('nama_proyek') is-invalid @enderror"
-                                                        id="nama_proyek" name="nama_proyek"
-                                                        value="{{ old('nama_proyek') }}">
-                                                    @error('nama_proyek')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="klasifikasi_portfolio_id">Klasifikasi Portfolio</label>
-                                                    <select class="form-select form-control"
-                                                        name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
-                                                        <option value="">--Pilih Klasifikasi Portfolio--</option>
-                                                        @foreach ($klasifikasiPortfolios as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="impact_goals_id">Impact Goals</label>
-                                                    <select class="form-select form-control" name="impact_goals_id[]"
-                                                        id="impact_goals_id" multiple>
-                                                        <option value="">--Pilih Impact Goals--</option>
-                                                        @foreach ($impactGoals as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="estimasi_nilai_usd">Estimasi Nilai USD</label>
-                                                    <input type="text" placeholder="Estimasi Nilai USD"
-                                                        class="form-control @error('estimasi_nilai_usd') is-invalid @enderror"
-                                                        id="estimasi_nilai_usd" name="estimasi_nilai_usd"
-                                                        value="{{ old('estimasi_nilai_usd') }}">
-                                                    @error('estimasi_nilai_usd')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="estimasi_nilai_idr">Estimasi Nilai IDR</label>
-                                                    <input type="text" placeholder="Estimasi Nilai IDR"
-                                                        class="form-control @error('estimasi_nilai_idr') is-invalid @enderror"
-                                                        id="estimasi_nilai_idr" name="estimasi_nilai_idr"
-                                                        value="{{ old('estimasi_nilai_idr') }}">
-                                                    @error('estimasi_nilai_idr')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="usulan_durasi">Usulan Durasi</label>
-                                                    <input type="text" placeholder="Usulan Durasi"
-                                                        class="form-control @error('usulan_durasi') is-invalid @enderror"
-                                                        id="usulan_durasi" name="usulan_durasi"
-                                                        value="{{ old('usulan_durasi') }}">
-                                                    @error('usulan_durasi')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="status_kemajuan_id">Status Kemajuan</label>
-                                                    <select class="form-select form-control" name="status_kemajuan_id"
-                                                        id="status_kemajuan_id">
-                                                        <option value="">--Pilih Status Kemajuan--</option>
-                                                        @foreach ($statusKemajuan as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group mb-4">
-                                                    <label for="dokumen_proposal" class="form-label">Dokumen</label>
-                                                    <input type="file" class="form-control" id="dokumen_proposal"
-                                                        name="dokumen_proposal" onchange="validateFile()">
-                                                    <small class="text-muted">File harus berupa gambar (jpg, jpeg, png,
-                                                        gif)
-                                                        atau PDF.</small>
-                                                    <span id="file_error_proposal" class="text-danger"></span>
-                                                </div>
-                                                <div id="filePreview-addMaster-proposal"></div>
+                                                @else
+                                                    <a href="#" class="btn btn-outline-danger btn-circle me-2 dash-button-add"
+                                                        id="btn-blank-row-proposal" data-bs-toggle="tooltip" title="Add Blank Row">
+                                                        <i class="fas fa-plus icon-prop"></i>
+                                                    </a>
+                                                @endif
                                             </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <thead>
+                                                    <tr class="text-center fw-bold" style="width: 250px;">
+                                                        <th>Tujuan Pendanaan</th>
+                                                        <th>Jenis Penerimaan</th>
+                                                        <th>Saluran Pendanaan</th>
+                                                        <th>Jenis Intermediary</th>
+                                                        <th>Nama Proyek</th>
+                                                        <th>Klasifikasi Portfolio</th>
+                                                        <th>Impact Goals</th>
+                                                        <th>Estimasi Nilai USD</th>
+                                                        <th>Estimasi Nilai IDR</th>
+                                                        <th>Usulan Durasi</th>
+                                                        <th>Status Kemajuan</th>
+                                                        <th>Dokumen</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-proposal">
+                                                    {{-- @for ($i = 1; $i <= 3; $i++) --}}
+                                                    <tr>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_proposal[0][tujuan_pendanaan_id]"
+                                                                id="tujuan_pendanaan_id">
+                                                                <option value="">--Pilih Tujuan Pendanaan--</option>
+                                                                @foreach ($tujuanPendanaan as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_proposal[0][jenis_penerimaan_id]"
+                                                                id="jenis_penerimaan_id">
+                                                                <option value="">--Pilih Jenis Penerimaan--</option>
+                                                                @foreach ($jenisPenerimaan as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_proposal[0][saluran_pendanaan_id]"
+                                                                id="saluran_pendanaan_id">
+                                                                <option value="">--Pilih Saluran Pendanaan--</option>
+                                                                @foreach ($saluranPendanaan as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_proposal[0][jenis_intermediaries_id]"
+                                                                id="jenis_intermediaries_id">
+                                                                <option value="">--Pilih Jenis Intermediary--</option>
+                                                                @foreach ($jenisIntermediaries as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" placeholder="Nama Proyek"
+                                                                class="form-control @error('nama_proyek') is-invalid @enderror"
+                                                                id="nama_proyek" name="inputs_proposal[0][nama_proyek]"
+                                                                value="{{ old('nama_proyek') }}">
+                                                            @error('nama_proyek')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_proposal[0][klasifikasi_portfolio_id]"
+                                                                id="klasifikasi_portfolio_id">
+                                                                <option value="">--Pilih Klasifikasi Portfolio--</option>
+                                                                @foreach ($klasifikasiPortfolios as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control"
+                                                                name="inputs_proposal[0][impact_goals_id][]"
+                                                                id="impact_goals_id" multiple>
+                                                                <option value="">--Pilih Impact Goals--</option>
+                                                                @foreach ($impactGoals as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" placeholder="Estimasi Nilai USD"
+                                                                class="form-control @error('estimasi_nilai_usd') is-invalid @enderror"
+                                                                id="estimasi_nilai_usd" name="inputs_proposal[0][estimasi_nilai_usd]"
+                                                                value="{{ old('estimasi_nilai_usd') }}">
+                                                            @error('estimasi_nilai_usd')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" placeholder="Estimasi Nilai IDR"
+                                                                class="form-control @error('estimasi_nilai_idr') is-invalid @enderror"
+                                                                id="estimasi_nilai_idr" name="inputs_proposal[0][estimasi_nilai_idr]"
+                                                                value="{{ old('estimasi_nilai_idr') }}">
+                                                            @error('estimasi_nilai_idr')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" placeholder="Usulan Durasi"
+                                                                class="form-control @error('usulan_durasi') is-invalid @enderror"
+                                                                id="usulan_durasi" name="inputs_proposal[0][usulan_durasi]"
+                                                                value="{{ old('usulan_durasi') }}">
+                                                            @error('usulan_durasi')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </td>
+                                                        <td>
+                                                            <select class="form-select form-control" name="inputs_proposal[0][status_kemajuan_id]"
+                                                                id="status_kemajuan_id">
+                                                                <option value="">--Pilih Status Kemajuan--</option>
+                                                                @foreach ($statusKemajuan as $item)
+                                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            <input type="file" class="form-control" id="dokumen_proposal"
+                                                                name="inputs_proposal[0][dokumen_proposal]" onchange="validateFile()">
+                                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                                atau PDF.</small>
+                                                            <span id="file-error" class="text-danger"></span>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-inline-block">
+                                                                <a class="btn btn-danger btn-circle" id="delete-btn-row-proposal" title="Delete">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    {{-- @endfor --}}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -771,6 +837,339 @@
                 })
 
             });
+        </script>
+
+        <script id="statusIDs" type="application/json">
+            {!! json_encode($status) !!}
+        </script>
+
+        <script id="saluranIDs" type="application/json">
+            {!! json_encode($saluran) !!}
+        </script>
+
+        <script id="jenjangkomunikasiIDs" type="application/json">
+            {!! json_encode($jenjangKomunikasi) !!}
+        </script>
+
+        <script id="tindaklanjutIDs" type="application/json">
+            {!! json_encode($tindakLanjut) !!}
+        </script>
+
+        <script id="tujuanpendanaanIDs" type="application/json">
+            {!! json_encode($tujuanPendanaan) !!}
+        </script>
+
+        <script id="jenispenerimaanIDs" type="application/json">
+            {!! json_encode($jenisPenerimaan) !!}
+        </script>
+
+        <script id="saluranpendanaanIDs" type="application/json">
+            {!! json_encode($saluranPendanaan) !!}
+        </script>
+
+        <script id="jenisintermediaryIDs" type="application/json">
+            {!! json_encode($jenisIntermediaries) !!}
+        </script>
+
+        <script id="klasifikasiportfolioIDs" type="application/json">
+            {!! json_encode($klasifikasiPortfolios) !!}
+        </script>
+
+        <script id="impactgoalsIDs" type="application/json">
+            {!! json_encode($impactGoals) !!}
+        </script>
+
+        <script id="statuskemajuanIDs" type="application/json">
+            {!! json_encode($statusKemajuan) !!}
+        </script>
+
+        <script>
+        var statusIDs = JSON.parse(document.getElementById("statusIDs").textContent);
+        var saluranIDs = JSON.parse(document.getElementById("saluranIDs").textContent);
+        var jenjangkomunikasiIDs = JSON.parse(document.getElementById("jenjangkomunikasiIDs").textContent);
+        var tindaklanjutIDs = JSON.parse(document.getElementById("tindaklanjutIDs").textContent);
+        var tujuanpendanaanIDs = JSON.parse(document.getElementById("tujuanpendanaanIDs").textContent);
+        var jenispenerimaanIDs = JSON.parse(document.getElementById("jenispenerimaanIDs").textContent);
+        var saluranpendanaanIDs = JSON.parse(document.getElementById("saluranpendanaanIDs").textContent);
+        var jenisintermediaryIDs = JSON.parse(document.getElementById("jenisintermediaryIDs").textContent);
+        var klasifikasiportfolioIDs = JSON.parse(document.getElementById("klasifikasiportfolioIDs").textContent);
+        var impactgoalsIDs = JSON.parse(document.getElementById("impactgoalsIDs").textContent);
+        var statuskemajuanIDs = JSON.parse(document.getElementById("statuskemajuanIDs").textContent);
+
+        function addBlankRowNarahubung() {
+            var tableBodyNarahubung = document.getElementById("table-narahubung");
+            var newRowNarahubung = document.createElement("tr");
+            var i = tableBodyNarahubung.children.length;
+            newRowNarahubung.innerHTML = `
+                                <td>
+                                    <input type="text" placeholder="Nama Kontak" class="form-control" name="inputs_narahubung[${i}][nama_kontak]">
+                                </td>
+                                <td>
+                                    <input type="text" placeholder="Jabatan" class="form-control" name="inputs_narahubung[${i}][jabatan]">
+                                </td>
+                                <td>
+                                    <input type="email" placeholder="Email" class="form-control" name="inputs_narahubung[${i}][email]">
+                                </td>
+                                <td>
+                                    <input type="tel" placeholder="No Telepon" class="form-control" name="inputs_narahubung[${i}][no_telp]">
+                                </td>
+                                <td>
+                                    <select class="form-select" name="inputs_narahubung[${i}][status_id]">
+                                    <option value="">--Pilih Status--</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="d-inline-block">
+                                        <a class="btn btn-danger btn-circle" id="delete-btn-row-narahubung" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+            `;
+
+            var statusSelect = newRowNarahubung.querySelector(`select[name='inputs_narahubung[${i}][status_id]']`);
+            statusIDs.forEach(function(status) {
+                var option = document.createElement('option');
+                option.value = status.id;
+                option.text = status.name;
+                statusSelect.appendChild(option);
+            });
+
+            tableBodyNarahubung.appendChild(newRowNarahubung);
+            newRowNarahubung.querySelector("#delete-btn-row-narahubung").addEventListener("click", deleteRow);
+        }
+
+        function addBlankRowKomunikasi() {
+            var tableBodyKomunikasi = document.getElementById("table-komunikasi");
+            var newRowKomunikasi = document.createElement("tr");
+            var i = tableBodyKomunikasi.children.length;
+            newRowKomunikasi.innerHTML = `
+                                    <td>
+                                        <input type="date" placeholder="Tanggal" class="form-control" id="tanggal" name="inputs_komunikasi[${i}][tanggal]" value="{{ old('tanggal') }}">
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_komunikasi[${i}][saluran_id]" id="saluran_id">
+                                        <option value="">--Pilih Saluran--</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_komunikasi[${i}][jenjang_komunikasi_id]" id="jenjang_komunikasi_id">
+                                        <option value="">--Pilih Jenjang Komunikasi--</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_komunikasi[${i}][tindak_lanjut_id]" id="tindak_lanjut_id">
+                                        <option value="">--Pilih Tindak Lanjut--</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <textarea type="text" placeholder="Catatan" class="form-control" id="catatan" name="inputs_komunikasi[${i}][catatan]" value="{{ old('catatan') }}"></textarea>
+                                    </td>
+                                    <td>
+                                        <input type="date" placeholder="Tanggal Selanjutnya" class="form-control" id="tgl_selanjutnya" name="inputs_komunikasi[${i}][tgl_selanjutnya]" value="{{ old('tgl_selanjutnya') }}">
+                                    </td>
+                                    <td>
+                                        <input type="file" class="form-control" id="dokumen_komunikasi" name="inputs_komunikasi[${i}][dokumen_komunikasi]" onchange="validateFile()">
+                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                        <span id="file-error" class="text-danger"></span>
+                                    </td>
+                                    <td>
+                                        <div class="d-inline-block">
+                                            <a class="btn btn-danger btn-circle" id="delete-btn-row-komunikasi" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+            `;
+
+            var saluranSelect = newRowKomunikasi.querySelector(`select[name='inputs_komunikasi[${i}][saluran_id]']`);
+            saluranIDs.forEach(function(saluran) {
+                var option = document.createElement('option');
+                option.value = saluran.id;
+                option.text = saluran.name;
+                saluranSelect.appendChild(option);
+            });
+
+            var jenjangkomunikasiSelect = newRowKomunikasi.querySelector(`select[name='inputs_komunikasi[${i}][jenjang_komunikasi_id]']`);
+            jenjangkomunikasiIDs.forEach(function(jenjang_komunikasi) {
+                var option = document.createElement('option');
+                option.value = jenjang_komunikasi.id;
+                option.text = jenjang_komunikasi.name;
+                jenjangkomunikasiSelect.appendChild(option);
+            });
+
+            var tindaklanjutSelect = newRowKomunikasi.querySelector(`select[name='inputs_komunikasi[${i}][tindak_lanjut_id]']`);
+            tindaklanjutIDs.forEach(function(tindak_lanjut) {
+                var option = document.createElement('option');
+                option.value = tindak_lanjut.id;
+                option.text = tindak_lanjut.name;
+                tindaklanjutSelect.appendChild(option);
+            });
+
+            tableBodyKomunikasi.appendChild(newRowKomunikasi);
+            newRowKomunikasi.querySelector("#delete-btn-row-komunikasi").addEventListener("click", deleteRow);
+        }
+
+        function addBlankRowProposal() {
+            var tableBodyProposal = document.getElementById("table-proposal");
+            var newRowProposal = document.createElement("tr");
+            var i = tableBodyProposal.children.length;
+            newRowProposal.innerHTML = `
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_proposal[${i}][tujuan_pendanaan_id]" id="tujuan_pendanaan_id">
+                                        <option value="">--Pilih Tujuan Pendanaan--</option></select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_proposal[${i}][jenis_penerimaan_id]" id="jenis_penerimaan_id">
+                                        <option value="">--Pilih Jenis Penerimaan--</option></select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_proposal[${i}][saluran_pendanaan_id]" id="saluran_pendanaan_id">
+                                        <option value="">--Pilih Saluran Pendanaan--</option></select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_proposal[${i}][jenis_intermediaries_id]" id="jenis_intermediaries_id">
+                                        <option value="">--Pilih Jenis Intermediary--</option></select>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Nama Proyek" class="form-control" id="nama_proyek" name="inputs_proposal[${i}][nama_proyek]" value="{{ old('nama_proyek') }}">
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_proposal[${i}][klasifikasi_portfolio_id]" id="klasifikasi_portfolio_id">
+                                        <option value="">--Pilih Klasifikasi Portfolio--</option></select>
+                                    </td>
+                                    <td>
+                                        <select class="impact-goals-select-grid form-select form-control" name="inputs_proposal[${i}][impact_goals_id][]" id="impact_goals_id_${i}" multiple>
+                                            <option value="">--Pilih Impact Goals--</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Estimasi Nilai USD" class="form-control" id="estimasi_nilai_usd" name="inputs_proposal[${i}][estimasi_nilai_usd]"
+                                        value="{{ old('estimasi_nilai_usd') }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Estimasi Nilai IDR" class="form-control" id="estimasi_nilai_idr" name="inputs_proposal[${i}][estimasi_nilai_idr]"
+                                        value="{{ old('estimasi_nilai_idr') }}">
+                                    </td>
+                                    <td>
+                                        <input type="text" placeholder="Usulan Durasi"class="form-control" id="usulan_durasi" name="inputs_proposal[${i}][usulan_durasi]"
+                                        value="{{ old('usulan_durasi') }}">
+                                    </td>
+                                    <td>
+                                        <select class="form-select form-control" name="inputs_proposal[${i}][status_kemajuan_id]" id="status_kemajuan_id">
+                                        <option value="">--Pilih Status Kemajuan--</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="file" class="form-control" id="dokumen_proposal" name="inputs_proposal[${i}][dokumen_proposal]" onchange="validateFile()">
+                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                        <span id="file-error" class="text-danger"></span>
+                                    </td>
+                                    <td>
+                                        <div class="d-inline-block">
+                                        <a class="btn btn-danger btn-circle" id="delete-btn-row-proposal" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        </div>
+                                    </td>
+            `;
+
+            var tujuanpendanaanSelect = newRowProposal.querySelector(`select[name='inputs_proposal[${i}][tujuan_pendanaan_id]']`);
+            tujuanpendanaanIDs.forEach(function(tujuan_pendanaan) {
+                var option = document.createElement('option');
+                option.value = tujuan_pendanaan.id;
+                option.text = tujuan_pendanaan.name;
+                tujuanpendanaanSelect.appendChild(option);
+            });
+
+            var jenispenerimaanSelect = newRowProposal.querySelector(`select[name='inputs_proposal[${i}][jenis_penerimaan_id]']`);
+            jenispenerimaanIDs.forEach(function(jenis_penerimaan) {
+                var option = document.createElement('option');
+                option.value = jenis_penerimaan.id;
+                option.text = jenis_penerimaan.name;
+                jenispenerimaanSelect.appendChild(option);
+            });
+
+            var saluranpendanaanSelect = newRowProposal.querySelector(`select[name='inputs_proposal[${i}][saluran_pendanaan_id]']`);
+            saluranpendanaanIDs.forEach(function(saluran_pendanaan) {
+                var option = document.createElement('option');
+                option.value = saluran_pendanaan.id;
+                option.text = saluran_pendanaan.name;
+                saluranpendanaanSelect.appendChild(option);
+            });
+
+            var jenisintermediarySelect = newRowProposal.querySelector(`select[name='inputs_proposal[${i}][jenis_intermediaries_id]']`);
+            jenisintermediaryIDs.forEach(function(jenis_intermediary) {
+                var option = document.createElement('option');
+                option.value = jenis_intermediary.id;
+                option.text = jenis_intermediary.name;
+                jenisintermediarySelect.appendChild(option);
+            });
+
+            var klasifikasiportfolioSelect = newRowProposal.querySelector(`select[name='inputs_proposal[${i}][klasifikasi_portfolio_id]']`);
+            klasifikasiportfolioIDs.forEach(function(klasifikasi_portfolio) {
+                var option = document.createElement('option');
+                option.value = klasifikasi_portfolio.id;
+                option.text = klasifikasi_portfolio.name;
+                klasifikasiportfolioSelect.appendChild(option);
+            });
+
+            var impactgoalsSelect = newRowProposal.querySelector(`select[name='inputs_proposal[${i}][impact_goals_id][]']`);
+            impactgoalsIDs.forEach(function(impact_goals) {
+                var option = document.createElement('option');
+                option.value = impact_goals.id;
+                option.text = impact_goals.name;
+                impactgoalsSelect.appendChild(option);
+            });
+            // $(impactgoalsSelect).select2();
+
+            var statuskemajuanSelect = newRowProposal.querySelector(`select[name='inputs_proposal[${i}][status_kemajuan_id]']`);
+            statuskemajuanIDs.forEach(function(status_kemajuan) {
+                var option = document.createElement('option');
+                option.value = status_kemajuan.id;
+                option.text = status_kemajuan.name;
+                statuskemajuanSelect.appendChild(option);
+            });
+
+            tableBodyProposal.appendChild(newRowProposal);
+            newRowProposal.querySelector("#delete-btn-row-proposal").addEventListener("click", deleteRow);
+        }
+
+        function deleteRow(event) {
+            var deleteButton = event.target;
+            var rowToDelete = deleteButton.closest("tr");
+            if (rowToDelete) {
+                rowToDelete.remove();
+            }
+        }
+
+        document.getElementById("btn-blank-row-narahubung").addEventListener("click", function (event) {
+            event.preventDefault();
+            addBlankRowNarahubung();
+        });
+
+        document.getElementById("btn-blank-row-komunikasi").addEventListener("click", function (event) {
+            event.preventDefault();
+            addBlankRowKomunikasi();
+        });
+
+        document.getElementById("btn-blank-row-proposal").addEventListener("click", function (event) {
+            event.preventDefault();
+            addBlankRowProposal();
+        });
+
+        document.getElementById("delete-btn-row-narahubung").addEventListener("click", function (event) {
+            deleteRow(event);
+        });
+
+        document.getElementById("delete-btn-row-komunikasi").addEventListener("click", function (event) {
+            deleteRow(event);
+        });
+
+        document.getElementById("delete-btn-row-proposal").addEventListener("click", function (event) {
+            deleteRow(event);
+        });
+
         </script>
 
         @include('layouts.template')
