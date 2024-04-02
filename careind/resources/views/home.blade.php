@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,12 +17,28 @@
     </script>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{ asset('css_2/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css_2/app.css') }}">
 
+    <style>
+        #dash-count .icon-container {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #dash-count .icon-container i {
+            font-size: 2em;
+        }
+    </style>
 
 </head>
 
@@ -36,7 +51,7 @@
         <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('home')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('home') }}">
                 <div class="sidebar-brand-text mx-3">Care Indonesia</div>
             </a>
 
@@ -46,7 +61,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{url('home')}}">
+                <a class="nav-link" href="{{ url('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -57,25 +72,25 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('donor')}}">
+                <a class="nav-link" href="{{ url('donor') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Donor</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('narahubung')}}">
+                <a class="nav-link" href="{{ url('narahubung') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Narahubung</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('komunikasi')}}">
+                <a class="nav-link" href="{{ url('komunikasi') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Komunikasi</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="{{url('proposal')}}">
+                <a class="nav-link" href="{{ url('proposal') }}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Proposal</span>
                 </a>
@@ -83,38 +98,39 @@
 
 
 
-            @if(Auth::user()->role_id != 1)
+            @if (Auth::user()->role_id != 1)
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
             @else
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Admin Only</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
-                        <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
-                        <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
-                        <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
-                        <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
-                        <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Admin Only</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Pages</h6>
+                            <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
+                            <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
+                            <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                            <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
+                            <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
+                            <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
+                                Portfolio</a>
+                            <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                            <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
+                            <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('status') }}">Status</a>
+                            <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                            <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
+                            <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
             @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -149,15 +165,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('style/img/user.png')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('style/img/user.png') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -175,74 +192,110 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
                     <!-- Sale & Revenue Start -->
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
-                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
-                                    <div class="icon-container bg-gradient-danger rounded-circle shadow">
-                                        <i data-feather="bar-chart-2" aria-hidden="true" style="color: white"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Total Donor</p>
-                                        <h6 class="mb-0">{{ $donor }}</h6>
-                                    </div>
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                            <div
+                                class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                <div class="icon-container bg-gradient-danger rounded-circle shadow">
+                                    <i data-feather="bar-chart-2" aria-hidden="true" style="color: white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Donor</p>
+                                    <h6 class="mb-0">{{ $donor }}</h6>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
-                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
-                                    <div class="icon-container bg-gradient-warning rounded-circle shadow">
-                                        <i data-feather="users" aria-hidden="true" style="color: white"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Total Narahubung</p>
-                                        <h6 class="mb-0">{{ $narahubung }}</h6>
-                                    </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                            <div
+                                class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                <div class="icon-container bg-gradient-warning rounded-circle shadow">
+                                    <i data-feather="users" aria-hidden="true" style="color: white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Narahubung</p>
+                                    <h6 class="mb-0">{{ $narahubung }}</h6>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
-                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
-                                    <div class="icon-container bg-gradient-info rounded-circle shadow">
-                                        <i data-feather="phone-call" aria-hidden="true" style="color: white"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Total Komunikasi</p>
-                                        <h6 class="mb-0">{{ $komunikasi }}</h6>
-                                    </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                            <div
+                                class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                <div class="icon-container bg-gradient-info rounded-circle shadow">
+                                    <i data-feather="phone-call" aria-hidden="true" style="color: white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Komunikasi</p>
+                                    <h6 class="mb-0">{{ $komunikasi }}</h6>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
-                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
-                                    <div class="icon-container bg-gradient-success rounded-circle shadow">
-                                        <i data-feather="file-text" aria-hidden="true" style="color: white"></i>
-                                    </div>
-                                    <div class="ms-3">
-                                        <p class="mb-2">Total Proposal</p>
-                                        <h6 class="mb-0">{{ $proposal }}</h6>
-                                    </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                            <div
+                                class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                <div class="icon-container bg-gradient-success rounded-circle shadow">
+                                    <i data-feather="file-text" aria-hidden="true" style="color: white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Proposal</p>
+                                    <h6 class="mb-0">{{ $proposal }}</h6>
                                 </div>
                             </div>
                         </div>
 
-                    <!-- Sale & Revenue End -->
 
-                    <div class="row">
+                        <!-- Sale & Revenue End -->
+
+
                         <!-- Content Column -->
                         <div class="col-lg-6 mb-4">
-
                             <!-- Calender Card -->
-                            <div class="card shadow mb-4">
+                            <div class="card shadow">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-danger">Calender</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="align-self-center w-100">
-										<div id="calender"></div>
-									</div>
+                                        <div class="chart">
+                                            <div id="datetimepicker-dashboard"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-					</div>
 
 
+                        <!-- Schedule Card -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow" style="height: 455px; overflow: auto;">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-danger">Schedule</h6>
+                                </div>
+                                <div class="card-body" style="overflow: auto;">
+                                    <div class="align-self-center w-100">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda libero
+                                            aspernatur sint at. Odio deleniti aspernatur dicta facere similique vitae et
+                                            ratione, optio laborum doloremque.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- History Card --}}
+                        <div class="mb-4">
+                            <div class="card shadow" style="overflow: auto;">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-danger">Proposal History</h6>
+                                </div>
+                                <div class="card-body" style="overflow: auto;">
+                                    <div class="align-self-center w-100">
+                                        <p class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ullam eaque
+                                            perferendis explicabo velit impedit, dolore, qui quasi nemo cum ratione vel
+                                            molestias aspernatur repellendus?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -271,8 +324,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -281,7 +334,8 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login again.</div>
+                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login
+                    again.</div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>
@@ -296,8 +350,18 @@
         feather.replace();
     </script>
 
+    <script src="{{ asset('js_2/app.js') }}"></script>
 
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr("#datetimepicker-dashboard", {
+                inline: true,
+                prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+                nextArrow: "<span title=\"Next month\">&raquo;</span>",
+                defaultDate: "today"
+            });
+        });
+    </script>
 
     @include('layouts.template')
 
