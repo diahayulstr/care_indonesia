@@ -140,3 +140,15 @@
 #btn-blank-row-proposal:hover .icon-prop {
     color: #e74a3b;
 }
+
+#dash-count .icon-container {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dash-count .icon-container i {
+    font-size: 2em;
+}

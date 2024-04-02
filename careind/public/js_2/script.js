@@ -402,10 +402,7 @@ $(document).ready(function () {
     }
     // add
     previewFile($("#dokumen_donor"), $("#filePreview-addMaster-donor"));
-    previewFile(
-        $("#dokumen_komunikasi"),
-        $("#filePreview-addMaster-komunikasi")
-    );
+    previewFile($("#dokumen_komunikasi"),$("#filePreview-addMaster-komunikasi"));
     previewFile($("#dokumen_proposal"), $("#filePreview-addMaster-proposal"));
 
     previewFile($("#dokumen_donor"), $("#filePreview-add-donor"));
@@ -451,7 +448,7 @@ $(document).ready(function () {
     });
 });
 
-// ADD BLANK ROW NARAHUBUNG
+
 
 
 

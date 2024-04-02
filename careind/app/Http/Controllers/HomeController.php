@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Donor;
+use App\Models\Proposal;
+use App\Models\Komunikasi;
+use App\Models\Narahubung;
 use App\Models\TabelStatus;
 use App\Models\TabelSaluran;
 use Illuminate\Http\Request;
@@ -22,7 +26,12 @@ use App\Models\TabelKlasifikasiPortfolios;
 class HomeController extends Controller
 {
     public function home() {
-        return view('home');
+        return view('home',[
+            'donor' => Donor::count(),
+            'narahubung' => Narahubung::count(),
+            'komunikasi' => Komunikasi::count(),
+            'proposal' => Proposal::count(),
+        ]);
     }
 
     public function user() {

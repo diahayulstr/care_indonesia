@@ -23,6 +23,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+
+
 </head>
 
 <body id="page-top">
@@ -171,7 +173,75 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+                    <!-- Sale & Revenue Start -->
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="icon-container bg-gradient-danger rounded-circle shadow">
+                                        <i data-feather="bar-chart-2" aria-hidden="true" style="color: white"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <p class="mb-2">Total Donor</p>
+                                        <h6 class="mb-0">{{ $donor }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="icon-container bg-gradient-warning rounded-circle shadow">
+                                        <i data-feather="users" aria-hidden="true" style="color: white"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <p class="mb-2">Total Narahubung</p>
+                                        <h6 class="mb-0">{{ $narahubung }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="icon-container bg-gradient-info rounded-circle shadow">
+                                        <i data-feather="phone-call" aria-hidden="true" style="color: white"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <p class="mb-2">Total Komunikasi</p>
+                                        <h6 class="mb-0">{{ $komunikasi }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4" id="dash-count">
+                                <div class="shadow h-100 py-2 bg-white rounded d-flex align-items-center justify-content-between p-4">
+                                    <div class="icon-container bg-gradient-success rounded-circle shadow">
+                                        <i data-feather="file-text" aria-hidden="true" style="color: white"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <p class="mb-2">Total Proposal</p>
+                                        <h6 class="mb-0">{{ $proposal }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Sale & Revenue End -->
+
+                    <div class="row">
+                        <!-- Content Column -->
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Calender Card -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-danger">Calender</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="align-self-center w-100">
+										<div id="calender"></div>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -219,6 +289,15 @@
             </div>
         </div>
     </div>
+
+    <!-- Icons library -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace();
+    </script>
+
+
+
 
     @include('layouts.template')
 

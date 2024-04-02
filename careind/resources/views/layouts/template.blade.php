@@ -64,6 +64,8 @@
     {{-- <script src="{{ asset('style/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('style/js/demo/chart-pie-demo.js') }}"></script> --}}
 
+
+
     {{-- Custom Script Dialog --}}
     <script src="{{ asset('js_2/script.js')}}"></script>
 

@@ -178,7 +178,7 @@
                             <div>
                                 @if (Auth::user()->role_id != 1)
                                 @else
-                                    <a href="{{ url('grid_edit/narahubung/edit') }}" class="btn btn-outline-warning btn-circle me-2 dotted-button"
+                                    <a href="{{ url('grid_edit/narahubung/edit') }}" class="btn btn-outline-warning btn-circle dotted-button"
                                         data-bs-toggle="tooltip" title="Grid Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil-fill icon-edit" viewBox="0 0 16 16">
@@ -187,7 +187,7 @@
                                         </svg>
                                     </a>
                                     <a href="{{ url('grid_add/narahubung') }}"
-                                        class="btn btn-outline-primary btn-circle me-2 dotted-button"
+                                        class="btn btn-outline-primary btn-circle dotted-button"
                                         data-bs-toggle="tooltip" title="Grid Add">
                                         <i class="fas fa-plus icon"></i>
                                     </a>

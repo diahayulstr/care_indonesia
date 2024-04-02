@@ -3,7 +3,7 @@
 
 <head>
 
-    {{-- Bootstrap CDN --}}
+     {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
 
 
 </head>
@@ -172,19 +173,11 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Donor</h6>
                             </div>
                             <div>
-                                {{-- <a href="#" class="btn btn-icon-split split-icon-btn btn-danger rounded-pill">
-                                    <span class="icon text-white">
-                                      <i class="fas fa-plus"></i>
-                                    </span>
-                                    <span class="text">Add Master</span>
-                                    <span class="divider"></span>
-
-                                </a> --}}
                                 @if(Auth::user()->role_id !=1)
 
                                 @else
                                 <a href="{{ url('master/add') }}" id="btn-addMaster"
-                                    class="btn btn-outline-primary btn-circle me-2" data-bs-toggle="tooltip"
+                                    class="btn btn-outline-primary btn-circle" data-bs-toggle="tooltip"
                                     title="Master/Detail Add"><i class="fas fa-plus"></i></a>
                                 <a href="{{ url('donor/add') }}" id="btn-add-donor"
                                     class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" title="Add"><i
