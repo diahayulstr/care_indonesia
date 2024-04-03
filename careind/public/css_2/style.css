@@ -9,12 +9,42 @@
     margin: 10px 0;
 }
 
+#statusact button:hover {
+    cursor: default;
+}
+
 #statuskemajuanact .status-button {
     border: none;
     padding: 0 5px;
     border-radius: 20px;
     color: white;
     width: 150px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#statuskemajuanact button:hover {
+    cursor: default;
+}
+
+#ongoingkomunikasi .status-button {
+    border: none;
+    padding: 0 5px;
+    border-radius: 20px;
+    color: white;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#action-btn .detail-button {
+    border: none;
+    padding: 2px 5px;
+    border-radius: 20px;
+    color: white;
+    width: 80px;
     height: 30px;
     text-align: center;
     margin: 10px 0;
@@ -152,4 +182,5 @@
 #dash-count .icon-container i {
     font-size: 2em;
 }
+
 

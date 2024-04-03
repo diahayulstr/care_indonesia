@@ -272,9 +272,53 @@
                                 </div>
                                 <div class="card-body" style="overflow: auto;">
                                     <div class="align-self-center w-100">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda libero
-                                            aspernatur sint at. Odio deleniti aspernatur dicta facere similique vitae et
-                                            ratione, optio laborum doloremque.</p>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover my-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Komunikasi ID</th>
+                                                        <th>Donor ID</th>
+                                                        <th>Tanggal</th>
+                                                        <th>Tanggal Selanjutnya</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @forelse ($ongoing_komunikasi as $items)
+                                                        <tr>
+                                                            <td scope="row" class="fw-bold">{{ $loop->iteration }}
+                                                            </td>
+                                                            <td>{{ $items->id }}</td>
+                                                            <td>{{ $items->donorID->nama_organisasi }}</td>
+                                                            <td>{{ $items->tanggal }}</td>
+                                                            <td id="ongoingkomunikasi">
+                                                                @php
+                                                                    $firstTglSelanjutnya = $ongoing_komunikasi->first()->tgl_selanjutnya;
+                                                                    $buttonClass = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'bg-warning pending' : '';
+                                                                    $textColor = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-white' : 'text-black';
+                                                                @endphp
+                                                                <button class="status-button {{ $buttonClass }} {{ $textColor }}">
+                                                                    {{ $items->tgl_selanjutnya }}
+                                                                </button>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-inline-block" id="action-btn">
+                                                                    <a href="{{ url('komunikasi/' . $items->id) }}"
+                                                                        class="btn btn-info detail-button"
+                                                                        data-bs-toggle="tooltip" title="View">
+                                                                        Detail
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        @empty
+                                                            <td colspan="6" class="text-center">Tidak ada data...
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -282,16 +326,75 @@
 
                         {{-- History Card --}}
                         <div class="mb-4">
-                            <div class="card shadow" style="overflow: auto;">
+                            <div class="card shadow">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-danger">Proposal History</h6>
                                 </div>
-                                <div class="card-body" style="overflow: auto;">
+                                <div class="card-body">
                                     <div class="align-self-center w-100">
-                                        <p class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti ullam eaque
-                                            perferendis explicabo velit impedit, dolore, qui quasi nemo cum ratione vel
-                                            molestias aspernatur repellendus?</p>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover my-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Updated Time</th>
+                                                        <th>Proposal ID</th>
+                                                        <th>Donor ID</th>
+                                                        <th>Nama Proyek</th>
+                                                        <th>Status Kemajuan</th>
+                                                        <th>Dokumen</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @forelse ($update_proposal as $item)
+                                                        <tr>
+                                                            <td scope="row" class="fw-bold">{{ $loop->iteration }}
+                                                            </td>
+                                                            <td>{{ $item->updated_at }}</td>
+                                                            <td>{{ $item->id }}</td>
+                                                            <td>{{ $item->donorID->nama_organisasi }}</td>
+                                                            <td>{{ $item->nama_proyek }}</td>
+                                                            <td id="statuskemajuanact">
+                                                                @if ($item->statusKemajuan->name == 'Disetujui')
+                                                                    <button
+                                                                        class="status-button bg-success active">{{ $item->statusKemajuan->name }}</button>
+                                                                @elseif ($item->statusKemajuan->name == 'Tidak dilanjutkan')
+                                                                    <button
+                                                                        class="status-button bg-danger pending">{{ $item->statusKemajuan->name }}</button>
+                                                                @else
+                                                                    <button
+                                                                        class="status-button bg-warning inactive">{{ $item->statusKemajuan->name }}</button>
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($item->dokumen_proposal)
+                                                                    {{ basename($item->dokumen_proposal) }}
+                                                                @else
+                                                                    Tidak ada dokumen
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-inline-block" id="action-btn">
+                                                                    <a href="{{ url('proposal/' . $item->id) }}"
+                                                                        class="btn btn-info detail-button"
+                                                                        data-bs-toggle="tooltip" title="View">
+                                                                        Detail
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        @empty
+                                                            <td colspan="5" class="text-center">Tidak ada data...
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="card-footer">
+                                    {{ $update_proposal->links('vendor.pagination.bootstrap-5') }}
                                 </div>
                             </div>
                         </div>

@@ -11,6 +11,7 @@ use App\Models\Narahubung;
 use App\Models\TabelStatus;
 use App\Models\TabelSaluran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\TabelImpactGoals;
 use App\Models\TabelKomitmenSdg;
 use App\Models\TabelTindakLanjut;
@@ -31,6 +32,11 @@ class HomeController extends Controller
             'narahubung' => Narahubung::count(),
             'komunikasi' => Komunikasi::count(),
             'proposal' => Proposal::count(),
+            'update_proposal' => Proposal::latest('updated_at')->paginate(5),
+            'ongoing_komunikasi' => Komunikasi::orderBy('tgl_selanjutnya', 'asc')
+            ->where('tgl_selanjutnya', '>=', Carbon::today())
+            ->take(4)
+            ->get(),
         ]);
     }
 
