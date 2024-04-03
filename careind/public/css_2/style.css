@@ -39,6 +39,10 @@
     margin: 10px 0;
 }
 
+#ongoingkomunikasi button:hover {
+    cursor: default;
+}
+
 #action-btn .detail-button {
     border: none;
     padding: 2px 5px;
