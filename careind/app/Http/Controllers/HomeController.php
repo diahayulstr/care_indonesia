@@ -35,7 +35,7 @@ class HomeController extends Controller
             'update_proposal' => Proposal::latest('updated_at')->paginate(5),
             'ongoing_komunikasi' => Komunikasi::orderBy('tgl_selanjutnya', 'asc')
             ->where('tgl_selanjutnya', '>=', Carbon::today())
-            ->take(4)
+            ->take(5)
             ->get(),
         ]);
     }

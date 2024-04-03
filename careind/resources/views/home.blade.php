@@ -247,7 +247,7 @@
 
 
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-xl-4 col-lg-5 mb-4">
                             <!-- Calender Card -->
                             <div class="card shadow">
                                 <div class="card-header py-3">
@@ -265,7 +265,7 @@
 
 
                         <!-- Schedule Card -->
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-xl-8 col-lg-7 mb-4">
                             <div class="card shadow" style="height: 455px; overflow: auto;">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-danger">Schedule</h6>
