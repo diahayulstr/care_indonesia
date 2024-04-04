@@ -34,6 +34,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('login.logout')->m
 // HOME
 Route::get('home', [HomeController::class, 'home'])->name('home')->middleware('auth');
 
+
 // USER
 Route::get('user', [HomeController::class, 'user'])->name('admin.user')->middleware('auth');
 Route::post('user', [AdminController::class, 'store_user'])->middleware('auth');

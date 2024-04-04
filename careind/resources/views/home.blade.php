@@ -152,12 +152,50 @@
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
+                        <i class="fa fa-bars" style="color: #e74a3b;"></i>
                     </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group shadow-sm rounded">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-light" type="submit" title="Search">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        {{-- Search --}}
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw" style="color: #858796;"></i>
+                            </a>
+                            <!-- Dropdown - Search -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group shadow-sm rounded">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-light" type="submit" title="Search">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -272,52 +310,123 @@
                                 </div>
                                 <div class="card-body" style="overflow: auto;">
                                     <div class="align-self-center w-100">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover my-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Komunikasi ID</th>
-                                                        <th>Donor ID</th>
-                                                        <th>Tanggal</th>
-                                                        <th>Tanggal Selanjutnya</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @forelse ($ongoing_komunikasi as $items)
-                                                        <tr>
-                                                            <td scope="row" class="fw-bold">{{ $loop->iteration }}
-                                                            </td>
-                                                            <td>{{ $items->id }}</td>
-                                                            <td>{{ $items->donorID->nama_organisasi }}</td>
-                                                            <td>{{ $items->tanggal }}</td>
-                                                            <td id="ongoingkomunikasi">
-                                                                @php
-                                                                    $firstTglSelanjutnya = $ongoing_komunikasi->first()->tgl_selanjutnya;
-                                                                    $buttonClass = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'bg-warning pending' : '';
-                                                                    $textColor = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-white' : 'text-black';
-                                                                @endphp
-                                                                <button class="status-button {{ $buttonClass }} {{ $textColor }}">
-                                                                    {{ $items->tgl_selanjutnya }}
-                                                                </button>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-inline-block" id="action-btn">
-                                                                    <a href="{{ url('komunikasi/' . $items->id) }}"
-                                                                        class="btn btn-info detail-button"
-                                                                        data-bs-toggle="tooltip" title="View">
-                                                                        Detail
-                                                                    </a>
-                                                                </div>
-                                                            </td>
-                                                        @empty
-                                                            <td colspan="6" class="text-center">Tidak ada data...
-                                                            </td>
-                                                        </tr>
-                                                    @endforelse
-                                                </tbody>
-                                            </table>
+                                        <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
+                                            <li class="nav-item flex-fill" role="presentation">
+                                                <button class="nav-link w-100 active" id="approach-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#approach-justified" type="button" role="tab"
+                                                    aria-controls="approach" aria-selected="true">Akan Datang</button>
+                                            </li>
+                                            <li class="nav-item flex-fill" role="presentation">
+                                                <button class="nav-link w-100" id="past-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#past-justified" type="button" role="tab"
+                                                    aria-controls="past" aria-selected="false">Terlewat</button>
+                                            </li>
+                                        </ul>
+
+                                        <div class="tab-content pt-4" id="myTabjustifiedContent">
+                                            {{-- Akan Datang --}}
+                                            <div class="tab-pane fade show active" id="approach-justified" role="tabpanel"
+                                                aria-labelledby="approach-tab">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover my-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Komunikasi ID</th>
+                                                                <th>Donor ID</th>
+                                                                <th>Tanggal</th>
+                                                                <th>Tanggal Selanjutnya</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @forelse ($approach as $items)
+                                                                <tr>
+                                                                    <td scope="row" class="fw-bold">{{ $loop->iteration }}
+                                                                    </td>
+                                                                    <td>{{ $items->id }}</td>
+                                                                    <td>{{ $items->donorID->nama_organisasi }}</td>
+                                                                    <td>{{ $items->tanggal }}</td>
+                                                                    <td id="ongoingkomunikasi">
+                                                                        @php
+                                                                            $firstTglSelanjutnya = $approach->first()->tgl_selanjutnya;
+                                                                            $buttonClass = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'bg-warning pending' : '';
+                                                                            $textColor = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-white' : 'text-black';
+                                                                        @endphp
+                                                                        <button class="status-button {{ $buttonClass }} {{ $textColor }}">
+                                                                            {{ $items->tgl_selanjutnya }}
+                                                                        </button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="d-inline-block" id="action-btn">
+                                                                            <a href="{{ url('komunikasi/' . $items->id) }}"
+                                                                                class="btn btn-info detail-button"
+                                                                                data-bs-toggle="tooltip" title="View">
+                                                                                Detail
+                                                                            </a>
+                                                                        </div>
+                                                                    </td>
+                                                                @empty
+                                                                    <td colspan="6" class="text-center">Tidak ada jadwal terdekat...
+                                                                    </td>
+                                                                </tr>
+                                                            @endforelse
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            {{-- Terlewat --}}
+                                            <div class="tab-pane fade show" id="past-justified" role="tabpanel"
+                                                aria-labelledby="past-tab">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover my-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No</th>
+                                                                <th>Komunikasi ID</th>
+                                                                <th>Donor ID</th>
+                                                                <th>Tanggal</th>
+                                                                <th>Tanggal Selanjutnya</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @forelse ($past as $pastitems)
+                                                                <tr>
+                                                                    <td scope="row" class="fw-bold">{{ $loop->iteration }}
+                                                                    </td>
+                                                                    <td>{{ $pastitems->id }}</td>
+                                                                    <td>{{ $pastitems->donorID->nama_organisasi }}</td>
+                                                                    <td>{{ $pastitems->tanggal }}</td>
+                                                                    <td id="ongoingkomunikasi">
+                                                                        @php
+                                                                            $firstTglSelanjutnya = $past->first()->tgl_selanjutnya;
+                                                                            $buttonClass = $pastitems->tgl_selanjutnya == $firstTglSelanjutnya ? '' : '';
+                                                                            $textColor = $pastitems->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-black' : 'text-black';
+                                                                        @endphp
+                                                                        <button class="status-button {{ $buttonClass }} {{ $textColor }}">
+                                                                            {{ $pastitems->tgl_selanjutnya }}
+                                                                        </button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="d-inline-block" id="action-btn">
+                                                                            <a href="{{ url('komunikasi/' . $pastitems->id) }}"
+                                                                                class="btn btn-info detail-button"
+                                                                                data-bs-toggle="tooltip" title="View">
+                                                                                Detail
+                                                                            </a>
+                                                                        </div>
+                                                                    </td>
+                                                                @empty
+                                                                    <td colspan="6" class="text-center">Tidak ada jadwal terlewat...
+                                                                    </td>
+                                                                </tr>
+                                                            @endforelse
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -452,6 +561,9 @@
     <script>
         feather.replace();
     </script>
+
+    {{-- Custom Js --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="{{ asset('js_2/app.js') }}"></script>
 

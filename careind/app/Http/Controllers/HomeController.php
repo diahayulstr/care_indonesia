@@ -33,9 +33,11 @@ class HomeController extends Controller
             'komunikasi' => Komunikasi::count(),
             'proposal' => Proposal::count(),
             'update_proposal' => Proposal::latest('updated_at')->paginate(5),
-            'ongoing_komunikasi' => Komunikasi::orderBy('tgl_selanjutnya', 'asc')
+            'approach' => Komunikasi::orderBy('tgl_selanjutnya', 'asc')
             ->where('tgl_selanjutnya', '>=', Carbon::today())
-            ->take(5)
+            ->get(),
+            'past' => Komunikasi::orderBy('tgl_selanjutnya', 'asc')
+            ->where('tgl_selanjutnya', '<', Carbon::today())
             ->get(),
         ]);
     }
