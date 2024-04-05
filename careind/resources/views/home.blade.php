@@ -156,13 +156,13 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form id="searchForm"
+                    <form method="GET" action="{{ url('/home-cari') }}"
                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group shadow-sm rounded">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" name="cari" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-light" type="submit" title="Search">
+                                <button class="btn btn-light" title="Search">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -182,13 +182,14 @@
                             <!-- Dropdown - Search -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
+                                <form method="GET" action="{{ url('/home-cari') }}"
+                                    class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group shadow-sm rounded">
-                                        <input type="text" class="form-control bg-light border-0 small"
+                                        <input type="text" name="cari" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-light" type="submit" title="Search">
+                                            <button class="btn btn-light" title="Search">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
                                         </div>

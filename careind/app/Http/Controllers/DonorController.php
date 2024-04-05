@@ -14,6 +14,48 @@ use File;
 
 class DonorController extends Controller
 {
+    public function cari_donor(Request $request) {
+        $keyword = $request->cari;
+
+        $donor = Donor::select('donors.*', 'provinces.name AS provinsi_name', 'regencies.name AS kabupaten_name',
+                    'districts.name AS kecamatan_name', 'villages.name AS desa_name', 'tabel_jenis_organisasis.name AS organisasi_name',
+                    'tabel_komitmen_sdgs.name AS komitmen_name')
+                ->leftJoin('provinces', 'donors.provinsi_id', '=', 'provinces.id')
+                ->leftJoin('regencies', 'donors.kabupaten_id', '=', 'regencies.id')
+                ->leftJoin('districts', 'donors.kecamatan_id', '=', 'districts.id')
+                ->leftJoin('villages', 'donors.desa_id', '=', 'villages.id')
+                ->leftJoin('tabel_jenis_organisasis', 'donors.jenis_organisasi_id', '=', 'tabel_jenis_organisasis.id')
+                ->leftJoin('tabel_komitmen_sdgs', 'donors.komitmen_sdgs', '=', 'tabel_komitmen_sdgs.id')
+                ->where(function($query) use ($keyword) {
+                    $query->where('donors.nama_organisasi', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.alamat', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.negara', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.provinsi_id', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.kabupaten_id', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.kecamatan_id', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.desa_id', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.website', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.informasi_singkat', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.jenis_organisasi_id', 'LIKE', '%' . $keyword . '%')
+                        ->orWhereJsonContains('donors.komitmen_sdgs', $keyword) // Mencari nilai dalam array JSON
+                        ->orWhere('donors.date', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('donors.dokumen_donor', 'LIKE', '%' . $keyword . '%');
+                })
+                ->orWhere(function($query) use ($keyword) {
+                    $query->where('provinces.name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('regencies.name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('districts.name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('villages.name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('tabel_jenis_organisasis.name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('tabel_komitmen_sdgs.name', 'LIKE', '%' . $keyword . '%');
+                })
+                ->distinct()
+                ->get();
+        return view('pages.donor-cari', compact('donor'));
+    }
+
+
+
     public function donor() {
         $donor = Donor::paginate(2);
         return view('pages.donor', compact('donor'));

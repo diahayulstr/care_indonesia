@@ -32,89 +32,102 @@ Route::post('login', [AuthController::class, 'authentication'])->name('login.aut
 Route::get('logout', [AuthController::class, 'logout'])->name('login.logout')->middleware('auth');
 
 // HOME
-Route::get('home', [HomeController::class, 'home'])->name('home')->middleware('auth');
-
+Route::get('home', [HomeController::class, 'home'])->name('home')->middleware(['auth', 'must-admin']);
 
 // USER
 Route::get('user', [HomeController::class, 'user'])->name('admin.user')->middleware('auth');
+Route::get('user/cari', [HomeController::class, 'cari_user'])->middleware(['auth', 'must-admin']);
 Route::post('user', [AdminController::class, 'store_user'])->middleware('auth');
 Route::patch('user/{user}', [AdminController::class, 'update_user'])->name('admin.update_user')->middleware('auth');
 Route::delete('user/{user}',[AdminController::class, 'destroy_user'])->middleware('auth');
 
 // IMPACT GOALS
 Route::get('impact_goals', [HomeController::class, 'impact_goals'])->name('admin.impactGoals')->middleware(['auth', 'must-admin']);
+Route::get('impact_goals/cari', [HomeController::class, 'cari_impact_goals'])->middleware(['auth', 'must-admin']);
 Route::post('impact_goals', [AdminController::class, 'store_impact_goals'])->middleware(['auth', 'must-admin']);
 Route::patch('impact_goals/{impact_goals}', [AdminController::class, 'update_impact_goals'])->name('admin.update_impact_goals')->middleware(['auth', 'must-admin']);
 Route::delete('impact_goals/{impact_goals}',[AdminController::class, 'destroy_impact_goals'])->middleware(['auth', 'must-admin']);
 
 // INTERMEDIARY
 Route::get('jenis_intermediary', [HomeController::class, 'jenis_intermediaries'])->name('admin.jenisIntermediary')->middleware(['auth', 'must-admin']);
+Route::get('jenis_intermediary/cari', [HomeController::class, 'cari_jenis_intermediaries'])->middleware(['auth', 'must-admin']);
 Route::post('jenis_intermediary', [AdminController::class, 'store_jenis_intermediary'])->middleware(['auth', 'must-admin']);
 Route::patch('jenis_intermediary/{jenis_intermediary}', [AdminController::class, 'update_jenis_intermediary'])->name('admin.update_jenis_intermediary')->middleware(['auth', 'must-admin']);
 Route::delete('jenis_intermediary/{jenis_intermediary}',[AdminController::class, 'destroy_jenis_intermediary'])->middleware(['auth', 'must-admin']);
 
 // JENIS ORGANISASI
 Route::get('jenis_organisasi', [HomeController::class, 'jenis_organisasi'])->name('admin.jenisOrganisasi')->middleware(['auth', 'must-admin']);
+Route::get('jenis_organisasi/cari', [HomeController::class, 'cari_jenis_organisasi'])->middleware(['auth', 'must-admin']);
 Route::post('jenis_organisasi', [AdminController::class, 'store_jenis_organisasi'])->middleware(['auth', 'must-admin']);
 Route::patch('jenis_organisasi/{jenis_organisasi}', [AdminController::class, 'update_jenis_organisasi'])->name('admin.update_jenis_organisasi')->middleware(['auth', 'must-admin']);
 Route::delete('jenis_organisasi/{jenis_organisasi}',[AdminController::class, 'destroy_jenis_organisasi'])->middleware(['auth', 'must-admin']);
 
 // JENIS PENERIMAAN
 Route::get('jenis_penerimaan', [HomeController::class, 'jenis_penerimaan'])->name('admin.jenisPenerimaan')->middleware(['auth', 'must-admin']);
+Route::get('jenis_penerimaan/cari', [HomeController::class, 'cari_jenis_penerimaan'])->middleware(['auth', 'must-admin']);
 Route::post('jenis_penerimaan', [AdminController::class, 'store_jenis_penerimaan'])->middleware(['auth', 'must-admin']);
 Route::patch('jenis_penerimaan/{jenis_penerimaan}', [AdminController::class, 'update_jenis_penerimaan'])->name('admin.update_jenis_penerimaan')->middleware(['auth', 'must-admin']);
 Route::delete('jenis_penerimaan/{jenis_penerimaan}',[AdminController::class, 'destroy_jenis_penerimaan'])->middleware(['auth', 'must-admin']);
 
 // JENJANG KOMUNIKASI
 Route::get('jenjang_komunikasi', [HomeController::class, 'jenjang_komunikasi'])->name('admin.jenjangKomunikasi')->middleware(['auth', 'must-admin']);
+Route::get('jenjang_komunikasi/cari', [HomeController::class, 'cari_jenjang_komunikasi'])->middleware(['auth', 'must-admin']);
 Route::post('jenjang_komunikasi', [AdminController::class, 'store_jenjang_komunikasi'])->middleware(['auth', 'must-admin']);
 Route::patch('jenjang_komunikasi/{jenjang_komunikasi}', [AdminController::class, 'update_jenjang_komunikasi'])->name('admin.update_jenjang_komunikasi')->middleware(['auth', 'must-admin']);
 Route::delete('jenjang_komunikasi/{jenjang_komunikasi}',[AdminController::class, 'destroy_jenjang_komunikasi'])->middleware(['auth', 'must-admin']);
 
 // KLASIFIKASI PORTFOLIO
 Route::get('klasifikasi_portfolio', [HomeController::class, 'klasifikasi_portfolio'])->name('admin.klasifikasiPortfolio')->middleware(['auth', 'must-admin']);
+Route::get('klasifikasi_portfolio/cari', [HomeController::class, 'cari_klasifikasi_portfolio'])->middleware(['auth', 'must-admin']);
 Route::post('klasifikasi_portfolio', [AdminController::class, 'store_klasifikasi_portfolio'])->middleware(['auth', 'must-admin']);
 Route::patch('klasifikasi_portfolio/{klasifikasi_portfolio}', [AdminController::class, 'update_klasifikasi_portfolio'])->name('admin.update_klasifikasi_portfolio')->middleware(['auth', 'must-admin']);
 Route::delete('klasifikasi_portfolio/{klasifikasi_portfolio}',[AdminController::class, 'destroy_klasifikasi_portfolio'])->middleware(['auth', 'must-admin']);
 
 // KOMITMEN SDGS
 Route::get('komitmen_sdgs', [HomeController::class, 'komitmen_sdgs'])->name('admin.komitmenSdgs')->middleware(['auth', 'must-admin']);
+Route::get('komitmen_sdgs/cari', [HomeController::class, 'cari_komitmen_sdgs'])->middleware(['auth', 'must-admin']);
 Route::post('komitmen_sdgs', [AdminController::class, 'store_komitmen_sdgs'])->middleware(['auth', 'must-admin']);
 Route::patch('komitmen_sdgs/{komitmen_sdgs}', [AdminController::class, 'update_komitmen_sdgs'])->name('admin.update_komitmen_sdgs')->middleware(['auth', 'must-admin']);
 Route::delete('komitmen_sdgs/{komitmen_sdgs}',[AdminController::class, 'destroy_komitmen_sdgs'])->middleware(['auth', 'must-admin']);
 
 // SALURAN
 Route::get('saluran', [HomeController::class, 'saluran'])->name('admin.saluran')->middleware(['auth', 'must-admin']);
+Route::get('saluran/cari', [HomeController::class, 'cari_saluran'])->middleware(['auth', 'must-admin']);
 Route::post('saluran', [AdminController::class, 'store_saluran'])->middleware(['auth', 'must-admin']);
 Route::patch('saluran/{saluran}', [AdminController::class, 'update_saluran'])->name('admin.update_saluran')->middleware(['auth', 'must-admin']);
 Route::delete('saluran/{saluran}',[AdminController::class, 'destroy_saluran'])->middleware(['auth', 'must-admin']);
 
 // SALURAN PENDANAAN
 Route::get('saluran_pendanaan', [HomeController::class, 'saluran_pendanaan'])->name('admin.saluranPendanaan')->middleware(['auth', 'must-admin']);
+Route::get('saluran_pendanaan/cari', [HomeController::class, 'cari_saluran_pendanaan'])->middleware(['auth', 'must-admin']);
 Route::post('saluran_pendanaan', [AdminController::class, 'store_saluran_pendanaan'])->middleware(['auth', 'must-admin']);
 Route::patch('saluran_pendanaan/{saluran_pendanaan}', [AdminController::class, 'update_saluran_pendanaan'])->name('admin.update_saluran_pendanaan')->middleware(['auth', 'must-admin']);
 Route::delete('saluran_pendanaan/{saluran_pendanaan}',[AdminController::class, 'destroy_saluran_pendanaan'])->middleware(['auth', 'must-admin']);
 
 // STATUS
 Route::get('status', [HomeController::class, 'status'])->name('admin.status')->middleware(['auth', 'must-admin']);
+Route::get('status/cari', [HomeController::class, 'cari_status'])->middleware(['auth', 'must-admin']);
 Route::post('status', [AdminController::class, 'store_status'])->middleware(['auth', 'must-admin']);
 Route::patch('status/{status}', [AdminController::class, 'update_status'])->name('admin.update_status')->middleware(['auth', 'must-admin']);
 Route::delete('status/{status}',[AdminController::class, 'destroy_status'])->middleware(['auth', 'must-admin']);
 
 // STATUS KEMAJUAN
 Route::get('status_kemajuan', [HomeController::class, 'status_kemajuan'])->name('admin.statusKemajuan')->middleware(['auth', 'must-admin']);
+Route::get('status_kemajuan/cari', [HomeController::class, 'cari_status_kemajuan'])->middleware(['auth', 'must-admin']);
 Route::post('status_kemajuan', [AdminController::class, 'store_status_kemajuan'])->middleware(['auth', 'must-admin']);
 Route::patch('status_kemajuan/{status_kemajuan}', [AdminController::class, 'update_status_kemajuan'])->name('admin.update_status_kemajuan')->middleware(['auth', 'must-admin']);
 Route::delete('status_kemajuan/{status_kemajuan}',[AdminController::class, 'destroy_status_kemajuan'])->middleware(['auth', 'must-admin']);
 
 // TINDAK LANJUT
 Route::get('tindak_lanjut', [HomeController::class, 'tindak_lanjut'])->name('admin.tindakLanjut')->middleware(['auth', 'must-admin']);
+Route::get('tindak_lanjut/cari', [HomeController::class, 'cari_tindak_lanjut'])->middleware(['auth', 'must-admin']);
 Route::post('tindak_lanjut', [AdminController::class, 'store_tindak_lanjut'])->middleware(['auth', 'must-admin']);
 Route::patch('tindak_lanjut/{tindak_lanjut}', [AdminController::class, 'update_tindak_lanjut'])->name('admin.update_tindak_lanjut')->middleware(['auth', 'must-admin']);
 Route::delete('tindak_lanjut/{tindak_lanjut}',[AdminController::class, 'destroy_tindak_lanjut'])->middleware(['auth', 'must-admin']);
 
 // TUJUAN PENDANAAN
 Route::get('tujuan_pendanaan', [HomeController::class, 'tujuan_pendanaan'])->name('admin.tujuanPendanaan')->middleware(['auth', 'must-admin']);
+Route::get('tujuan_pendanaan/cari', [HomeController::class, 'cari_tujuan_pendanaan'])->middleware(['auth', 'must-admin']);
 Route::post('tujuan_pendanaan', [AdminController::class, 'store_tujuan_pendanaan'])->middleware(['auth', 'must-admin']);
 Route::patch('tujuan_pendanaan/{tujuan_pendanaan}', [AdminController::class, 'update_tujuan_pendanaan'])->name('admin.update_tujuan_pendanaan')->middleware(['auth', 'must-admin']);
 Route::delete('tujuan_pendanaan/{tujuan_pendanaan}',[AdminController::class, 'destroy_tujuan_pendanaan'])->middleware(['auth', 'must-admin']);
@@ -126,6 +139,7 @@ Route::post('getdesa', [DonorController::class, 'getdesa'])->name('getdesa')->mi
 
 // DONOR
 Route::get('donor', [DonorController::class, 'donor'])->name('pages.donor')->middleware('auth');
+Route::get('donor/cari', [DonorController::class, 'cari_donor'])->middleware('auth');
 Route::get('donor/add', [DonorController::class, 'addDonor'])->name('donor.add')->middleware(['auth', 'must-admin']);
 Route::post('donor', [DonorController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('donor/{donor}', [DonorController::class, 'show'])->name('donor.view')->middleware('auth');
@@ -135,6 +149,7 @@ Route::delete('donor/{donor}',[DonorController::class, 'destroy'])->middleware([
 
 // NARAHUBUNG
 Route::get('narahubung', [NarahubungController::class, 'narahubung'])->name('pages.narahubung')->middleware('auth');
+Route::get('narahubung/cari', [NarahubungController::class, 'cari_narahubung'])->middleware('auth');
 Route::get('narahubung/add', [NarahubungController::class, 'addNarahubung'])->name('narahubung.add')->middleware(['auth', 'must-admin']);
 Route::post('narahubung', [NarahubungController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('narahubung/{narahubung}', [NarahubungController::class, 'show'])->name('narahubung.view')->middleware('auth');
@@ -150,6 +165,7 @@ Route::delete('grid_edit/{narahubung}/narahubung', [NarahubungController::class,
 
 // KOMUNIKASI
 Route::get('komunikasi', [KomunikasiController::class, 'komunikasi'])->name('pages.komunikasi')->middleware('auth');
+Route::get('komunikasi/cari', [KomunikasiController::class, 'cari_komunikasi'])->middleware('auth');
 Route::get('komunikasi/add', [KomunikasiController::class, 'addKomunikasi'])->name('komunikasi.add')->middleware(['auth', 'must-admin']);
 Route::post('komunikasi', [KomunikasiController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('komunikasi/{komunikasi}', [KomunikasiController::class, 'show'])->name('komunikasi.view')->middleware('auth');
@@ -165,6 +181,7 @@ Route::delete('grid_edit/{komunikasi}/komunikasi', [KomunikasiController::class,
 
 // PROPOSAL
 Route::get('proposal', [ProposalController::class, 'proposal'])->name('pages.proposal')->middleware('auth');
+Route::get('proposal/cari', [ProposalController::class, 'cari_proposal'])->middleware('auth');
 Route::get('proposal/add', [ProposalController::class, 'addProposal'])->name('proposal.add')->middleware(['auth', 'must-admin']);
 Route::post('proposal', [ProposalController::class, 'store'])->middleware(['auth', 'must-admin']);
 Route::get('proposal/{proposal}', [ProposalController::class, 'show'])->name('proposal.view')->middleware('auth');

@@ -16,7 +16,7 @@
     <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     {{-- Custom CSS --}}
-    <link rel="stylesheet" href="{{ asset('css_2/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css_2/style.css') }}">
 
     {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -81,39 +81,40 @@
                 </a>
             </li>
 
-            @if(Auth::user()->role_id != 1)
+            @if (Auth::user()->role_id != 1)
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
             @else
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item active">
-                <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Admin Only</span>
-                </a>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item " href="{{ url('impact_goals') }}">Impact Goals</a>
-                        <a class="collapse-item " href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
-                        <a class="collapse-item active" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
-                        <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
-                        <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
-                        <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item active">
+                    <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Admin Only</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Pages</h6>
+                            <a class="collapse-item " href="{{ url('impact_goals') }}">Impact Goals</a>
+                            <a class="collapse-item " href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
+                            <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                            <a class="collapse-item active" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
+                            <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
+                            <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
+                                Portfolio</a>
+                            <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                            <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
+                            <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('status') }}">Status</a>
+                            <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                            <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
+                            <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
             @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -140,11 +141,11 @@
 
                     <!-- Topbar Search -->
                     <form method="GET" action="{{ url('jenis_penerimaan/cari') }}"
-                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group shadow-sm rounded">
-                            <input type="text" name="cari" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            value="{{ old('cari') }}"
-                            aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" name="cari" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." value="{{ request()->input('cari') }}" aria-label="Search"
+                                aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-light" title="Search">
                                     <i class="fas fa-search fa-sm"></i>
@@ -169,8 +170,9 @@
                                 <form method="GET" action="{{ url('jenis_penerimaan/cari') }}"
                                     class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group shadow-sm rounded">
-                                        <input type="text" name="cari" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search" value="{{ old('cari') }}"
+                                        <input type="text" name="cari"
+                                            class="form-control bg-light border-0 small" placeholder="Search for..."
+                                            aria-label="Search" value="{{ request()->input('cari') }}"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-light" title="Search">
@@ -285,7 +287,6 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    {{ $jenisPenerimaan->links('vendor.pagination.bootstrap-5') }}
                                 </div>
                             </div>
                         </div>
@@ -359,8 +360,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -369,7 +370,8 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login again.</div>
+                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login
+                    again.</div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>

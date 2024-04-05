@@ -15,6 +15,9 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{ asset('css_2/style.css')}}">
+
     {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -136,18 +139,19 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group shadow-sm rounded">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-light" type="submit" title="Search">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <form method="GET" action="{{ url('tujuan_pendanaan/cari') }}"
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                       <div class="input-group shadow-sm rounded">
+                           <input type="text" name="cari" class="form-control bg-light border-0 small" placeholder="Search for..."
+                           value="{{ old('cari') }}"
+                           aria-label="Search" aria-describedby="basic-addon2">
+                           <div class="input-group-append">
+                               <button class="btn btn-light" title="Search">
+                                   <i class="fas fa-search fa-sm"></i>
+                               </button>
+                           </div>
+                       </div>
+                   </form>
 
 
                     <!-- Topbar Navbar -->
@@ -162,13 +166,14 @@
                             <!-- Dropdown - Search -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
+                                <form method="GET" action="{{ url('tujuan_pendanaan/cari') }}"
+                                    class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group shadow-sm rounded">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
+                                        <input type="text" name="cari" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search" value="{{ old('cari') }}"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-light" type="submit" title="Search">
+                                            <button class="btn btn-light" title="Search">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
                                         </div>

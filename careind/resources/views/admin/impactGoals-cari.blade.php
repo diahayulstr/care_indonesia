@@ -81,39 +81,40 @@
                 </a>
             </li>
 
-            @if(Auth::user()->role_id != 1)
+            @if (Auth::user()->role_id != 1)
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
             @else
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item active">
-                <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Admin Only</span>
-                </a>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item " href="{{ url('impact_goals') }}">Impact Goals</a>
-                        <a class="collapse-item " href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
-                        <a class="collapse-item active" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
-                        <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
-                        <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
-                        <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item active">
+                    <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Admin Only</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Pages</h6>
+                            <a class="collapse-item active" href="{{ url('impact_goals') }}">Impact Goals</a>
+                            <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
+                            <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                            <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
+                            <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
+                            <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
+                                Portfolio</a>
+                            <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                            <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
+                            <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('status') }}">Status</a>
+                            <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                            <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
+                            <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
             @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -139,12 +140,12 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form method="GET" action="{{ url('jenis_penerimaan/cari') }}"
-                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form method="GET" action="{{ url('impact_goals/cari') }}"
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group shadow-sm rounded">
-                            <input type="text" name="cari" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            value="{{ old('cari') }}"
-                            aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" name="cari" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." value="{{ request()->input('cari') }}" aria-label="Search"
+                                aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-light" title="Search">
                                     <i class="fas fa-search fa-sm"></i>
@@ -166,11 +167,12 @@
                             <!-- Dropdown - Search -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
-                                <form method="GET" action="{{ url('jenis_penerimaan/cari') }}"
+                                <form method="GET" action="{{ url('impact_goals/cari') }}"
                                     class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group shadow-sm rounded">
-                                        <input type="text" name="cari" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search" value="{{ old('cari') }}"
+                                        <input type="text" name="cari"
+                                            class="form-control bg-light border-0 small" placeholder="Search for..."
+                                            aria-label="Search" value="{{ request()->input('cari') }}"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-light" title="Search">
@@ -181,7 +183,6 @@
                                 </form>
                             </div>
                         </li>
-
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -215,7 +216,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Jenis Penerimaan</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Impact Goals</h1>
                     </div>
 
                     <div class="row">
@@ -224,7 +225,7 @@
                             <div class="card mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header">
-                                    <h6 class="m-0 font-weight-bold text-danger">View Jenis Penerimaan</h6>
+                                    <h6 class="m-0 font-weight-bold text-danger">View Impact Goals</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -232,12 +233,12 @@
                                             <thead>
                                                 <tr class="text-center fw-bold">
                                                     <th>ID</th>
-                                                    <th>Nama Jenis Penerimaan </th>
+                                                    <th>Nama Impact Goals </th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @forelse($jenisPenerimaan as $item)
+                                                @forelse($impactGoals as $item)
                                                     <tr>
                                                         <td>{{ $item->id }}</td>
                                                         <td>{{ $item->name }}</td>
@@ -262,7 +263,7 @@
                                                                 </div>
                                                                 <div class="d-inline-block mx-1">
                                                                     <form
-                                                                        action="{{ url('jenis_penerimaan/' . $item->id) }}"
+                                                                        action="{{ url('impact_goals/' . $item->id) }}"
                                                                         method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
@@ -285,7 +286,6 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    {{ $jenisPenerimaan->links('vendor.pagination.bootstrap-5') }}
                                 </div>
                             </div>
                         </div>
@@ -295,18 +295,18 @@
                                 <a href="#collapseCardExample" class="d-block card-header py-3"
                                     data-toggle="collapse" role="button" aria-expanded="true"
                                     aria-controls="collapseCardExample">
-                                    <h6 class="m-0 font-weight-bold text-danger">Add Jenis Penerimaan</h6>
+                                    <h6 class="m-0 font-weight-bold text-danger">Add Impact Goals</h6>
                                 </a>
                                 <div class="collapse show" id="collapseCardExample">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
-                                                <form action="{{ url('jenis_penerimaan') }}" method="POST"
+                                                <form action="{{ url('impact_goals') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="form-group">
-                                                        <label for="name">Nama Jenis Penerimaan</label>
-                                                        <input type="text" placeholder="Nama Penerimaan"
+                                                        <label for="name">Nama Impact Goals</label>
+                                                        <input type="text" placeholder="Nama Impact Goals"
                                                             class="form-control @error('name') is-invalid @enderror"
                                                             id="name" name="name"
                                                             value="{{ old('name') }}">
@@ -315,7 +315,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                        <a href="{{ url('jenis_penerimaan') }}"
+                                                        <a href="{{ url('impact_goals') }}"
                                                             class="btn btn-outline-primary">Cancel</a>
                                                         <button type="submit" class="btn btn-primary">Add</button>
                                                     </div>
@@ -359,8 +359,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -369,7 +369,8 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login again.</div>
+                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login
+                    again.</div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>
@@ -383,13 +384,13 @@
     <div class="modal fade" id="form-update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="formUpdateLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="updateForm" action="{{ url('jenis_penerimaan/' . $item->id) }}" method="POST"
+            <form id="updateForm" action="{{ url('impact_goals/' . $item->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="formUpdateLabel">Update Jenis Penerimaan</h1>
+                        <h1 class="modal-title fs-5" id="formUpdateLabel">Update Impact Goals</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -397,7 +398,7 @@
                         <input type="hidden" id="id-edit" name="id">
 
                         <div class="form-group">
-                            <label for="name">Nama Jenis Penerimaan</label>
+                            <label for="name">Nama Impact Goals</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror"
                                 id="name-edit" name="name" value="{{ old('name') }}">
                             @error('name')

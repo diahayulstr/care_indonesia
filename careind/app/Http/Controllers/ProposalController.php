@@ -16,6 +16,56 @@ use File;
 
 class ProposalController extends Controller
 {
+    public function cari_proposal(Request $request) {
+        $keyword = $request->cari;
+        $proposal = Proposal::select('proposals.*', 'donors.nama_organisasi AS nama_organisasi',
+                            'tabel_tujuan_pendanaans.name AS tujuan_name', 'tabel_jenis_penerimaans.name AS jenis_name',
+                            'tabel_saluran_pendanaans.name AS saluran_pendanaan_name', 'tabel_jenis_intermediaries.name AS intermediaries_name',
+                            'tabel_klasifikasi_portfolios.name AS klasifikasi_name', 'tabel_status_kemajuans.name AS kemajuan_name',
+                            'tabel_impact_goals.name AS impact_name')
+                    ->leftJoin('donors', 'proposals.donor_id', '=', 'donors.id')
+                    ->leftJoin('tabel_tujuan_pendanaans', 'proposals.tujuan_pendanaan_id', '=', 'tabel_tujuan_pendanaans.id')
+                    ->leftJoin('tabel_jenis_penerimaans', 'proposals.jenis_penerimaan_id', '=', 'tabel_jenis_penerimaans.id')
+                    ->leftJoin('tabel_saluran_pendanaans', 'proposals.saluran_pendanaan_id', '=', 'tabel_saluran_pendanaans.id')
+                    ->leftJoin('tabel_jenis_intermediaries', 'proposals.jenis_intermediaries_id', '=', 'tabel_jenis_intermediaries.id')
+                    ->leftJoin('tabel_klasifikasi_portfolios', 'proposals.klasifikasi_portfolio_id', '=', 'tabel_klasifikasi_portfolios.id')
+                    ->leftJoin('tabel_status_kemajuans', 'proposals.status_kemajuan_id', '=', 'tabel_status_kemajuans.id')
+                    ->leftJoin('tabel_impact_goals', 'proposals.impact_goals_id', '=', 'tabel_impact_goals.id')
+                    ->where(function($query) use ($keyword) {
+                        $query->where('donors.nama_organisasi', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.nama_proyek', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.donor_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.tujuan_pendanaan_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.jenis_penerimaan_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.saluran_pendanaan_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.jenis_intermediaries_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.klasifikasi_portfolio_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.impact_goals_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.estimasi_nilai_usd', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.estimasi_nilai_idr', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.usulan_durasi', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.status_kemajuan_id', 'LIKE', '%' . $keyword . '%')
+                              ->orWhere('proposals.dokumen_proposal', 'LIKE', '%' . $keyword . '%');
+                    })
+                    ->orWhere('tabel_tujuan_pendanaans.name', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('tabel_jenis_penerimaans.name', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('tabel_saluran_pendanaans.name', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('tabel_jenis_intermediaries.name', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('tabel_klasifikasi_portfolios.name', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('tabel_status_kemajuans.name', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere(function($query) use ($keyword) {
+                        $impactGoalsValues = explode(',', $keyword);
+                        foreach ($impactGoalsValues as $value) {
+                            $query->orWhere('proposals.impact_goals_id', 'LIKE', '%' . trim($value) . '%');
+                        }
+                    })
+                    ->distinct()
+                    ->get();
+
+        return view('pages.proposal-cari', compact('proposal'));
+    }
+
+
     public function proposal() {
         $proposal = Proposal::paginate(2);
         return view('pages.proposal', compact('proposal'));

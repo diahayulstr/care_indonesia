@@ -14,6 +14,23 @@ class NarahubungController extends Controller
         return view('pages.narahubung', compact('narahubung'));
     }
 
+    public function cari_narahubung(Request $request) {
+        $keyword = $request -> cari;
+        $narahubung = Narahubung::select('narahubungs.*', 'donors.nama_organisasi AS nama_organisasi', 'tabel_statuses.name AS name')
+            ->leftJoin('donors', 'narahubungs.donor_id', '=', 'donors.id')
+            ->leftJoin('tabel_statuses', 'narahubungs.status_id', '=', 'tabel_statuses.id')
+            ->where('donors.nama_organisasi', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('narahubungs.donor_id', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('nama_kontak', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('jabatan', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('email', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('no_telp', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('narahubungs.status_id', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('tabel_statuses.name', 'LIKE', '%' . $keyword . '%')
+            ->get();
+        return view ('pages.narahubung-cari', compact('narahubung'));
+    }
+
     public function addNarahubung() {
         $status = TabelStatus::all();
         $donorID = Donor::all();

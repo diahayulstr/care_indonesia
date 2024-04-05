@@ -17,6 +17,34 @@ class KomunikasiController extends Controller
         return view('pages.komunikasi', compact('komunikasi'));
     }
 
+    public function cari_komunikasi(Request $request) {
+        $keyword = $request->cari; 
+        $komunikasi = Komunikasi::select('komunikasis.*', 'donors.nama_organisasi AS nama_organisasi',
+                        'tabel_salurans.name AS saluran_name', 'tabel_jenjang_komunikasis.name AS jenjang_name',
+                        'tabel_tindak_lanjuts.name AS tindak_lanjut_name')
+                ->leftJoin('donors', 'komunikasis.donor_id', '=', 'donors.id')
+                ->leftJoin('tabel_salurans', 'komunikasis.saluran_id', '=', 'tabel_salurans.id')
+                ->leftJoin('tabel_jenjang_komunikasis', 'komunikasis.jenjang_komunikasi_id', '=', 'tabel_jenjang_komunikasis.id')
+                ->leftJoin('tabel_tindak_lanjuts', 'komunikasis.tindak_lanjut_id', '=', 'tabel_tindak_lanjuts.id')
+                ->where(function($query) use ($keyword) {
+                    $query->where('donors.nama_organisasi', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.donor_id', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.tanggal', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.saluran_id', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.jenjang_komunikasi_id', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.tindak_lanjut_id', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.catatan', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.tgl_selanjutnya', 'LIKE', '%' . $keyword . '%')
+                          ->orWhere('komunikasis.dokumen_komunikasi', 'LIKE', '%' . $keyword . '%');
+                })
+                ->orWhere('tabel_salurans.name', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('tabel_jenjang_komunikasis.name', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('tabel_tindak_lanjuts.name', 'LIKE', '%' . $keyword . '%')
+                ->get();
+
+        return view('pages.komunikasi-cari', compact('komunikasi'));
+    }
+
     public function addKomunikasi() {
         $donorID = Donor::all();
         $saluran = TabelSaluran::all();
