@@ -156,7 +156,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                    <form id="searchForm"
                      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group shadow-sm rounded">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -349,7 +349,7 @@
                                                                     <td>{{ $items->tanggal }}</td>
                                                                     <td id="ongoingkomunikasi">
                                                                         @php
-                                                                            $firstTglSelanjutnya = $approach->first()->tgl_selanjutnya;
+                                                                            $firstTglSelanjutnya = $approach ? $approach[0]->tgl_selanjutnya : null;
                                                                             $buttonClass = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'bg-warning pending' : '';
                                                                             $textColor = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-white' : 'text-black';
                                                                         @endphp
@@ -401,7 +401,7 @@
                                                                     <td>{{ $pastitems->tanggal }}</td>
                                                                     <td id="ongoingkomunikasi">
                                                                         @php
-                                                                            $firstTglSelanjutnya = $past->first()->tgl_selanjutnya;
+                                                                            $firstTglSelanjutnya = $past ? $past[0]->tgl_selanjutnya : null;
                                                                             $buttonClass = $pastitems->tgl_selanjutnya == $firstTglSelanjutnya ? '' : '';
                                                                             $textColor = $pastitems->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-black' : 'text-black';
                                                                         @endphp

@@ -27,18 +27,32 @@ use App\Models\TabelKlasifikasiPortfolios;
 class HomeController extends Controller
 {
     public function home() {
+        $today = Carbon::today();
+        $allKomunikasi = Komunikasi::orderBy('tgl_selanjutnya', 'asc')->get();
+        $approach = [];
+        $past = [];
+
+        foreach ($allKomunikasi as $komunikasi) {
+            $tglSelanjutnya = Carbon::parse($komunikasi->tgl_selanjutnya);
+
+            if ($tglSelanjutnya >= $today) {
+                $approach[] = $komunikasi;
+            } else {
+                if ($tglSelanjutnya->isSameDay($today)) {
+                    $approach[] = $komunikasi;
+                } else {
+                    $past[] = $komunikasi;
+                }
+            }
+        }
         return view('home',[
             'donor' => Donor::count(),
             'narahubung' => Narahubung::count(),
             'komunikasi' => Komunikasi::count(),
             'proposal' => Proposal::count(),
             'update_proposal' => Proposal::latest('updated_at')->paginate(5),
-            'approach' => Komunikasi::orderBy('tgl_selanjutnya', 'asc')
-            ->where('tgl_selanjutnya', '>=', Carbon::today())
-            ->get(),
-            'past' => Komunikasi::orderBy('tgl_selanjutnya', 'asc')
-            ->where('tgl_selanjutnya', '<', Carbon::today())
-            ->get(),
+            'approach' => $approach,
+            'past' => $past,
         ]);
     }
 
