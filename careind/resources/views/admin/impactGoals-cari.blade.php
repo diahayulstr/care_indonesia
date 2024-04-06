@@ -384,7 +384,7 @@
     <div class="modal fade" id="form-update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="formUpdateLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="updateForm" action="{{ url('impact_goals/' . $item->id) }}" method="POST"
+            <form id="updateForm" action="{{ isset($item) ? url('impact_goals/' . $item->id) : '#' }}" method="POST"
                 enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
@@ -409,7 +409,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-primary"
                             data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary" onclick="updateData()">Update</button>
                     </div>
                 </div>
             </form>
@@ -417,7 +417,6 @@
     </div>
 
     @include('layouts.template')
-
 
 
 </body>

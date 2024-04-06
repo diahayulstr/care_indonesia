@@ -286,7 +286,7 @@
                                                             </div>
                                                         </td>
                                                     @empty
-                                                        <td colspan="4" class="text-center">Tidak ada data...</td>
+                                                        <td colspan="7" class="text-center">Tidak ada data...</td>
                                                     </tr>
                                                 @endforelse
                                             </tbody>
@@ -424,7 +424,7 @@
     <div class="modal fade" id="form-update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="formUpdateLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="updateForm" action="{{ url('user/' . $item->id) }}" method="POST"
+            <form id="updateForm" action="{{ isset($item) ? url('user/' . $item->id) : '#' }}" method="POST"
                 enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf

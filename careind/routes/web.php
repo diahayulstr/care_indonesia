@@ -32,7 +32,7 @@ Route::post('login', [AuthController::class, 'authentication'])->name('login.aut
 Route::get('logout', [AuthController::class, 'logout'])->name('login.logout')->middleware('auth');
 
 // HOME
-Route::get('home', [HomeController::class, 'home'])->name('home')->middleware(['auth', 'must-admin']);
+Route::get('home', [HomeController::class, 'home'])->name('home')->middleware(['auth']);
 
 // USER
 Route::get('user', [HomeController::class, 'user'])->name('admin.user')->middleware('auth');
