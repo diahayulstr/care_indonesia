@@ -229,7 +229,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="{{ url('report') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" id="btn-report"><i
+                                class="fas fa-download fa-sm text-white"></i> Generate Report</a>
+                    </div>
+
                     <!-- Sale & Revenue Start -->
                     <div class="row">
                         <div class="col-xl-3 col-md-6 mb-4" id="dash-count">

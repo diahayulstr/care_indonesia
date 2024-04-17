@@ -187,4 +187,15 @@
     font-size: 2em;
 }
 
+#btn-report {
+    border: none;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    width: 150px;
+}
+
+.footer-table {
+    margin: 20px;
+}
 

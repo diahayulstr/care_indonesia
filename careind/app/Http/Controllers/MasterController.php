@@ -480,8 +480,7 @@ class MasterController extends Controller
         ));
     }
 
-    public function storeOrUpdate_narahubung(Request $request, $donor_id)
-    {
+    public function storeOrUpdate_narahubung(Request $request, $donor_id) {
         $request->validate([
             'nama_kontak'   => 'required',
             'jabatan'       => 'required',

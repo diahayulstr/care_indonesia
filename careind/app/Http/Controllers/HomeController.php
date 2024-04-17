@@ -23,6 +23,7 @@ use App\Models\TabelSaluranPendanaan;
 use App\Models\TabelJenjangKomunikasi;
 use App\Models\TabelJenisIntermediaries;
 use App\Models\TabelKlasifikasiPortfolios;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeController extends Controller
 {
@@ -253,5 +254,39 @@ class HomeController extends Controller
                         -> get();
         return view('admin.tujuanPendanaan-cari', compact('tujuanPendanaan'));
     }
+
+    // REPORT
+    public function report() {
+        $donor = Donor::paginate(4);
+        $narahubungs = Narahubung::paginate(7);
+        $komunikasis = Komunikasi::paginate(4);
+        $proposals = Proposal::paginate(4);
+        return view('admin.report.report', compact('donor', 'narahubungs', 'komunikasis', 'proposals'));
+    }
+
+    public function downloadpdf_donor() {
+        $donor = Donor::all();
+        $pdf = Pdf::loadView('pdf.donor-pdf', ['donor'=>$donor]);
+        return $pdf->stream('Data-Donor.pdf');
+    }
+
+    public function downloadpdf_narahubung() {
+        $narahubung = Narahubung::all();
+        $pdf = Pdf::loadView('pdf.narahubung-pdf', ['narahubung'=>$narahubung]);
+        return $pdf->stream('Data-Narahubung.pdf');
+    }
+
+    public function downloadpdf_komunikasi() {
+        $komunikasi = Komunikasi::all();
+        $pdf = Pdf::loadView('pdf.komunikasi-pdf', ['komunikasi'=>$komunikasi]);
+        return $pdf->stream('Data-Komunikasi.pdf');
+    }
+
+    public function downloadpdf_proposal() {
+        $proposal = Proposal::all();
+        $pdf = Pdf::loadView('pdf.proposal-pdf', ['proposal'=>$proposal]);
+        return $pdf->stream('Data-Proposal.pdf');
+    }
+
 
 }

@@ -41,6 +41,14 @@ Route::post('user', [AdminController::class, 'store_user'])->middleware('auth');
 Route::patch('user/{user}', [AdminController::class, 'update_user'])->name('admin.update_user')->middleware('auth');
 Route::delete('user/{user}',[AdminController::class, 'destroy_user'])->middleware('auth');
 
+// REPORT
+Route::get('report', [HomeController::class, 'report'])->name('admin.report')->middleware(['auth', 'must-admin']);
+Route::get('downloadpdf-donor', [HomeController::class, 'downloadpdf_donor'])->middleware(['auth', 'must-admin']);
+Route::get('downloadpdf-narahubung', [HomeController::class, 'downloadpdf_narahubung'])->middleware(['auth', 'must-admin']);
+Route::get('downloadpdf-komunikasi', [HomeController::class, 'downloadpdf_komunikasi'])->middleware(['auth', 'must-admin']);
+Route::get('downloadpdf-proposal', [HomeController::class, 'downloadpdf_proposal'])->middleware(['auth', 'must-admin']);
+
+
 // IMPACT GOALS
 Route::get('impact_goals', [HomeController::class, 'impact_goals'])->name('admin.impactGoals')->middleware(['auth', 'must-admin']);
 Route::get('impact_goals/cari', [HomeController::class, 'cari_impact_goals'])->middleware(['auth', 'must-admin']);
