@@ -358,20 +358,20 @@ function deleteProposal() {
 }
 
 // Delete Grid Edit
-function deleteGridEditNarahubung() {
-    var form = document.getElementById("deleteFormGridEditNarahubung");
-    form.submit();
-}
+// function deleteGridEditNarahubung() {
+//     var form = document.getElementById("deleteFormGridEditNarahubung");
+//     form.submit();
+// }
 
-function deleteGridEditKomunikasi() {
-    var form = document.getElementById("deleteFormGridEditKomunikasi");
-    form.submit();
-}
+// function deleteGridEditKomunikasi() {
+//     var form = document.getElementById("deleteFormGridEditKomunikasi");
+//     form.submit();
+// }
 
-function deleteGridEditProposal() {
-    var form = document.getElementById("deleteFormGridEditProposal");
-    form.submit();
-}
+// function deleteGridEditProposal() {
+//     var form = document.getElementById("deleteFormGridEditProposal");
+//     form.submit();
+// }
 
 // File Preview
 $(document).ready(function () {

@@ -276,6 +276,7 @@
                                                             <th>Komitmen SDGs</th>
                                                             <th>Tanggal</th>
                                                             <th>Dokumen</th>
+                                                            <th>Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -310,6 +311,15 @@
                                                                     @else
                                                                         Tidak ada dokumen
                                                                     @endif
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-inline-block">
+                                                                        <a href="{{ url('downloadpdf/' . $item->id) }}"
+                                                                            class="btn btn-outline-success btn-circle"
+                                                                            data-bs-toggle="tooltip" title="Download">
+                                                                            <i class="fas fa-download fa-sm"></i>
+                                                                        </a>
+                                                                    </div>
                                                                 </td>
                                                             @empty
                                                                 <td colspan="15" class="text-center">Tidak ada

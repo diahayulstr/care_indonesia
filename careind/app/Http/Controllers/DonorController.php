@@ -54,12 +54,22 @@ class DonorController extends Controller
         return view('pages.donor-cari', compact('donor'));
     }
 
-
-
     public function donor() {
         $donor = Donor::paginate(2);
+        $donor->load('narahubungs', 'komunikasis', 'proposals');
         return view('pages.donor', compact('donor'));
     }
+
+    // public function donor($id) {
+    //     $donors = Donor::findOrFail($id);
+    //     $narahubungs = $donors->narahubungs;
+    //     $komunikasis = $donors->komunikasis;
+    //     $proposals = $donors->proposals;
+    //     $allDonors = Donor::paginate(2);
+
+    //     return view('pages.donor', compact('donors', 'narahubungs', 'komunikasis', 'proposals', 'allDonors'));
+    // }
+
 
     public function addDonor() {
         $provinces = Province::all();

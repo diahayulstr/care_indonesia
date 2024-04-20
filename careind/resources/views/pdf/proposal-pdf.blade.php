@@ -29,7 +29,7 @@
         }
 
         .table {
-            font-family: sans-serif;
+            font-family: 'Times New Roman';
             color: #000000;
             border-collapse: collapse;
             width: 100%;

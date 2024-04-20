@@ -288,5 +288,26 @@ class HomeController extends Controller
         return $pdf->stream('Data-Proposal.pdf');
     }
 
+    public function downloadpdf_byid(Request $request, $id) {
+        $donors = Donor::findOrFail($id);
+        $narahubungs = $donors->narahubungs;
+        $komunikasis = $donors->komunikasis;
+        $proposals = $donors->proposals;
+        $status = TabelStatus::all();
+        $saluran = TabelSaluran::all();
+        $jenjangKomunikasi = TabelJenjangKomunikasi::all();
+        $tindakLanjut = TabelTindakLanjut::all();
+        $impactGoals = TabelImpactGoals::all();
+        $jenisIntermediaries = TabelJenisIntermediaries::all();
+        $jenisPenerimaan = TabelJenisPenerimaan::all();
+        $klasifikasiPortfolios = TabelKlasifikasiPortfolios::all();
+        $saluranPendanaan = TabelSaluranPendanaan::all();
+        $statusKemajuan = TabelStatusKemajuan::all();
+        $tujuanPendanaan = TabelTujuanPendanaan::all();
+        $pdf = Pdf::loadView('pdf.downloadpdf', compact('donors', 'narahubungs', 'komunikasis', 'proposals',
+        'status', 'saluran', 'jenjangKomunikasi', 'tindakLanjut', 'impactGoals', 'jenisIntermediaries',
+        'jenisPenerimaan', 'klasifikasiPortfolios', 'saluranPendanaan', 'statusKemajuan', 'tujuanPendanaan'));
+        return $pdf->stream('Data-Client.pdf');
+    }
 
 }

@@ -386,9 +386,11 @@
                                                                     <li><a class="dropdown-item"
                                                                             href="{{ url('master/' . $item->id) }}">Master/Detail
                                                                             View</a></li>
-                                                                    <li><a id="btn-edit-master" class="dropdown-item"
-                                                                            href="{{ url('master/' . $item->id . '/edit') }}">Master/Detail
-                                                                            Edit</a></li>
+                                                                    @if($item->narahubungs->isNotEmpty() && $item->komunikasis->isNotEmpty() && $item->proposals->isNotEmpty())
+                                                                        <li><a id="btn-edit-master" class="dropdown-item"
+                                                                                href="{{ url('master/' . $item->id . '/edit') }}">Master/Detail
+                                                                                Edit</a></li>
+                                                                    @endif
                                                                 </ul>
                                                             </div>
                                                         </div>

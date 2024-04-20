@@ -47,7 +47,7 @@ Route::get('downloadpdf-donor', [HomeController::class, 'downloadpdf_donor'])->m
 Route::get('downloadpdf-narahubung', [HomeController::class, 'downloadpdf_narahubung'])->middleware(['auth', 'must-admin']);
 Route::get('downloadpdf-komunikasi', [HomeController::class, 'downloadpdf_komunikasi'])->middleware(['auth', 'must-admin']);
 Route::get('downloadpdf-proposal', [HomeController::class, 'downloadpdf_proposal'])->middleware(['auth', 'must-admin']);
-
+Route::get('downloadpdf/{downloadpdf}', [HomeController::class, 'downloadpdf_byid'])->middleware(['auth', 'must-admin']);
 
 // IMPACT GOALS
 Route::get('impact_goals', [HomeController::class, 'impact_goals'])->name('admin.impactGoals')->middleware(['auth', 'must-admin']);
