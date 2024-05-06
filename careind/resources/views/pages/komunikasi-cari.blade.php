@@ -275,21 +275,24 @@
                                                             );
                                                         @endphp
                                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                            <img src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
-                                                                alt="Pratinjau Gambar"
-                                                                style="max-width: 100px; max-height: 100px;">
+                                                            <a href="{{ asset($item->dokumen_komunikasi) }}" download>
+                                                                <img src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
+                                                                    alt="Pratinjau Gambar"
+                                                                    style="max-width: 100px; max-height: 100px;">
+                                                            </a>
                                                         @elseif ($extension === 'pdf')
                                                             <embed
                                                                 src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
                                                                 type="application/pdf" width="200" height="200">
                                                         @else
-                                                            {{ basename($item->dokumen_komunikasi) }}
+                                                            <a style="color: black"
+                                                                href="{{ asset($item->dokumen_komunikasi) }}"
+                                                                download>{{ basename($item->dokumen_komunikasi) }}</a>
                                                         @endif
                                                     @else
                                                         Tidak ada dokumen
                                                     @endif
                                                 </td>
-
                                                 <td class="text-center">
                                                     <div class="action-buttons d-flex justify-content-center">
                                                         @if (Auth::user()->role_id != 1)

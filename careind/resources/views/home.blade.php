@@ -230,11 +230,12 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        @if(Auth::user()->role_id !=1)
+                        @if (Auth::user()->role_id != 1)
                             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         @else
                             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                            <a href="{{ url('report') }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" id="btn-report"><i
+                            <a href="{{ url('report') }}"
+                                class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" id="btn-report"><i
                                     class="fas fa-download fa-sm text-white"></i> Generate Report</a>
                         @endif
                     </div>
@@ -322,9 +323,10 @@
                                     <div class="align-self-center w-100">
                                         <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
                                             <li class="nav-item flex-fill" role="presentation">
-                                                <button class="nav-link w-100 active" id="approach-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#approach-justified" type="button" role="tab"
-                                                    aria-controls="approach" aria-selected="true">Akan Datang</button>
+                                                <button class="nav-link w-100 active" id="approach-tab"
+                                                    data-bs-toggle="tab" data-bs-target="#approach-justified"
+                                                    type="button" role="tab" aria-controls="approach"
+                                                    aria-selected="true">Akan Datang</button>
                                             </li>
                                             <li class="nav-item flex-fill" role="presentation">
                                                 <button class="nav-link w-100" id="past-tab" data-bs-toggle="tab"
@@ -335,8 +337,8 @@
 
                                         <div class="tab-content pt-4" id="myTabjustifiedContent">
                                             {{-- Akan Datang --}}
-                                            <div class="tab-pane fade show active" id="approach-justified" role="tabpanel"
-                                                aria-labelledby="approach-tab">
+                                            <div class="tab-pane fade show active" id="approach-justified"
+                                                role="tabpanel" aria-labelledby="approach-tab">
                                                 <div class="table-responsive">
                                                     <table class="table table-hover my-0">
                                                         <thead>
@@ -352,18 +354,30 @@
                                                         <tbody>
                                                             @forelse ($approach as $items)
                                                                 <tr>
-                                                                    <td scope="row" class="fw-bold">{{ $loop->iteration }}
+                                                                    <td scope="row" class="fw-bold">
+                                                                        {{ $loop->iteration }}
                                                                     </td>
                                                                     <td>{{ $items->id }}</td>
                                                                     <td>{{ $items->donorID->nama_organisasi }}</td>
                                                                     <td>{{ $items->tanggal }}</td>
                                                                     <td id="ongoingkomunikasi">
                                                                         @php
-                                                                            $firstTglSelanjutnya = $approach ? $approach[0]->tgl_selanjutnya : null;
-                                                                            $buttonClass = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'bg-warning pending' : '';
-                                                                            $textColor = $items->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-white' : 'text-black';
+                                                                            $firstTglSelanjutnya = $approach
+                                                                                ? $approach[0]->tgl_selanjutnya
+                                                                                : null;
+                                                                            $buttonClass =
+                                                                                $items->tgl_selanjutnya ==
+                                                                                $firstTglSelanjutnya
+                                                                                    ? 'bg-warning pending'
+                                                                                    : '';
+                                                                            $textColor =
+                                                                                $items->tgl_selanjutnya ==
+                                                                                $firstTglSelanjutnya
+                                                                                    ? 'text-white'
+                                                                                    : 'text-black';
                                                                         @endphp
-                                                                        <button class="status-button {{ $buttonClass }} {{ $textColor }}">
+                                                                        <button
+                                                                            class="status-button {{ $buttonClass }} {{ $textColor }}">
                                                                             {{ $items->tgl_selanjutnya }}
                                                                         </button>
                                                                     </td>
@@ -371,13 +385,15 @@
                                                                         <div class="d-inline-block" id="action-btn">
                                                                             <a href="{{ url('komunikasi/' . $items->id) }}"
                                                                                 class="btn btn-info detail-button"
-                                                                                data-bs-toggle="tooltip" title="View">
+                                                                                data-bs-toggle="tooltip"
+                                                                                title="View">
                                                                                 Detail
                                                                             </a>
                                                                         </div>
                                                                     </td>
                                                                 @empty
-                                                                    <td colspan="6" class="text-center">Tidak ada jadwal terdekat...
+                                                                    <td colspan="6" class="text-center">Tidak ada
+                                                                        jadwal terdekat...
                                                                     </td>
                                                                 </tr>
                                                             @endforelse
@@ -404,18 +420,30 @@
                                                         <tbody>
                                                             @forelse ($past as $pastitems)
                                                                 <tr>
-                                                                    <td scope="row" class="fw-bold">{{ $loop->iteration }}
+                                                                    <td scope="row" class="fw-bold">
+                                                                        {{ $loop->iteration }}
                                                                     </td>
                                                                     <td>{{ $pastitems->id }}</td>
                                                                     <td>{{ $pastitems->donorID->nama_organisasi }}</td>
                                                                     <td>{{ $pastitems->tanggal }}</td>
                                                                     <td id="ongoingkomunikasi">
                                                                         @php
-                                                                            $firstTglSelanjutnya = $past ? $past[0]->tgl_selanjutnya : null;
-                                                                            $buttonClass = $pastitems->tgl_selanjutnya == $firstTglSelanjutnya ? '' : '';
-                                                                            $textColor = $pastitems->tgl_selanjutnya == $firstTglSelanjutnya ? 'text-black' : 'text-black';
+                                                                            $firstTglSelanjutnya = $past
+                                                                                ? $past[0]->tgl_selanjutnya
+                                                                                : null;
+                                                                            $buttonClass =
+                                                                                $pastitems->tgl_selanjutnya ==
+                                                                                $firstTglSelanjutnya
+                                                                                    ? ''
+                                                                                    : '';
+                                                                            $textColor =
+                                                                                $pastitems->tgl_selanjutnya ==
+                                                                                $firstTglSelanjutnya
+                                                                                    ? 'text-black'
+                                                                                    : 'text-black';
                                                                         @endphp
-                                                                        <button class="status-button {{ $buttonClass }} {{ $textColor }}">
+                                                                        <button
+                                                                            class="status-button {{ $buttonClass }} {{ $textColor }}">
                                                                             {{ $pastitems->tgl_selanjutnya }}
                                                                         </button>
                                                                     </td>
@@ -423,13 +451,15 @@
                                                                         <div class="d-inline-block" id="action-btn">
                                                                             <a href="{{ url('komunikasi/' . $pastitems->id) }}"
                                                                                 class="btn btn-info detail-button"
-                                                                                data-bs-toggle="tooltip" title="View">
+                                                                                data-bs-toggle="tooltip"
+                                                                                title="View">
                                                                                 Detail
                                                                             </a>
                                                                         </div>
                                                                     </td>
                                                                 @empty
-                                                                    <td colspan="6" class="text-center">Tidak ada jadwal terlewat...
+                                                                    <td colspan="6" class="text-center">Tidak ada
+                                                                        jadwal terlewat...
                                                                     </td>
                                                                 </tr>
                                                             @endforelse
@@ -488,7 +518,9 @@
                                                             </td>
                                                             <td>
                                                                 @if ($item->dokumen_proposal)
-                                                                    {{ basename($item->dokumen_proposal) }}
+                                                                    <a style="color: black"
+                                                                        href="{{ asset($item->dokumen_proposal) }}"
+                                                                        download>{{ basename($item->dokumen_proposal) }}</a>
                                                                 @else
                                                                     Tidak ada dokumen
                                                                 @endif

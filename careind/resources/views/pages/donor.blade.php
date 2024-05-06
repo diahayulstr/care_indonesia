@@ -3,7 +3,7 @@
 
 <head>
 
-     {{-- Bootstrap CDN --}}
+    {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -11,10 +11,10 @@
     </script>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 
 
@@ -74,38 +74,39 @@
                 </a>
             </li>
 
-            @if(Auth::user()->role_id != 1)
+            @if (Auth::user()->role_id != 1)
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
             @else
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Admin Only</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
-                        <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
-                        <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
-                        <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
-                        <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
-                        <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Admin Only</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Pages</h6>
+                            <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
+                            <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
+                            <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                            <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
+                            <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
+                            <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
+                                Portfolio</a>
+                            <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                            <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
+                            <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('status') }}">Status</a>
+                            <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                            <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
+                            <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
             @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -132,11 +133,11 @@
 
                     <!-- Topbar Search -->
                     <form method="GET" action="{{ url('donor/cari') }}"
-                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group shadow-sm rounded">
-                            <input type="text" name="cari" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            value="{{ old('cari') }}"
-                            aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" name="cari" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." value="{{ old('cari') }}" aria-label="Search"
+                                aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-light" title="Search">
                                     <i class="fas fa-search fa-sm"></i>
@@ -161,8 +162,9 @@
                                 <form method="GET" action="{{ url('donor/cari') }}"
                                     class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group shadow-sm rounded">
-                                        <input type="text" name="cari" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search" value="{{ old('cari') }}"
+                                        <input type="text" name="cari"
+                                            class="form-control bg-light border-0 small" placeholder="Search for..."
+                                            aria-label="Search" value="{{ old('cari') }}"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-light" title="Search">
@@ -214,15 +216,14 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Donor</h6>
                             </div>
                             <div>
-                                @if(Auth::user()->role_id !=1)
-
+                                @if (Auth::user()->role_id != 1)
                                 @else
-                                {{-- <a href="{{ url('master/add') }}" id="btn-addMaster"
+                                    {{-- <a href="{{ url('master/add') }}" id="btn-addMaster"
                                     class="btn btn-outline-primary btn-circle" data-bs-toggle="tooltip"
                                     title="Master/Detail Add"><i class="fas fa-plus"></i></a> --}}
-                                <a href="{{ url('donor/add') }}" id="btn-add-donor"
-                                    class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" title="Add"><i
-                                        class="fas fa-plus"></i></a>
+                                    <a href="{{ url('donor/add') }}" id="btn-add-donor"
+                                        class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip"
+                                        title="Add"><i class="fas fa-plus"></i></a>
                                 @endif
 
                             </div>
@@ -305,15 +306,19 @@
                                                             );
                                                         @endphp
                                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                            <img src="{{ url('') }}/{{ $item->dokumen_donor }}"
-                                                                alt="Pratinjau Gambar"
-                                                                style="max-width: 100px; max-height: 100px;">
+                                                            <a href="{{ asset($item->dokumen_donor) }}" download>
+                                                                <img src="{{ url('') }}/{{ $item->dokumen_donor }}"
+                                                                    alt="Pratinjau Gambar"
+                                                                    style="max-width: 100px; max-height: 100px;">
+                                                            </a>
                                                         @elseif ($extension === 'pdf')
                                                             <embed
                                                                 src="{{ url('') }}/{{ $item->dokumen_donor }}"
                                                                 type="application/pdf" width="200" height="200">
                                                         @else
-                                                            {{ basename($item->dokumen_donor) }}
+                                                            <a style="color: black"
+                                                                href="{{ asset($item->dokumen_donor) }}"
+                                                                download>{{ basename($item->dokumen_donor) }}</a>
                                                         @endif
                                                     @else
                                                         Tidak ada dokumen
@@ -321,17 +326,16 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="action-buttons d-flex justify-content-center">
-                                                        @if(Auth::user()->role_id !=1)
+                                                        @if (Auth::user()->role_id != 1)
+                                                            <div class="d-inline-block mx-1">
+                                                                <a href="{{ url('master/' . $item->id) }}"
+                                                                    class="btn btn-info btn-circle"
+                                                                    data-bs-toggle="tooltip" title="View">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            </div>
 
-                                                        <div class="d-inline-block mx-1">
-                                                            <a href="{{ url('master/' . $item->id) }}"
-                                                                class="btn btn-info btn-circle"
-                                                                data-bs-toggle="tooltip" title="View">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                        </div>
-                                                        
-                                                        {{-- <div class="d-inline-block">
+                                                            {{-- <div class="d-inline-block">
                                                             <a href="{{ url('donor/' . $item->id) }}"
                                                                 class="btn btn-info btn-circle"
                                                                 data-bs-toggle="tooltip" title="View">
@@ -352,17 +356,15 @@
                                                                 </ul>
                                                             </div>
                                                         </div> --}}
-
                                                         @else
-
-                                                        <div class="d-inline-block mx-1">
-                                                            <a href="{{ url('master/' . $item->id) }}"
-                                                                class="btn btn-success btn-circle"
-                                                                data-bs-toggle="tooltip" title="View">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                        </div>
-                                                        {{-- <div class="d-inline-block mx-1">
+                                                            <div class="d-inline-block mx-1">
+                                                                <a href="{{ url('master/' . $item->id) }}"
+                                                                    class="btn btn-success btn-circle"
+                                                                    data-bs-toggle="tooltip" title="View">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            </div>
+                                                            {{-- <div class="d-inline-block mx-1">
                                                             <a href="{{ url('donor/' . $item->id . '/edit') }}"
                                                                 id="btn-edit-donor" class="btn btn-warning btn-circle"
                                                                 data-bs-toggle="tooltip" title="Edit">
@@ -374,19 +376,20 @@
                                                                 </svg>
                                                             </a>
                                                         </div> --}}
-                                                        <div class="d-inline-block">
-                                                            <form action="{{ url('donor/' . $item->id) }}"
-                                                                method="POST">
-                                                                @method('DELETE')
-                                                                @csrf
-                                                                <button class="btn btn-danger btn-circle delete-btn"
-                                                                    data-confirm-delete="true"
-                                                                    data-bs-toggle="tooltip" title="Delete">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                        {{-- <div class="d-inline-block">
+                                                            <div class="d-inline-block">
+                                                                <form action="{{ url('donor/' . $item->id) }}"
+                                                                    method="POST">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button
+                                                                        class="btn btn-danger btn-circle delete-btn"
+                                                                        data-confirm-delete="true"
+                                                                        data-bs-toggle="tooltip" title="Delete">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                            {{-- <div class="d-inline-block">
                                                             <div class="dropdown">
                                                                 <button class="btn btn-success btn-circle"
                                                                     type="button" data-bs-toggle="dropdown"
@@ -397,7 +400,7 @@
                                                                     <li><a class="dropdown-item"
                                                                             href="{{ url('master/' . $item->id) }}">Master/Detail
                                                                             View</a></li>
-                                                                    @if($item->narahubungs->isNotEmpty() && $item->komunikasis->isNotEmpty() && $item->proposals->isNotEmpty())
+                                                                    @if ($item->narahubungs->isNotEmpty() && $item->komunikasis->isNotEmpty() && $item->proposals->isNotEmpty())
                                                                         <li><a id="btn-edit-master" class="dropdown-item"
                                                                                 href="{{ url('master/' . $item->id . '/edit') }}">Master/Detail
                                                                                 Edit</a></li>
@@ -450,8 +453,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -460,7 +463,8 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login again.</div>
+                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login
+                    again.</div>
                 <div class="modal-footer">
                     <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>

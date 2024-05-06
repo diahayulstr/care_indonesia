@@ -540,7 +540,9 @@ class MasterController extends Controller
                 $namaDonor = $donor->nama_organisasi;
                 $extension = $request->dokumen_komunikasi->getClientOriginalExtension();
                 $tanggalUpdate = now()->format('d-m-Y');
-                $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                $komunikasi->save();
+                $idKomunikasi = $komunikasi->id; 
+                $namaFileBaru = $namaDonor . '_ID-' . $idKomunikasi . '_' . $tanggalUpdate . '.' . $extension;
                 $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFileBaru);
                 $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFileBaru;
             }
@@ -597,7 +599,9 @@ class MasterController extends Controller
                 $namaDonor = $donor->nama_organisasi;
                 $extension = $request->dokumen_proposal->getClientOriginalExtension();
                 $tanggalUpdate = now()->format('d-m-Y');
-                $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                $proposal->save();
+                $idProposal = $proposal->id; 
+                $namaFileBaru = $namaDonor . '_ID-' . $idProposal . '_' . $tanggalUpdate . '.' . $extension;
                 $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFileBaru);
                 $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFileBaru;
             }

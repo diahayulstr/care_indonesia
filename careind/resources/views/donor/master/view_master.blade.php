@@ -11,13 +11,13 @@
     </script>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('style/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('style/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('style/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     {{-- Custom CSS --}}
-    <link rel="stylesheet" href="{{ asset('css_2/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css_2/style.css') }}">
 
 </head>
 
@@ -74,38 +74,39 @@
                 </a>
             </li>
 
-            @if(Auth::user()->role_id != 1)
+            @if (Auth::user()->role_id != 1)
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
             @else
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Admin Only</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Pages</h6>
-                        <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
-                        <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
-                        <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
-                        <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
-                        <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
-                        <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi Portfolio</a>
-                        <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
-                        <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
-                        <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('status') }}">Status</a>
-                        <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
-                        <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
-                        <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
-                        <a class="collapse-item" href="{{ url('user') }}">User</a>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Admin Only</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Pages</h6>
+                            <a class="collapse-item" href="{{ url('impact_goals') }}">Impact Goals</a>
+                            <a class="collapse-item" href="{{ url('jenis_intermediary') }}">Jenis Intermediary</a>
+                            <a class="collapse-item" href="{{ url('jenis_organisasi') }}">Jenis Organisasi</a>
+                            <a class="collapse-item" href="{{ url('jenis_penerimaan') }}">Jenis Penerimaan</a>
+                            <a class="collapse-item" href="{{ url('jenjang_komunikasi') }}">Jenjang Komunikasi</a>
+                            <a class="collapse-item" href="{{ url('klasifikasi_portfolio') }}">Klasifikasi
+                                Portfolio</a>
+                            <a class="collapse-item" href="{{ url('komitmen_sdgs') }}">Komitmen SDGs</a>
+                            <a class="collapse-item" href="{{ url('saluran') }}">Saluran</a>
+                            <a class="collapse-item" href="{{ url('saluran_pendanaan') }}">Saluran Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('status') }}">Status</a>
+                            <a class="collapse-item" href="{{ url('status_kemajuan') }}">Status Kemajuan</a>
+                            <a class="collapse-item" href="{{ url('tindak_lanjut') }}">Tindak Lanjut</a>
+                            <a class="collapse-item" href="{{ url('tujuan_pendanaan') }}">Tujuan Pendanaan</a>
+                            <a class="collapse-item" href="{{ url('user') }}">User</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
             @endif
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -173,8 +174,8 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Master/Detail View</h6>
                             </div>
                             <div>
-                                {{-- @if(Auth::user()->role_id == 1)
-                                    @if(count($narahubungs) > 0 && count($komunikasis) > 0 && count($proposals) > 0)
+                                {{-- @if (Auth::user()->role_id == 1)
+                                    @if (count($narahubungs) > 0 && count($komunikasis) > 0 && count($proposals) > 0)
                                         <a href="{{ url('master/'.$donor->id.'/edit') }}" class="btn btn-outline-warning btn-circle me-2" data-bs-toggle="tooltip" title="Master/Detail Edit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                                 <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
@@ -220,19 +221,18 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h2></h2>
                                         <div class="action-buttons">
-                                            @if(Auth::user()->role_id !=1)
-
+                                            @if (Auth::user()->role_id != 1)
                                             @else
-                                            <a href="{{ url('master/' . $donor->id . '/edit_donor') }}"
-                                                id="btn-edit-donor" class="btn btn-warning btn-circle"
-                                                data-bs-toggle="tooltip" title="Edit">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-                                                </svg>
-                                            </a>
+                                                <a href="{{ url('master/' . $donor->id . '/edit_donor') }}"
+                                                    id="btn-edit-donor" class="btn btn-warning btn-circle"
+                                                    data-bs-toggle="tooltip" title="Edit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                        height="16" fill="currentColor" class="bi bi-pencil-fill"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                                    </svg>
+                                                </a>
                                             @endif
                                         </div>
                                     </div>
@@ -306,16 +306,22 @@
                                                                 );
                                                             @endphp
                                                             @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                <img src="{{ url('') }}/{{ $donor->dokumen_donor }}"
-                                                                    alt="Pratinjau Gambar"
-                                                                    style="max-width: 300px; max-height: 300px;">
+                                                                <a href="{{ asset($donor->dokumen_donor) }}" download>
+                                                                    <img src="{{ url('') }}/{{ $donor->dokumen_donor }}"
+                                                                        alt="Pratinjau Gambar"
+                                                                        style="max-width: 300px; max-height: 300px;">
+                                                                </a>
                                                             @elseif ($extension === 'pdf')
                                                                 <embed
                                                                     src="{{ url('') }}/{{ $donor->dokumen_donor }}"
                                                                     type="application/pdf" width="100%"
                                                                     height="500">
                                                             @else
-                                                                {{ basename($donor->dokumen_donor) }}
+                                                                <a style="color: black"
+                                                                    href="{{ asset($donor->dokumen_donor) }}"
+                                                                    download>
+                                                                    {{ basename($donor->dokumen_donor) }}
+                                                                </a>
                                                             @endif
                                                         @else
                                                             Tidak ada dokumen
@@ -333,13 +339,13 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h2></h2>
                                         <div class="action-buttons">
-                                            @if(Auth::user()->role_id !=1)
-
+                                            @if (Auth::user()->role_id != 1)
                                             @else
-                                            <a href="#" class="btn btn-primary btn-circle me-2" title="Add"
-                                                data-bs-toggle="modal" data-bs-target="#form-master-narahubung"
-                                                id="btn-addmaster-narahubung" data-id="{{ $donor->id }}">
-                                                <i class="fas fa-plus"></i></a>
+                                                <a href="#" class="btn btn-primary btn-circle me-2"
+                                                    title="Add" data-bs-toggle="modal"
+                                                    data-bs-target="#form-master-narahubung"
+                                                    id="btn-addmaster-narahubung" data-id="{{ $donor->id }}">
+                                                    <i class="fas fa-plus"></i></a>
                                             @endif
                                         </div>
                                     </div>
@@ -376,57 +382,59 @@
 
                                                         <td class="text-center">
                                                             <div class="action-buttons d-flex justify-content-center">
-                                                                @if(Auth::user()->role_id !=1)
-                                                                <div class="d-inline-block">
-                                                                    <a href="{{ url('narahubung/' . $item->id) }}"
-                                                                        class="btn btn-info btn-circle"
-                                                                        data-bs-toggle="tooltip" title="View">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </div>
+                                                                @if (Auth::user()->role_id != 1)
+                                                                    <div class="d-inline-block">
+                                                                        <a href="{{ url('narahubung/' . $item->id) }}"
+                                                                            class="btn btn-info btn-circle"
+                                                                            data-bs-toggle="tooltip" title="View">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </div>
                                                                 @else
-                                                                <div class="d-inline-block">
-                                                                    <a href="{{ url('narahubung/' . $item->id) }}"
-                                                                        class="btn btn-info btn-circle"
-                                                                        data-bs-toggle="tooltip" title="View">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block mx-1">
-                                                                    <a href="#"
-                                                                        class="btn btn-warning btn-circle"
-                                                                        id="btn-editmaster-narahubung" title="Edit"
-                                                                        data-id = "{{ $item->id }}"
-                                                                        data-donor-id = "{{ $item->donor_id }}"
-                                                                        data-nama-kontak = "{{ $item->nama_kontak }}"
-                                                                        data-jabatan = "{{ $item->jabatan }}"
-                                                                        data-email = "{{ $item->email }}"
-                                                                        data-no-telp = "{{ $item->no_telp }}"
-                                                                        data-status-id = "{{ $item->status->id }}">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="16" height="16"
-                                                                            fill="currentColor"
-                                                                            class="bi bi-pencil-fill"
-                                                                            viewBox="0 0 16 16">
-                                                                            <path
-                                                                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block">
-                                                                    <form
-                                                                        action="{{ url('master_narahubung/' . $item->id) }}"
-                                                                        method="POST">
-                                                                        @method('DELETE')
-                                                                        @csrf
-                                                                        <button
-                                                                            class="btn btn-danger btn-circle delete-btn"
-                                                                            data-confirm-delete="true"
-                                                                            data-bs-toggle="tooltip" title="Delete">
-                                                                            <i class="fas fa-trash"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
+                                                                    <div class="d-inline-block">
+                                                                        <a href="{{ url('narahubung/' . $item->id) }}"
+                                                                            class="btn btn-info btn-circle"
+                                                                            data-bs-toggle="tooltip" title="View">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="d-inline-block mx-1">
+                                                                        <a href="#"
+                                                                            class="btn btn-warning btn-circle"
+                                                                            id="btn-editmaster-narahubung"
+                                                                            title="Edit"
+                                                                            data-id = "{{ $item->id }}"
+                                                                            data-donor-id = "{{ $item->donor_id }}"
+                                                                            data-nama-kontak = "{{ $item->nama_kontak }}"
+                                                                            data-jabatan = "{{ $item->jabatan }}"
+                                                                            data-email = "{{ $item->email }}"
+                                                                            data-no-telp = "{{ $item->no_telp }}"
+                                                                            data-status-id = "{{ $item->status->id }}">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="16" height="16"
+                                                                                fill="currentColor"
+                                                                                class="bi bi-pencil-fill"
+                                                                                viewBox="0 0 16 16">
+                                                                                <path
+                                                                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="d-inline-block">
+                                                                        <form
+                                                                            action="{{ url('master_narahubung/' . $item->id) }}"
+                                                                            method="POST">
+                                                                            @method('DELETE')
+                                                                            @csrf
+                                                                            <button
+                                                                                class="btn btn-danger btn-circle delete-btn"
+                                                                                data-confirm-delete="true"
+                                                                                data-bs-toggle="tooltip"
+                                                                                title="Delete">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
                                                                 @endif
                                                             </div>
                                                         </td>
@@ -445,13 +453,13 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h2></h2>
                                         <div class="action-buttons">
-                                            @if(Auth::user()->role_id !=1)
-
+                                            @if (Auth::user()->role_id != 1)
                                             @else
-                                            <a href="#" class="btn btn-primary btn-circle me-2" title="Add" data-action="add"
-                                                data-bs-toggle="modal" data-bs-target="#form-master-komunikasi"
-                                                id="btn-addmaster-komunikasi" data-id="{{ $donor->id }}">
-                                                <i class="fas fa-plus"></i></a>
+                                                <a href="#" class="btn btn-primary btn-circle me-2"
+                                                    title="Add" data-action="add" data-bs-toggle="modal"
+                                                    data-bs-target="#form-master-komunikasi"
+                                                    id="btn-addmaster-komunikasi" data-id="{{ $donor->id }}">
+                                                    <i class="fas fa-plus"></i></a>
                                             @endif
                                         </div>
                                     </div>
@@ -489,16 +497,21 @@
                                                                     );
                                                                 @endphp
                                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                    <img src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
-                                                                        alt="Pratinjau Gambar"
-                                                                        style="max-width: 100px; max-height: 100px;">
+                                                                    <a href="{{ asset($item->dokumen_komunikasi) }}"
+                                                                        download>
+                                                                        <img src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
+                                                                            alt="Pratinjau Gambar"
+                                                                            style="max-width: 100px; max-height: 100px;">
+                                                                    </a>
                                                                 @elseif ($extension === 'pdf')
                                                                     <embed
                                                                         src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
                                                                         type="application/pdf" width="200"
                                                                         height="200">
                                                                 @else
-                                                                    {{ basename($item->dokumen_komunikasi) }}
+                                                                    <a style="color: black"
+                                                                        href="{{ asset($item->dokumen_komunikasi) }}"
+                                                                        download>{{ basename($item->dokumen_komunikasi) }}</a>
                                                                 @endif
                                                             @else
                                                                 Tidak ada dokumen
@@ -507,61 +520,61 @@
 
                                                         <td class="text-center">
                                                             <div class="action-buttons d-flex justify-content-center">
-                                                                @if(Auth::user()->role_id !=1)
-                                                                <div class="d-inline-block">
-                                                                    <a href="{{ url('komunikasi/' . $item->id) }}"
-                                                                        class="btn btn-info btn-circle"
-                                                                        data-bs-toggle="tooltip" title="View">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </div>
+                                                                @if (Auth::user()->role_id != 1)
+                                                                    <div class="d-inline-block">
+                                                                        <a href="{{ url('komunikasi/' . $item->id) }}"
+                                                                            class="btn btn-info btn-circle"
+                                                                            data-bs-toggle="tooltip" title="View">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </div>
                                                                 @else
-                                                                <div class="d-inline-block">
-                                                                    <a href="{{ url('komunikasi/' . $item->id) }}"
-                                                                        class="btn btn-info btn-circle"
-                                                                        data-bs-toggle="tooltip" title="View">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block mx-1">
-                                                                    <a href="#"
-                                                                        class="btn btn-warning btn-circle"
-                                                                        id="btn-editmaster-komunikasi" title="Edit"
-                                                                        data-action="edit"
-                                                                        data-id = "{{ $item->id }}"
-                                                                        data-donor-id = "{{ $item->donor_id }}"
-                                                                        data-tanggal = "{{ $item->tanggal }}"
-                                                                        data-saluran-id = "{{ $item->saluran_id }}"
-                                                                        data-jenjang-komunikasi-id = "{{ $item->jenjang_komunikasi_id }}"
-                                                                        data-tindak-lanjut-id = "{{ $item->tindak_lanjut_id }}"
-                                                                        data-catatan = "{{ $item->catatan }}"
-                                                                        data-tgl-selanjutnya = "{{ $item->tgl_selanjutnya }}"
-                                                                        data-dokumen-komunikasi = "{{ $item->dokumen_komunikasi }}"
-                                                                        >
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="16" height="16"
-                                                                            fill="currentColor"
-                                                                            class="bi bi-pencil-fill"
-                                                                            viewBox="0 0 16 16">
-                                                                            <path
-                                                                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block">
-                                                                    <form
-                                                                        action="{{ url('master_komunikasi/' . $item->id) }}"
-                                                                        method="POST">
-                                                                        @method('DELETE')
-                                                                        @csrf
-                                                                        <button
-                                                                            class="btn btn-danger btn-circle delete-btn"
-                                                                            data-confirm-delete="true"
-                                                                            data-bs-toggle="tooltip" title="Delete">
-                                                                            <i class="fas fa-trash"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
+                                                                    <div class="d-inline-block">
+                                                                        <a href="{{ url('komunikasi/' . $item->id) }}"
+                                                                            class="btn btn-info btn-circle"
+                                                                            data-bs-toggle="tooltip" title="View">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="d-inline-block mx-1">
+                                                                        <a href="#"
+                                                                            class="btn btn-warning btn-circle"
+                                                                            id="btn-editmaster-komunikasi"
+                                                                            title="Edit" data-action="edit"
+                                                                            data-id = "{{ $item->id }}"
+                                                                            data-donor-id = "{{ $item->donor_id }}"
+                                                                            data-tanggal = "{{ $item->tanggal }}"
+                                                                            data-saluran-id = "{{ $item->saluran_id }}"
+                                                                            data-jenjang-komunikasi-id = "{{ $item->jenjang_komunikasi_id }}"
+                                                                            data-tindak-lanjut-id = "{{ $item->tindak_lanjut_id }}"
+                                                                            data-catatan = "{{ $item->catatan }}"
+                                                                            data-tgl-selanjutnya = "{{ $item->tgl_selanjutnya }}"
+                                                                            data-dokumen-komunikasi = "{{ $item->dokumen_komunikasi }}">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="16" height="16"
+                                                                                fill="currentColor"
+                                                                                class="bi bi-pencil-fill"
+                                                                                viewBox="0 0 16 16">
+                                                                                <path
+                                                                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="d-inline-block">
+                                                                        <form
+                                                                            action="{{ url('master_komunikasi/' . $item->id) }}"
+                                                                            method="POST">
+                                                                            @method('DELETE')
+                                                                            @csrf
+                                                                            <button
+                                                                                class="btn btn-danger btn-circle delete-btn"
+                                                                                data-confirm-delete="true"
+                                                                                data-bs-toggle="tooltip"
+                                                                                title="Delete">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
                                                                 @endif
                                                             </div>
                                                         </td>
@@ -580,13 +593,13 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h2></h2>
                                         <div class="action-buttons">
-                                            @if(Auth::user()->role_id !=1)
-
+                                            @if (Auth::user()->role_id != 1)
                                             @else
-                                            <a href="#" class="btn btn-primary btn-circle me-2" title="Add"
-                                                data-bs-toggle="modal" data-bs-target="#form-master-proposal"
-                                                id="btn-addmaster-proposal" data-id="{{ $donor->id }}">
-                                                <i class="fas fa-plus"></i></a>
+                                                <a href="#" class="btn btn-primary btn-circle me-2"
+                                                    title="Add" data-bs-toggle="modal"
+                                                    data-bs-target="#form-master-proposal" id="btn-addmaster-proposal"
+                                                    data-id="{{ $donor->id }}">
+                                                    <i class="fas fa-plus"></i></a>
                                             @endif
                                         </div>
                                     </div>
@@ -657,16 +670,21 @@
                                                                     );
                                                                 @endphp
                                                                 @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                                    <img src="{{ url('') }}/{{ $item->dokumen_proposal }}"
-                                                                        alt="Pratinjau Gambar"
-                                                                        style="max-width: 100px; max-height: 100px;">
+                                                                    <a href="{{ asset($item->dokumen_proposal) }}"
+                                                                        download>
+                                                                        <img src="{{ url('') }}/{{ $item->dokumen_proposal }}"
+                                                                            alt="Pratinjau Gambar"
+                                                                            style="max-width: 100px; max-height: 100px;">
+                                                                    </a>
                                                                 @elseif ($extension === 'pdf')
                                                                     <embed
                                                                         src="{{ url('') }}/{{ $item->dokumen_proposal }}"
                                                                         type="application/pdf" width="200"
                                                                         height="200">
                                                                 @else
-                                                                    {{ basename($item->dokumen_proposal) }}
+                                                                    <a style="color: black"
+                                                                        href="{{ asset($item->dokumen_proposal) }}"
+                                                                        download>{{ basename($item->dokumen_proposal) }}</a>
                                                                 @endif
                                                             @else
                                                                 Tidak ada dokumen
@@ -674,65 +692,66 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="action-buttons d-flex justify-content-center">
-                                                                @if(Auth::user()->role_id !=1)
-                                                                <div class="d-inline-block">
-                                                                    <a href="{{ url('proposal/' . $item->id) }}"
-                                                                        class="btn btn-info btn-circle"
-                                                                        data-bs-toggle="tooltip" title="View">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </div>
+                                                                @if (Auth::user()->role_id != 1)
+                                                                    <div class="d-inline-block">
+                                                                        <a href="{{ url('proposal/' . $item->id) }}"
+                                                                            class="btn btn-info btn-circle"
+                                                                            data-bs-toggle="tooltip" title="View">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </div>
                                                                 @else
-                                                                <div class="d-inline-block">
-                                                                    <a href="{{ url('proposal/' . $item->id) }}"
-                                                                        class="btn btn-info btn-circle"
-                                                                        data-bs-toggle="tooltip" title="View">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block mx-1">
-                                                                    <a href="#"
-                                                                        class="btn btn-warning btn-circle"
-                                                                        id="btn-editmaster-proposal" title="Edit"
-                                                                        data-id = "{{ $item->id }}"
-                                                                        data-donor-id = "{{ $item->donor_id }}"
-                                                                        data-tujuan-pendanaan-id = "{{ $item->tujuan_pendanaan_id }}"
-                                                                        data-jenis-penerimaan-id = "{{ $item->jenis_penerimaan_id }}"
-                                                                        data-saluran-pendanaan-id = "{{ $item->saluran_pendanaan_id }}"
-                                                                        data-jenis-intermediaries-id = "{{ $item->jenis_intermediaries_id }}"
-                                                                        data-nama-proyek = "{{ $item->nama_proyek }}"
-                                                                        data-klasifikasi-portfolio-id = "{{ $item->klasifikasi_portfolio_id }}"
-                                                                        data-impact-goals-id = "{{ $item->impact_goals_id }}"
-                                                                        data-estimasi-nilai-usd = "{{ $item->estimasi_nilai_usd }}"
-                                                                        data-estimasi-nilai-idr = "{{ $item->estimasi_nilai_idr }}"
-                                                                        data-usulan-durasi = "{{ $item->usulan_durasi }}"
-                                                                        data-status-kemajuan-id = "{{ $item->status_kemajuan_id }}"
-                                                                        data-dokumen-proposal = "{{ $item->dokumen_proposal }}"
-                                                                        >
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            width="16" height="16"
-                                                                            fill="currentColor"
-                                                                            class="bi bi-pencil-fill"
-                                                                            viewBox="0 0 16 16">
-                                                                            <path
-                                                                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block">
-                                                                    <form
-                                                                        action="{{ url('master_proposal/' . $item->id) }}"
-                                                                        method="POST">
-                                                                        @method('DELETE')
-                                                                        @csrf
-                                                                        <button
-                                                                            class="btn btn-danger btn-circle delete-btn"
-                                                                            data-confirm-delete="true"
-                                                                            data-bs-toggle="tooltip" title="Delete">
-                                                                            <i class="fas fa-trash"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
+                                                                    <div class="d-inline-block">
+                                                                        <a href="{{ url('proposal/' . $item->id) }}"
+                                                                            class="btn btn-info btn-circle"
+                                                                            data-bs-toggle="tooltip" title="View">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="d-inline-block mx-1">
+                                                                        <a href="#"
+                                                                            class="btn btn-warning btn-circle"
+                                                                            id="btn-editmaster-proposal"
+                                                                            title="Edit"
+                                                                            data-id = "{{ $item->id }}"
+                                                                            data-donor-id = "{{ $item->donor_id }}"
+                                                                            data-tujuan-pendanaan-id = "{{ $item->tujuan_pendanaan_id }}"
+                                                                            data-jenis-penerimaan-id = "{{ $item->jenis_penerimaan_id }}"
+                                                                            data-saluran-pendanaan-id = "{{ $item->saluran_pendanaan_id }}"
+                                                                            data-jenis-intermediaries-id = "{{ $item->jenis_intermediaries_id }}"
+                                                                            data-nama-proyek = "{{ $item->nama_proyek }}"
+                                                                            data-klasifikasi-portfolio-id = "{{ $item->klasifikasi_portfolio_id }}"
+                                                                            data-impact-goals-id = "{{ $item->impact_goals_id }}"
+                                                                            data-estimasi-nilai-usd = "{{ $item->estimasi_nilai_usd }}"
+                                                                            data-estimasi-nilai-idr = "{{ $item->estimasi_nilai_idr }}"
+                                                                            data-usulan-durasi = "{{ $item->usulan_durasi }}"
+                                                                            data-status-kemajuan-id = "{{ $item->status_kemajuan_id }}"
+                                                                            data-dokumen-proposal = "{{ $item->dokumen_proposal }}">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="16" height="16"
+                                                                                fill="currentColor"
+                                                                                class="bi bi-pencil-fill"
+                                                                                viewBox="0 0 16 16">
+                                                                                <path
+                                                                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                                                            </svg>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="d-inline-block">
+                                                                        <form
+                                                                            action="{{ url('master_proposal/' . $item->id) }}"
+                                                                            method="POST">
+                                                                            @method('DELETE')
+                                                                            @csrf
+                                                                            <button
+                                                                                class="btn btn-danger btn-circle delete-btn"
+                                                                                data-confirm-delete="true"
+                                                                                data-bs-toggle="tooltip"
+                                                                                title="Delete">
+                                                                                <i class="fas fa-trash"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
                                                                 @endif
                                                             </div>
                                                         </td>
@@ -774,29 +793,31 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-semibold" id="exampleModalLabel">Logout Account</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login again.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>
+        <div class="modal fade text-black" id="logoutModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-semibold" id="exampleModalLabel">Logout Account</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body fw-light">Are you sure you want to logout? Once you logout you need to login
+                        again.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="{{ url('logout') }}">Yes, Logout!</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
         <!-- Modal Add/Edit Master/Detail Narahubung -->
-        <div class="modal fade" id="form-master-narahubung" role="dialog" data-bs-backdrop="static"
-            tabindex="-1" aria-labelledby="formAddLabelNarahubung" aria-hidden="true">
-            <form id="addmasterFormNarahubung" method="POST" action="{{ route('master.storeOrUpdate_narahubung', $donor->id) }}" enctype="multipart/form-data">
+        <div class="modal fade" id="form-master-narahubung" role="dialog" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="formAddLabelNarahubung" aria-hidden="true">
+            <form id="addmasterFormNarahubung" method="POST"
+                action="{{ route('master.storeOrUpdate_narahubung', $donor->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -879,9 +900,10 @@
 
 
         <!-- Modal Add/Edit Master/Detail Komunikasi -->
-        <div class="modal fade" id="form-master-komunikasi" role="dialog" data-bs-backdrop="static"
-            tabindex="-1" aria-labelledby="formAddLabelKomunikasi" aria-hidden="true">
-            <form id="addmasterFormKomunikasi" method="POST" action="{{ route('master.storeOrUpdate_komunikasi', $donor->id) }}" enctype="multipart/form-data">
+        <div class="modal fade" id="form-master-komunikasi" role="dialog" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="formAddLabelKomunikasi" aria-hidden="true">
+            <form id="addmasterFormKomunikasi" method="POST"
+                action="{{ route('master.storeOrUpdate_komunikasi', $donor->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -907,9 +929,8 @@
                                     <div class="form-group">
                                         <label for="tanggal">Tanggal</label>
                                         <input type="date" placeholder="Tanggal"
-                                            class="form-control @error('tanggal') is-invalid @enderror"
-                                            id="tanggal" name="tanggal"
-                                            value="{{ old('tanggal') }}">
+                                            class="form-control @error('tanggal') is-invalid @enderror" id="tanggal"
+                                            name="tanggal" value="{{ old('tanggal') }}">
                                         @error('tanggal')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -918,35 +939,35 @@
                                         <label for="saluran_id">Saluran</label>
                                         <select class="form-select form-control" name="saluran_id" id="saluran_id">
                                             <option value="">--Pilih Saluran--</option>
-                                            @foreach($saluran as $item)
+                                            @foreach ($saluran as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="jenjang_komunikasi_id">Jenjang Komunikasi</label>
-                                        <select class="form-select form-control" name="jenjang_komunikasi_id" id="jenjang_komunikasi_id">
+                                        <select class="form-select form-control" name="jenjang_komunikasi_id"
+                                            id="jenjang_komunikasi_id">
                                             <option value="">--Pilih Jenjang Komunikasi--</option>
-                                            @foreach($jenjangKomunikasi as $item)
+                                            @foreach ($jenjangKomunikasi as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="tindak_lanjut_id">Tindak Lanjut</label>
-                                        <select class="form-select form-control" name="tindak_lanjut_id" id="tindak_lanjut_id">
+                                        <select class="form-select form-control" name="tindak_lanjut_id"
+                                            id="tindak_lanjut_id">
                                             <option value="">--Pilih Tindak Lanjut--</option>
-                                            @foreach($tindakLanjut as $item)
+                                            @foreach ($tindakLanjut as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="catatan">Catatan</label>
-                                        <textarea type="text" placeholder="Catatan"
-                                            class="form-control @error('catatan') is-invalid @enderror"
-                                            id="catatan" name="catatan"
-                                            value="{{ old('catatan') }}"></textarea>
+                                        <textarea type="text" placeholder="Catatan" class="form-control @error('catatan') is-invalid @enderror"
+                                            id="catatan" name="catatan" value="{{ old('catatan') }}"></textarea>
                                         @error('catatan')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -963,7 +984,8 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
-                                        <input type="file" class="form-control" id="dokumen_komunikasi" name="dokumen_komunikasi" onchange="validateFile()">
+                                        <input type="file" class="form-control" id="dokumen_komunikasi"
+                                            name="dokumen_komunikasi" onchange="validateFile()">
                                         <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
                                             atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                         <span id="file-error-komunikasi" class="text-danger"></span>
@@ -987,9 +1009,10 @@
 
 
         <!-- Modal Add/Edit Master/Detail Proposal -->
-        <div class="modal fade" id="form-master-proposal" role="dialog" data-bs-backdrop="static"
-            tabindex="-1" aria-labelledby="formAddLabelProposal" aria-hidden="true">
-            <form id="addmasterFormProposal" method="POST" action="{{ route('master.storeOrUpdate_proposal', $donor->id) }}" enctype="multipart/form-data">
+        <div class="modal fade" id="form-master-proposal" role="dialog" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="formAddLabelProposal" aria-hidden="true">
+            <form id="addmasterFormProposal" method="POST"
+                action="{{ route('master.storeOrUpdate_proposal', $donor->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
@@ -1015,36 +1038,40 @@
 
                                     <div class="form-group">
                                         <label for="tujuan_pendanaan_id">Tujuan Pendanaan</label>
-                                        <select class="form-select form-control" name="tujuan_pendanaan_id" id="tujuan_pendanaan_id">
+                                        <select class="form-select form-control" name="tujuan_pendanaan_id"
+                                            id="tujuan_pendanaan_id">
                                             <option value="">--Pilih Tujuan Pendanaan--</option>
-                                            @foreach($tujuanPendanaan as $item)
+                                            @foreach ($tujuanPendanaan as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="jenis_penerimaan_id">Jenis Penerimaan</label>
-                                        <select class="form-select form-control" name="jenis_penerimaan_id" id="jenis_penerimaan_id">
+                                        <select class="form-select form-control" name="jenis_penerimaan_id"
+                                            id="jenis_penerimaan_id">
                                             <option value="">--Pilih Jenis Penerimaan--</option>
-                                            @foreach($jenisPenerimaan as $item)
+                                            @foreach ($jenisPenerimaan as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="saluran_pendanaan_id">Saluran Pendanaan</label>
-                                        <select class="form-select form-control" name="saluran_pendanaan_id" id="saluran_pendanaan_id">
+                                        <select class="form-select form-control" name="saluran_pendanaan_id"
+                                            id="saluran_pendanaan_id">
                                             <option value="">--Pilih Saluran Pendanaan--</option>
-                                            @foreach($saluranPendanaan as $item)
+                                            @foreach ($saluranPendanaan as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="jenis_intermediaries_id">Jenis Intermediary</label>
-                                        <select class="form-select form-control" name="jenis_intermediaries_id" id="jenis_intermediaries_id">
+                                        <select class="form-select form-control" name="jenis_intermediaries_id"
+                                            id="jenis_intermediaries_id">
                                             <option value="">--Pilih Jenis Intermediary--</option>
-                                            @foreach($jenisIntermediaries as $item)
+                                            @foreach ($jenisIntermediaries as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
@@ -1053,27 +1080,29 @@
                                         <label for="nama_proyek">Nama Proyek</label>
                                         <input type="text" placeholder="Nama Proyek"
                                             class="form-control @error('nama_proyek') is-invalid @enderror"
-                                            id="nama_proyek" name="nama_proyek"
-                                            value="{{ old('nama_proyek') }}">
+                                            id="nama_proyek" name="nama_proyek" value="{{ old('nama_proyek') }}">
                                         @error('nama_proyek')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="klasifikasi_portfolio_id">Klasifikasi Portfolio</label>
-                                        <select class="form-select form-control" name="klasifikasi_portfolio_id" id="klasifikasi_portfolio_id">
+                                        <select class="form-select form-control" name="klasifikasi_portfolio_id"
+                                            id="klasifikasi_portfolio_id">
                                             <option value="">--Pilih Klasifikasi Portfolio--</option>
-                                            @foreach($klasifikasiPortfolios as $item)
+                                            @foreach ($klasifikasiPortfolios as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="impact_goals_id">Impact Goals</label>
-                                        <select class="form-select form-control" name="impact_goals_id[]
-                                        " id="impact_goals_id" multiple>
+                                        <select class="form-select form-control"
+                                            name="impact_goals_id[]
+                                        "
+                                            id="impact_goals_id" multiple>
                                             <option value="">--Pilih Impact Goals--</option>
-                                            @foreach($impactGoals as $item)
+                                            @foreach ($impactGoals as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
@@ -1110,16 +1139,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="status_kemajuan_id">Status Kemajuan</label>
-                                        <select class="form-select form-control" name="status_kemajuan_id" id="status_kemajuan_id">
+                                        <select class="form-select form-control" name="status_kemajuan_id"
+                                            id="status_kemajuan_id">
                                             <option value="">--Pilih Status Kemajuan--</option>
-                                            @foreach($statusKemajuan as $item)
+                                            @foreach ($statusKemajuan as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="dokumen_proposal" class="form-label">Dokumen</label>
-                                        <input type="file" class="form-control" id="dokumen_proposal" name="dokumen_proposal" onchange="validateFile()">
+                                        <input type="file" class="form-control" id="dokumen_proposal"
+                                            name="dokumen_proposal" onchange="validateFile()">
                                         <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
                                             atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                         <span id="file-error-proposal" class="text-danger"></span>

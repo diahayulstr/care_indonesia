@@ -131,7 +131,9 @@ class KomunikasiController extends Controller
                 $namaDonor = $donor->nama_organisasi;
                 $extension = $request->dokumen_komunikasi->getClientOriginalExtension();
                 $tanggalUpdate = now()->format('d-m-Y');
-                $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                $komunikasi->save();
+                $idKomunikasi = $komunikasi->id; 
+                $namaFileBaru = $namaDonor . '_ID-' . $idKomunikasi . '_' . $tanggalUpdate . '.' . $extension;
                 $request->dokumen_komunikasi->move('assets/komunikasi/dokumen', $namaFileBaru);
                 $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFileBaru;
             }
@@ -177,7 +179,9 @@ class KomunikasiController extends Controller
                     $namaDonor = $donor->nama_organisasi;
                     $extension = $request->file('inputs_komunikasi.'.$key.'.dokumen_komunikasi')->getClientOriginalExtension();
                     $tanggalUpdate = now()->format('d-m-Y');
-                    $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                    $komunikasi->save();
+                    $idKomunikasi = $komunikasi->id; 
+                    $namaFileBaru = $namaDonor . '_ID-' . $idKomunikasi . '_' . $tanggalUpdate . '.' . $extension;
                     $request->file('inputs_komunikasi.'.$key.'.dokumen_komunikasi')->move('assets/komunikasi/dokumen', $namaFileBaru);
                     $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFileBaru;
                 }
@@ -227,7 +231,9 @@ class KomunikasiController extends Controller
                     $namaDonor = $donor->nama_organisasi;
                     $extension = $request->file('inputs_komunikasi.'.$key.'.dokumen_komunikasi')->getClientOriginalExtension();
                     $tanggalUpdate = now()->format('d-m-Y');
-                    $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                    $komunikasi->save();
+                    $idKomunikasi = $komunikasi->id; 
+                    $namaFileBaru = $namaDonor . '_ID-' . $idKomunikasi . '_' . $tanggalUpdate . '.' . $extension;
                     $request->file('inputs_komunikasi.'.$key.'.dokumen_komunikasi')->move('assets/komunikasi/dokumen', $namaFileBaru);
                     $komunikasi->dokumen_komunikasi = 'assets/komunikasi/dokumen/' . $namaFileBaru;
                 }

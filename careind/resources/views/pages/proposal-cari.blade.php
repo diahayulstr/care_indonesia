@@ -134,8 +134,8 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group shadow-sm rounded">
                             <input type="text" name="cari" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." value="{{ request()->input('cari') }}" aria-label="Search"
-                                aria-describedby="basic-addon2">
+                                placeholder="Search for..." value="{{ request()->input('cari') }}"
+                                aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-light" title="Search">
                                     <i class="fas fa-search fa-sm"></i>
@@ -307,15 +307,19 @@
                                                             );
                                                         @endphp
                                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                            <img src="{{ url('') }}/{{ $item->dokumen_proposal }}"
-                                                                alt="Pratinjau Gambar"
-                                                                style="max-width: 100px; max-height: 100px;">
+                                                            <a href="{{ asset($item->dokumen_proposal) }}" download>
+                                                                <img src="{{ url('') }}/{{ $item->dokumen_proposal }}"
+                                                                    alt="Pratinjau Gambar"
+                                                                    style="max-width: 100px; max-height: 100px;">
+                                                            </a>
                                                         @elseif ($extension === 'pdf')
                                                             <embed
                                                                 src="{{ url('') }}/{{ $item->dokumen_proposal }}"
                                                                 type="application/pdf" width="200" height="200">
                                                         @else
-                                                            {{ basename($item->dokumen_proposal) }}
+                                                            <a style="color: black"
+                                                                href="{{ asset($item->dokumen_proposal) }}"
+                                                                download>{{ basename($item->dokumen_proposal) }}</a>
                                                         @endif
                                                     @else
                                                         Tidak ada dokumen

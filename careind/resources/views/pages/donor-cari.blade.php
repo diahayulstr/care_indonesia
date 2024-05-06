@@ -136,8 +136,8 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group shadow-sm rounded">
                             <input type="text" name="cari" class="form-control bg-light border-0 small"
-                                value="{{ request()->input('cari') }}"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                value="{{ request()->input('cari') }}" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-light" title="Search">
                                     <i class="fas fa-search fa-sm"></i>
@@ -305,15 +305,19 @@
                                                             );
                                                         @endphp
                                                         @if (in_array($extension, ['jpg', 'jpeg', 'png', 'gif']))
-                                                            <img src="{{ url('') }}/{{ $item->dokumen_donor }}"
-                                                                alt="Pratinjau Gambar"
-                                                                style="max-width: 100px; max-height: 100px;">
+                                                            <a href="{{ asset($item->dokumen_donor) }}" download>
+                                                                <img src="{{ url('') }}/{{ $item->dokumen_donor }}"
+                                                                    alt="Pratinjau Gambar"
+                                                                    style="max-width: 100px; max-height: 100px;">
+                                                            </a>
                                                         @elseif ($extension === 'pdf')
                                                             <embed
                                                                 src="{{ url('') }}/{{ $item->dokumen_donor }}"
                                                                 type="application/pdf" width="200" height="200">
                                                         @else
-                                                            {{ basename($item->dokumen_donor) }}
+                                                            <a style="color: black"
+                                                                href="{{ asset($item->dokumen_donor) }}"
+                                                                download>{{ basename($item->dokumen_donor) }}</a>
                                                         @endif
                                                     @else
                                                         Tidak ada dokumen
@@ -322,16 +326,15 @@
                                                 <td class="text-center">
                                                     <div class="action-buttons d-flex justify-content-center">
                                                         @if (Auth::user()->role_id != 1)
+                                                            <div class="d-inline-block mx-1">
+                                                                <a href="{{ url('master/' . $item->id) }}"
+                                                                    class="btn btn-info btn-circle"
+                                                                    data-bs-toggle="tooltip" title="View">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            </div>
 
-                                                        <div class="d-inline-block mx-1">
-                                                            <a href="{{ url('master/' . $item->id) }}"
-                                                                class="btn btn-info btn-circle"
-                                                                data-bs-toggle="tooltip" title="View">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                        </div>
-                                                        
-                                                        {{-- <div class="d-inline-block">
+                                                            {{-- <div class="d-inline-block">
                                                             <a href="{{ url('donor/' . $item->id) }}"
                                                                 class="btn btn-info btn-circle"
                                                                 data-bs-toggle="tooltip" title="View">
@@ -352,17 +355,15 @@
                                                                 </ul>
                                                             </div>
                                                         </div> --}}
-
                                                         @else
-
                                                             <div class="d-inline-block mx-1">
-                                                            <a href="{{ url('master/' . $item->id) }}"
-                                                                class="btn btn-success btn-circle"
-                                                                data-bs-toggle="tooltip" title="View">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
-                                                        </div>
-                                                        {{-- <div class="d-inline-block mx-1">
+                                                                <a href="{{ url('master/' . $item->id) }}"
+                                                                    class="btn btn-success btn-circle"
+                                                                    data-bs-toggle="tooltip" title="View">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            </div>
+                                                            {{-- <div class="d-inline-block mx-1">
                                                             <a href="{{ url('donor/' . $item->id . '/edit') }}"
                                                                 id="btn-edit-donor" class="btn btn-warning btn-circle"
                                                                 data-bs-toggle="tooltip" title="Edit">
@@ -374,19 +375,20 @@
                                                                 </svg>
                                                             </a>
                                                         </div> --}}
-                                                        <div class="d-inline-block">
-                                                            <form action="{{ url('donor/' . $item->id) }}"
-                                                                method="POST">
-                                                                @method('DELETE')
-                                                                @csrf
-                                                                <button class="btn btn-danger btn-circle delete-btn"
-                                                                    data-confirm-delete="true"
-                                                                    data-bs-toggle="tooltip" title="Delete">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                        {{-- <div class="d-inline-block">
+                                                            <div class="d-inline-block">
+                                                                <form action="{{ url('donor/' . $item->id) }}"
+                                                                    method="POST">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button
+                                                                        class="btn btn-danger btn-circle delete-btn"
+                                                                        data-confirm-delete="true"
+                                                                        data-bs-toggle="tooltip" title="Delete">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                            {{-- <div class="d-inline-block">
                                                             <div class="dropdown">
                                                                 <button class="btn btn-success btn-circle"
                                                                     type="button" data-bs-toggle="dropdown"
@@ -397,7 +399,7 @@
                                                                     <li><a class="dropdown-item"
                                                                             href="{{ url('master/' . $item->id) }}">Master/Detail
                                                                             View</a></li>
-                                                                    @if($item->narahubungs->isNotEmpty() && $item->komunikasis->isNotEmpty() && $item->proposals->isNotEmpty())
+                                                                    @if ($item->narahubungs->isNotEmpty() && $item->komunikasis->isNotEmpty() && $item->proposals->isNotEmpty())
                                                                         <li><a id="btn-edit-master" class="dropdown-item"
                                                                                 href="{{ url('master/' . $item->id . '/edit') }}">Master/Detail
                                                                                 Edit</a></li>
