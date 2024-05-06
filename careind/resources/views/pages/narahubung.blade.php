@@ -226,12 +226,12 @@
                                         </svg>
                                     </a>
                                     <a href="{{ url('grid_add/narahubung') }}"
-                                        class="btn btn-outline-primary btn-circle dotted-button"
+                                        class="btn btn-primary btn-circle me-2"
                                         data-bs-toggle="tooltip" title="Grid Add">
                                         <i class="fas fa-plus icon"></i>
                                     </a>
-                                    <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle me-2"
-                                        data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
+                                    {{-- <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle me-2"
+                                        data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a> --}}
                                 @endif
                             </div>
                         </div>

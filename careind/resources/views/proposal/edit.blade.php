@@ -332,6 +332,8 @@
                                             <label for="dokumen_proposal" class="form-label">Dokumen</label>
                                             <input type="file" class="form-control" id="dokumen_proposal"
                                                 name="dokumen_proposal">
+                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                             <br>
                                             @if ($proposal->dokumen_proposal)
                                                 <input type="text" class="form-control"

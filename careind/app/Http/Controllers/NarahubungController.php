@@ -31,32 +31,32 @@ class NarahubungController extends Controller
         return view ('pages.narahubung-cari', compact('narahubung'));
     }
 
-    public function addNarahubung() {
-        $status = TabelStatus::all();
-        $donorID = Donor::all();
-        return view('narahubung.add', compact('status', 'donorID'));
-    }
+    // public function addNarahubung() {
+    //     $status = TabelStatus::all();
+    //     $donorID = Donor::all();
+    //     return view('narahubung.add', compact('status', 'donorID'));
+    // }
 
-    public function store(Request $request) {
-        $request->validate([
-            'donor_id'       => 'required|exists:donors,id',
-            'nama_kontak'    => 'required',
-            'jabatan'        => 'required',
-            'email'          => 'required|email',
-            'no_telp'        => 'required',
-            'status_id'      => 'required|exists:tabel_statuses,id',
-        ]);
-        $narahubung = new Narahubung();
-        $narahubung->donor_id       = $request->donor_id;
-        $narahubung->nama_kontak    = $request->nama_kontak;
-        $narahubung->jabatan        = $request->jabatan;
-        $narahubung->email          = $request->email;
-        $narahubung->no_telp        = $request->no_telp;
-        $narahubung->status_id      = $request->status_id;
-        $narahubung->save();
-        return redirect()->route('pages.narahubung')->
-        with('toast_success', 'Data narahubung berhasil ditambahkan.');
-    }
+    // public function store(Request $request) {
+    //     $request->validate([
+    //         'donor_id'       => 'required|exists:donors,id',
+    //         'nama_kontak'    => 'required',
+    //         'jabatan'        => 'required',
+    //         'email'          => 'required|email',
+    //         'no_telp'        => 'required',
+    //         'status_id'      => 'required|exists:tabel_statuses,id',
+    //     ]);
+    //     $narahubung = new Narahubung();
+    //     $narahubung->donor_id       = $request->donor_id;
+    //     $narahubung->nama_kontak    = $request->nama_kontak;
+    //     $narahubung->jabatan        = $request->jabatan;
+    //     $narahubung->email          = $request->email;
+    //     $narahubung->no_telp        = $request->no_telp;
+    //     $narahubung->status_id      = $request->status_id;
+    //     $narahubung->save();
+    //     return redirect()->route('pages.narahubung')->
+    //     with('toast_success', 'Data narahubung berhasil ditambahkan.');
+    // }
 
     public function show($id) {
         $narahubung = Narahubung::findOrFail($id);

@@ -269,7 +269,7 @@
                                                     <input type="file" class="form-control" id="dokumen_komunikasi"
                                                         name="inputs_komunikasi[0][dokumen_komunikasi]" onchange="validateFile()">
                                                     <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
-                                                        atau PDF.</small>
+                                                        atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                                     <span id="file-error" class="text-danger"></span>
                                                 </td>
                                                 <td>
@@ -396,7 +396,8 @@
                                     </td>
                                     <td>
                                         <input type="file" class="form-control" id="dokumen_komunikasi" name="inputs_komunikasi[${i}][dokumen_komunikasi]" onchange="validateFile()">
-                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                            atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                         <span id="file-error" class="text-danger"></span>
                                     </td>
                                     <td>

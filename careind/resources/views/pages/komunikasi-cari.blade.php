@@ -228,13 +228,13 @@
                                         </svg>
                                     </a>
                                     <a href="{{ url('grid_add/komunikasi') }}"
-                                        class="btn btn-outline-primary btn-circle dotted-button"
+                                        class="btn btn-primary btn-circle me-2"
                                         data-bs-toggle="tooltip" title="Grid Add">
                                         <i class="fas fa-plus icon"></i>
                                     </a>
-                                    <a href="{{ url('komunikasi/add') }}" class="btn btn-primary btn-circle me-2"
+                                    {{-- <a href="{{ url('komunikasi/add') }}" class="btn btn-primary btn-circle me-2"
                                         id="btn-add-komunikasi" data-bs-toggle="tooltip" title="Add"><i
-                                            class="fas fa-plus"></i></a>
+                                            class="fas fa-plus"></i></a> --}}
                                 @endif
                             </div>
                         </div>
@@ -283,7 +283,7 @@
                                                                 src="{{ url('') }}/{{ $item->dokumen_komunikasi }}"
                                                                 type="application/pdf" width="200" height="200">
                                                         @else
-                                                            Tidak ada pratinjau
+                                                            {{ basename($item->dokumen_komunikasi) }}
                                                         @endif
                                                     @else
                                                         Tidak ada dokumen

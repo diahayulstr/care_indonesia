@@ -171,8 +171,8 @@
 
                                 @else
                                 <div class="d-inline-block">
-                                    <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle"
-                                        data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
+                                    {{-- <a href="{{ url('narahubung/add') }}" class="btn btn-primary btn-circle"
+                                        data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a> --}}
                                 </div>
                                 <div class="d-inline-block mx-1">
                                     <a href="{{ url('narahubung/' . $narahubung->id . '/edit') }}"

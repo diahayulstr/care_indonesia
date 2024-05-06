@@ -289,7 +289,7 @@
                                             <input type="file" class="form-control" id="dokumen_donor"
                                                 name="dokumen_donor" onchange="validateFile()">
                                             <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
-                                                atau PDF.</small>
+                                                atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                             <span id="file-error" class="text-danger"></span>
                                         </div>
                                         <div id="filePreview-add-donor"></div>

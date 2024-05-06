@@ -168,7 +168,7 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Donor Edit</h6>
                             </div>
                         </div>
-                        <form id="form-edit-donor" action="{{ route('donor.update', ['donor' => $donor->id]) }}" method="POST"
+                        <form id="form-edit-donor" action="{{ route('donor.update', ['master' => $donor->id]) }}" method="POST"
                             enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
@@ -342,6 +342,8 @@
                                             <label for="dokumen_donor" class="form-label">Dokumen</label>
                                             <input type="file" class="form-control" id="dokumen_donor"
                                                 name="dokumen_donor">
+                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                             <br>
                                             @if ($donor->dokumen_donor)
                                                 <input type="text" class="form-control"

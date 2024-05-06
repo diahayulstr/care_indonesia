@@ -71,68 +71,68 @@ class ProposalController extends Controller
         return view('pages.proposal', compact('proposal'));
     }
 
-    public function addProposal() {
-        $donorID = Donor::all();
-        $impactGoals = TabelImpactGoals::all();
-        $jenisIntermediaries = TabelJenisIntermediaries::all();
-        $jenisPenerimaan = TabelJenisPenerimaan::all();
-        $klasifikasiPortfolios = TabelKlasifikasiPortfolios::all();
-        $saluranPendanaan = TabelSaluranPendanaan::all();
-        $statusKemajuan = TabelStatusKemajuan::all();
-        $tujuanPendanaan = TabelTujuanPendanaan::all();
-        return view('proposal.add', compact('donorID', 'impactGoals', 'jenisIntermediaries',
-        'jenisPenerimaan', 'klasifikasiPortfolios', 'saluranPendanaan', 'statusKemajuan',
-        'tujuanPendanaan'));
-    }
+    // public function addProposal() {
+    //     $donorID = Donor::all();
+    //     $impactGoals = TabelImpactGoals::all();
+    //     $jenisIntermediaries = TabelJenisIntermediaries::all();
+    //     $jenisPenerimaan = TabelJenisPenerimaan::all();
+    //     $klasifikasiPortfolios = TabelKlasifikasiPortfolios::all();
+    //     $saluranPendanaan = TabelSaluranPendanaan::all();
+    //     $statusKemajuan = TabelStatusKemajuan::all();
+    //     $tujuanPendanaan = TabelTujuanPendanaan::all();
+    //     return view('proposal.add', compact('donorID', 'impactGoals', 'jenisIntermediaries',
+    //     'jenisPenerimaan', 'klasifikasiPortfolios', 'saluranPendanaan', 'statusKemajuan',
+    //     'tujuanPendanaan'));
+    // }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'donor_id'                  =>  'required|exists:donors,id',
-            'tujuan_pendanaan_id'       =>  'required|exists:tabel_tujuan_pendanaans,id',
-            'jenis_penerimaan_id'       =>  'required|exists:tabel_jenis_penerimaans,id',
-            'saluran_pendanaan_id'      =>  'required|exists:tabel_saluran_pendanaans,id',
-            'jenis_intermediaries_id'   =>  'required|exists:tabel_jenis_intermediaries,id',
-            'nama_proyek'               =>  'required',
-            'klasifikasi_portfolio_id'  =>  'required|exists:tabel_klasifikasi_portfolios,id',
-            'impact_goals_id'           =>  'required|exists:tabel_impact_goals,id',
-            'estimasi_nilai_usd'        =>  'required',
-            'estimasi_nilai_idr'        =>  'required',
-            'usulan_durasi'             =>  'required',
-            'status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
-            'dokumen_proposal'          =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'donor_id'                  =>  'required|exists:donors,id',
+    //         'tujuan_pendanaan_id'       =>  'required|exists:tabel_tujuan_pendanaans,id',
+    //         'jenis_penerimaan_id'       =>  'required|exists:tabel_jenis_penerimaans,id',
+    //         'saluran_pendanaan_id'      =>  'required|exists:tabel_saluran_pendanaans,id',
+    //         'jenis_intermediaries_id'   =>  'required|exists:tabel_jenis_intermediaries,id',
+    //         'nama_proyek'               =>  'required',
+    //         'klasifikasi_portfolio_id'  =>  'required|exists:tabel_klasifikasi_portfolios,id',
+    //         'impact_goals_id'           =>  'required|exists:tabel_impact_goals,id',
+    //         'estimasi_nilai_usd'        =>  'required',
+    //         'estimasi_nilai_idr'        =>  'required',
+    //         'usulan_durasi'             =>  'required',
+    //         'status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
+    //         'dokumen_proposal'          =>  'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif',
+    //     ]);
 
-        $proposal = new Proposal([
-            'donor_id'                   =>   $request->donor_id,
-            'tujuan_pendanaan_id'        =>   $request->tujuan_pendanaan_id,
-            'jenis_penerimaan_id'        =>   $request->jenis_penerimaan_id,
-            'saluran_pendanaan_id'       =>   $request->saluran_pendanaan_id,
-            'jenis_intermediaries_id'    =>   $request->jenis_intermediaries_id,
-            'nama_proyek'                =>   $request->nama_proyek,
-            'klasifikasi_portfolio_id'   =>   $request->klasifikasi_portfolio_id,
-            'impact_goals_id'            =>   json_encode($request->impact_goals_id),
-            'estimasi_nilai_usd'         =>   $request->estimasi_nilai_usd,
-            'estimasi_nilai_idr'         =>   $request->estimasi_nilai_idr,
-            'usulan_durasi'              =>   $request->usulan_durasi,
-            'status_kemajuan_id'         =>   $request->status_kemajuan_id,
-        ]);
+    //     $proposal = new Proposal([
+    //         'donor_id'                   =>   $request->donor_id,
+    //         'tujuan_pendanaan_id'        =>   $request->tujuan_pendanaan_id,
+    //         'jenis_penerimaan_id'        =>   $request->jenis_penerimaan_id,
+    //         'saluran_pendanaan_id'       =>   $request->saluran_pendanaan_id,
+    //         'jenis_intermediaries_id'    =>   $request->jenis_intermediaries_id,
+    //         'nama_proyek'                =>   $request->nama_proyek,
+    //         'klasifikasi_portfolio_id'   =>   $request->klasifikasi_portfolio_id,
+    //         'impact_goals_id'            =>   json_encode($request->impact_goals_id),
+    //         'estimasi_nilai_usd'         =>   $request->estimasi_nilai_usd,
+    //         'estimasi_nilai_idr'         =>   $request->estimasi_nilai_idr,
+    //         'usulan_durasi'              =>   $request->usulan_durasi,
+    //         'status_kemajuan_id'         =>   $request->status_kemajuan_id,
+    //     ]);
 
-        if ($request->hasFile('dokumen_proposal')) {
-            $namaFile = $request->dokumen_proposal->getClientOriginalName();
-            $path = 'assets/proposal/dokumen/' . $namaFile;
-            $counter = 1;
-            while (file_exists($path)) {
-                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
-                $path = 'assets/proposal/dokumen/' . $namaFile;
-                $counter++;
-            }
-            $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
-            $proposal->dokumen_proposal = $path;
-        }
-        $proposal->save();
-        return redirect()->route('pages.proposal')->with('success', 'Data proposal berhasil ditambahkan');
-    }
+    //     if ($request->hasFile('dokumen_proposal')) {
+    //         $namaFile = $request->dokumen_proposal->getClientOriginalName();
+    //         $path = 'assets/proposal/dokumen/' . $namaFile;
+    //         $counter = 1;
+    //         while (file_exists($path)) {
+    //             $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+    //             $path = 'assets/proposal/dokumen/' . $namaFile;
+    //             $counter++;
+    //         }
+    //         $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
+    //         $proposal->dokumen_proposal = $path;
+    //     }
+    //     $proposal->save();
+    //     return redirect()->route('pages.proposal')->with('success', 'Data proposal berhasil ditambahkan');
+    // }
 
     public function show($id) {
         $proposal = Proposal::findOrFail($id);
@@ -168,7 +168,7 @@ class ProposalController extends Controller
             'estimasi_nilai_idr'        =>  'required',
             'usulan_durasi'             =>  'required',
             'status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
-            'dokumen_proposal'          =>  'file',
+            'dokumen_proposal'          =>  'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif',
         ]);
 
         $proposal -> update($request->only([
@@ -187,18 +187,17 @@ class ProposalController extends Controller
         ]));
 
         if ($request->hasFile('dokumen_proposal')) {
-            $namaFile = $request->dokumen_proposal->getClientOriginalName();
-            $path = 'assets/proposal/dokumen/' . $namaFile;
-            $counter = 1;
-            while (file_exists($path)) {
-                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
-                $path = 'assets/proposal/dokumen/' . $namaFile;
-                $counter++;
+            $donor = Donor::find($proposal->donor_id);
+            if ($donor) {
+                $namaDonor = $donor->nama_organisasi;
+                $extension = $request->dokumen_proposal->getClientOriginalExtension();
+                $tanggalUpdate = now()->format('d-m-Y');
+                $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFileBaru);
+                $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFileBaru;
             }
-            $request->dokumen_proposal->move('assets/proposal/dokumen', $namaFile);
-	        File::delete($proposal->dokumen_proposal);
-            $proposal->dokumen_proposal = $path;
         }
+
         $proposal->save();
         return redirect()->route('pages.proposal', ['proposal' => $proposal->id])
         ->with('toast_success', 'Data proposal berhasil diupdate');
@@ -239,7 +238,7 @@ class ProposalController extends Controller
             'inputs_proposal.*.estimasi_nilai_idr'        =>  'required',
             'inputs_proposal.*.usulan_durasi'             =>  'required',
             'inputs_proposal.*.status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
-            'inputs_proposal.*.dokumen_proposal'          =>  'required|file|mimes:pdf,jpg,jpeg,png,gif',
+            'inputs_proposal.*.dokumen_proposal'          =>  'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif',
         ]);
         foreach($request->inputs_proposal as $key => $value) {
             $proposal = new Proposal([
@@ -257,19 +256,17 @@ class ProposalController extends Controller
                 'status_kemajuan_id'        => $value['status_kemajuan_id'],
             ]);
 
-            if ($request->file('inputs_proposal.'.$key.'.dokumen_proposal')) {
-                $file = $request->file('inputs_proposal.'.$key.'.dokumen_proposal');
-                $namaFile = $file->getClientOriginalName();
-                $path = 'assets/proposal/dokumen/' . $namaFile;
-                $counter = 1;
-                while (file_exists($path)) {
-                    $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
-                    $path = 'assets/proposal/dokumen/' . $namaFile;
-                    $counter++;
+            if ($request->hasFile('inputs_proposal.'.$key.'.dokumen_proposal')) {
+                $donor = Donor::find($proposal->donor_id);
+                if ($donor) {
+                    $namaDonor = $donor->nama_organisasi;
+                    $extension = $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->getClientOriginalExtension();
+                    $tanggalUpdate = now()->format('d-m-Y');
+                    $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                    $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->move('assets/proposal/dokumen', $namaFileBaru);
+                    $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFileBaru;
                 }
-                $file->move('assets/proposal/dokumen', $namaFile);
-                $proposal->dokumen_proposal = $path;
-            }
+            }    
             $proposal->save();
         }
         return redirect()->route('pages.proposal')
@@ -305,7 +302,7 @@ class ProposalController extends Controller
             'inputs_proposal.*.estimasi_nilai_idr'        =>  'required',
             'inputs_proposal.*.usulan_durasi'             =>  'required',
             'inputs_proposal.*.status_kemajuan_id'        =>  'required|exists:tabel_status_kemajuans,id',
-            'inputs_proposal.*.dokumen_proposal'          =>  'file',
+            'inputs_proposal.*.dokumen_proposal'          =>  'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif',
         ]);
 
         foreach ($request->input('inputs_proposal') as $key => $item) {
@@ -324,20 +321,17 @@ class ProposalController extends Controller
                 'usulan_durasi'             => $item['usulan_durasi'],
                 'status_kemajuan_id'        => $item['status_kemajuan_id'],
             ]);
-            if ($request->file('inputs_proposal.'.$key.'.dokumen_proposal')) {
-                $file = $request->file('inputs_proposal.'.$key.'.dokumen_proposal');
-                $namaFile = $file->getClientOriginalName();
-                $path = 'assets/proposal/dokumen/' . $namaFile;
-                $counter = 1;
-                while (file_exists($path)) {
-                    $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
-                    $path = 'assets/proposal/dokumen/' . $namaFile;
-                    $counter++;
+            if ($request->hasFile('inputs_proposal.'.$key.'.dokumen_proposal')) {
+                $donor = Donor::find($proposal->donor_id);
+                if ($donor) {
+                    $namaDonor = $donor->nama_organisasi;
+                    $extension = $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->getClientOriginalExtension();
+                    $tanggalUpdate = now()->format('d-m-Y');
+                    $namaFileBaru = $namaDonor . '_' . $tanggalUpdate . '.' . $extension;
+                    $request->file('inputs_proposal.'.$key.'.dokumen_proposal')->move('assets/proposal/dokumen', $namaFileBaru);
+                    $proposal->dokumen_proposal = 'assets/proposal/dokumen/' . $namaFileBaru;
                 }
-                $file->move('assets/proposal/dokumen', $namaFile);
-                File::delete($proposal->dokumen_proposal);
-                $proposal->dokumen_proposal = $path;
-            }
+            }    
             $proposal->save();
         }
         return redirect()->route('pages.proposal', ['proposal' => $proposal->id])

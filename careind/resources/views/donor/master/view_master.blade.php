@@ -173,7 +173,7 @@
                                 <h6 class="m-0 font-weight-bold text-danger">Master/Detail View</h6>
                             </div>
                             <div>
-                                @if(Auth::user()->role_id == 1)
+                                {{-- @if(Auth::user()->role_id == 1)
                                     @if(count($narahubungs) > 0 && count($komunikasis) > 0 && count($proposals) > 0)
                                         <a href="{{ url('master/'.$donor->id.'/edit') }}" class="btn btn-outline-warning btn-circle me-2" data-bs-toggle="tooltip" title="Master/Detail Edit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -183,7 +183,7 @@
                                     @else
 
                                     @endif
-                                @endif
+                                @endif --}}
 
                             </div>
                         </div>
@@ -217,6 +217,25 @@
                                 {{-- DONOR --}}
                                 <div class="tab-pane fade show active" id="donor-justified" role="tabpanel"
                                     aria-labelledby="donor-tab">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h2></h2>
+                                        <div class="action-buttons">
+                                            @if(Auth::user()->role_id !=1)
+
+                                            @else
+                                            <a href="{{ url('master/' . $donor->id . '/edit_donor') }}"
+                                                id="btn-edit-donor" class="btn btn-warning btn-circle"
+                                                data-bs-toggle="tooltip" title="Edit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                    height="16" fill="currentColor"
+                                                    class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                                </svg>
+                                            </a>
+                                            @endif
+                                        </div>
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table table-hover table-bordered">
                                             <tbody>
@@ -296,7 +315,7 @@
                                                                     type="application/pdf" width="100%"
                                                                     height="500">
                                                             @else
-                                                                Tidak ada pratinjau
+                                                                {{ basename($donor->dokumen_donor) }}
                                                             @endif
                                                         @else
                                                             Tidak ada dokumen
@@ -479,7 +498,7 @@
                                                                         type="application/pdf" width="200"
                                                                         height="200">
                                                                 @else
-                                                                    Tidak ada pratinjau
+                                                                    {{ basename($item->dokumen_komunikasi) }}
                                                                 @endif
                                                             @else
                                                                 Tidak ada dokumen
@@ -647,7 +666,7 @@
                                                                         type="application/pdf" width="200"
                                                                         height="200">
                                                                 @else
-                                                                    Tidak ada pratinjau
+                                                                    {{ basename($item->dokumen_proposal) }}
                                                                 @endif
                                                             @else
                                                                 Tidak ada dokumen
@@ -773,7 +792,6 @@
             </div>
         </div>
     </div>
-
 
         <!-- Modal Add/Edit Master/Detail Narahubung -->
         <div class="modal fade" id="form-master-narahubung" role="dialog" data-bs-backdrop="static"
@@ -946,7 +964,8 @@
                                     <div class="form-group mb-4">
                                         <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
                                         <input type="file" class="form-control" id="dokumen_komunikasi" name="dokumen_komunikasi" onchange="validateFile()">
-                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                            atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                         <span id="file-error-komunikasi" class="text-danger"></span>
                                     </div>
                                     <div id="nama-dokumen-komunikasi"></div>
@@ -1101,7 +1120,8 @@
                                     <div class="form-group mb-4">
                                         <label for="dokumen_proposal" class="form-label">Dokumen</label>
                                         <input type="file" class="form-control" id="dokumen_proposal" name="dokumen_proposal" onchange="validateFile()">
-                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif) atau PDF.</small>
+                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                            atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                         <span id="file-error-proposal" class="text-danger"></span>
                                     </div>
                                     <div id="nama-dokumen-proposal"></div>

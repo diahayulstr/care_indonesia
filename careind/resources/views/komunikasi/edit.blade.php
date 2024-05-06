@@ -258,6 +258,8 @@
                                             <label for="dokumen_komunikasi" class="form-label">Dokumen</label>
                                             <input type="file" class="form-control" id="dokumen_komunikasi"
                                                 name="dokumen_komunikasi">
+                                            <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                             <br>
                                             @if ($komunikasi->dokumen_komunikasi)
                                                 <input type="text" class="form-control"

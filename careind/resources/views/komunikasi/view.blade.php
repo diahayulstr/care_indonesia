@@ -176,8 +176,8 @@
 
                                 @else
                                 <div class="d-inline-block">
-                                    <a href="{{ url('komunikasi/add') }}" class="btn btn-primary btn-circle"
-                                        data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a>
+                                    {{-- <a href="{{ url('komunikasi/add') }}" class="btn btn-primary btn-circle"
+                                        data-bs-toggle="tooltip" title="Add"><i class="fas fa-plus"></i></a> --}}
                                 </div>
                                 <div class="d-inline-block mx-1">
                                     <a href="{{ url('komunikasi/' . $komunikasi->id . '/edit') }}"
@@ -254,7 +254,7 @@
                                                         <embed src="{{ url('') }}/{{ $komunikasi->dokumen_komunikasi }}"
                                                             type="application/pdf" width="100%" height="500">
                                                     @else
-                                                        Tidak ada pratinjau
+                                                        {{ basename($komunikasi->dokumen_komunikasi) }}
                                                     @endif
                                                 @else
                                                     Tidak ada dokumen

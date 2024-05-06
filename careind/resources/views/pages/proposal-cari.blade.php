@@ -315,7 +315,7 @@
                                                                 src="{{ url('') }}/{{ $item->dokumen_proposal }}"
                                                                 type="application/pdf" width="200" height="200">
                                                         @else
-                                                            Tidak ada pratinjau
+                                                            {{ basename($item->dokumen_proposal) }}
                                                         @endif
                                                     @else
                                                         Tidak ada dokumen

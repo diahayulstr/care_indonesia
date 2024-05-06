@@ -122,7 +122,7 @@ class DonorController extends Controller
             'jenis_organisasi_id'   => 'required|exists:tabel_jenis_organisasis,id',
             'komitmen_sdgs'         => 'required|exists:tabel_komitmen_sdgs,id',
             'date'                  => 'required',
-            'dokumen_donor'         => 'required|file|mimes:pdf,jpg,jpeg,png,gif',
+            'dokumen_donor'         => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,jpg,jpeg,png,gif',
         ]);
         $donor = new Donor();
         $donor->nama_organisasi     = $request->nama_organisasi;
@@ -139,16 +139,12 @@ class DonorController extends Controller
         $donor->date                = $request->date;
 
         if ($request->hasFile('dokumen_donor')) {
-            $namaFile = $request->dokumen_donor->getClientOriginalName();
-            $path = 'assets/donor/dokumen/' . $namaFile;
-            $counter = 1;
-            while (file_exists($path)) {
-                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
-                $path = 'assets/donor/dokumen/' . $namaFile;
-                $counter++;
-            }
-            $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
-            $donor->dokumen_donor = $path;
+            $idDonor = $donor->nama_organisasi;
+            $tanggalUpdate = now()->format('d-m-Y');
+            $extension = $request->dokumen_donor->getClientOriginalExtension();
+            $namaFileBaru = $idDonor . '_' . $tanggalUpdate . '.' . $extension;
+            $request->dokumen_donor->move('assets/donor/dokumen', $namaFileBaru);
+            $donor->dokumen_donor = 'assets/donor/dokumen/' . $namaFileBaru;
         }
         $donor->save();
         return redirect()->route('pages.donor')->with('toast_success', 'Data donor berhasil ditambahkan');
@@ -159,65 +155,65 @@ class DonorController extends Controller
         return view('donor.view', compact('donor'));
     }
 
-    public function edit($id) {
-        $provinces = Province::all();
-        $jenisOrganisasis = TabelJenisOrganisasi::all();
-        $komitmenSdgs = TabelKomitmenSdg::all();
-        $donor = Donor::findOrFail($id);
-        return view('donor.edit', compact(
-            'donor', 'provinces', 'jenisOrganisasis', 'komitmenSdgs'
-        ));
-    }
+    // public function edit($id) {
+    //     $provinces = Province::all();
+    //     $jenisOrganisasis = TabelJenisOrganisasi::all();
+    //     $komitmenSdgs = TabelKomitmenSdg::all();
+    //     $donor = Donor::findOrFail($id);
+    //     return view('donor.edit', compact(
+    //         'donor', 'provinces', 'jenisOrganisasis', 'komitmenSdgs'
+    //     ));
+    // }
 
-    public function update(Request $request, Donor $donor) {
-        $request -> validate([
-            'nama_organisasi'       => 'required',
-            'alamat'                => 'required',
-            'negara'                => 'required',
-            'provinsi_id'           => 'required|exists:provinces,id',
-            'kabupaten_id'          => 'required|exists:regencies,id',
-            'kecamatan_id'          => 'required|exists:districts,id',
-            'desa_id'               => 'required|exists:villages,id',
-            'website'               => 'required',
-            'informasi_singkat'     => 'required',
-            'jenis_organisasi_id'   => 'required|exists:tabel_jenis_organisasis,id',
-            'komitmen_sdgs'         => 'required|exists:tabel_komitmen_sdgs,id',
-            'date'                  => 'required',
-            'dokumen_donor'         => 'file',
-        ]);
+    // public function update(Request $request, Donor $donor) {
+    //     $request -> validate([
+    //         'nama_organisasi'       => 'required',
+    //         'alamat'                => 'required',
+    //         'negara'                => 'required',
+    //         'provinsi_id'           => 'required|exists:provinces,id',
+    //         'kabupaten_id'          => 'required|exists:regencies,id',
+    //         'kecamatan_id'          => 'required|exists:districts,id',
+    //         'desa_id'               => 'required|exists:villages,id',
+    //         'website'               => 'required',
+    //         'informasi_singkat'     => 'required',
+    //         'jenis_organisasi_id'   => 'required|exists:tabel_jenis_organisasis,id',
+    //         'komitmen_sdgs'         => 'required|exists:tabel_komitmen_sdgs,id',
+    //         'date'                  => 'required',
+    //         'dokumen_donor'         => 'file',
+    //     ]);
 
-        $donor->update($request->only([
-            'nama_organisasi',
-            'alamat',
-            'negara',
-            'provinsi_id',
-            'kabupaten_id',
-            'kecamatan_id',
-            'desa_id',
-            'website',
-            'informasi_singkat',
-            'jenis_organisasi_id',
-            'komitmen_sdgs',
-            'date',
-        ]));
+    //     $donor->update($request->only([
+    //         'nama_organisasi',
+    //         'alamat',
+    //         'negara',
+    //         'provinsi_id',
+    //         'kabupaten_id',
+    //         'kecamatan_id',
+    //         'desa_id',
+    //         'website',
+    //         'informasi_singkat',
+    //         'jenis_organisasi_id',
+    //         'komitmen_sdgs',
+    //         'date',
+    //     ]));
 
-        if ($request->hasFile('dokumen_donor')) {
-            $namaFile = $request->dokumen_donor->getClientOriginalName();
-            $path = 'assets/donor/dokumen/' . $namaFile;
-            $counter = 1;
-            while (file_exists($path)) {
-                $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
-                $path = 'assets/donor/dokumen/' . $namaFile;
-                $counter++;
-            }
-            $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
-	        File::delete($donor->dokumen_donor);
-            $donor->dokumen_donor = $path;
-        }
-        $donor->save();
-        return redirect()->route('pages.donor', ['donor' => $donor->id])
-        ->with('toast_success', 'Data donor berhasil diupdate');
-    }
+    //     if ($request->hasFile('dokumen_donor')) {
+    //         $namaFile = $request->dokumen_donor->getClientOriginalName();
+    //         $path = 'assets/donor/dokumen/' . $namaFile;
+    //         $counter = 1;
+    //         while (file_exists($path)) {
+    //             $namaFile = pathinfo($namaFile, PATHINFO_FILENAME) . " ($counter)." . pathinfo($namaFile, PATHINFO_EXTENSION);
+    //             $path = 'assets/donor/dokumen/' . $namaFile;
+    //             $counter++;
+    //         }
+    //         $request->dokumen_donor->move('assets/donor/dokumen', $namaFile);
+	//         File::delete($donor->dokumen_donor);
+    //         $donor->dokumen_donor = $path;
+    //     }
+    //     $donor->save();
+    //     return redirect()->route('donor.master.view_master', ['donor' => $donor->id])
+    //     ->with('toast_success', 'Data donor berhasil diupdate');
+    // }
 
     public function destroy($id) {
         $donor = Donor::findOrFail($id);

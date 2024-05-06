@@ -393,6 +393,8 @@
                                                         <input type="file" class="form-control"
                                                             id="dokumen_proposal"
                                                             name="inputs_proposal[{{ $proposals->id }}][dokumen_proposal]">
+                                                        <small class="text-muted">File harus berupa gambar (jpg, jpeg, png, gif)
+                                                            atau pdf, doc, docx, xls, xlsx, ppt, pptx.</small>
                                                         <br>
                                                         @if ($proposals->dokumen_proposal)
                                                             <input type="text" class="form-control"
