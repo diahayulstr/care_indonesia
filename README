@@ -1,0 +1,32 @@
+# Proposal Management System – Care Indonesia
+
+This is a freelance project developed for **Care Indonesia**, a non-profit organization focused on managing and distributing donations from donors to community-focused programs.
+
+## 🧭 Overview
+
+The system was developed to help Care Indonesia efficiently manage the flow of donation proposals—from submission, review, to approval and reporting. This internal information system streamlines administrative tasks and improves transparency in decision-making.
+
+> *Note: This is a simplified, anonymized version of the original project for portfolio purposes.*
+
+## 🔧 Tech Stack
+
+- Laravel
+- MySQL
+- Bootstrap
+
+## 🔑 Key Features
+
+- Multi-role login system (Admin, Reviewer, Donor)
+- Proposal submission & status tracking
+- Approval workflow with notification
+- Reporting dashboard
+- Secure file uploads
+
+## 📦 Repository Access
+
+This repository contains **a demo version** of the project (anonymized and stripped of private data). The original production version is hosted on the client’s private server and not publicly available.
+
+## 👩‍💻 Author
+
+Diah Ayu Lestari  
+[LinkedIn](https://linkedin.com/in/diahayulstr)

@@ -1,0 +1,201 @@
+#statusact .status-button {
+    border: none;
+    padding: 0 5px;
+    border-radius: 20px;
+    color: white;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#statusact button:hover {
+    cursor: default;
+}
+
+#statuskemajuanact .status-button {
+    border: none;
+    padding: 0 5px;
+    border-radius: 20px;
+    color: white;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#statuskemajuanact button:hover {
+    cursor: default;
+}
+
+#ongoingkomunikasi .status-button {
+    border: none;
+    padding: 0 5px;
+    border-radius: 20px;
+    color: white;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#ongoingkomunikasi button:hover {
+    cursor: default;
+}
+
+#action-btn .detail-button {
+    border: none;
+    padding: 2px 5px;
+    border-radius: 20px;
+    color: white;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#collapseTwo .collapse-item.active {
+    color: #e74a3b;
+}
+
+#myTabjustified .nav-link {
+    color: black;
+}
+
+#myTabjustified .nav-link.active {
+    color: #e74a3b;
+}
+
+#myTabjustified.flex-fill {
+    color: #e74a3b;
+}
+
+.table th,
+.table td input {
+    width: auto;
+}
+
+.table th,
+.table td select {
+    width: auto;
+}
+
+.table th,
+.table td textarea {
+    width: auto;
+}
+
+#container-login .card-body {
+    background-color: #eeebdd;
+}
+
+#container-login .card {
+    border-radius: 32px;
+}
+/* #bgLogin {
+    background-color: #f1faee;
+} */
+
+#page-top .sidebar-divider {
+    border: none;
+    border-top: 1px solid white;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.sticky-footer {
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    box-shadow: 0px -2px 5px 0px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#content-wrapper {
+    margin-bottom: 100px;
+}
+
+.dotted-button {
+    border-style: dashed;
+    border-width: 2px;
+}
+
+.dotted-button:hover {
+    background-color: transparent;
+    border-style: solid;
+}
+
+.dotted-button .icon {
+    color: #4e73df;
+}
+
+.dotted-button:hover .icon {
+    color: #4e73df;
+}
+
+.dotted-button .icon-edit {
+    color: #f6c23e;
+}
+
+.dotted-button:hover .icon-edit {
+    color: #f6c23e;
+}
+
+.dash-button-add {
+    border-style: dashed;
+    border-width: 2px;
+}
+
+.dash-button-add:hover {
+    background-color: transparent;
+    border-style: solid;
+}
+
+#btn-blank-row-narahubung .icon-narhub {
+    color: #e74a3b;
+}
+
+#btn-blank-row-narahubung:hover .icon-narhub {
+    color: #e74a3b;
+}
+
+#btn-blank-row-komunikasi .icon-kom {
+    color: #e74a3b;
+}
+
+#btn-blank-row-komunikasi:hover .icon-kom {
+    color: #e74a3b;
+
+}
+#btn-blank-row-proposal .icon-prop {
+    color: #e74a3b;
+}
+
+#btn-blank-row-proposal:hover .icon-prop {
+    color: #e74a3b;
+}
+
+#dash-count .icon-container {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dash-count .icon-container i {
+    font-size: 2em;
+}
+
+#btn-report {
+    border: none;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    width: 150px;
+}
+
+.footer-table {
+    margin: 20px;
+}
+
